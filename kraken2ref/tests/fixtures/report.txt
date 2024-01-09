@@ -1,0 +1,212 @@
+  0.03	2	2	U	0	unclassified
+ 99.97	6618	0	R	1	root
+ 99.97	6618	0	D	10239	  Viruses
+ 99.97	6618	0	D1	2559587	    Riboviria
+ 99.97	6618	0	K	2732396	      Orthornavirae
+ 69.91	4628	0	P	2497569	        Negarnaviricota
+ 39.43	2610	0	P1	2497571	          Polyploviricotina
+ 39.43	2610	0	C	2497577	            Insthoviricetes
+ 39.43	2610	0	O	2499411	              Articulavirales
+ 39.43	2610	0	F	11308	                Orthomyxoviridae
+ 25.53	1690	0	G	197911	                  Alphainfluenzavirus
+ 25.53	1690	0	S	2955291	                    Alphainfluenzavirus influenzae
+ 25.53	1690	1273	S1	11320	                      Influenza A virus
+  3.96	262	118	S2	119210	                        H3N2 subtype
+  1.37	91	91	S3	335341	                          Influenza A virus (A/New York/392/2004(H3N2))
+  0.03	2	2	S3	1978707	                          Influenza A virus (A/Santa Cruz do Sul/LACENRS-913/2011(H3N2))
+  0.02	1	1	S3	1517335	                          Influenza A virus (A/Singapore/H2013.384/2013(H3N2))
+  0.02	1	1	S3	327309	                          Influenza A virus (A/Kinmen/639/04(H3N2))
+  0.02	1	1	S3	1909953	                          Influenza A virus (A/Hawaii/61/2016(H3N2))
+  0.02	1	1	S3	2025006	                          Influenza A virus (A/Kenya/009/2017(H3N2))
+  0.02	1	1	S3	1515684	                          Influenza A virus (A/swine/Guangxi/JGB4/2013(H3N2))
+  0.02	1	1	S3	1000838	                          Influenza A virus (A/Uganda/MUWRP-070/2009(H3N2))
+  0.02	1	1	S3	1731044	                          Influenza A virus (A/California/82/2015(H3N2))
+  0.02	1	1	S3	2018281	                          Influenza A virus (A/Korea/KUMC-GR202/2011(H3N2))
+  0.02	1	1	S3	765580	                          Influenza A virus (A/California/VRDL188/2009(H3N2))
+  0.02	1	1	S3	351280	                          Influenza A virus (A/Memphis/1/1968(H3N2))
+  0.02	1	1	S3	1032119	                          Influenza A virus (A/India/C058671/2005(H3N2))
+  0.02	1	1	S3	870460	                          Influenza A virus (A/swine/Nagano/2000(H3N2))
+  0.02	1	1	S3	2015202	                          Influenza A virus (A/swine/Minnesota/A02216466/2017(H3N2))
+  0.02	1	1	S3	2030835	                          Influenza A virus (A/swine/Alberta/SD0181/2016(H3N2))
+  0.02	1	1	S3	383055	                          Influenza A virus (A/New York/714/1994(H3N2))
+  0.02	1	1	S3	438221	                          Influenza A virus (A/Newcastle/1/2004(H3N2))
+  0.02	1	1	S3	353348	                          Influenza A virus (A/Canterbury/16/2004(H3N2))
+  0.02	1	1	S3	661543	                          Influenza A virus (A/Taiwan/F197/2009(H3N2))
+  0.02	1	1	S3	355486	                          Influenza A virus (A/New York/518/1998(H3N2))
+  0.02	1	1	S3	253678	                          Influenza A virus (A/swine/Hong Kong/1311/01(H3N2))
+  0.02	1	1	S3	1032134	                          Influenza A virus (A/India/C087864/2008(H3N2))
+  0.02	1	1	S3	1212700	                          Influenza A virus (A/swine/Missouri/A01241619/2012(H3N2))
+  0.02	1	1	S3	1517285	                          Influenza A virus (A/Singapore/C2012.197/2012(H3N2))
+  0.02	1	1	S3	1004616	                          Influenza A virus (A/Texas/NHRC0002/2005(H3N2))
+  0.02	1	1	S3	1503104	                          Influenza A virus (A/swine/Italy/282811/2013(H3N2))
+  0.02	1	1	S3	1214139	                          Influenza A virus (A/swine/Guangdong/L5/2010(H3N2))
+  0.02	1	1	S3	1261885	                          Influenza A virus (A/swine/Nebraska/00386/2004(H3N2))
+  0.02	1	1	S3	1348507	                          Influenza A virus (A/swine/Henan/1/2010(H3N2))
+  0.02	1	1	S3	1108824	                          Influenza A virus (A/Mexico/InDRE2118/2005(H3N2))
+  0.02	1	1	S3	2032953	                          Influenza A virus (A/swine/Saskatchewan/SD0118/2015(H3N2))
+  0.02	1	1	S3	1788650	                          Influenza A virus (A/Florida/81/2015(H3N2))
+  0.02	1	1	S3	1317939	                          Influenza A virus (A/Alaska/13/2011(H3N2))
+  0.02	1	1	S3	1426058	                          Influenza A virus (A/swine/South Dakota/SG1453/2003(H3N2))
+  0.02	1	1	S3	586210	                          Influenza A virus (A/Hong Kong/HKU72/2005(H3N2))
+  0.02	1	1	S3	1468704	                          Influenza A virus (A/New York/1022/2006(H3N2))
+  0.02	1	1	S3	353365	                          Influenza A virus (A/Canterbury/109/2004(H3N2))
+  0.02	1	1	S3	353484	                          Influenza A virus (A/Canterbury/270/2005(H3N2))
+  0.02	1	1	S3	401396	                          Influenza A virus (A/Niigata/F183/2006(H3N2))
+  0.02	1	1	S3	679739	                          Influenza A virus (A/New York/3932/2009(H3N2))
+  0.02	1	1	S3	1194147	                          Influenza A virus (A/swine/Guangdong/L21/2011(H3N2))
+  0.02	1	1	S3	383220	                          Influenza A virus (A/Waikato/139/2003(H3N2))
+  0.02	1	1	S3	594673	                          Influenza A virus (A/swine/Thailand/S1/2005(H3N2))
+  0.02	1	1	S3	311757	                          Influenza A virus (A/New York/184/1999(H3N2))
+  0.02	1	1	S3	383569	                          Influenza A virus (A/Shanghai/31/1980(H3N2))
+  0.02	1	1	S3	1454183	                          Influenza A virus (A/Asturias/1324407/2013(H3N2))
+  0.02	1	1	S3	1043109	                          Influenza A virus (A/Taiwan/393/2004(H3N2))
+  0.02	1	1	S3	2036952	                          Influenza A virus (A/swine/North Carolina/A02219753/2017(H3N2))
+  0.02	1	1	S3	443875	                          Influenza A virus (A/swine/Guangdong/SGD6(H3N2))
+  0.02	1	1	S3	486628	                          Influenza A virus (A/swine/Guangdong/165/06(H3N2))
+  0.02	1	1	S3	1462143	                          Influenza A virus (A/Boston/YGA_01214/2013(H3N2))
+  0.02	1	1	S3	1041906	                          Influenza A virus (A/duck/Korea/U14-2/2007(H3N2))
+  1.75	116	44	S2	114727	                        H1N1 subtype
+  0.20	13	13	S3	641809	                          Influenza A virus (A/California/07/2009(H1N1))
+  0.03	2	2	S3	860534	                          Influenza A virus (A/Thailand/CU-MV28/2010(H1N1))
+  0.03	2	2	S3	930810	                          Influenza A virus (A/Jiangsu/S62/2009(H1N1))
+  0.02	1	1	S3	714246	                          Influenza A virus (A/District of Columbia/INS23/2009(H1N1))
+  0.02	1	1	S3	988486	                          Influenza A virus (A/India/NIV30179/2010(H1N1))
+  0.02	1	1	S3	1071323	                          Influenza A virus (A/Zhejiang/3/2009(H1N1))
+  0.02	1	1	S3	1820568	                          Influenza A virus (A/swine/Mexico/AVX42/2012(H1N1))
+  0.02	1	1	S3	1305570	                          Influenza A virus (A/Wisconsin/53/2009(H1N1))
+  0.02	1	1	S3	1086543	                          Influenza A virus (A/swine/Holguin/121/2010(H1N1))
+  0.02	1	1	S3	1262170	                          Influenza A virus (A/swine/Minnesota/A01279213/2012(H1N1))
+  0.02	1	1	S3	416705	                          Influenza A virus (A/Memphis/38/1983(H1N1))
+  0.02	1	1	S3	1073457	                          Influenza A virus (A/swine/Illinois/SG1141/2003(H1N1))
+  0.02	1	1	S3	1396475	                          Influenza A virus (A/Santa Cruz/995/2010(H1N1))
+  0.02	1	1	S3	1193849	                          Influenza A virus (A/swine/Illinois/A01202615/2011(H1N1))
+  0.02	1	1	S3	1823892	                          Influenza A virus (A/Idaho/42/2015(H1N1))
+  0.02	1	1	S3	1071485	                          Influenza A virus (A/Zhejiang/X1/2009(H1N1))
+  0.02	1	1	S3	1406989	                          Influenza A virus (A/swine/Illinois/A01290499/2013(H1N1))
+  0.02	1	1	S3	2060339	                          Influenza A virus (A/California/07-00013/2009(H1N1))
+  0.02	1	1	S3	1648080	                          Influenza A virus (A/Mexico/200130/2014(H1N1))
+  0.02	1	1	S3	1638892	                          Influenza A virus (A/India/Pun151245/2015(H1N1))
+  0.02	1	1	S3	1910095	                          Influenza A virus (A/New York/79/2016(H1N1))
+  0.02	1	1	S3	1501722	                          Influenza A virus (A/Sri Lanka/19/2012(H1N1))
+  0.02	1	1	S3	723783	                          Influenza A virus (A/Wisconsin/629-D00459/2009(H1N1))
+  0.02	1	1	S3	1501719	                          Influenza A virus (A/Sri Lanka/11/2012(H1N1))
+  0.02	1	1	S3	1081398	                          Influenza A virus (A/swine/North Carolina/18161/2002(H1N1))
+  0.02	1	1	S3	1421628	                          Influenza A virus (A/Thailand/SirirajICRC_NMA_9/2011(H1N1))
+  0.02	1	1	S3	1184697	                          Influenza A virus (A/Mexico/UASLP-023/2009(H1N1))
+  0.02	1	1	S3	1432601	                          Influenza A virus (A/swine/Minnesota/SG1235/2005(H1N1))
+  0.02	1	1	S3	232234	                          Influenza A virus (A/Fiji/15899/83(H1N1))
+  0.02	1	1	S3	1654287	                          Influenza A virus (A/swine/Poland/16315/2011(H1N1))
+  0.02	1	1	S3	1873091	                          Influenza A virus (A/California/NHRC_FDX11908/2016(H1N1))
+  0.02	1	1	S3	857483	                          Influenza A virus (A/Iran/1519/2009(H1N1))
+  0.02	1	1	S3	1540726	                          Influenza A virus (A/swine/North Carolina/A01476202/2014(H1N1))
+  0.02	1	1	S3	1511957	                          Influenza A virus (A/swine/Guangdong/NS2801/2010(H1N1))
+  0.02	1	1	S3	1108820	                          Influenza A virus (A/Mexico City/INER16/2009(H1N1))
+  0.02	1	1	S3	752156	                          Influenza A virus (A/Wisconsin/629-D02442/2009(H1N1))
+  0.02	1	1	S3	653947	                          Influenza A virus (A/Castro/JXP/2009(H1N1))
+  0.02	1	1	S3	1364900	                          Influenza A virus (A/Qingdao/F404/2011(H1N1))
+  0.02	1	1	S3	1487156	                          Influenza A virus (A/Uganda/MUWRP-069/2009(H1N1))
+  0.02	1	1	S3	1929430	                          Influenza A virus (A/swine/France/35-160126/2016(H1N1))
+  0.02	1	1	S3	679811	                          Influenza A virus (A/Wisconsin/629-D01903/2009(H1N1))
+  0.02	1	1	S3	1140177	                          Influenza A virus (A/Scotland/EastKilbride_420703/2009(H1N1))
+  0.02	1	1	S3	1510478	                          Influenza A virus (A/Bangkok/SIMI503/2010(H1N1))
+  0.02	1	1	S3	761202	                          Influenza A virus (A/Blagovechensk/01/2009(H1N1))
+  0.02	1	1	S3	652936	                          Influenza A virus (A/Sakai/2/2009(H1N1))
+  0.02	1	1	S3	991149	                          Influenza A virus (A/swine/Minnesota/226128/2010(H1N1))
+  0.02	1	1	S3	1305391	                          Influenza A virus (A/North Dakota/15/2009(H1N1))
+  0.02	1	1	S3	1501763	                          Influenza A virus (A/swine/Sri Lanka/62/2011(H1N1))
+  0.02	1	1	S3	1315809	                          Influenza A virus (A/swine/Thailand/CB228/2010(H1N1))
+  0.02	1	1	S3	978110	                          Influenza A virus (A/India/GWL_DSC/2010(H1N1))
+  0.02	1	1	S3	1348883	                          Influenza A virus (A/India/Nag132467/2013(H1N1))
+  0.02	1	1	S3	985928	                          Influenza A virus (A/South Carolina/WRAIR1645P/2009(H1N1))
+  0.02	1	1	S3	710662	                          Influenza A virus (A/Kurgan/01/2009(H1N1))
+  0.02	1	1	S3	723731	                          Influenza A virus (A/Wisconsin/629-D00938/2009(H1N1))
+  0.02	1	1	S3	608585	                          Influenza A virus (A/swine/Taichung/E3/1992(H1N1))
+  0.02	1	1	S3	885193	                          Influenza A virus (A/Canada-NFL/RV2509/2009(H1N1))
+  0.02	1	1	S3	608582	                          Influenza A virus (A/swine/Pingtung/64-26/2007(H1N1))
+  0.02	1	1	S3	1490473	                          Influenza A virus (A/swine/Guangxi/1/2013(H1N1))
+  0.18	12	10	S2	102797	                        Influenza A virus with incomplete names
+  0.02	1	1	S3	727907	                          Influenza A virus (A/Eurasian wigeon/Shanghai/47F/2008)
+  0.02	1	1	S3	1246652	                          Influenza A virus (A/Aarhus/INS611/2011)
+  0.12	8	1	S2	114728	                        H1N2 subtype
+  0.02	1	1	S3	1755985	                          Influenza A virus (A/swine/North Carolina/A01945748/2015(H1N2))
+  0.02	1	1	S3	1470860	                          Influenza A virus (A/swine/Kansas/12-117893/2012(H1N2))
+  0.02	1	1	S3	1654149	                          Influenza A virus (A/swine/England/61470/2013(H1N2))
+  0.02	1	1	S3	1512238	                          Influenza A virus (A/swine/Hong Kong/NS26/2012(H1N2))
+  0.02	1	1	S3	649633	                          Influenza A virus (A/swine/Hong Kong/78/2003(H1N2))
+  0.02	1	1	S3	1261826	                          Influenza A virus (A/swine/Minnesota/SG1395/2011(H1N2))
+  0.02	1	1	S3	1114925	                          Influenza A virus (A/swine/Minnesota/0745/2010(H1N2))
+  0.08	5	1	S2	102793	                        H5N1 subtype
+  0.02	1	1	S3	690998	                          Influenza A virus (A/chicken/Jakarta/DKI-Nurs/2007(H5N1))
+  0.02	1	1	S3	196425	                          Influenza A virus (A/Chicken/Hong Kong/FY77/01 (H5N1))
+  0.02	1	1	S3	762385	                          Influenza A virus (A/chicken/Henan/A-7/2006(H5N1))
+  0.02	1	1	S3	496757	                          Influenza A virus (A/duck/Hunan/1386/2003(H5N1))
+  0.03	2	1	S2	102796	                        H9N2 subtype
+  0.02	1	1	S3	1870773	                          Influenza A virus (A/turkey/Poland/14/2013(H9N2))
+  0.03	2	1	S2	102800	                        H4N6 subtype
+  0.02	1	1	S3	1202640	                          Influenza A virus (A/American black duck/New Brunswick/03554/2009(H4N6))
+  0.02	1	0	S2	119212	                        H6N1 subtype
+  0.02	1	1	S3	1038310	                          Influenza A virus (A/mallard/California/6744/2009(H6N1))
+  0.02	1	0	S2	222769	                        H6N6 subtype
+  0.02	1	1	S3	1454277	                          Influenza A virus (A/chicken/Guangxi/S4029/2010(H6N6))
+  0.02	1	0	S2	140020	                        H5N9 subtype
+  0.02	1	1	S3	1267699	                          Influenza A virus (A/mallard/Missouri/10MO084/2010(H5N9))
+  0.02	1	0	S2	119218	                        H7N7 subtype
+  0.02	1	1	S3	382785	                          Influenza A virus (A/fowl/Dobson(H7N7))
+  0.02	1	1	S2	142951	                        H12N5 subtype
+  0.02	1	0	S2	384619	                        mixed subtypes
+  0.02	1	1	S3	1174538	                          Influenza A virus (A/Malaysia/23721/2002(mixed))
+  0.02	1	1	S2	119214	                        H7N2 subtype
+  0.02	1	0	S2	119211	                        H3N8 subtype
+  0.02	1	1	S3	1322665	                          Influenza A virus (A/northern pintail/Interior Alaska/9BM11789R0/2009(H3N8))
+  0.02	1	0	S2	184006	                        H6N5 subtype
+  0.02	1	1	S3	1935477	                          Influenza A virus (A/blue winged teal/Missouri/14OS1960/2013(H6N5))
+  0.02	1	0	S2	437442	                        H11N7 subtype
+  0.02	1	1	S3	1698340	                          Influenza A virus (A/duck/Vietnam/HU1-151/2014(H11N7))
+ 13.90	920	0	G	197912	                  Betainfluenzavirus
+ 13.90	920	0	S	2955465	                    Betainfluenzavirus influenzae
+ 13.90	920	797	S1	11520	                      Influenza B virus
+  1.50	99	99	S2	518987	                        Influenza B virus (B/Lee/1940)
+  0.02	1	1	S2	416662	                        Influenza B virus (B/Hong Kong/167/2002)
+  0.02	1	1	S2	1468795	                        Influenza B virus (B/New York/1005/1995)
+  0.02	1	1	S2	1774466	                        Influenza B virus (B/Philippines/17/2013)
+  0.02	1	1	S2	1621975	                        Influenza B virus (B/Alberta/07/2014)
+  0.02	1	1	S2	1733723	                        Influenza B virus (B/Montana/03/2014)
+  0.02	1	1	S2	107410	                        Influenza B virus (B/Henan/22/97)
+  0.02	1	1	S2	1462188	                        Influenza B virus (B/Boston/YGB_01058/2013)
+  0.02	1	1	S2	1001799	                        Influenza B virus (B/Yokohama/12/2005)
+  0.02	1	1	S2	1321231	                        Influenza B virus (B/Wisconsin/04/2012)
+  0.02	1	1	S2	385996	                        Influenza B virus (B/Taiwan/N798/05)
+  0.02	1	1	S2	1468829	                        Influenza B virus (B/New York/1039/2001)
+  0.02	1	1	S2	1757490	                        Influenza B virus (B/Darwin/31/2013)
+  0.02	1	1	S2	1468832	                        Influenza B virus (B/New York/1042/2001)
+  0.02	1	1	S2	1296967	                        Influenza B virus (B/Wellington/02/2004)
+  0.02	1	1	S2	1321196	                        Influenza B virus (B/South Carolina/03/2012)
+  0.02	1	1	S2	1275507	                        Influenza B virus (B/Townsville/11/2002)
+  0.02	1	1	S2	1468838	                        Influenza B virus (B/New York/1048/2002)
+  0.02	1	1	S2	164554	                        Influenza B virus (B/Beijing/43/75)
+  0.02	1	1	S2	2051237	                        Influenza B virus (B/Arizona/64/2017)
+  0.02	1	1	S2	1757505	                        Influenza B virus (B/Hawkes Bay/6/2013)
+  0.02	1	1	S2	416664	                        Influenza B virus (B/Chile/3162/2002)
+  0.02	1	1	S2	1640840	                        Influenza B virus (B/Malaysia/U3901/2014)
+  0.02	1	1	S2	444325	                        Influenza B virus (B/Russia/69)
+  0.02	1	1	S2	230285	                        Influenza B virus (B/Bonn/43)
+ 30.48	2018	0	P1	2497570	          Haploviricotina
+ 30.48	2018	0	C	2497574	            Monjiviricetes
+ 30.48	2018	0	O	11157	              Mononegavirales
+ 30.48	2018	0	F	11244	                Pneumoviridae
+ 30.48	2018	2	G	1868215	                  Orthopneumovirus
+ 15.24	1009	0	S	3049954	                    Orthopneumovirus hominis
+ 15.24	1009	1009	S1	11250	                      Human orthopneumovirus
+ 15.21	1007	0	S	3050248	                    Orthopneumovirus bovis
+ 15.21	1007	0	S1	11246	                      Bovine orthopneumovirus
+ 15.21	1007	1007	S2	12814	                        Respiratory syncytial virus
+ 30.06	1990	0	P	2732408	        Pisuviricota
+ 30.06	1990	0	C	2732506	          Pisoniviricetes
+ 30.06	1990	0	O	76804	            Nidovirales
+ 30.06	1990	0	O1	2499399	              Cornidovirineae
+ 30.06	1990	0	F	11118	                Coronaviridae
+ 30.06	1990	0	F1	2501931	                  Orthocoronavirinae
+ 30.06	1990	0	G	694002	                    Betacoronavirus
+ 30.06	1990	0	G1	2509511	                      Sarbecovirus
+ 30.06	1990	0	S	694009	                        Severe acute respiratory syndrome-related coronavirus
+ 30.06	1990	1990	S1	2697049	                          Severe acute respiratory syndrome coronavirus 2

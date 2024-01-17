@@ -1,0 +1,13 @@
+workflow:
+  rules:
+    - if: $CI_COMMIT_MESSAGE =~ /-draft$/
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "push"
+      when: always
+
+lint_code:
+  script:
+    - 
+
+
+

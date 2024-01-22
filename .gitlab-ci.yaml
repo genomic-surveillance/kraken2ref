@@ -4,10 +4,25 @@ workflow:
       when: never
     - if: $CI_PIPELINE_SOURCE == "push"
       when: always
+stages:
+   - build
+   - test
+
+prepare_env:
+  stage: build
+  script:
+    - python --version ; pip --version
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+    - pip install -r requirements.txt
 
 lint_code:
+  stage: build
   script:
-    - 
+    - flake8 . --count --select=E9,F63,F7 --show-source --statistics --exit-zero
+    - flake8 . --count --max-complexity=10 --max-line-length=127 --statistics --exit-zero
+
 
 
 

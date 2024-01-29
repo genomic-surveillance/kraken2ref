@@ -1,12 +1,12 @@
 import re
 import pandas as pd
-import os.path
+import os
 from cached_property import cached_property
 import logging
 
-from kraken2ref.src.graph_functions import build_graph, get_end_points, get_graph_endpoints
+from kraken2ref.src.graph_functions import build_graph, get_graph_endpoints
 
-logging.basicConfig( format='%(asctime)s %(message)s', level=logging.DEBUG )
+logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
 
 class KrakenTaxonomyReport():
     """
@@ -22,7 +22,7 @@ class KrakenTaxonomyReport():
 
     """
 
-    def __init__( self, in_file: str, min_abs_reads: int = 5 ):
+    def __init__(self, in_file: str, min_abs_reads: int = 5):
         self.in_file = in_file
         self.threshold = min_abs_reads
 
@@ -48,6 +48,7 @@ class KrakenTaxonomyReport():
                         value[0] = number of reads assigned to that node
                         value[1] = taxonomy ID of that node
         """
+        ## read in kraken report and collect lists of data needed
         kraken_report = pd.read_csv(kraken_report, sep = "\t", header = None)
 
         num_hits = list(kraken_report[2])
@@ -57,7 +58,10 @@ class KrakenTaxonomyReport():
         keys = list(zip(kraken_report.index, tax_levels))
         vals = list(zip(num_hits, tax_ids))
 
+        ## construct data dict
         data_dict = dict(zip(keys, vals))
+
+        ## iterate over keys in data dict and collect nodes for each graph in report
         all_node_lists = []
         for k in data_dict.keys():
             if k[1] == "S":
@@ -68,8 +72,6 @@ class KrakenTaxonomyReport():
 
         return all_node_lists, data_dict
 
-    @cached_property
-    ##TODO: this is a property, rename function
     def pick_reference_taxid(self):
         """Build all graphs contained in the kraken2 taxonoic report;
             From each graph, identify nodes that are assigned more reads
@@ -86,19 +88,13 @@ class KrakenTaxonomyReport():
                         value[0] = list of tax_ids for the path leading to this key
                         value[1] = list of node (ie the path) leading to this key
         """
-        graphs = []
-        all_node_lists, data_dict = self.read_kraken_report(self.in_file)
-        for node_list in all_node_lists:
-            graphs.append(build_graph(node_list))
+        self.graphs = []
+        self.all_node_lists, self.data_dict = self.read_kraken_report(self.in_file)
+        for node_list in self.all_node_lists:
+            self.graphs.append(build_graph(node_list))
 
-        graph_meta_dict = get_graph_endpoints(graphs=graphs, data_dict=data_dict, threshold=self.threshold)
+        graph_meta_dict = get_graph_endpoints(graphs=self.graphs, data_dict=self.data_dict, threshold=self.threshold)
+        self.graph_meta = graph_meta_dict
 
         return graph_meta_dict
 
-    @cached_property
-    def taxonomy_graph( self ):
-        """
-        A graph representation of the taxonomy with number of reads that are assigned directly to each node
-        """
-        # TODO
-        pass

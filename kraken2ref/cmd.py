@@ -51,10 +51,7 @@ def main():
     args = args_parser().parse_args()
 
     my_tax_report = KrakenTaxonomyReport(in_file = args.in_file, min_abs_reads = args.min_read_threshold)
-    dump_dict = my_tax_report.pick_reference_taxid
-
-    for k, [t, p] in dump_dict.items():
-                print(f"Filename = {k}\ttaxa = {t}\tpath = {p}")
+    graph_meta = my_tax_report.pick_reference_taxid()
 
 if __name__ == "__main__":
     exit(main())

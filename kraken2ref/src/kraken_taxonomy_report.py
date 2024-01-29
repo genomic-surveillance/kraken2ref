@@ -4,7 +4,7 @@ import os.path
 from cached_property import cached_property
 import logging
 
-from kraken2ref.src.graph_functions import build_graph, get_end_points
+from kraken2ref.src.graph_functions import build_graph, get_end_points, get_graph_endpoints
 
 logging.basicConfig( format='%(asctime)s %(message)s', level=logging.DEBUG )
 
@@ -31,10 +31,31 @@ class KrakenTaxonomyReport():
 
 
     def read_kraken_report(self, kraken_report):
+        """Read in kraken2 report and produce outputs used to build and find paths in taxonomy graph.
+
+        Args:
+            kraken_report (str/pathlike): Path to input kraken2 taxonomy report.
+
+        Returns:
+            all_nodes_list (list): List of nodes (from species level - "S" - onward only)
+                Each node is represented as a tuple, where:
+                    node[0] = index of that node in the kraken report
+                    node[1] = taxon level of that node ("S"/"S1"/etc)
+            data_dict (dict): Dictionary representation of kraken report (from species level - "S" - onward only)
+                The contents of the data_dict are:
+                    key = node (node is a tuple as described above)
+                    value = tuple, where
+                        value[0] = number of reads assigned to that node
+                        value[1] = taxonomy ID of that node
+        """
         kraken_report = pd.read_csv(kraken_report, sep = "\t", header = None)
 
-        keys = list(zip(kraken_report.index, kraken_report[3]))
-        vals = list(zip(list(kraken_report[2]), list(kraken_report[4])))
+        num_hits = list(kraken_report[2])
+        tax_levels = list(kraken_report[3])
+        tax_ids = list(kraken_report[4])
+
+        keys = list(zip(kraken_report.index, tax_levels))
+        vals = list(zip(num_hits, tax_ids))
 
         data_dict = dict(zip(keys, vals))
         all_node_lists = []
@@ -48,32 +69,31 @@ class KrakenTaxonomyReport():
         return all_node_lists, data_dict
 
     @cached_property
+    ##TODO: this is a property, rename function
     def pick_reference_taxid(self):
+        """Build all graphs contained in the kraken2 taxonoic report;
+            From each graph, identify nodes that are assigned more reads
+                than the threshold (passing nodes);
+            Find all paths leading to passing nodes;
+            Collect all paths found in the kraken2 report;
+            Collect the taxon IDs for each node in each path
+
+        Returns:
+            dump_dict (dict): A dictionary with data that can be dumped to file.
+                The contents of dump_dict are:
+                    key = tax ID chosen for each path
+                    value = list where:
+                        value[0] = list of tax_ids for the path leading to this key
+                        value[1] = list of node (ie the path) leading to this key
+        """
         graphs = []
         all_node_lists, data_dict = self.read_kraken_report(self.in_file)
         for node_list in all_node_lists:
             graphs.append(build_graph(node_list))
 
-        all_paths_lists = []
-        all_taxids_lists = []
-        for graph in graphs:
-            this_graph_paths, this_graph_tax_lists = get_end_points(graph, data_dict, self.threshold)
-            # print(this_graph_paths)
-            print("\n\n\n")
-            for path in this_graph_paths:
-                all_paths_lists.append(path)
-            for tax_id_list in this_graph_tax_lists:
-                all_taxids_lists.append(tax_id_list)
+        graph_meta_dict = get_graph_endpoints(graphs=graphs, data_dict=data_dict, threshold=self.threshold)
 
-        dump_dict = {all_taxids_lists[i][-1]: [all_taxids_lists[i], all_paths_lists[i]] for i in range(len(all_taxids_lists))}
-        # print("\n\n\n\nDUMP DICT = ")
-        # for k, [t, p] in dump_dict.items():
-        #     print(f"Filename = {k}\ttaxa = {t}\tpath = {p}")
-
-        # for i in range(len(all_paths_lists)):
-        #     print(f"{i}. path = {all_paths_lists[i]}\ttax_ids_list = {all_taxids_lists[i]}")
-
-        return dump_dict
+        return graph_meta_dict
 
     @cached_property
     def taxonomy_graph( self ):

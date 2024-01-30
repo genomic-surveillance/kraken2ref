@@ -57,6 +57,8 @@ class TaxonLevel:
             if work_factor < 0:
                 sys.stderr.write("Too far, returning to S")
                 return TaxonLevel("S")
+            if work_factor == 0:
+                return TaxonLevel("S")
             else:
                 return TaxonLevel("S"+str(work_factor))
 

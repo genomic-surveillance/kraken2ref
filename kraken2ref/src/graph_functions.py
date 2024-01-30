@@ -20,8 +20,10 @@ def build_graph(indexed_nodes):
     ## initialise required data structures for graph building
     graph = {}
 
-    ##TODO: simplify this; keeping data that is functionally duplicate = ew
     plain_levels = []  ## e.g. ["S", "S1", "S2", "S3", "S3"]
+
+    ## levels_as_taxa is used to backtrack
+    ## good to have it computed once as will probably be needed often
     levels_as_taxa = []  ## same as above except as list of TaxonLevel objects
 
     ## iterate over indexed_nodes list
@@ -118,17 +120,20 @@ def get_graph_endpoints(graphs, data_dict, threshold):
         end_nodes = [key for key in graph.keys() if key[1] == maximum.lvl and data_dict[key][0] >= threshold]
         ## handle exception where end_nodes is empty
         if len(end_nodes) == 0:
-            sys.stderr.write(f"\n\nNo leaf nodes found suitable, reverting to pre-selected reference for node: {root}, taxonomic ID: {data_dict[root][1]}\n\n")
-            ## create a unique "undetermined target" entry with no path; use root as filename
-            ## TODO: test with new DB structure; this might break/be inappropriate
+            ## create a unique "undetermined target" entry with no path; use parent as filename
+            ## jump up 1 level to get parent
             parent_level = maximum - 1
-            print(parent_level)
+
+            ## find parent node
             for (idx,lvl) in graph.keys():
                 if lvl == parent_level.lvl:
                     parent_node = (idx,lvl)
                     break
-            sys.stderr.write(f"\n\nNo leaf nodes found suitable, reverting to pre-selected reference for node: {parent_node}, taxonomic ID: {data_dict[root][1]}\n\n")
-            # print(parent_node)
+
+            ## write error: this is important
+            sys.stderr.write(f"\n\nNoSuitableTargetError: No leaf nodes found suitable, reverting to pre-selected reference for node: {parent_node}, taxonomic ID: {data_dict[parent_node][1]}\n\n")
+
+            ## populate graph_meta
             graph_meta["parent_selected_"+str(idx)] = {"graph_idx": idx,
                                     "source": root,
                                     "all_taxa": all_taxids_in_graph,

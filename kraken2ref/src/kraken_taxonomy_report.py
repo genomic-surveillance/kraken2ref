@@ -6,7 +6,7 @@ import logging
 
 from kraken2ref.src.graph_functions import build_graph, get_graph_endpoints
 
-logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
+logging.basicConfig(format="%(asctime)s %(message)s", level=logging.DEBUG)
 
 class KrakenTaxonomyReport():
     """
@@ -27,7 +27,7 @@ class KrakenTaxonomyReport():
         self.threshold = min_abs_reads
 
         if not os.path.isfile( self.in_file ):
-            raise ValueError(f'path { in_file} does not exist or is not a file')
+            raise FileNotFoundError(f"path {in_file} does not exist or is not a file")
 
 
     def read_kraken_report(self, kraken_report):

@@ -1,3 +1,4 @@
+import sys
 from kraken2ref.src.taxonlevel import TaxonLevel, find_parent
 
 def build_graph(indexed_nodes):
@@ -98,10 +99,12 @@ def get_graph_endpoints(graphs, data_dict, threshold):
         graphs (list(dicts)): A list of graphs to collect info on; each graph is a dict describing
                                 edges between nodes in that graph
         data_dict (dict): Dictionary representation of kraken2 report
-        threshold (_type_): _description_
+        threshold (int): Minimum number of read needed to retain a leaf node
 
     Returns:
-        _type_: _description_
+        graph_meta (dict(dicts)): A dict containing various info about processed graphs, where:
+                                    key = target node
+                                    value = dictionary containing info about path to target node
     """
     graph_meta = {}
     for idx, graph in enumerate(graphs):
@@ -113,14 +116,42 @@ def get_graph_endpoints(graphs, data_dict, threshold):
                 root = (idx, lvl)
                 break
         end_nodes = [key for key in graph.keys() if key[1] == maximum.lvl and data_dict[key][0] >= threshold]
-        for end_node in end_nodes:
-            path_found = find_all_paths(graph, root, end_node)[0]
-            path_as_taxids = [data_dict[node][1] for node in path_found]
-            graph_meta[end_node] = {"graph_idx": idx,
+        ## handle exception where end_nodes is empty
+        if len(end_nodes) == 0:
+            sys.stderr.write(f"\n\nNo leaf nodes found suitable, reverting to pre-selected reference for node: {root}, taxonomic ID: {data_dict[root][1]}\n\n")
+            ## create a unique "undetermined target" entry with no path; use root as filename
+            ## TODO: test with new DB structure; this might break/be inappropriate
+            parent_level = maximum - 1
+            print(parent_level)
+            for (idx,lvl) in graph.keys():
+                if lvl == parent_level.lvl:
+                    parent_node = (idx,lvl)
+                    break
+            sys.stderr.write(f"\n\nNo leaf nodes found suitable, reverting to pre-selected reference for node: {parent_node}, taxonomic ID: {data_dict[root][1]}\n\n")
+            # print(parent_node)
+            graph_meta["parent_selected_"+str(idx)] = {"graph_idx": idx,
                                     "source": root,
                                     "all_taxa": all_taxids_in_graph,
-                                    "path": path_found,
-                                    "path_as_taxids": path_as_taxids,
-                                    "taxid_filename": path_as_taxids[-1]
+                                    "path": None,
+                                    "path_as_taxids": None,
+                                    "taxid_filename": data_dict[parent_node][1]
                                     }
+        else:
+            ##TODO: add polling function here, apply to end nodes list
+            for end_node in end_nodes:
+                path_found = find_all_paths(graph, root, end_node)[0]
+                path_as_taxids = [data_dict[node][1] for node in path_found]
+                graph_meta[end_node] = {"graph_idx": idx,
+                                        "source": root,
+                                        "all_taxa": all_taxids_in_graph,
+                                        "path": path_found,
+                                        "path_as_taxids": path_as_taxids,
+                                        "taxid_filename": path_as_taxids[-1]
+                                        }
+
     return graph_meta
+
+def poll_leaves(end_nodes, data_dict):
+    filtered_end_nodes = []
+
+    return filtered_end_nodes

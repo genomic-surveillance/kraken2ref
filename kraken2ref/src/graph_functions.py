@@ -134,8 +134,9 @@ def get_graph_endpoints(graphs, data_dict, threshold):
             sys.stderr.write(f"\n\nNoSuitableTargetError: No leaf nodes found suitable, reverting to pre-selected reference for node: {parent_node}, taxonomic ID: {data_dict[parent_node][1]}\n\n")
 
             ## populate graph_meta
-            graph_meta["parent_selected_"+str(idx)] = {"graph_idx": idx,
+            graph_meta["parent_selected_"+str(data_dict[parent_node][1])] = {"graph_idx": idx,
                                     "source": root,
+                                    "target": parent_node,
                                     "all_taxa": all_taxids_in_graph,
                                     "path": None,
                                     "path_as_taxids": None,
@@ -146,8 +147,9 @@ def get_graph_endpoints(graphs, data_dict, threshold):
             for end_node in end_nodes:
                 path_found = find_all_paths(graph, root, end_node)[0]
                 path_as_taxids = [data_dict[node][1] for node in path_found]
-                graph_meta[end_node] = {"graph_idx": idx,
+                graph_meta[data_dict[end_node][1]] = {"graph_idx": idx,
                                         "source": root,
+                                        "target": end_node,
                                         "all_taxa": all_taxids_in_graph,
                                         "path": path_found,
                                         "path_as_taxids": path_as_taxids,

@@ -3,6 +3,7 @@ import pandas as pd
 import os
 from cached_property import cached_property
 import logging
+import json
 
 from kraken2ref.src.graph_functions import build_graph, get_graph_endpoints
 
@@ -95,6 +96,9 @@ class KrakenTaxonomyReport():
 
         graph_meta_dict = get_graph_endpoints(graphs=self.graphs, data_dict=self.data_dict, threshold=self.threshold)
         self.graph_meta = graph_meta_dict
+
+        with open("decomposed.json", "w") as outfile:
+            json.dump(self.graph_meta, outfile, indent=4)
 
         return graph_meta_dict
 

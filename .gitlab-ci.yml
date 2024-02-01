@@ -13,7 +13,7 @@ prepare_env:
   tags:
    - autoscale
   script:
-    - python --version ; pip --version
+    - python3 --version ; pip --version
     - pip install virtualenv
     - virtualenv venv
     - source venv/bin/activate

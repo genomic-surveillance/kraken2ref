@@ -10,6 +10,8 @@ stages:
 
 prepare_env:
   stage: build
+  tags:
+   - autoscale
   script:
     - python --version ; pip --version
     - pip install virtualenv
@@ -19,6 +21,8 @@ prepare_env:
 
 lint_code:
   stage: build
+  tags:
+   - autoscale
   script:
     - flake8 . --count --select=E9,F63,F7 --show-source --statistics --exit-zero
     - flake8 . --count --max-complexity=10 --max-line-length=127 --statistics --exit-zero

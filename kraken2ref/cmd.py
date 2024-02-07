@@ -32,6 +32,12 @@ def args_parser():
         version='kraken2ref ' + __version__ )
 
     parser.add_argument(
+        '-s', '--sample_id',
+        type = str,
+        required = True,
+        help = "Sample ID. [str]")
+
+    parser.add_argument(
         '-i', '--in_file',
         type = str,
         required = True,

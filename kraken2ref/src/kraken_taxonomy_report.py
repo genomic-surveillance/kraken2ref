@@ -1,11 +1,16 @@
-import re
 import pandas as pd
 import os
-from cached_property import cached_property
+# from cached_property import cached_property
 import logging
 import json
+import datetime
 
-from kraken2ref.src.graph_functions import build_graph, get_graph_endpoints
+from kraken2ref.src.graph_functions import build_graph, get_graph_endpoints, split_graph
+
+try:
+    from kraken2ref.version import version as __version__
+except ImportError as ie:
+    __version__ = "dev/test"
 
 logging.basicConfig(format="%(asctime)s %(message)s", level=logging.DEBUG)
 
@@ -23,9 +28,18 @@ class KrakenTaxonomyReport():
 
     """
 
-    def __init__(self, in_file: str, min_abs_reads: int = 5):
+    def __init__(self, sample_id: str, in_file: str, min_abs_reads: int = 5):
+
+        NOW = datetime.datetime.now()
+        self.sample_id = sample_id
         self.in_file = in_file
         self.threshold = min_abs_reads
+
+        self.metadata = {
+                            "k2r_version": __version__,
+                            "sample": self.sample_id,
+                            "timestamp": str(NOW)
+                        }
 
         if not os.path.isfile( self.in_file ):
             raise FileNotFoundError(f"path {in_file} does not exist or is not a file")
@@ -73,7 +87,7 @@ class KrakenTaxonomyReport():
 
         return all_node_lists, data_dict
 
-    def pick_reference_taxid(self):
+    def pick_reference_taxid(self, split_at = None):
         """Build all graphs contained in the kraken2 taxonoic report;
             From each graph, identify nodes that are assigned more reads
                 than the threshold (passing nodes);
@@ -94,11 +108,34 @@ class KrakenTaxonomyReport():
         for node_list in self.all_node_lists:
             self.graphs.append(build_graph(node_list))
 
-        graph_meta_dict = get_graph_endpoints(graphs=self.graphs, data_dict=self.data_dict, threshold=self.threshold)
+        ## can split each graph in input at the given levels
+        ## this is useful as it provides more resolution
+        ## output is also noisier as a result
+        self.metadata["split_at"] = split_at
+
+        ## if graph to be split, apply splitting and construct graph_meta
+        if split_at:
+            split_graphs = []
+            for graph in self.graphs:
+                subgraphs = split_graph(graph, split_at)
+                split_graphs.extend(subgraphs)
+                graph_meta_dict = get_graph_endpoints(graphs=split_graphs, data_dict=self.data_dict, threshold=self.threshold)
+
+        ## else analyse entire graphs
+        else:
+            graph_meta_dict = get_graph_endpoints(graphs=self.graphs, data_dict=self.data_dict, threshold=self.threshold)
+
         self.graph_meta = graph_meta_dict
 
-        with open("decomposed.json", "w") as outfile:
-            json.dump(self.graph_meta, outfile, indent=4)
+        selected_refs = list(graph_meta_dict.keys())
+        self.metadata["selected"] = selected_refs
 
-        return graph_meta_dict
+        to_json = {
+            "metadata": self.metadata,
+            "outputs": self.graph_meta
+        }
+
+        with open(self.sample_id+"_decomposed.json", "w") as outfile:
+            json.dump(to_json, outfile, indent=4)
+        return self.metadata, graph_meta_dict
 

@@ -1,5 +1,6 @@
 import sys
 from kraken2ref.src.taxonlevel import TaxonLevel, find_parent
+from kraken2ref.src.polling_functions import poll_leaves
 
 def build_graph(indexed_nodes):
     """Function to build a graph representation from a list of indexed nodes.
@@ -36,7 +37,7 @@ def build_graph(indexed_nodes):
 
     ## set up counters for list trawling
     start = 0
-    offset = indexed_nodes[0][0]
+    # offset = indexed_nodes[0][0]
 
     ## trawl over list to find edges in graph
     while start < len(plain_levels)-1:
@@ -46,14 +47,18 @@ def build_graph(indexed_nodes):
 
         ## if left node less than right node: that's an edge
         if left_node < right_node:
-            graph[(start+offset,plain_levels[start])].append((end+offset, plain_levels[end]))
+            ## generalise this, do not depend on offset
+            graph[indexed_nodes[start]].append(indexed_nodes[end])
+            # graph[(start+offset,plain_levels[start])].append((end+offset, plain_levels[end]))
 
         ## if left node equals right node: oops! find the closest parent
         if left_node >= right_node:
             sublist = levels_as_taxa[:end]
             parent = right_node - 1
             parent_idx = find_parent(sublist, parent)
-            graph[(parent_idx+offset, parent.lvl)].append((end+offset, plain_levels[end]))
+            ## generalise this, do not depend on offset
+            graph[indexed_nodes[parent_idx]].append(indexed_nodes[end])
+            # graph[(parent_idx+offset, parent.lvl)].append((end+offset, plain_levels[end]))
         start += 1
 
     return graph
@@ -143,8 +148,9 @@ def get_graph_endpoints(graphs, data_dict, threshold):
                                     "taxid_filename": data_dict[parent_node][1]
                                     }
         else:
-            ##TODO: add polling function here, apply to end nodes list
-            for end_node in end_nodes:
+            ## polling function
+            filt_end_nodes, pre_surprise, post_surprise = poll_leaves(end_nodes=end_nodes, data_dict=data_dict)
+            for end_node in filt_end_nodes:
                 path_found = find_all_paths(graph, root, end_node)[0]
                 path_as_taxids = [data_dict[node][1] for node in path_found]
                 graph_meta[data_dict[end_node][1]] = {"graph_idx": idx,
@@ -158,7 +164,58 @@ def get_graph_endpoints(graphs, data_dict, threshold):
 
     return graph_meta
 
-def poll_leaves(end_nodes, data_dict):
-    filtered_end_nodes = []
+def split_graph(graph, split_at):
+    """Function to allow splitting of graph at given level for more granular analysis
 
-    return filtered_end_nodes
+    Args:
+        graph (dict): A dictionary representation of the graph, where:
+                    key = Source node
+                    value = Target node
+                    (Nodes are represented as described above)
+        split_at (str): The level at which to introduce granularity. E.g "S2"
+
+    Returns:
+        subgraphs (list(dicts)): A list of sub-graphs found after splitting at given level
+    """
+    subgraphs = []
+
+    ## set up data structures
+    sorted_keys = sorted(list(k for k in graph.keys()))
+    levels = [l for (i,l) in sorted_keys]
+
+    ## handle edge case
+    if levels.count(split_at) < 2:
+        print(f"Can't split at {split_at}")
+        return [graph]
+
+    ## get parent level and find nodes at that level
+    parent = TaxonLevel(split_at) - 1
+    parent
+
+    parent_nodes = []
+    for k in graph.keys():
+        if parent.lvl in k:
+            parent_nodes.append(k)
+    parent_nodes
+
+    ## identify nodes at split points
+    split_points = []
+    for parent_node in parent_nodes:
+        if len(graph[parent_node]) > 1:
+            split_points.extend(graph[parent_node])
+    split_points
+    print(split_points)
+
+    ## find paths to split points and convert those to graphs
+    paths_to_splits = []
+    for split_point in split_points:
+        path = find_all_paths(graph, sorted_keys[0], split_point)[0]
+        path.extend(graph[split_point])
+        print(path)
+        paths_to_splits.append(path)
+
+    for path in paths_to_splits:
+        subgraph = build_graph(path)
+        subgraphs.append(subgraph)
+
+    return subgraphs

@@ -6,8 +6,8 @@ class TaxonLevel:
     def __init__(self, tax_lvl):
 
         self.lvl = tax_lvl
-        if len(tax_lvl) == 2:
-            self.val = int(tax_lvl[1])
+        if len(tax_lvl[1:]) > 0:
+            self.val = int(tax_lvl[1:])
         else:
             self.val = 0
 

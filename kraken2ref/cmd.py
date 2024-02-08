@@ -44,6 +44,13 @@ def args_parser():
         help = "The kraken2 taxonomy report (typically 'report.txt') to process. [str/pathlike]")
 
     parser.add_argument(
+        '-o', '--outdir',
+        type = str,
+        required = True,
+        help = "Full path to output directory. [str/pathlike]")
+
+
+    parser.add_argument(
         '-t', '--min_read_threshold',
         type = int,
         required = False,
@@ -56,12 +63,12 @@ def main():
 
     args = args_parser().parse_args()
 
-    my_tax_report = KrakenTaxonomyReport(in_file = args.in_file, min_abs_reads = args.min_read_threshold)
+    my_tax_report = KrakenTaxonomyReport(in_file = args.in_file, outdir = args.outdir, min_abs_reads = args.min_read_threshold)
     graph_meta = my_tax_report.pick_reference_taxid()
 
     ## for dev purposes
-    for k in graph_meta.keys():
-        print(f"target = {k}: {graph_meta[k]}\n\n")
+    # for k in graph_meta.keys():
+    #     print(f"target = {k}: {graph_meta[k]}\n\n")
 
 if __name__ == "__main__":
     exit(main())

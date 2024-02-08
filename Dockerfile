@@ -8,3 +8,4 @@ COPY setup.cfg  /home/kraken2ref/
 COPY requirements.txt  /home/kraken2ref/
 
 RUN cd  /home/kraken2ref/ && pip install .
+WORKDIR /home

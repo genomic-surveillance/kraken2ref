@@ -86,7 +86,7 @@ def find_all_paths(graph, source, target, path=[]):
     if source not in graph:
         return []
 
-    ## paths is a list in case of multiple paths from ource to target
+    ## paths is a list in case of multiple paths from source to target
     paths = []
 
     ## iterate over graph dict (i.e. edges)

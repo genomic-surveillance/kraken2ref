@@ -130,9 +130,9 @@ def get_graph_endpoints(graphs, data_dict, threshold):
             parent_level = maximum - 1
 
             ## find parent node
-            for (idx,lvl) in graph.keys():
+            for (idx, lvl) in graph.keys():
                 if lvl == parent_level.lvl:
-                    parent_node = (idx,lvl)
+                    parent_node = (idx, lvl)
                     break
 
             ## write error: this is important
@@ -140,13 +140,13 @@ def get_graph_endpoints(graphs, data_dict, threshold):
 
             ## populate graph_meta
             graph_meta["parent_selected_"+str(data_dict[parent_node][1])] = {"graph_idx": idx,
-                                    "source": root,
-                                    "target": parent_node,
-                                    "all_taxa": all_taxids_in_graph,
-                                    "path": None,
-                                    "path_as_taxids": None,
-                                    "taxid_filename": data_dict[parent_node][1]
-                                    }
+                                                                                "source": root,
+                                                                                "target": parent_node,
+                                                                                "all_taxa": all_taxids_in_graph,
+                                                                                "path": None,
+                                                                                "path_as_taxids": None,
+                                                                                "taxid_filename": data_dict[parent_node][1]
+                                                                                }
         else:
             ## polling function
             filt_end_nodes, pre_surprise, post_surprise = poll_leaves(end_nodes=end_nodes, data_dict=data_dict)
@@ -154,13 +154,13 @@ def get_graph_endpoints(graphs, data_dict, threshold):
                 path_found = find_all_paths(graph, root, end_node)[0]
                 path_as_taxids = [data_dict[node][1] for node in path_found]
                 graph_meta[data_dict[end_node][1]] = {"graph_idx": idx,
-                                        "source": root,
-                                        "target": end_node,
-                                        "all_taxa": all_taxids_in_graph,
-                                        "path": path_found,
-                                        "path_as_taxids": path_as_taxids,
-                                        "taxid_filename": path_as_taxids[-1]
-                                        }
+                                                        "source": root,
+                                                        "target": end_node,
+                                                        "all_taxa": all_taxids_in_graph,
+                                                        "path": path_found,
+                                                        "path_as_taxids": path_as_taxids,
+                                                        "taxid_filename": path_as_taxids[-1]
+                                                        }
 
     return graph_meta
 

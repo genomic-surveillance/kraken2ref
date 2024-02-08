@@ -1,7 +1,5 @@
 import argparse
-import os
-import shutil
-import logging
+# import logging
 from kraken2ref.src.kraken_taxonomy_report import KrakenTaxonomyReport
 
 
@@ -29,7 +27,7 @@ def args_parser():
     parser.add_argument(
         '-v', '--version',
         action='version',
-        version='kraken2ref ' + __version__ )
+        version='kraken2ref ' + __version__)
 
     parser.add_argument(
         '-s', '--sample_id',
@@ -63,8 +61,8 @@ def main():
 
     args = args_parser().parse_args()
 
-    my_tax_report = KrakenTaxonomyReport(sample_id = args.sample_id, in_file = args.in_file, outdir = args.outdir, min_abs_reads = args.min_read_threshold)
-    graph_meta = my_tax_report.pick_reference_taxid()
+    tax_report = KrakenTaxonomyReport(sample_id = args.sample_id, in_file = args.in_file, outdir = args.outdir, min_abs_reads = args.min_read_threshold)
+    tax_report.pick_reference_taxid()
 
     ## for dev purposes
     # for k in graph_meta.keys():

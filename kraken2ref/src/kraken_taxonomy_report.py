@@ -28,7 +28,7 @@ class KrakenTaxonomyReport():
 
     """
 
-    def __init__(self, sample_id: str, in_file: str, outdir:str, min_abs_reads: int = 5):
+    def __init__(self, sample_id: str, in_file: str, outdir: str, min_abs_reads: int = 5):
 
         NOW = datetime.datetime.now()
         self.sample_id = sample_id
@@ -138,5 +138,5 @@ class KrakenTaxonomyReport():
 
         with open(os.path.join(self.outdir, self.sample_id+"_decomposed.json"), "w") as outfile:
             json.dump(to_json, outfile, indent=4)
-        return self.metadata, graph_meta_dict
+        # return self.metadata, graph_meta_dict
 

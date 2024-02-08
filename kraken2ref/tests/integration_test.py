@@ -4,7 +4,7 @@ from kraken2ref.src.kraken_taxonomy_report import KrakenTaxonomyReport
 
 def __init__():
     RUN_DIR = os.getcwd()
-    test_tax_report = KrakenTaxonomyReport(sample_id="int_test", in_file="./fixtures/report.txt", outdir="./", min_abs_reads=3)
+    test_tax_report = KrakenTaxonomyReport(sample_id="int_test", in_file="kraken2ref/tests/fixtures/report.txt", outdir="./", min_abs_reads=3)
 
     assert test_tax_report
     return test_tax_report

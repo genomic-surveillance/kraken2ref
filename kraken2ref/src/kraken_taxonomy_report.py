@@ -28,12 +28,13 @@ class KrakenTaxonomyReport():
 
     """
 
-    def __init__(self, sample_id: str, in_file: str, min_abs_reads: int = 5):
+    def __init__(self, sample_id: str, in_file: str, outdir:str, min_abs_reads: int = 5):
 
         NOW = datetime.datetime.now()
         self.sample_id = sample_id
         self.in_file = in_file
         self.threshold = min_abs_reads
+        self.outdir = outdir
 
         self.metadata = {
                             "k2r_version": __version__,
@@ -41,7 +42,7 @@ class KrakenTaxonomyReport():
                             "timestamp": str(NOW)
                         }
 
-        if not os.path.isfile( self.in_file ):
+        if not os.path.isfile(self.in_file):
             raise FileNotFoundError(f"path {in_file} does not exist or is not a file")
 
 
@@ -135,7 +136,7 @@ class KrakenTaxonomyReport():
             "outputs": self.graph_meta
         }
 
-        with open(self.sample_id+"_decomposed.json", "w") as outfile:
+        with open(os.path.join(self.outdir, self.sample_id+"_decomposed.json"), "w") as outfile:
             json.dump(to_json, outfile, indent=4)
         return self.metadata, graph_meta_dict
 

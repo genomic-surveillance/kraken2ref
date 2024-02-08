@@ -14,7 +14,7 @@ def __init__():
 def test_basic():
 
     test_tax_report = __init__()
-    metadata, graph_meta = test_tax_report.pick_reference_taxid()
+    test_tax_report.pick_reference_taxid()
 
     tmp = open("int_test_decomposed.json")
     data = json.load(tmp)
@@ -24,7 +24,7 @@ def test_basic():
 def test_split():
 
     test_tax_report = __init__()
-    metadata, graph_meta = test_tax_report.pick_reference_taxid("S2")
+    test_tax_report.pick_reference_taxid("S2")
 
     tmp = open("int_test_decomposed.json")
     data = json.load(tmp)

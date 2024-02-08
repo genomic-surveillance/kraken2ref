@@ -63,7 +63,7 @@ def main():
 
     args = args_parser().parse_args()
 
-    my_tax_report = KrakenTaxonomyReport(in_file = args.in_file, outdir = args.outdir, min_abs_reads = args.min_read_threshold)
+    my_tax_report = KrakenTaxonomyReport(sample_id = args.sample_id, in_file = args.in_file, outdir = args.outdir, min_abs_reads = args.min_read_threshold)
     graph_meta = my_tax_report.pick_reference_taxid()
 
     ## for dev purposes

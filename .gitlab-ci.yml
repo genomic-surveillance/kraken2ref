@@ -31,5 +31,7 @@ run_tests:
   script:
     - pip install .
     - pytest
+  artifacts:
+    expire_in: "5 mins"
 
 

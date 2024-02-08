@@ -21,6 +21,14 @@ cd kraken2ref
 pip install .
 ```  
 
+#### From Docker  
+```shell
+git clone https://gitlab.internal.sanger.ac.uk/malariagen1/misc_utils/kraken2ref.git
+cd kraken2ref
+docker build -t name:tag .
+docker run name:tag kraken2r <OPTIONS>
+```
+
 Once installed, run as follows:  
 
 ```shell

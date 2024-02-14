@@ -1,11 +1,10 @@
 import argparse
-import os
-import shutil
-import logging
+# import logging
+from kraken2ref.src.kraken_taxonomy_report import KrakenTaxonomyReport
 
 
-# get the version number from a file that is created by setuptools_scm 
-# when the package is installed. 
+# get the version number from a file that is created by setuptools_scm
+# when the package is installed.
 try:
     from .version import version as __version__
     from .version import version_tuple
@@ -21,24 +20,53 @@ except ImportError:
 def args_parser():
     """
     Command line argument parser
-    """        
+    """
     parser = argparse.ArgumentParser(
-        description = "kraken2ref: extract reads to reference sequences from kraken2 outputs") 
+        description = "kraken2ref: extract reads to reference sequences from kraken2 outputs")
 
     parser.add_argument(
-        '-v', '--version', 
-        action='version', 
-        version='kraken2ref ' + __version__ )
+        '-v', '--version',
+        action='version',
+        version='kraken2ref ' + __version__)
 
-    # TODO: add the parameters
-    
+    parser.add_argument(
+        '-s', '--sample_id',
+        type = str,
+        required = True,
+        help = "Sample ID. [str]")
+
+    parser.add_argument(
+        '-i', '--in_file',
+        type = str,
+        required = True,
+        help = "The kraken2 taxonomy report (typically 'report.txt') to process. [str/pathlike]")
+
+    parser.add_argument(
+        '-o', '--outdir',
+        type = str,
+        required = True,
+        help = "Full path to output directory. [str/pathlike]")
+
+
+    parser.add_argument(
+        '-t', '--min_read_threshold',
+        type = int,
+        required = False,
+        default = 5,
+        help = "The absolute minimum number of reads to use as threshold; taxa with fewer reads assigned to them will not be considered. [int][Default = 5]")
+
     return parser
-    
+
 def main():
-    
+
     args = args_parser().parse_args()
 
-    # TODO: run the command
+    tax_report = KrakenTaxonomyReport(sample_id = args.sample_id, in_file = args.in_file, outdir = args.outdir, min_abs_reads = args.min_read_threshold)
+    tax_report.pick_reference_taxid()
+
+    ## for dev purposes
+    # for k in graph_meta.keys():
+    #     print(f"target = {k}: {graph_meta[k]}\n\n")
 
 if __name__ == "__main__":
     exit(main())

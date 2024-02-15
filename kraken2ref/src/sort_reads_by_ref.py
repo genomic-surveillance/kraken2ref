@@ -90,6 +90,6 @@ def write_fastq(fq1, fq2, kraken_out, update_output, ref_data):
             with open(new_json_path, "w") as new_json:
                 json.dump(data, new_json, indent=4)
 
-    sys.stderr.write(f"Wrote {wrote} non-unique read-pairs to {len(file_read_counts.keys())} file-pairs.")
+    sys.stderr.write(f"Wrote {wrote} non-unique read-pairs to {len(file_read_counts.keys())} file-pairs.\n\n")
 
     return summary

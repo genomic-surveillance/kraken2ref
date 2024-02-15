@@ -6,6 +6,7 @@ import json
 import datetime
 
 from kraken2ref.src.graph_functions import build_graph, get_graph_endpoints, split_graph
+from kraken2ref.src.sort_reads_by_ref import write_fastq
 
 try:
     from kraken2ref.version import version as __version__
@@ -28,13 +29,10 @@ class KrakenTaxonomyReport():
 
     """
 
-    def __init__(self, sample_id: str, in_file: str, outdir: str, min_abs_reads: int = 5):
+    def __init__(self, sample_id: str):
 
         NOW = datetime.datetime.now()
         self.sample_id = sample_id
-        self.in_file = in_file
-        self.threshold = min_abs_reads
-        self.outdir = outdir
 
         self.metadata = {
                             "k2r_version": __version__,
@@ -42,11 +40,8 @@ class KrakenTaxonomyReport():
                             "timestamp": str(NOW)
                         }
 
-        if not os.path.isfile(self.in_file):
-            raise FileNotFoundError(f"path {in_file} does not exist or is not a file")
 
-
-    def read_kraken_report(self, kraken_report):
+    def read_kraken_report(self, kraken_report:str):
         """Read in kraken2 report and produce outputs used to build and find paths in taxonomy graph.
 
         Args:
@@ -88,7 +83,7 @@ class KrakenTaxonomyReport():
 
         return all_node_lists, data_dict
 
-    def pick_reference_taxid(self, split_at = None):
+    def pick_reference_taxid(self, in_file: str, outdir: str, min_abs_reads: int = 5, split_at = None):
         """Build all graphs contained in the kraken2 taxonoic report;
             From each graph, identify nodes that are assigned more reads
                 than the threshold (passing nodes);
@@ -104,6 +99,12 @@ class KrakenTaxonomyReport():
                         value[0] = list of tax_ids for the path leading to this key
                         value[1] = list of node (ie the path) leading to this key
         """
+        if not os.path.isfile(in_file):
+            raise FileNotFoundError(f"Missing Input: Path {in_file} does not exist or is not a file")
+
+        self.in_file = in_file
+        self.threshold = min_abs_reads
+        self.outdir = outdir
         self.graphs = []
         self.all_node_lists, self.data_dict = self.read_kraken_report(self.in_file)
         for node_list in self.all_node_lists:
@@ -138,5 +139,13 @@ class KrakenTaxonomyReport():
 
         with open(os.path.join(self.outdir, self.sample_id+"_decomposed.json"), "w") as outfile:
             json.dump(to_json, outfile, indent=4)
-        # return self.metadata, graph_meta_dict
+
+    def sort_reads_by_ref(self, sample_id: str, fq1: str, fq2:str, kraken_out:str, update_output:bool = True, ref_data = None):
+        if not sample_id:
+            sample_id = self.sample_id
+        if not ref_data:
+            ref_data = os.path.join(self.outdir, sample_id+"_decomposed.json")
+
+        self.summary = write_fastq(fq1, fq2, kraken_out, update_output, ref_data)
+
 

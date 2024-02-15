@@ -35,25 +35,67 @@ def args_parser():
         required = True,
         help = "Sample ID. [str]")
 
-    parser.add_argument(
+    subparsers = parser.add_subparsers(title="subcommands", help='kraken2ref sub-commands', dest='mode')
+    report_parser = subparsers.add_parser("parse_report")
+
+    report_parser.add_argument(
         '-i', '--in_file',
         type = str,
         required = True,
         help = "The kraken2 taxonomy report (typically 'report.txt') to process. [str/pathlike]")
 
-    parser.add_argument(
+    report_parser.add_argument(
         '-o', '--outdir',
         type = str,
         required = True,
         help = "Full path to output directory. [str/pathlike]")
 
 
-    parser.add_argument(
+    report_parser.add_argument(
         '-t', '--min_read_threshold',
         type = int,
         required = False,
         default = 5,
         help = "The absolute minimum number of reads to use as threshold; taxa with fewer reads assigned to them will not be considered. [int][Default = 5]")
+
+    report_parser.add_argument(
+        '-x', '--split_at',
+        type = str,
+        required = False,
+        default = None,
+        help = "The taxon level to split graphs at. [str][Default = None]")
+
+    sort_read_parser = subparsers.add_parser("ref_sort_reads")
+
+    sort_read_parser.add_argument(
+        "-fq1", "--fastq1",
+        type = str,
+        required = True,
+        help = "First FASTQ file of paired end reads. [str/pathlike]")
+
+    sort_read_parser.add_argument(
+        "-fq2", "--fastq2",
+        type = str,
+        required = True,
+        help = "Second FASTQ file of paired end reads. [str/pathlike]")
+
+    sort_read_parser.add_argument(
+        "-k", "--kraken_out",
+        type = str,
+        required = True,
+        help = "Kraken2 output containing read-to-taxon mapping (typically output.kraken). [str/pathlike]")
+
+    sort_read_parser.add_argument(
+        "-r", "--ref_json",
+        type = str,
+        required = True,
+        help = "Output JSON created by `kraken2ref parse_report`. [str/pathlike]")
+
+    sort_read_parser.add_argument(
+        "-u", "--update",
+        action = "store_true",
+        required = False,
+        help = "Whether to update the kraken2ref JSON inplace or create a new updated copy. [switch]")
 
     return parser
 
@@ -61,8 +103,11 @@ def main():
 
     args = args_parser().parse_args()
 
-    tax_report = KrakenTaxonomyReport(sample_id = args.sample_id, in_file = args.in_file, outdir = args.outdir, min_abs_reads = args.min_read_threshold)
-    tax_report.pick_reference_taxid()
+    tax_report = KrakenTaxonomyReport(sample_id = args.sample_id)
+    if args.mode == "parse_report":
+        tax_report.pick_reference_taxid(in_file = args.in_file, outdir = args.outdir, min_abs_reads = args.min_read_threshold, split_at = args.split_at)
+    if args.mode == "ref_sort_reads":
+        tax_report.sort_reads_by_ref(sample_id = args.sample_id, fq1 = args.fastq1, fq2 = args.fastq2, kraken_out = args.kraken_out, ref_data = args.ref_json, update_output = args.update)
 
     ## for dev purposes
     # for k in graph_meta.keys():

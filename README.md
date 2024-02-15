@@ -21,24 +21,43 @@ cd kraken2ref
 pip install .
 ```  
 
+Once installed, run as follows:  
+
+```shell
+## parse kraken2 report
+kraken2r -s sample_id parse_report -i path/to/kraken2/report.txt -o ./ -t min_read_threshold
+
+## sort reads by reference (requires parse_report to have been run before)
+kraken2r -s sample_id ref_sort_reads -fq1 path/to/fq1.fq -fq2 path/to/fq2.fq -k path/to/output.kraken -r path/to/kraken2ref.json -u
+```  
+
 #### From Docker  
 ```shell
 git clone https://gitlab.internal.sanger.ac.uk/malariagen1/misc_utils/kraken2ref.git
 cd kraken2ref
 docker build -t name:tag .
-docker run -v `pwd`:/home name:tag kraken2r <OPTIONS>
+docker run -v `pwd`:/home name:tag kraken2r -s sample_id <mode> <OPTIONS>
 ```
-
-Once installed, run as follows:  
-
-```shell
-kraken2r -i path/to/kraken2/report.txt -t min_read_threshold
-```  
 
 # List of Arguments  
 
-- `-i` [path]: (ideally the absolute) path to kraken2 taxonomy report file [REQUIRED]  
+- `-s` [str]: Sample ID [REQUIRED FOR BOTH MODES]  
+
+## Mode: "parse_report"  
+
+- `-i` [path]: (Ideally the absolute) path to kraken2 taxonomy report file [REQUIRED]  
 - `-t` [int]: Minimum number of reads assigned to a leaf node for it to be considered [OPTIONAL][Default = 5]  
+- `-o` [path]: Path to output directory [Default = "./"]  
+
+## Mode: "ref_sort_reads"  
+
+- `-fq1` [path]: Path to R1 fastq file [REQUIRED]  
+- `-fq2` [path]: Path to R2 fastq file [REQUIRED]  
+- `-k` [path]: Path to kraken2 output.kraken file [REQUIRED]  
+- `-r` [path]: Path to JSON file produced by `kraken2r parse_report` [REQUIRED]  
+- `-u` [switch]: Whether to update the JSON file produced by `kraken2r parse_report` inplace or produce a new, updated copy [OPTIONAL][Default: produce new]  
+
+## General Args
 
 - `-h`: print help and exit  
 - `-v`: print version and exit  

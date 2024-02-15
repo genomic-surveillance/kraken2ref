@@ -12,7 +12,6 @@ def step_thru(freq_dist):
         idxs_to_return: Index locations of retained frequencies to map back to X-axis values and retrieve them
     """
     steps = sorted(freq_dist)
-    print(steps)
     max_step = 0
     for i in range(len(steps) - 1):
         j = i+1
@@ -34,7 +33,6 @@ def step_thru(freq_dist):
         break_point = None
 
     filt_freqs = steps[break_point:]
-    print(filt_freqs)
     idxs_to_return = [freq_dist.index(freq) for freq in filt_freqs]
     return idxs_to_return
 
@@ -48,15 +46,12 @@ def step_thru_back(freq_dist):
         idxs_to_return: Index locations of retained frequencies to map back to X-axis values and retrieve them
     """
     steps = sorted(freq_dist, reverse=True)
-    print(f"sorted = {steps}")
     max_step = 100000000000000000
     for i in range(len(steps) - 1):
         j = i+1
         step = steps[i] - steps[j]
-        print(steps[i], steps[j], step)
         if step > max_step:
             break_point = j
-            print(steps[i], steps[j])
             break
         elif step == 0:
             pass
@@ -70,7 +65,6 @@ def step_thru_back(freq_dist):
         break_point = None
 
     filt_freqs = steps[:break_point]
-    print(filt_freqs)
     idxs_to_return = [freq_dist.index(freq) for freq in filt_freqs]
     return idxs_to_return
 
@@ -100,7 +94,6 @@ def poll_leaves(end_nodes, data_dict):
     if len(prob_dist) < 8:
         padding = [0]*(8-len(prob_dist))
         prob_dist.extend(padding)
-        print(f"padded probdist: {prob_dist}")
 
     skew_test = sts.skewtest(prob_dist)
     if skew_test.pvalue < 0.005:
@@ -129,14 +122,12 @@ def poll_leaves(end_nodes, data_dict):
 
         ## using step_thru to step forward in ascending sorted dist
         idxs_to_keep = step_thru(freq_dist)
-        print(f"idxs found = {idxs_to_keep}")
         for idx in idxs_to_keep:
             filtered_end_nodes.append(nodes[idx])
 
     if mode == "step":
         ## using step_thru_back to step forward in **descending** sorted dist
         idxs_to_keep = step_thru_back(freq_dist)
-        print(f"idxs found = {idxs_to_keep}")
         for idx in idxs_to_keep:
             filtered_end_nodes.append(nodes[idx])
 

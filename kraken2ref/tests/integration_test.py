@@ -4,7 +4,7 @@ from kraken2ref.src.kraken_taxonomy_report import KrakenTaxonomyReport
 
 def __init__():
     RUN_DIR = os.getcwd()
-    test_tax_report = KrakenTaxonomyReport(sample_id="int_test", in_file="kraken2ref/tests/fixtures/report.txt", outdir="./", min_abs_reads=3)
+    test_tax_report = KrakenTaxonomyReport(sample_id="int_test")
 
     assert test_tax_report
     return test_tax_report
@@ -14,7 +14,7 @@ def __init__():
 def test_basic():
 
     test_tax_report = __init__()
-    test_tax_report.pick_reference_taxid()
+    test_tax_report.pick_reference_taxid(in_file="kraken2ref/tests/fixtures/report.txt", outdir="./", min_abs_reads=3)
 
     tmp = open("int_test_decomposed.json")
     data = json.load(tmp)
@@ -24,7 +24,7 @@ def test_basic():
 def test_split():
 
     test_tax_report = __init__()
-    test_tax_report.pick_reference_taxid("S2")
+    test_tax_report.pick_reference_taxid(in_file="kraken2ref/tests/fixtures/report.txt", outdir="./", min_abs_reads=3, split_at = "S2")
 
     tmp = open("int_test_decomposed.json")
     data = json.load(tmp)

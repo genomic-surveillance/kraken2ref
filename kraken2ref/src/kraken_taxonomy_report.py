@@ -1,5 +1,5 @@
 import pandas as pd
-import os
+import os, sys
 # from cached_property import cached_property
 import logging
 import json
@@ -102,6 +102,11 @@ class KrakenTaxonomyReport():
         if not os.path.isfile(in_file):
             raise FileNotFoundError(f"Missing Input: Path {in_file} does not exist or is not a file")
 
+        if not os.path.exists(outdir):
+            os.mkdir(outdir)
+        else:
+            sys.stderr.write(f"OutputPathExists: The path {outdir} already exists; existing outputs may be overwritten.")
+
         self.in_file = in_file
         self.threshold = min_abs_reads
         self.outdir = outdir
@@ -141,11 +146,6 @@ class KrakenTaxonomyReport():
             json.dump(to_json, outfile, indent=4)
 
     def sort_reads_by_ref(self, sample_id: str, fq1: str, fq2:str, kraken_out:str, update_output:bool = True, ref_data = None):
-        if not sample_id:
-            sample_id = self.sample_id
-        if not ref_data:
-            ref_data = os.path.join(self.outdir, sample_id+"_decomposed.json")
-
-        self.summary = write_fastq(fq1, fq2, kraken_out, update_output, ref_data)
+        self.summary = write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data)
 
 

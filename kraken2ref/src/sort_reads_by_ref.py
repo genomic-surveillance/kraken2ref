@@ -4,7 +4,7 @@ import datetime
 import pandas as pd
 from Bio import SeqIO
 
-def write_fastq(fq1, fq2, kraken_out, update_output, ref_data):
+def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
 
     NOW = datetime.datetime.now()
     fq1_dict = SeqIO.index(fq1, "fastq")
@@ -43,7 +43,7 @@ def write_fastq(fq1, fq2, kraken_out, update_output, ref_data):
     for tax in to_remove:
         del ref_map[tax]
 
-    file_handle_map = {k: [open(k+"_R1.fq", "w"), open(k+"_R2.fq", "w")] for k in ref_map.keys()}
+    file_handle_map = {k: [open(sample_id+k+"_R1.fq", "w"), open(sample_id+k+"_R2.fq", "w")] for k in ref_map.keys()}
     file_read_counts = {k: 0 for k in ref_map.keys()}
     wrote = 0
     for ref_tax, [v, reads] in ref_map.items():

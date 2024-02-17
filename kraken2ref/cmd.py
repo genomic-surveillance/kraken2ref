@@ -1,7 +1,7 @@
 import argparse
-# import logging
+import os
+import logging
 from kraken2ref.src.kraken_taxonomy_report import KrakenTaxonomyReport
-
 
 # get the version number from a file that is created by setuptools_scm
 # when the package is installed.
@@ -102,6 +102,21 @@ def args_parser():
 def main():
 
     args = args_parser().parse_args()
+
+    if args.mode == "parse_report":
+        outdir = args.outdir
+    if args.mode == "ref_sort_reads":
+        outdir = os.path.dirname(os.path.abspath(args.ref_json))
+
+    if not os.path.exists(outdir):
+            os.mkdir(outdir)
+    # else:
+    #     logging.warning(msg = f"CMD: OutputPathExists: The path {outdir} already exists; existing outputs may be overwritten.\n")
+        # sys.stderr.write(f"OutputPathExists: The path {outdir} already exists; existing outputs may be overwritten.\n")
+
+
+    logfile = os.path.join(outdir, f"{args.sample_id}_kraken2ref.log")
+    logging.basicConfig(format='%(asctime)s | %(levelname)s | %(module)s - %(funcName)s | %(message)s', level=logging.NOTSET, datefmt="%Y-%m-%d %H:%M:%S", filename = logfile)
 
     tax_report = KrakenTaxonomyReport(sample_id = args.sample_id)
     if args.mode == "parse_report":

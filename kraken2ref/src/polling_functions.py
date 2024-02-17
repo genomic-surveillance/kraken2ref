@@ -1,5 +1,4 @@
-# import sys
-# import numpy as np
+import logging
 import scipy.stats as sts
 
 def step_thru(freq_dist):
@@ -82,14 +81,20 @@ def poll_leaves(end_nodes, data_dict):
     """
 
     if len(end_nodes) == 1:
+        logging.info("Only one non-spurious leaf-node found. NOT POLLING.")
         return end_nodes, 0, 0
+
+    logging.info("Now polling...")
 
     filt_data_dict = {k: data_dict[k] for k in data_dict.keys() if k in end_nodes}
 
     filtered_end_nodes = []
     nodes, freq_dist = [[k for k in filt_data_dict.keys()], [filt_data_dict[k][0] for k in filt_data_dict.keys()]]
     prob_dist = [i/sum(freq_dist) for i in freq_dist]
+    logging.debug(f"Frequency Distribution: {freq_dist}")
+    logging.debug(f"Probability Distribution: {prob_dist}")
     surprise_prefilter = sts.entropy(prob_dist)
+    logging.debug(f"Pre-filter Entropy: {surprise_prefilter}")
 
     if len(prob_dist) < 8:
         padding = [0]*(8-len(prob_dist))
@@ -97,13 +102,13 @@ def poll_leaves(end_nodes, data_dict):
 
     skew_test = sts.skewtest(prob_dist)
     if skew_test.pvalue < 0.005:
-        print("using mode 'max'")
+        logging.info("Mode = MAX")
         mode = "max"
     if 0.005 < skew_test.pvalue < 0.05:
-        print("using mode 'step'")
+        logging.info("Mode = STEP")
         mode = "step"
     if 0.05 < skew_test.pvalue:
-        print("using mode 'conservative'")
+        logging.info("Mode = CONSERVATIVE")
         mode = "conservative"
 
     max_freq = max(freq_dist)
@@ -135,8 +140,10 @@ def poll_leaves(end_nodes, data_dict):
     if mode == "max":
         filtered_end_nodes.append(max_node)
 
+    logging.debug(f"Selected nodes: {filtered_end_nodes}")
     filt_freqs = [filt_data_dict[k][0] for k in filtered_end_nodes]
     filt_prob_dist = [i/sum(filt_freqs) for i in filt_freqs]
     surprise_postfilter = sts.entropy(filt_prob_dist)
+    logging.debug(f"Post-filter Entropy: {surprise_postfilter}")
 
     return filtered_end_nodes, surprise_prefilter, surprise_postfilter

@@ -13,8 +13,6 @@ try:
 except ImportError as ie:
     __version__ = "dev/test"
 
-logging.basicConfig(format="%(asctime)s %(message)s", level=logging.DEBUG)
-
 class KrakenTaxonomyReport():
     """
     This class handles a kraken2 taxonomy report output file.
@@ -31,14 +29,16 @@ class KrakenTaxonomyReport():
 
     def __init__(self, sample_id: str):
 
-        NOW = datetime.datetime.now()
+        NOW = f"{datetime.datetime.now():%Y-%m-%d %H:%M:%S}"
         self.sample_id = sample_id
 
         self.metadata = {
                             "k2r_version": __version__,
                             "sample": self.sample_id,
-                            "timestamp": str(NOW)
+                            "timestamp": NOW
                         }
+
+        logging.info(f"\nkraken2ref version = {__version__}\nSTARTED = {NOW}\nSample: {sample_id}")
 
 
     def read_kraken_report(self, kraken_report:str):
@@ -99,13 +99,12 @@ class KrakenTaxonomyReport():
                         value[0] = list of tax_ids for the path leading to this key
                         value[1] = list of node (ie the path) leading to this key
         """
-        if not os.path.isfile(in_file):
-            raise FileNotFoundError(f"Missing Input: Path {in_file} does not exist or is not a file")
+        logging.info(msg = f"CMD: kraken2r -s {self.sample_id} parse_report \n\t\t-i {in_file} \n\t\t-o {outdir} \n\t\t-t {min_abs_reads} \n\t\t-x {split_at}\n\n")
 
-        if not os.path.exists(outdir):
-            os.mkdir(outdir)
-        else:
-            sys.stderr.write(f"OutputPathExists: The path {outdir} already exists; existing outputs may be overwritten.")
+        if not os.path.isfile(in_file):
+            logging.critical(msg = f"FileNotFoundError: Missing Input: Path {in_file} does not exist or is not a file.\n")
+            raise FileNotFoundError(f"Missing Input: Path {in_file} does not exist or is not a file.\n")
+
 
         self.in_file = in_file
         self.threshold = min_abs_reads
@@ -144,8 +143,9 @@ class KrakenTaxonomyReport():
 
         with open(os.path.join(self.outdir, self.sample_id+"_decomposed.json"), "w") as outfile:
             json.dump(to_json, outfile, indent=4)
+        logging.info(msg = f"Output written to {os.path.join(self.outdir, self.sample_id+"_decomposed.json")}\n\n")
 
     def sort_reads_by_ref(self, sample_id: str, fq1: str, fq2:str, kraken_out:str, update_output:bool = True, ref_data = None):
+        logging.info(msg = f"CMD: kraken2r -s {self.sample_id} ref_sort_reads \n\t\t-fq1 {fq1} \n\t\t-fq2 {fq2} \n\t\t-k {kraken_out} \n\t\t-r {ref_data} \n\t\t-u {update_output}\n\n")
         self.summary = write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data)
-
 

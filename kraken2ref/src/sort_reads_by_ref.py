@@ -1,12 +1,14 @@
-import sys
+import os, sys
 import json
+import logging
 import datetime
 import pandas as pd
 from Bio import SeqIO
 
 def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
 
-    NOW = datetime.datetime.now()
+    outdir = os.path.dirname(os.path.abspath(ref_data))
+    NOW = f"{datetime.datetime.now():%Y-%m-%d %H:%M:%S}"
     fq1_dict = SeqIO.index(fq1, "fastq")
     fq2_dict = SeqIO.index(fq2, "fastq")
     k = list(fq1_dict.keys())[0]
@@ -17,9 +19,12 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
 
     read_data = pd.read_csv(kraken_out, sep = "\t", header = None)
     num_all = len(read_data)
+    logging.info(f"Found {num_all} unique reads.")
+
     read_data = read_data[read_data[0] == "C"]
     num_class = len(read_data)
-    print(len(read_data))
+    logging.info(f"Found {num_class} unique classified reads.")
+
     ## keys are taxid; values are reads assigned to the key
     read_dict = {}
     for i, row in read_data.iterrows():
@@ -43,7 +48,7 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
     for tax in to_remove:
         del ref_map[tax]
 
-    file_handle_map = {k: [open(sample_id+k+"_R1.fq", "w"), open(sample_id+k+"_R2.fq", "w")] for k in ref_map.keys()}
+    file_handle_map = {k: [open(os.path.join(outdir, f"{sample_id}_{k}_R1.fq"), "w"), open(os.path.join(outdir, f"{sample_id}_{k}_R2.fq"), "w")] for k in ref_map.keys()}
     file_read_counts = {k: 0 for k in ref_map.keys()}
     wrote = 0
     for ref_tax, [v, reads] in ref_map.items():
@@ -63,10 +68,6 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
                 file_handle_map[ref_tax][1].write(fq2_dict[read].format("fastq"))
                 wrote += 1
                 file_read_counts[ref_tax] += 1
-
-    # for k in file_handle_map.keys():
-    #     k[0].close()
-    #     k[1].close()
 
     summary = {
         "info": {
@@ -89,7 +90,6 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
             new_json_path = ref_data.replace("_decomposed.json", "_updated_decomposed.json")
             with open(new_json_path, "w") as new_json:
                 json.dump(data, new_json, indent=4)
-
-    sys.stderr.write(f"Wrote {wrote} non-unique read-pairs to {len(file_read_counts.keys())} file-pairs.\n\n")
+    logging.info(f"Wrote {wrote} non-unique read-pairs to {len(file_read_counts.keys())} file-pairs at path {outdir}.\n\n")
 
     return summary

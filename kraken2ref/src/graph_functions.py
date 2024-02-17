@@ -1,4 +1,4 @@
-import sys
+import logging
 from kraken2ref.src.taxonlevel import TaxonLevel, find_parent
 from kraken2ref.src.polling_functions import poll_leaves
 
@@ -136,7 +136,7 @@ def get_graph_endpoints(graphs, data_dict, threshold):
                     break
 
             ## write error: this is important
-            sys.stderr.write(f"\n\nNoSuitableTargetError: No leaf nodes found suitable, reverting to pre-selected reference for node: {parent_node}, taxonomic ID: {data_dict[parent_node][1]}\n\n")
+            logging.warning(f"NoSuitableTargetWarning: No leaf nodes found suitable, reverting to pre-selected reference for node: {parent_node}, taxonomic ID: {data_dict[parent_node][1]}\n\n")
 
             ## populate graph_meta
             graph_meta["parent_selected_"+str(data_dict[parent_node][1])] = {"graph_idx": idx,

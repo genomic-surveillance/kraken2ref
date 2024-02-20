@@ -110,6 +110,7 @@ class KrakenTaxonomyReport():
         self.threshold = min_abs_reads
         self.outdir = outdir
         self.graphs = []
+        self.metadata["threshold"] = self.threshold
         self.all_node_lists, self.data_dict = self.read_kraken_report(self.in_file)
         for node_list in self.all_node_lists:
             self.graphs.append(build_graph(node_list))

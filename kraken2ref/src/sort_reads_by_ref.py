@@ -34,7 +34,9 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
             read_dict[int(row[2])].append(row[1])
 
     ## keys are selected refs; values are taxa included in this ref, and empty list for reads
-    ref_map = {k: [set([int(i) for i in v["all_taxa"]]), []] for k, v in json.load(open(ref_data))["outputs"].items()}
+    ref_json = json.load(open(ref_data))
+    ref_map = {k: [set([int(i) for i in v["all_taxa"]]), []] for k, v in ref_json["outputs"].items()}
+    threshold = ref_json["metadata"]["threshold"]
 
     for tax_id in read_dict.keys():
         for ref_tax, vals in ref_map.items():
@@ -52,7 +54,7 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
     file_read_counts = {k: 0 for k in ref_map.keys()}
     wrote = 0
     for ref_tax, [v, reads] in ref_map.items():
-        if len(reads) == 0:
+        if len(reads) < threshold:
             continue
         if slashes:
             for read in reads:

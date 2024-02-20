@@ -28,13 +28,13 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
     ## keys are taxid; values are reads assigned to the key
     read_dict = {}
     for i, row in read_data.iterrows():
-        if str(row[2]) not in read_dict.keys():
-            read_dict[str(row[2])] = [row[1]]
+        if int(row[2]) not in read_dict.keys():
+            read_dict[int(row[2])] = [row[1]]
         else:
-            read_dict[str(row[2])].append(row[1])
+            read_dict[int(row[2])].append(row[1])
 
     ## keys are selected refs; values are taxa included in this ref, and empty list for reads
-    ref_map = {k: [set(v["all_taxa"]), []] for k, v in json.load(open(ref_data))["outputs"].items()}
+    ref_map = {k: [set([int(i) for i in v["all_taxa"]]), []] for k, v in json.load(open(ref_data))["outputs"].items()}
 
     for tax_id in read_dict.keys():
         for ref_tax, vals in ref_map.items():

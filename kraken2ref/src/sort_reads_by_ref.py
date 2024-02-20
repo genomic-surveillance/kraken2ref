@@ -45,7 +45,7 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
 
     to_remove = []
     for ref_tax, [v, reads] in ref_map.items():
-        if len(reads) == 0:
+        if len(reads) < threshold:
             to_remove.append(ref_tax)
     for tax in to_remove:
         del ref_map[tax]

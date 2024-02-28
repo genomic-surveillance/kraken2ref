@@ -2,6 +2,13 @@ import logging
 from kraken2ref.src.taxonlevel import TaxonLevel, find_parent
 from kraken2ref.src.polling_functions import poll_leaves
 
+def get_graph_reads(graph, data_dict):
+    num_hits = 0
+    for node in graph.keys():
+        num_hits += data_dict[node][0]
+
+    return num_hits
+
 def build_graph(indexed_nodes):
     """Function to build a graph representation from a list of indexed nodes.
 
@@ -125,15 +132,23 @@ def get_graph_endpoints(graphs, data_dict, threshold):
         end_nodes = [key for key in graph.keys() if key[1] == maximum.lvl and data_dict[key][0] >= threshold]
         ## handle exception where end_nodes is empty
         if len(end_nodes) == 0:
+            num_reads_in_graph = get_graph_reads(graph, data_dict)
+            if num_reads_in_graph < threshold:
+                continue
             ## create a unique "undetermined target" entry with no path; use parent as filename
             ## jump up 1 level to get parent
             parent_level = maximum - 1
 
             ## find parent node
-            for (idx, lvl) in graph.keys():
-                if lvl == parent_level.lvl:
-                    parent_node = (idx, lvl)
-                    break
+
+            parent_node = min([i for i in graph.keys() if i[1] == parent_level.lvl])
+            # for (idx, lvl) in graph.keys():
+            #     if lvl == parent_level.lvl:
+            #         parent_node = (idx, lvl)
+            #         break
+
+            if data_dict[parent_node][2] < threshold:
+                continue
 
             ## write error: this is important
             logging.warning(f"NoSuitableTargetWarning: No leaf nodes found suitable, reverting to pre-selected reference for node: {parent_node}, taxonomic ID: {data_dict[parent_node][1]}\n\n")
@@ -184,19 +199,17 @@ def split_graph(graph, split_at):
     levels = [l for (i,l) in sorted_keys]
 
     ## handle edge case
-    if levels.count(split_at) < 2:
+    if levels.count(split_at) < 2 or split_at == max(TaxonLevel(l).lvl for l in levels):
         print(f"Can't split at {split_at}")
         return [graph]
 
     ## get parent level and find nodes at that level
     parent = TaxonLevel(split_at) - 1
-    parent
 
     parent_nodes = []
     for k in graph.keys():
         if parent.lvl in k:
             parent_nodes.append(k)
-    parent_nodes
 
     ## identify nodes at split points
     split_points = []
@@ -219,3 +232,4 @@ def split_graph(graph, split_at):
         subgraphs.append(subgraph)
 
     return subgraphs
+

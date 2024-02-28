@@ -25,6 +25,8 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
     num_class = len(read_data)
     logging.info(f"Found {num_class} unique classified reads.")
 
+    all_class_reads = set(list(read_data[1]))
+
     ## keys are taxid; values are reads assigned to the key
     read_dict = {}
     for i, row in read_data.iterrows():
@@ -53,9 +55,11 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
     file_handle_map = {k: [open(os.path.join(outdir, f"{sample_id}_{k}_R1.fq"), "w"), open(os.path.join(outdir, f"{sample_id}_{k}_R2.fq"), "w")] for k in ref_map.keys()}
     file_read_counts = {k: 0 for k in ref_map.keys()}
     wrote = 0
+    reads_written = set()
     for ref_tax, [v, reads] in ref_map.items():
         if len(reads) < threshold:
             continue
+        reads_written.update(reads)
         if slashes:
             for read in reads:
                 r1_key = read+"/1"
@@ -94,4 +98,6 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
                 json.dump(data, new_json, indent=4)
     logging.info(f"Wrote {wrote} non-unique read-pairs to {len(file_read_counts.keys())} file-pairs at path {outdir}.\n\n")
 
+    reads_not_written = all_class_reads - reads_written
+    print(reads_not_written)
     return summary

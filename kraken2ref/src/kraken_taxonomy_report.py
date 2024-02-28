@@ -41,7 +41,7 @@ class KrakenTaxonomyReport():
         logging.info(f"\nkraken2ref version = {__version__}\nSTARTED = {NOW}\nSample: {sample_id}")
 
 
-    def read_kraken_report(self, kraken_report:str):
+    def read_kraken_report(self, kraken_report_file:str):
         """Read in kraken2 report and produce outputs used to build and find paths in taxonomy graph.
 
         Args:
@@ -60,14 +60,15 @@ class KrakenTaxonomyReport():
                         value[1] = taxonomy ID of that node
         """
         ## read in kraken report and collect lists of data needed
-        kraken_report = pd.read_csv(kraken_report, sep = "\t", header = None)
+        kraken_report = pd.read_csv(kraken_report_file, sep = "\t", header = None)
 
         num_hits = list(kraken_report[2])
+        num__cumulative_hits = list(kraken_report[1])
         tax_levels = list(kraken_report[3])
         tax_ids = list(kraken_report[4])
 
         keys = list(zip(kraken_report.index, tax_levels))
-        vals = list(zip(num_hits, tax_ids))
+        vals = list(zip(num_hits, tax_ids, num__cumulative_hits))
 
         ## construct data dict
         data_dict = dict(zip(keys, vals))
@@ -80,6 +81,11 @@ class KrakenTaxonomyReport():
             if all_node_lists:
                 if "S" in k[1]:
                     all_node_lists[-1].append(k)
+
+        if len(all_node_lists) == 0:
+            logging.critical(msg = f"NoDataFoundError: No Data in Report: File {kraken_report_file} does not contain any usable data.\n")
+            sys.stderr.write(f"NoDataFoundError: No Data in Report: File {kraken_report_file} does not contain any usable data.\n")
+            sys.exit(0)
 
         return all_node_lists, data_dict
 

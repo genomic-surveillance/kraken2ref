@@ -5,7 +5,7 @@ import logging
 import json
 import datetime
 
-from kraken2ref.src.graph_functions import build_graph, get_graph_endpoints, split_graph
+from kraken2ref.src.graph_functions import build_graph, find_valid_graphs
 from kraken2ref.src.sort_reads_by_ref import write_fastq
 
 try:
@@ -89,7 +89,7 @@ class KrakenTaxonomyReport():
 
         return all_node_lists, data_dict
 
-    def pick_reference_taxid(self, in_file: str, outdir: str, min_abs_reads: int = 5, split_at = None):
+    def pick_reference_taxid(self, in_file: str, outdir: str, min_abs_reads: int = 5):
         """Build all graphs contained in the kraken2 taxonoic report;
             From each graph, identify nodes that are assigned more reads
                 than the threshold (passing nodes);
@@ -105,7 +105,7 @@ class KrakenTaxonomyReport():
                         value[0] = list of tax_ids for the path leading to this key
                         value[1] = list of node (ie the path) leading to this key
         """
-        logging.info(msg = f"CMD: kraken2r -s {self.sample_id} parse_report \n\t\t-i {in_file} \n\t\t-o {outdir} \n\t\t-t {min_abs_reads} \n\t\t-x {split_at}\n\n")
+        logging.info(msg = f"CMD: kraken2r -s {self.sample_id} parse_report \n\t\t-i {in_file} \n\t\t-o {outdir} \n\t\t-t {min_abs_reads} \n\t\t")
 
         if not os.path.isfile(in_file):
             logging.critical(msg = f"FileNotFoundError: Missing Input: Path {in_file} does not exist or is not a file.\n")
@@ -121,22 +121,9 @@ class KrakenTaxonomyReport():
         for node_list in self.all_node_lists:
             self.graphs.append(build_graph(node_list))
 
-        ## can split each graph in input at the given levels
-        ## this is useful as it provides more resolution
-        ## output is also noisier as a result
-        self.metadata["split_at"] = split_at
-
-        ## if graph to be split, apply splitting and construct graph_meta
-        if split_at:
-            split_graphs = []
-            for graph in self.graphs:
-                subgraphs = split_graph(graph, split_at)
-                split_graphs.extend(subgraphs)
-                graph_meta_dict = get_graph_endpoints(graphs=split_graphs, data_dict=self.data_dict, threshold=self.threshold)
-
-        ## else analyse entire graphs
-        else:
-            graph_meta_dict = get_graph_endpoints(graphs=self.graphs, data_dict=self.data_dict, threshold=self.threshold)
+        graph_meta_dict = {}
+        for graph in self.graphs:
+            graph_meta_dict.update(find_valid_graphs(graph, self.data_dict, self.threshold))
 
         self.graph_meta = graph_meta_dict
 

@@ -55,17 +55,10 @@ def args_parser():
         '-t', '--min_read_threshold',
         type = int,
         required = False,
-        default = 5,
-        help = "The absolute minimum number of reads to use as threshold; taxa with fewer reads assigned to them will not be considered. [int][Default = 5]")
+        default = 100,
+        help = "The absolute minimum number of reads to use as threshold; taxa with fewer reads assigned to them will not be considered. [int][Default = 100]")
 
-    report_parser.add_argument(
-        '-x', '--split_at',
-        type = str,
-        required = False,
-        default = None,
-        help = "The taxon level to split graphs at. [str][Default = None]")
-
-    sort_read_parser = subparsers.add_parser("ref_sort_reads")
+    sort_read_parser = subparsers.add_parser("sort_reads")
 
     sort_read_parser.add_argument(
         "-fq1", "--fastq1",
@@ -105,7 +98,7 @@ def main():
 
     if args.mode == "parse_report":
         outdir = args.outdir
-    if args.mode == "ref_sort_reads":
+    if args.mode == "sort_reads":
         outdir = os.path.dirname(os.path.abspath(args.ref_json))
 
     if not os.path.exists(outdir):
@@ -120,8 +113,8 @@ def main():
 
     tax_report = KrakenTaxonomyReport(sample_id = args.sample_id)
     if args.mode == "parse_report":
-        tax_report.pick_reference_taxid(in_file = args.in_file, outdir = args.outdir, min_abs_reads = args.min_read_threshold, split_at = args.split_at)
-    if args.mode == "ref_sort_reads":
+        tax_report.pick_reference_taxid(in_file = args.in_file, outdir = args.outdir, min_abs_reads = args.min_read_threshold)
+    if args.mode == "sort_reads":
         tax_report.sort_reads_by_ref(sample_id = args.sample_id, fq1 = args.fastq1, fq2 = args.fastq2, kraken_out = args.kraken_out, ref_data = args.ref_json, update_output = args.update)
 
     ## for dev purposes

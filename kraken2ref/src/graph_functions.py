@@ -288,31 +288,35 @@ def find_valid_graphs(graph, data_dict, threshold):
         ## i.e. if num_reads for parent and all its children > threshold, pass it
         else:
             penultimate = (TaxonLevel(maximum_level)-1).lvl
-            penultimate_nodes = [key for key in subgraph.keys() if key[1] == penultimate and data_dict[key][2] >= threshold]
-            if len(penultimate_nodes) > 0:
-                valid_penultimate_nodes = []
-                for penultimate_node in penultimate_nodes:
-                    pen_taxon = data_dict[penultimate_node][1]
-                    children = subgraph[penultimate_node]
+            penultimate_node = None
+            ## find the parent node and check if it is valid
+            for key in subgraph.keys():
+                if key[1] == penultimate and data_dict[key][2] >= threshold:
+                    penultimate_node = key
+                    break
 
-                    ## importantnly, check that the parent has > 1 children
-                    ## this catches cases where no leaves pass but their parents,often higher level taxa
-                    ### are passed leading to data duplication at sort_reads step
-                    if len(children) > 1:
-                        chosen_subgraphs.append(subgraph)
-                        logging.debug(msg=f"Selected valid parent node(s) {penultimate_node}, taxonomic ID(s): {pen_taxon} in graph rooted at {root}, root taxonomic ID: {root_taxid}")
-                        valid_penultimate_nodes.append(penultimate_node)
-                    else:
-                        logging.debug(msg=f"REJECTED {penultimate_node}, taxonomic ID(s): {pen_taxon} in graph rooted at {root}, root taxonomic ID: {root_taxid}")
+            if penultimate_node is not None:
+                logging.debug(msg=f"{penultimate_node = }")
+                pen_taxon = data_dict[penultimate_node][1]
+                children = subgraph[penultimate_node]
+
+                ## importantnly, check that the parent has > 1 children
+                ## this catches cases where no leaves pass but their parents,often higher level taxa
+                ### are passed leading to data duplication at sort_reads step
+                if len(children) > 1:
+                    chosen_subgraphs.append(subgraph)
+                    logging.debug(msg=f"Selected valid parent node(s) {penultimate_node}, taxonomic ID(s): {pen_taxon} in graph rooted at {root}, root taxonomic ID: {root_taxid}")
+
+                    ## run polling and update output using passing parent nodes
+                    graph_meta.update(update_graph_meta(subgraph, data_dict, [penultimate_node], root, root_taxid, True))
+
+                else:
+                    logging.debug(msg=f"REJECTED {penultimate_node}, taxonomic ID(s): {pen_taxon} in graph rooted at {root}, root taxonomic ID: {root_taxid}")
 
             ## explicitly skip graphs where no leaves pass, nor parents
             ## this was somehow needed explicitly: weird
             else:
                 continue
-
-            ## run polling and update output using passing parent nodes
-            if len(valid_penultimate_nodes) > 0:
-                graph_meta.update(update_graph_meta(subgraph, data_dict, valid_penultimate_nodes, root, root_taxid, True))
 
     return graph_meta
 

@@ -1,11 +1,8 @@
 # KRAKEN2REF  
 
-This python package identifies suitable reference genomes as well as reads that should be associated with that reference genome in downstream analysis, using the kraken2 taxonomic report as input. Briefly, it first finds all graphs in the report that are rooted at species level ("S"); then analyses the leaf nodes of these graphs to identify one or more of them as suitable reference genomes; and finally outputs information about each selected reference to pass on to downstream processes. (#TODO: potentially output json file?)  
-
-# Quick Start  
+This python package identifies suitable reference genomes as well as reads that should be associated with that reference genome in downstream analysis, using the kraken2 taxonomic report as input. Briefly, it first finds all graphs in the report that are rooted at species level ("S"); then analyses the leaf nodes of these graphs to identify one or more of them as suitable reference genomes; and finally outputs information about each selected reference to pass on to downstream processes.  
 
 ## Installation  
-#TODO: Will add container recipes ASAP
 
 #### With pip  
 
@@ -30,6 +27,14 @@ kraken2r -s sample_id parse_report -i path/to/kraken2/report.txt -o ./ -t min_re
 ## sort reads by reference (requires parse_report to have been run before)
 kraken2r -s sample_id sort_reads -fq1 path/to/fq1.fq -fq2 path/to/fq2.fq -k path/to/output.kraken -r path/to/kraken2ref.json -u
 ```  
+
+#### From Singularity  
+```shell
+git clone https://gitlab.internal.sanger.ac.uk/malariagen1/misc_utils/kraken2ref.git
+cd kraken2ref
+sudo singularity build kraken2ref.sif Singularity
+singularity exec --bind `pwd` kraken2ref.sif kraken2r -s dump_test ref_sort_reads
+```
 
 #### From Docker  
 ```shell

@@ -67,7 +67,7 @@ def step_thru_back(freq_dist):
     idxs_to_return = [freq_dist.index(freq) for freq in filt_freqs]
     return idxs_to_return
 
-def poll_leaves(end_nodes, data_dict):
+def poll_leaves(end_nodes, data_dict, parent_selected = False):
     """Apply polling functions to end nodes, treating data as a frequency distribution of hits v/s end nodes
 
     Args:
@@ -89,7 +89,10 @@ def poll_leaves(end_nodes, data_dict):
     filt_data_dict = {k: data_dict[k] for k in data_dict.keys() if k in end_nodes}
 
     filtered_end_nodes = []
-    nodes, freq_dist = [[k for k in filt_data_dict.keys()], [filt_data_dict[k][0] for k in filt_data_dict.keys()]]
+    if parent_selected:
+        nodes, freq_dist = [[k for k in filt_data_dict.keys()], [filt_data_dict[k][2] for k in filt_data_dict.keys()]]
+    else:
+        nodes, freq_dist = [[k for k in filt_data_dict.keys()], [filt_data_dict[k][0] for k in filt_data_dict.keys()]]
     prob_dist = [i/sum(freq_dist) for i in freq_dist]
     logging.debug(f"Frequency Distribution: {freq_dist}")
     logging.debug(f"Probability Distribution: {prob_dist}")

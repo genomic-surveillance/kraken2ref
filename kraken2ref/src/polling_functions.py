@@ -15,7 +15,7 @@ def step_thru(freq_dist):
     for i in range(len(steps) - 1):
         j = i+1
         step = steps[j] - steps[i]
-        print(steps[i], steps[j], step)
+        # print(steps[i], steps[j], step)
         if step > max_step:
             max_step = step
             i += 1
@@ -23,7 +23,7 @@ def step_thru(freq_dist):
             pass
         else:
             break_point = i
-            print(steps[i], steps[j])
+            # print(steps[i], steps[j])
             break
 
     try:

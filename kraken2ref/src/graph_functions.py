@@ -169,7 +169,7 @@ def split_graph_properly(graph, split_at):
 
     split_points = [k for k in graph.keys() if k[1] == split_at]
     if len(split_points) <= 1:
-        print(f"Can't split at {split_at}")
+        logging.debug(msg=f"Can't split at {split_at}")
         return graph
 
     for split_pt in split_points:
@@ -217,7 +217,7 @@ def decompose_graph(graph, known_subgraphs = []):
         if get_graph_complexity(g) == 0:
             subgraphs.append(g)
         else:
-            print(f"Decomposing {g.keys()} further")
+            logging.debug(f"Decomposing {g.keys()} further")
             ## recursion is cool!
             ## (but only when it works)
             cmp_subgraphs = decompose_graph(g, subgraphs)

@@ -118,6 +118,10 @@ class KrakenTaxonomyReport():
         self.graphs = []
         self.metadata["threshold"] = self.threshold
         self.all_node_lists, self.data_dict = self.read_kraken_report(self.in_file)
+        if len(self.all_node_lists) == 0:
+            logging.warning(msg=f"The given report: {self.in_file} does not contain any graphs. Sample ID: {self.sample_id} will have no outputs. Exiting...")
+            sys.stderr.write("The given report: {self.in_file} does not contain any graphs. Sample ID: {self.sample_id} will have no outputs. Exiting...")
+            sys.exit(0)
         for node_list in self.all_node_lists:
             self.graphs.append(build_graph(node_list))
 

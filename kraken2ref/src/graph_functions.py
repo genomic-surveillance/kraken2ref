@@ -280,8 +280,7 @@ def find_valid_graphs(graph, data_dict, threshold):
                 taxa.append(data_dict[term][1])
             logging.debug(msg=f"Selected valid terminals {terminals}, taxonomic ID(s): {taxa} in graph rooted at {root}, root taxonomic ID: {root_taxid}.")
 
-
-            graph_meta.update(update_graph_meta(subgraph, data_dict, terminals, root, root_taxid))
+            graph_meta.update(update_graph_meta(subgraph, data_dict, terminals))
 
         ## if no passing leaf nodes, check for passing parent nodes
         ## in this case, check based on the cumulative num_reads for that parent
@@ -300,7 +299,7 @@ def find_valid_graphs(graph, data_dict, threshold):
                 pen_taxon = data_dict[penultimate_node][1]
                 children = subgraph[penultimate_node]
 
-                ## importantnly, check that the parent has > 1 children
+                ## importantly, check that the parent has > 1 children
                 ## this catches cases where no leaves pass but their parents,often higher level taxa
                 ### are passed leading to data duplication at sort_reads step
                 if len(children) > 1:
@@ -308,7 +307,7 @@ def find_valid_graphs(graph, data_dict, threshold):
                     logging.debug(msg=f"Selected valid parent node(s) {penultimate_node}, taxonomic ID(s): {pen_taxon} in graph rooted at {root}, root taxonomic ID: {root_taxid}")
 
                     ## run polling and update output using passing parent nodes
-                    graph_meta.update(update_graph_meta(subgraph, data_dict, [penultimate_node], root, root_taxid, True))
+                    graph_meta.update(update_graph_meta(subgraph, data_dict, [penultimate_node], True))
 
                 else:
                     logging.debug(msg=f"REJECTED {penultimate_node}, taxonomic ID(s): {pen_taxon} in graph rooted at {root}, root taxonomic ID: {root_taxid}")
@@ -320,7 +319,7 @@ def find_valid_graphs(graph, data_dict, threshold):
 
     return graph_meta
 
-def update_graph_meta(valid_subgraph, data_dict, terminals, root, root_taxid, parent_selected = False):
+def update_graph_meta(valid_subgraph, data_dict, terminals, parent_selected = False):
     """Function to silo off:
         - polling
         - creating an entry for each valid result
@@ -337,8 +336,6 @@ def update_graph_meta(valid_subgraph, data_dict, terminals, root, root_taxid, pa
                             value[1] = Taxonomic ID of that entry
                             value[2] = Cumulative assigned reads, i.e. sum(value[0] for this entry + sum(value[0] of each child entry))
         terminals (list(tuples)): Passing terminal nodes in valid_subgraph
-        root (tuple): Root node of valid_subgraph, used for logging.
-        root_taxid (int): Taxonomic ID of root, used for logging
         parent_selected (bool, optional): Whether the terminals are leaf nodes or parent nodes. Defaults to False.
 
     Returns:
@@ -346,6 +343,8 @@ def update_graph_meta(valid_subgraph, data_dict, terminals, root, root_taxid, pa
                                     key = target node
                                     value = dictionary containing info about path to target nod
     """
+    root = sorted(list(valid_subgraph.keys()))[0]
+    root_taxid = data_dict[root][1]
     graph_meta = {}
     filt_end_nodes, pre_surprise, post_surprise = poll_leaves(end_nodes=terminals, data_dict=data_dict, parent_selected=parent_selected)
     if parent_selected:

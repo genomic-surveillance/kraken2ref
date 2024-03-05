@@ -1,7 +1,7 @@
 import argparse
-# import logging
+import os
+import logging
 from kraken2ref.src.kraken_taxonomy_report import KrakenTaxonomyReport
-
 
 # get the version number from a file that is created by setuptools_scm
 # when the package is installed.
@@ -35,25 +35,60 @@ def args_parser():
         required = True,
         help = "Sample ID. [str]")
 
-    parser.add_argument(
+    subparsers = parser.add_subparsers(title="subcommands", help='kraken2ref sub-commands', dest='mode')
+    report_parser = subparsers.add_parser("parse_report")
+
+    report_parser.add_argument(
         '-i', '--in_file',
         type = str,
         required = True,
         help = "The kraken2 taxonomy report (typically 'report.txt') to process. [str/pathlike]")
 
-    parser.add_argument(
+    report_parser.add_argument(
         '-o', '--outdir',
         type = str,
         required = True,
         help = "Full path to output directory. [str/pathlike]")
 
 
-    parser.add_argument(
+    report_parser.add_argument(
         '-t', '--min_read_threshold',
         type = int,
         required = False,
-        default = 5,
-        help = "The absolute minimum number of reads to use as threshold; taxa with fewer reads assigned to them will not be considered. [int][Default = 5]")
+        default = 100,
+        help = "The absolute minimum number of reads to use as threshold; taxa with fewer reads assigned to them will not be considered. [int][Default = 100]")
+
+    sort_read_parser = subparsers.add_parser("sort_reads")
+
+    sort_read_parser.add_argument(
+        "-fq1", "--fastq1",
+        type = str,
+        required = True,
+        help = "First FASTQ file of paired end reads. [str/pathlike]")
+
+    sort_read_parser.add_argument(
+        "-fq2", "--fastq2",
+        type = str,
+        required = True,
+        help = "Second FASTQ file of paired end reads. [str/pathlike]")
+
+    sort_read_parser.add_argument(
+        "-k", "--kraken_out",
+        type = str,
+        required = True,
+        help = "Kraken2 output containing read-to-taxon mapping (typically output.kraken). [str/pathlike]")
+
+    sort_read_parser.add_argument(
+        "-r", "--ref_json",
+        type = str,
+        required = True,
+        help = "Output JSON created by `kraken2ref parse_report`. [str/pathlike]")
+
+    sort_read_parser.add_argument(
+        "-u", "--update",
+        action = "store_true",
+        required = False,
+        help = "Whether to update the kraken2ref JSON inplace or create a new updated copy. [switch]")
 
     return parser
 
@@ -61,8 +96,26 @@ def main():
 
     args = args_parser().parse_args()
 
-    tax_report = KrakenTaxonomyReport(sample_id = args.sample_id, in_file = args.in_file, outdir = args.outdir, min_abs_reads = args.min_read_threshold)
-    tax_report.pick_reference_taxid()
+    if args.mode == "parse_report":
+        outdir = args.outdir
+    if args.mode == "sort_reads":
+        outdir = os.path.dirname(os.path.abspath(args.ref_json))
+
+    if not os.path.exists(outdir):
+            os.mkdir(outdir)
+    # else:
+    #     logging.warning(msg = f"CMD: OutputPathExists: The path {outdir} already exists; existing outputs may be overwritten.\n")
+        # sys.stderr.write(f"OutputPathExists: The path {outdir} already exists; existing outputs may be overwritten.\n")
+
+
+    logfile = os.path.join(outdir, f"{args.sample_id}_kraken2ref.log")
+    logging.basicConfig(format='%(asctime)s | %(levelname)s | %(module)s - %(funcName)s | %(message)s', level=logging.NOTSET, datefmt="%Y-%m-%d %H:%M:%S", filename = logfile)
+
+    tax_report = KrakenTaxonomyReport(sample_id = args.sample_id)
+    if args.mode == "parse_report":
+        tax_report.pick_reference_taxid(in_file = args.in_file, outdir = args.outdir, min_abs_reads = args.min_read_threshold)
+    if args.mode == "sort_reads":
+        tax_report.sort_reads_by_ref(sample_id = args.sample_id, fq1 = args.fastq1, fq2 = args.fastq2, kraken_out = args.kraken_out, ref_data = args.ref_json, update_output = args.update)
 
     ## for dev purposes
     # for k in graph_meta.keys():

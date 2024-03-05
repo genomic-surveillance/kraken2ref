@@ -55,7 +55,7 @@ class TaxonLevel:
         if isinstance(value, int) or isinstance(value, float):
             work_factor = self.val - value
             if work_factor < 0:
-                sys.stderr.write("Too far, returning to S")
+                sys.stderr.write("Too far, returning to S\n")
                 return TaxonLevel("S")
             if work_factor == 0:
                 return TaxonLevel("S")

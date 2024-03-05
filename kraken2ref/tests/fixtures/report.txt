@@ -210,6 +210,3 @@
  30.06	1990	0	G1	2509511	                      Sarbecovirus
  30.06	1990	0	S	694009	                        Severe acute respiratory syndrome-related coronavirus
  30.06	1990	1990	S1	2697049	                          Severe acute respiratory syndrome coronavirus 2
- 30.06	1	0	G1	2509511_T	                      Sarbecovirus
- 30.06	123	0	S	694009_T	                        Severe acute respiratory syndrome-related coronavirus
- 30.06	1	1	S1	2697049_T	                          Severe acute respiratory syndrome coronavirus 2

@@ -1,18 +1,17 @@
 import pandas as pd
-import os
+import os, sys
 # from cached_property import cached_property
 import logging
 import json
 import datetime
 
-from kraken2ref.src.graph_functions import build_graph, get_graph_endpoints, split_graph
+from kraken2ref.src.graph_functions import build_graph, find_valid_graphs
+from kraken2ref.src.sort_reads_by_ref import write_fastq
 
 try:
     from kraken2ref.version import version as __version__
 except ImportError as ie:
     __version__ = "dev/test"
-
-logging.basicConfig(format="%(asctime)s %(message)s", level=logging.DEBUG)
 
 class KrakenTaxonomyReport():
     """
@@ -28,25 +27,21 @@ class KrakenTaxonomyReport():
 
     """
 
-    def __init__(self, sample_id: str, in_file: str, outdir: str, min_abs_reads: int = 5):
+    def __init__(self, sample_id: str):
 
-        NOW = datetime.datetime.now()
+        NOW = f"{datetime.datetime.now():%Y-%m-%d %H:%M:%S}"
         self.sample_id = sample_id
-        self.in_file = in_file
-        self.threshold = min_abs_reads
-        self.outdir = outdir
 
         self.metadata = {
                             "k2r_version": __version__,
                             "sample": self.sample_id,
-                            "timestamp": str(NOW)
+                            "timestamp": NOW
                         }
 
-        if not os.path.isfile(self.in_file):
-            raise FileNotFoundError(f"path {in_file} does not exist or is not a file")
+        logging.info(f"\nkraken2ref version = {__version__}\nSTARTED = {NOW}\nSample: {sample_id}")
 
 
-    def read_kraken_report(self, kraken_report):
+    def read_kraken_report(self, kraken_report_file:str):
         """Read in kraken2 report and produce outputs used to build and find paths in taxonomy graph.
 
         Args:
@@ -65,14 +60,15 @@ class KrakenTaxonomyReport():
                         value[1] = taxonomy ID of that node
         """
         ## read in kraken report and collect lists of data needed
-        kraken_report = pd.read_csv(kraken_report, sep = "\t", header = None)
+        kraken_report = pd.read_csv(kraken_report_file, sep = "\t", header = None)
 
         num_hits = list(kraken_report[2])
+        num__cumulative_hits = list(kraken_report[1])
         tax_levels = list(kraken_report[3])
         tax_ids = list(kraken_report[4])
 
         keys = list(zip(kraken_report.index, tax_levels))
-        vals = list(zip(num_hits, tax_ids))
+        vals = list(zip(num_hits, tax_ids, num__cumulative_hits))
 
         ## construct data dict
         data_dict = dict(zip(keys, vals))
@@ -86,9 +82,14 @@ class KrakenTaxonomyReport():
                 if "S" in k[1]:
                     all_node_lists[-1].append(k)
 
+        if len(all_node_lists) == 0:
+            logging.critical(msg = f"NoDataFoundError: No Data in Report: File {kraken_report_file} does not contain any usable data.\n")
+            sys.stderr.write(f"NoDataFoundError: No Data in Report: File {kraken_report_file} does not contain any usable data.\n")
+            sys.exit(0)
+
         return all_node_lists, data_dict
 
-    def pick_reference_taxid(self, split_at = None):
+    def pick_reference_taxid(self, in_file: str, outdir: str, min_abs_reads: int = 5):
         """Build all graphs contained in the kraken2 taxonoic report;
             From each graph, identify nodes that are assigned more reads
                 than the threshold (passing nodes);
@@ -104,27 +105,29 @@ class KrakenTaxonomyReport():
                         value[0] = list of tax_ids for the path leading to this key
                         value[1] = list of node (ie the path) leading to this key
         """
+        logging.info(msg = f"CMD: kraken2r -s {self.sample_id} parse_report \n\t\t-i {in_file} \n\t\t-o {outdir} \n\t\t-t {min_abs_reads} \n\t\t")
+
+        if not os.path.isfile(in_file):
+            logging.critical(msg = f"FileNotFoundError: Missing Input: Path {in_file} does not exist or is not a file.\n")
+            raise FileNotFoundError(f"Missing Input: Path {in_file} does not exist or is not a file.\n")
+
+
+        self.in_file = in_file
+        self.threshold = min_abs_reads
+        self.outdir = outdir
         self.graphs = []
+        self.metadata["threshold"] = self.threshold
         self.all_node_lists, self.data_dict = self.read_kraken_report(self.in_file)
+        if len(self.all_node_lists) == 0:
+            logging.warning(msg=f"The given report: {self.in_file} does not contain any graphs. Sample ID: {self.sample_id} will have no outputs. Exiting...")
+            sys.stderr.write("The given report: {self.in_file} does not contain any graphs. Sample ID: {self.sample_id} will have no outputs. Exiting...")
+            sys.exit(0)
         for node_list in self.all_node_lists:
             self.graphs.append(build_graph(node_list))
 
-        ## can split each graph in input at the given levels
-        ## this is useful as it provides more resolution
-        ## output is also noisier as a result
-        self.metadata["split_at"] = split_at
-
-        ## if graph to be split, apply splitting and construct graph_meta
-        if split_at:
-            split_graphs = []
-            for graph in self.graphs:
-                subgraphs = split_graph(graph, split_at)
-                split_graphs.extend(subgraphs)
-                graph_meta_dict = get_graph_endpoints(graphs=split_graphs, data_dict=self.data_dict, threshold=self.threshold)
-
-        ## else analyse entire graphs
-        else:
-            graph_meta_dict = get_graph_endpoints(graphs=self.graphs, data_dict=self.data_dict, threshold=self.threshold)
+        graph_meta_dict = {}
+        for graph in self.graphs:
+            graph_meta_dict.update(find_valid_graphs(graph, self.data_dict, self.threshold))
 
         self.graph_meta = graph_meta_dict
 
@@ -138,5 +141,9 @@ class KrakenTaxonomyReport():
 
         with open(os.path.join(self.outdir, self.sample_id+"_decomposed.json"), "w") as outfile:
             json.dump(to_json, outfile, indent=4)
-        # return self.metadata, graph_meta_dict
+        logging.info(msg = f"Output written to {self.sample_id}_decomposed.json at location {outdir}\n\n")
+
+    def sort_reads_by_ref(self, sample_id: str, fq1: str, fq2:str, kraken_out:str, update_output:bool = True, ref_data = None):
+        logging.info(msg = f"CMD: kraken2r -s {self.sample_id} ref_sort_reads \n\t\t-fq1 {fq1} \n\t\t-fq2 {fq2} \n\t\t-k {kraken_out} \n\t\t-r {ref_data} \n\t\t-u {update_output}\n\n")
+        self.summary = write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data)
 

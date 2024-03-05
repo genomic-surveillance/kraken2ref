@@ -98,6 +98,7 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
                 json.dump(data, new_json, indent=4)
     logging.info(f"Wrote {wrote} non-unique read-pairs to {len(file_read_counts.keys())} file-pairs at path {outdir}.\n\n")
 
-    reads_not_written = all_class_reads - reads_written
-    print(reads_not_written)
+    reads_not_written = list(all_class_reads - reads_written)
+    unwritten_reads_df = read_data[read_data[1].isin(reads_not_written)]
+    unwritten_reads_df.to_csv(os.path.join(outdir, f"{sample_id}.unwritten_reads.kraken"), sep="\t", header=None, index=False)
     return summary

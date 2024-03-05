@@ -5,14 +5,14 @@ import datetime
 import pandas as pd
 from Bio import SeqIO
 
-def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
+def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data, condense = False):
 
     outdir = os.path.dirname(os.path.abspath(ref_data))
     NOW = f"{datetime.datetime.now():%Y-%m-%d %H:%M:%S}"
     fq1_dict = SeqIO.index(fq1, "fastq")
     fq2_dict = SeqIO.index(fq2, "fastq")
-    k = list(fq1_dict.keys())[0]
-    if k[-2:] == "/1":
+    chosen_ref = list(fq1_dict.keys())[0]
+    if chosen_ref[-2:] == "/1":
         slashes = True
     else:
         slashes = False
@@ -37,7 +37,20 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
 
     ## keys are selected refs; values are taxa included in this ref, and empty list for reads
     ref_json = json.load(open(ref_data))
-    ref_map = {k: [set([int(i) for i in v["all_taxa"]]), []] for k, v in ref_json["outputs"].items()}
+    if not condense:
+        ref_map = {k: [set([int(i) for i in v["all_taxa"]]), []] for k, v in ref_json["outputs"].items()}
+        root_to_selected = None
+    else:
+        root_to_selected = {v["source_taxid"]: [] for k, v in ref_json["outputs"].items()}
+        ref_map = {}
+        for k, v in ref_json["outputs"].items():
+            root_taxid = v["source_taxid"]
+            root_to_selected[root_taxid].append(k)
+            if root_taxid in ref_map.keys():
+                ref_map[root_taxid][0].update(set([int(i) for i in v["all_taxa"]]))
+            else:
+                ref_map[root_taxid] = [set([int(i) for i in v["all_taxa"]]), []]
+
     threshold = ref_json["metadata"]["threshold"]
 
     for tax_id in read_dict.keys():
@@ -84,6 +97,14 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data):
                     },
         "per_taxon": file_read_counts
     }
+
+    if not condense:
+        summary["condense"] = {"condense_by_root": False}
+    else:
+        summary["condense"] = {
+                                "condense_by_root": False,
+                                "condense_info": root_to_selected
+                            }
 
 
     with open(ref_data, "r+") as data_json:

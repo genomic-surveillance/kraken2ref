@@ -90,6 +90,12 @@ def args_parser():
         required = False,
         help = "Whether to update the kraken2ref JSON inplace or create a new updated copy. [switch]")
 
+    sort_read_parser.add_argument(
+        "-c", "--condense",
+        action = "store_true",
+        required = False,
+        help = "Whether to condense the outputs by root taxid. [switch]")
+
     return parser
 
 def main():
@@ -115,7 +121,7 @@ def main():
     if args.mode == "parse_report":
         tax_report.pick_reference_taxid(in_file = args.in_file, outdir = args.outdir, min_abs_reads = args.min_read_threshold)
     if args.mode == "sort_reads":
-        tax_report.sort_reads_by_ref(sample_id = args.sample_id, fq1 = args.fastq1, fq2 = args.fastq2, kraken_out = args.kraken_out, ref_data = args.ref_json, update_output = args.update)
+        tax_report.sort_reads_by_ref(sample_id = args.sample_id, fq1 = args.fastq1, fq2 = args.fastq2, kraken_out = args.kraken_out, ref_data = args.ref_json, update_output = args.update, condense = args.condense)
 
     ## for dev purposes
     # for k in graph_meta.keys():

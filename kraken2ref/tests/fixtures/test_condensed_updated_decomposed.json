@@ -27,7 +27,7 @@
                 "694009": 1990
             },
             "condense": {
-                "condense_by_root": false,
+                "condense_by_root": true,
                 "condense_info": {
                     "2955291": [
                         "335341",

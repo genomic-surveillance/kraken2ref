@@ -102,7 +102,7 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data, conden
         summary["condense"] = {"condense_by_root": False}
     else:
         summary["condense"] = {
-                                "condense_by_root": False,
+                                "condense_by_root": True,
                                 "condense_info": root_to_selected
                             }
 

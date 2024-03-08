@@ -7,6 +7,10 @@ from Bio import SeqIO
 
 def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data, condense = False):
 
+    if not os.path.exists(ref_data):
+        sys.stderr.write(f"No JSON file found for sample: {sample_id}. Either kraken2ref has not been run with this sample, or there is not data for this sample.")
+        sys.exit(0)
+
     outdir = os.path.dirname(os.path.abspath(ref_data))
     NOW = f"{datetime.datetime.now():%Y-%m-%d %H:%M:%S}"
     fq1_dict = SeqIO.index(fq1, "fastq")

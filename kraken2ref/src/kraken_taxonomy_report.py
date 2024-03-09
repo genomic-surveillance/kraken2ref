@@ -132,6 +132,8 @@ class KrakenTaxonomyReport():
         self.graph_meta = graph_meta_dict
 
         selected_refs = list(graph_meta_dict.keys())
+        if len(selected_refs) == 0:
+            logging.warning(msg=f"There are no selected references in sample {self.sample_id}.")
         self.metadata["selected"] = selected_refs
 
         to_json = {

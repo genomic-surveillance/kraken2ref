@@ -11,6 +11,11 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data, conden
         sys.stderr.write(f"No JSON file found for sample: {sample_id}. Either kraken2ref has not been run with this sample, or there is not data for this sample.")
         sys.exit(0)
 
+    ref_json = json.load(open(ref_data))
+    if len(ref_json["metadata"]["selected"]) == 0:
+        sys.stderr.write(f"No FASTQ files to generate for sample: {sample_id}: no reference taxids selected.")
+        sys.exit(0)
+
     outdir = os.path.dirname(os.path.abspath(ref_data))
     NOW = f"{datetime.datetime.now():%Y-%m-%d %H:%M:%S}"
     fq1_dict = SeqIO.index(fq1, "fastq")
@@ -40,7 +45,6 @@ def write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data, conden
             read_dict[int(row[2])].append(row[1])
 
     ## keys are selected refs; values are taxa included in this ref, and empty list for reads
-    ref_json = json.load(open(ref_data))
     if not condense:
         ref_map = {k: [set([int(i) for i in v["all_taxa"]]), []] for k, v in ref_json["outputs"].items()}
         root_to_selected = None

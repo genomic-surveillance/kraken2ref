@@ -5,7 +5,7 @@ import argparse
 
 def get_args():
     parser = argparse.ArgumentParser("Script to convert kraken2ref JSON to TSV report.")
-    parser.add_argument("-i", "--input", type = str, required = True, help = "The JSON file produced by kraken2ref.")
+    parser.add_argument("-i", "--input_json", type = str, required = True, help = "The JSON file produced by kraken2ref.")
     parser.add_argument("-r", "--report", type = str, required = True, help = "The kraken2 taxonomic report.")
 
     return parser
@@ -25,14 +25,11 @@ def get_report(in_file, report_file):
     report_df = pd.read_csv(report_file, sep = "\t", header = None)
     ref_json = json.load(open(in_file))
 
-    ## figure out if outputs are to be condensed
-    condensed = ref_json["metadata"]["summary"]["condense"]["condense_by_root"]
-
     ## collect tax_ids for selected reference taxa
     selected_ref_taxa = ref_json["metadata"]["selected"]
 
     ## collect tax_ids for Species associated with each chosen reference tax_id
-    virus_ids = [int(i) for i in ref_json["metadata"]["summary"]["condense"]["condense_info"].keys()]
+    virus_ids = [int(ref_json["outputs"][k]["source_taxid"]) for k in ref_json["outputs"].keys()]
 
     ## collect the human-readable names associated with the viru_ids and selected_ref_taxa
     ## from kraken report
@@ -53,6 +50,7 @@ def get_report(in_file, report_file):
 
         ## identify its Species and get Species name
         virus = selected_data_dict["source_taxid"]
+        virus_name = None
         virus_name = virus_desc_names_dict[virus]
 
         ## get the name of the actual reference that was chosen
@@ -72,10 +70,10 @@ def get_report(in_file, report_file):
         generic_subtype = regex_subtyping("H[0-9]+N[0-9]+", ref_name)
 
         ## collect number of reads written to each fastq filepair
-        if condensed:
+        if "per_taxon" in ref_json["metadata"].keys():
             num_reads = ref_json["metadata"]["summary"]["per_taxon"][str(virus)]
         else:
-            num_reads = ref_json["metadata"]["summary"]["per_taxon"][str(selected_ref)]
+            num_reads = None
 
         ## populate output data dict
         report_output[idx] = {
@@ -93,8 +91,11 @@ def get_report(in_file, report_file):
     ## once iteration over all chosen refs is done
     ## convert dict of dicts to tabular format and write to tsv
     output = pd.DataFrame.from_dict(report_output.values())
-    output.to_csv(f"{sample_id}.viral_pipe.report.txt", sep = "\t", header=True, index = False)
+    output.to_csv(f"{sample_id}.viral_pipe.report.tsv", sep = "\t", header=True, index = False)
+
+def main():
+    args = get_args().parse_args()
+    get_report(args.input_json, args.report)
 
 if __name__ == "__main__":
-    args = get_args().parse_args()
-    get_report(args.input, args.report)
+    main()

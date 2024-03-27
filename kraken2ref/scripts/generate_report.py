@@ -56,18 +56,21 @@ def get_report(in_file, report_file):
         ## get the name of the actual reference that was chosen
         ref_name = desc_names_dict[selected_ref]
 
-        ## if selected_ref is Flu Segment 4 or 6, collect subtype info
-        ## THIS WILL BE THE SUBTYPE OF THE SAMPLE
-        subtype = "None"
-        if "segment 4" in ref_name:
-            subtype = regex_subtyping("H[0-9]+", ref_name)
-        if "segment 6" in ref_name:
-            subtype = regex_subtyping("N[0-9]+", ref_name)
-
         ## if selected_ref is ANY flu segment, collect its subtype info
         ## THIS IS THE SUBTYPE OF THE CHOSEN REFERENCE ONLY
         ## THIS MAY NOT BE THE SAME AS THE SUBTYOE OF THE SAMPLE ITSELF
         generic_subtype = regex_subtyping("H[0-9]+N[0-9]+", ref_name)
+
+        ## if selected_ref is Flu Segment 4 or 6, collect subtype info
+        ## THIS WILL BE THE SUBTYPE OF THE SAMPLE
+        subtype = "None"
+        segment = "None"
+        if generic_subtype is not None:
+            segment = regex_subtyping("(?<=segment )[0-9]", ref_name)
+        if segment == 4:
+            subtype = regex_subtyping("H[0-9]+", ref_name)
+        if segment == 6:
+            subtype = regex_subtyping("N[0-9]+", ref_name)
 
         ## collect number of reads written to each fastq filepair
         if "per_taxon" in ref_json["metadata"].keys():
@@ -83,6 +86,7 @@ def get_report(in_file, report_file):
                                 "selected_taxid": selected_ref,
                                 "ref_selected": ref_name,
                                 "sample_subtype": subtype,
+                                "flu_segment": segment,
                                 "reference_subtype": generic_subtype,
                                 "parent_selected": selected_data_dict["parent_selected"],
                                 "num_reads": num_reads

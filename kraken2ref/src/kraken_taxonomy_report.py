@@ -132,6 +132,8 @@ class KrakenTaxonomyReport():
         self.graph_meta = graph_meta_dict
 
         selected_refs = list(graph_meta_dict.keys())
+        if len(selected_refs) == 0:
+            logging.warning(msg=f"There are no selected references in sample {self.sample_id}.")
         self.metadata["selected"] = selected_refs
 
         to_json = {
@@ -143,7 +145,7 @@ class KrakenTaxonomyReport():
             json.dump(to_json, outfile, indent=4)
         logging.info(msg = f"Output written to {self.sample_id}_decomposed.json at location {outdir}\n\n")
 
-    def sort_reads_by_ref(self, sample_id: str, fq1: str, fq2:str, kraken_out:str, update_output:bool = True, ref_data = None):
-        logging.info(msg = f"CMD: kraken2r -s {self.sample_id} ref_sort_reads \n\t\t-fq1 {fq1} \n\t\t-fq2 {fq2} \n\t\t-k {kraken_out} \n\t\t-r {ref_data} \n\t\t-u {update_output}\n\n")
-        self.summary = write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data)
+    def sort_reads_by_ref(self, sample_id: str, fq1: str, fq2:str, kraken_out:str, update_output:bool = True, ref_data = None, condense = False):
+        logging.info(msg = f"CMD: kraken2r -s {self.sample_id} ref_sort_reads \n\t\t-fq1 {fq1} \n\t\t-fq2 {fq2} \n\t\t-k {kraken_out} \n\t\t-r {ref_data} \n\t\t-u {update_output} \n\t\t-c {condense}\n\n")
+        self.summary = write_fastq(sample_id, fq1, fq2, kraken_out, update_output, ref_data, condense)
 

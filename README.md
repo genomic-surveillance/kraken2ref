@@ -61,6 +61,7 @@ docker run -v `pwd`:/home name:tag kraken2r -s sample_id <mode> <OPTIONS>
 - `-k` [path]: Path to kraken2 output.kraken file [REQUIRED]  
 - `-r` [path]: Path to JSON file produced by `kraken2r parse_report` [REQUIRED]  
 - `-u` [switch]: Whether to update the JSON file produced by `kraken2r parse_report` inplace or produce a new, updated copy [OPTIONAL][Default: produce new]  
+- `-c` [switch]: Whether to dump all reads for a species into one file-pair (as opposed to producing a file-pair _per reference_)
 
 ## General Args
 

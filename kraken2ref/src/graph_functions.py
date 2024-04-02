@@ -361,6 +361,7 @@ def update_graph_meta(valid_subgraph, data_dict, terminals, parent_selected = Fa
         graph_meta[data_dict[end_node][1]] = {
                                                 "graph_idx": root[0],
                                                 "source": root,
+                                                "source_taxid": root_taxid,
                                                 "target": end_node,
                                                 "parent_selected": parent_selected,
                                                 "all_taxa": all_taxids_in_subgraph,

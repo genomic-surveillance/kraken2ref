@@ -127,7 +127,7 @@ In most cases, there is expected to be at least one leaf node which passes the t
 
 ### KMeans-Based Outlier Detection  
 
-In this approach to outlier analysis, we use `sklearn.cluster`, specifically the `KMeans` module. Briefly, we conceptualise the list of references and their correspoding number of assigned reads as a frequency distribution. This frequency distribution is reshaped to a 2D `numpy` array so that `KMeans` can use it. Then, we "cluster" this distribution using `KMeans`, sort the frequenccies by their distance from the cluster centroid, and retain those outlier frequencies that are to the right of the median (i.e. those that are big numbers, rather than those that are outliers because they are small).
+In this approach to outlier analysis, we use `sklearn.cluster`, specifically the `KMeans` module. Briefly, we conceptualise the list of references and their correspoding number of assigned reads as a frequency distribution. This frequency distribution is reshaped to a 2D `numpy` array so that `KMeans` can use it. Then, we "cluster" this distribution using `KMeans`, sort the frequenccies by their distance from the cluster centroid, and retain those outlier frequencies that are to the right of the median (i.e. those that are big numbers, rather than those that are outliers because they are small).  
 
 | ![Fig.2](assets/polling_kmeans.png) |
 |:--:|
@@ -135,7 +135,7 @@ In this approach to outlier analysis, we use `sklearn.cluster`, specifically the
 
 ### Quantile-Based Outlier Detection  
 
-In this approach, we use quartiles 1 and 3 (Q1 and Q3 respectively) to calculate the interquartile range (IQR) of the distribution, then we use these values to set up quantile "fences"; a "left fence": `Q1 - (1.5 x IQR)` and a "right fence": `Q3 + (1.5 x IQR)`. Finally, we retain frequences that lie beyond the "right fence". 
+In this approach, we use quartiles 1 and 3 (Q1 and Q3 respectively) to calculate the interquartile range (IQR) of the distribution, then we use these values to set up quantile "fences"; a "left fence": `Q1 - (1.5 x IQR)` and a "right fence": `Q3 + (1.5 x IQR)`. Finally, we retain frequences that lie beyond the "right fence".  
 
 | ![Fig.3](assets/polling_tiles.png) |
 |:--:|

@@ -27,7 +27,7 @@ authors = [
 ]
 description = "Analyse Kraken2 taxonomic report and select best reference sequence(s)."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 keywords = ["kraken2", "kraken2ref", "metagenome"]
 classifiers = [
     "Programming Language :: Python :: 3.11",

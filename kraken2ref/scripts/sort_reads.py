@@ -138,7 +138,7 @@ def dump_to_file(tax_to_readids_dict, fq1, fq2, outdir):
         futures.wait(functions)
 
 
-def sort_reads(sample_id, kraken_output, mode, fastq1, fastq2, ref_json_file, outdir, condense = False, update_output = True, taxon_list = None):
+def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq2: str, ref_json_file: str, outdir: str, update_output: bool, condense: bool = False, taxon_list: list = None):
     """Control flow of taking args and producing output fastq files
 
     Args:
@@ -173,8 +173,6 @@ def sort_reads(sample_id, kraken_output, mode, fastq1, fastq2, ref_json_file, ou
 
     logging.debug(f"Found {read_count} read pairs.")
     logging.debug(f"Of which {classified_reads_count} are classified.")
-    # print(f"{read_count = }")
-    # print(f"{classified_reads_count = }")
 
     ############################
     #                          #

@@ -10,11 +10,17 @@ build-backend = "setuptools.build_meta"
 # setuptools_scm obtains the package version number from Git tags so we don't
 # have to have a version number hardcoded in scripts in the package 
 # upon installation, the version is written (from git tag) to this file
-write_to = "kraken2reference/version.py"
+write_to = "kraken2ref/version.py"
 git_describe_command = "git describe --dirty --tags --long --match v* --first-parent"
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["kraken2ref"]
+exclude = []
+namespaces = false
+
 [project]
-name = "kraken2reference"
+name = "kraken2ref"
 authors = [
     {name = "Bruhad Dave", email = "bd8@sanger.ac.uk"},
 ]
@@ -44,5 +50,5 @@ dependencies = [
 dynamic = ["version"]
 
 [project.scripts]
-kraken2ref = "kraken2reference.main:main"
-sort_reads = "kraken2reference.scripts.sort_reads:main"
+kraken2ref = "kraken2ref.main:main"
+sort_reads = "kraken2ref.scripts.sort_reads:main"

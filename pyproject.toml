@@ -23,10 +23,11 @@ namespaces = false
 name = "kraken2ref"
 authors = [
     {name = "Bruhad Dave", email = "bd8@sanger.ac.uk"},
+    {name = "Frank Schwach", email = "fs5@sanger.ac.uk"},
 ]
 description = "Analyse Kraken2 taxonomic report and select best reference sequence(s)."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 keywords = ["kraken2", "kraken2ref", "metagenome"]
 classifiers = [
     "Programming Language :: Python :: 3.11",

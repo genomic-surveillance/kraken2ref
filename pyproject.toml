@@ -1,15 +1,48 @@
 [build-system]
-requires = [
-    "setuptools >= 48",
-    "setuptools_scm[toml] >= 4, <6",
-    "setuptools_scm_git_archive",
-    "wheel >= 0.29.0",
-]
-build-backend = 'setuptools.build_meta'
+requires = ["setuptools >= 61.0",
+            "setuptools_scm[toml] >= 4, <6",
+            "setuptools_scm_git_archive",
+            "wheel >= 0.29.0"
+            ]
+build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
 # setuptools_scm obtains the package version number from Git tags so we don't
 # have to have a version number hardcoded in scripts in the package 
 # upon installation, the version is written (from git tag) to this file
-write_to = "kraken2ref/version.py"
+write_to = "kraken2reference/version.py"
 git_describe_command = "git describe --dirty --tags --long --match v* --first-parent"
+
+[project]
+name = "kraken2reference"
+authors = [
+    {name = "Bruhad Dave", email = "bd8@sanger.ac.uk"},
+]
+description = "Analyse Kraken2 taxonomic report and select best reference sequence(s)."
+readme = "README.md"
+requires-python = ">=3.9"
+keywords = ["kraken2", "kraken2ref", "metagenome"]
+classifiers = [
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent"
+
+]
+dependencies = [
+    "pytest>=6.2.2",
+	"importlib-resources>=5.1.0",
+	"cached-property>=1.5.2",
+	"flake8>=7.0.0",
+	"pandas>=2.1.4",
+	"pytest>=6.2.2",
+	"importlib-resources>=5.1.0",
+	"cached-property>=1.5.2",
+	"scipy>=1.12.0",
+    "scikit-learn>=1.4.1",
+	"biopython>=1.83"
+]
+
+dynamic = ["version"]
+
+[project.scripts]
+kraken2ref = "kraken2reference.main:main"
+sort_reads = "kraken2reference.scripts.sort_reads:main"

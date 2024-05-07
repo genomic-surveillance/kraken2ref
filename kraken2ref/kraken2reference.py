@@ -252,7 +252,8 @@ class KrakenProcessor:
         return self.tree_meta_out
 
     def _update_tree_meta(self, filt_leaves: list, simple_source_tree: TaxonomyTree, data_dict: dict, parent_selected: bool):
-        """Function to encapsulate output dict updtes
+        """Function to encapsulate output dict updates 
+            Produces dictionary slices that are added to the main `tree_meta_out` dictionary every time it is called by the `analyse_report` method 
 
         Args:
             filt_leaves (list): List of leaf nodes that passed the polling

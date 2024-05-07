@@ -2,6 +2,20 @@ import sys
 
 ## classes and helper functions
 class TaxonLevel:
+    """Class that wraps around taxon levels represented as letters. Currently limited to 
+        taxon levels as represented in kraken2, and handles levels from "S" (species) and below. 
+
+        Methods in this class allow intuitive operations on taxon levels, for example: 
+        S3 - S1 = 2
+        S2 + S5 = S7
+        S3 == S3
+        S1 != S4
+        S1 < S3
+        S2 - 1 = S1
+        S3 - 10 = S (This is an exception handled in this class)
+        S2.to(S6) = [S3, S4, S5, S6]
+        S6.to(S2) = None (Unhandled exception)
+    """
     ## make the class behave
     def __init__(self, tax_lvl):
 

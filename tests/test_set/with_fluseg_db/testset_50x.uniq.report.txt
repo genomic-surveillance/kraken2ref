@@ -1,0 +1,1278 @@
+  0.63	618	618	0	0	U	0	unclassified
+ 99.37	97251	0	6733234	107793	R	1	root
+ 99.37	97251	0	6733234	107793	D	10239	  Viruses
+ 74.99	73394	0	5057023	77071	D1	2559587	    Riboviria
+ 74.99	73394	0	5056989	77071	K	2732396	      Orthornavirae
+ 42.47	41569	0	2922002	12499	P	2732408	        Pisuviricota
+ 42.47	41569	0	2922002	12499	C	2732506	          Pisoniviricetes
+ 41.27	40394	0	2840393	10280	O	76804	            Nidovirales
+ 41.27	40394	0	2840391	10280	O1	2499399	              Cornidovirineae
+ 41.27	40394	0	2840391	10280	F	11118	                Coronaviridae
+ 41.27	40394	0	2840045	10277	F1	2501931	                  Orthocoronavirinae
+ 41.27	40394	0	2835837	10244	G	694002	                    Betacoronavirus
+ 41.27	40394	0	2834890	10228	G1	2509511	                      Sarbecovirus
+ 41.27	40394	0	2798630	9947	S	694009	                        Severe acute respiratory syndrome-related coronavirus
+ 41.27	40394	40394	2727544	9480	S1	2697049	                          Severe acute respiratory syndrome coronavirus 2
+  1.20	1175	0	81609	2264	O	464095	            Picornavirales
+  1.20	1175	0	81608	2264	F	12058	              Picornaviridae
+  1.20	1175	0	81606	2262	F1	2946630	                Ensavirinae
+  1.20	1175	0	81606	2262	G	12059	                  Enterovirus
+  1.20	1175	0	81346	2260	S	147711	                    Rhinovirus A
+  1.20	1175	1175	81294	2250	S1	573824	                      rhinovirus A1
+ 32.52	31825	0	2134897	64300	P	2497569	        Negarnaviricota
+ 20.23	19800	0	1423691	49683	P1	2497571	          Polyploviricotina
+ 20.23	19800	0	1423687	49671	C	2497577	            Insthoviricetes
+ 20.23	19800	0	1423687	49671	O	2499411	              Articulavirales
+ 20.23	19800	0	1423687	49671	F	11308	                Orthomyxoviridae
+ 10.83	10600	0	736070	33178	G	197911	                  Alphainfluenzavirus
+ 10.83	10600	0	736070	33178	S	2955291	                    Alphainfluenzavirus influenzae
+ 10.83	10600	6101	736070	33178	S1	11320	                      Influenza A virus
+  0.83	815	324	4300	822	S2	3121627	                        Influenza A segment 1
+  0.07	66	66	558	13	S3	3369048	                          A/chicken/Xinjiang/16/2005(H5N1) segment 1
+  0.06	56	56	57	1	S3	3597048	                          A/Shanghai/02/2013(H7N9) segment 1
+  0.05	51	51	189	6	S3	3219752	                          A/duck/Shantou/195/2001(H5N1) segment 1
+  0.05	45	45	207	5	S3	3185064	                          A/duck/Yangzhou/02/2005(H8N4) segment 1
+  0.04	43	43	158	4	S3	3149248	                          A/New York/392/2004(H3N2) segment 1
+  0.04	43	43	104	2	S3	3368880	                          A/bar-headed goose/Qinghai/3/2005(H5N1) segment 1
+  0.02	20	20	72	2	S3	3369064	                          A/chicken/Xinjiang/27/2006(H5N1) segment 1
+  0.02	16	16	18	1	S3	3599864	                          A/chicken/Hong Kong/YU341/2008(H9N2) segment 1
+  0.02	16	16	128	4	S3	3181128	                          A/chicken/Shanxi/2/2006(H5N1) segment 1
+  0.00	3	3	3	2	S3	3162496	                          A/mallard/Maryland/470/2002(H6N2) segment 1
+  0.00	2	2	12	11	S3	3324000	                          A/Texas/45062584/2009(H1N1) segment 1
+  0.00	2	2	5	3	S3	3808312	                          A/duck/Shanghai/602/2009(H10N8) segment 1
+  0.00	2	2	2	1	S3	3919640	                          A/environment/Hunan/S40858/2015(H7N9) segment 1
+  0.00	2	2	19	2	S3	3214584	                          A/duck/Victoria/512/2007(H7N6) segment 1
+  0.00	2	2	13	8	S3	3584128	                          A/Zhejiang/DTID-ZJU01/2013(H7N9) segment 1
+  0.00	2	2	2	2	S3	3368960	                          A/chicken/Hunan/41/2004(H5N1) segment 1
+  0.00	2	2	5	5	S3	3369000	                          A/chicken/Shandong/A-1/2009(H5N1) segment 1
+  0.00	1	1	9	9	S3	3797400	                          A/Georgia/13/2015(H3N2) segment 1
+  0.00	1	1	1	1	S3	3320216	                          A/Argentina/9004/2009(H1N1) segment 1
+  0.00	1	1	2	2	S3	3171032	                          A/turkey/Minnesota/833/1980(H4N2) segment 1
+  0.00	1	1	1	1	S3	3411608	                          A/swine/Jangsu/38/2010(H1N1) segment 1
+  0.00	1	1	1	1	S3	3264416	                          A/swine/Minnesota/578/2007(H3N2) segment 1
+  0.00	1	1	2	2	S3	3487688	                          A/swine/Indiana/A00968321/2010(H3N2) segment 1
+  0.00	1	1	2	2	S3	3817584	                          A/duck/Shanghai/421-2/2009(H4N6) segment 1
+  0.00	1	1	1	1	S3	3891488	                          A/Soledade/LACENRS-551/2012(H1N1) segment 1
+  0.00	1	1	1	1	S3	3195056	                          A/swine/Maryland/23239/1991(H1N1) segment 1
+  0.00	1	1	1	1	S3	3578080	                          A/swine/Thailand/CB001/2009(H1N1) segment 1
+  0.00	1	1	4	4	S3	3845680	                          A/New Mexico/36/2016(H3N2) segment 1
+  0.00	1	1	1	1	S3	3159656	                          A/Canterbury/42/2000(H3N2) segment 1
+  0.00	1	1	3	3	S3	3817520	                          A/chicken/Hebei/3/2013(H5N2) segment 1
+  0.00	1	1	4	4	S3	3518904	                          A/turtle dove/Guangdong/300/2005(H5N1) segment 1
+  0.00	1	1	1	1	S3	3348640	                          A/California/VRDL128/2009(H1N1) segment 1
+  0.00	1	1	2	2	S3	3379864	                          A/duck/Hokkaido/1058/2001(H4N5) segment 1
+  0.00	1	1	2	2	S3	3842800	                          A/mallard duck/Netherlands/17/2009(H6N8) segment 1
+  0.00	1	1	1	1	S3	3778888	                          A/Bhutan/FLU_BTD_SV0023_CP2/2009(H3N2) segment 1
+  0.00	1	1	2	2	S3	3647104	                          A/chicken/Beijing/B7/2010(H9N2) segment 1
+  0.00	1	1	3	3	S3	3939672	                          A/canine/Guangxi/HC18/2013(H1N1) segment 1
+  0.00	1	1	4	4	S3	3597600	                          A/chicken/Zhejiang/C481/2013(H7N9) segment 1
+  0.00	1	1	2	2	S3	3888336	                          A/northern shoveler/California/LDC185/2014(H8N4) segment 1
+  0.00	1	1	1	1	S3	3359960	                          A/common teal/Netherlands/9/2000(H11N9) segment 1
+  0.00	1	1	1	1	S3	3364760	                          A/duck/Shantou/2542/2001(H6N2) segment 1
+  0.00	1	1	4	4	S3	3276128	                          A/Hong Kong/HKU24/2004(H3N2) segment 1
+  0.00	1	1	1	1	S3	3487808	                          A/chicken/Zhejiang/329/2011(H9N2) segment 1
+  0.00	1	1	1	1	S3	3700168	                          A/swine/Henan/232/2011(H1N1) segment 1
+  0.00	1	1	1	1	S3	3288312	                          A/fowl/Hampshire/PD378/1985(H10N4) segment 1
+  0.00	1	1	1	1	S3	3679320	                          A/Kerala/RGCBA923/2009(H1N1) segment 1
+  0.00	1	1	1	1	S3	3406360	                          A/swine/Guangxi/8/2007(H9N2) segment 1
+  0.00	1	1	1	1	S3	3162024	                          A/Memphis/1/1979(H1N1) segment 1
+  0.00	1	1	2	2	S3	3829000	                          A/Iowa/10/2016(H3N2) segment 1
+  0.00	1	1	1	1	S3	3492448	                          A/Reunion/0215-4-M1E/2009(H1N1) segment 1
+  0.00	1	1	1	1	S3	3647096	                          A/chicken/Anhui/02/2008(H9N2) segment 1
+  0.00	1	1	1	1	S3	3790976	                          A/chicken/HoChiMinh/0181/2013(H9N2) segment 1
+  0.00	1	1	3	3	S3	3667032	                          A/Mexico/QUE2270/2005(H3N2) segment 1
+  0.00	1	1	1	1	S3	3155808	                          A/mallard duck/ALB/525/1985(H3N8) segment 1
+  0.00	1	1	1	1	S3	3623832	                          A/Washington/07/2013(H3N2) segment 1
+  0.00	1	1	7	7	S3	3604832	                          A/wild waterfowl/Hong Kong/MPC729/2006(H11N9) segment 1
+  0.00	1	1	1	1	S3	3384200	                          A/mallard/PT/35910-2/2006(H4N6) segment 1
+  0.00	1	1	3	3	S3	3932552	                          A/chicken/Bangladesh/30065/2016(H5N1) segment 1
+  0.00	1	1	1	1	S3	3948616	                          A/duck/Cameroon/17RS1661-3/2017(H5N8) segment 1
+  0.00	1	1	4	4	S3	3278040	                          A/California/UR07-0053/2008(H3N2) segment 1
+  0.00	1	1	1	1	S3	3279032	                          A/whiskered tern/Egypt/04/2004(H6N2) segment 1
+  0.00	1	1	1	1	S3	3607416	                          A/Changsha/1/2013(H7N9) segment 1
+  0.00	1	1	2	2	S3	3181560	                          A/duck/South Africa/1233A/2004(H4N8) segment 1
+  0.00	1	1	1	1	S3	3558296	                          A/swine/Korea/CY02-08/2012(H3N1) segment 1
+  0.00	1	1	1	1	S3	3620248	                          A/swine/Indiana/A00968325/2010(H3N2) segment 1
+  0.00	1	1	1	1	S3	3885856	                          A/quail/Hong Kong/G1/1997(H9N2) segment 1
+  0.00	1	1	1	1	S3	3857096	                          A/mink/Shandong/Z2/2015(H9N2) segment 1
+  0.00	1	1	1	1	S3	3271152	                          A/northern shoveler/Washington/44249-664/2006(H7N3) segment 1
+  0.00	1	1	3	3	S3	3192552	                          A/duck/Italy/775/2004(H5N3) segment 1
+  0.00	1	1	3	3	S3	3565448	                          A/duck/Hokkaido/W26/2012(H12N1) segment 1
+  0.00	1	1	1	1	S3	3697368	                          A/duck/Jiangxi/36487/2013(H9N2) segment 1
+  0.00	1	1	3	3	S3	3571208	                          A/Alaska/38/2009(H1N1) segment 1
+  0.00	1	1	6	6	S3	3594304	                          A/chicken/Guangdong/LG1/2013(H9N2) segment 1
+  0.00	1	1	7	7	S3	3347488	                          A/New York/1998/2010(H1N1) segment 1
+  0.00	1	1	3	3	S3	3663424	                          A/ferret/Taiwan/E01/2013(H1N1) segment 1
+  0.00	1	1	1	1	S3	3667256	                          A/Sri Lanka/22700/2010(H1N1) segment 1
+  0.00	1	1	1	1	S3	3281920	                          A/Kansas/UR07-0096/2008(H3N2) segment 1
+  0.00	1	1	2	2	S3	3770928	                          A/Florida/34/2014(H3N2) segment 1
+  0.00	1	1	1	1	S3	3604376	                          A/duck/Wenzhou/771/2013(H7N3) segment 1
+  0.00	1	1	1	1	S3	3701736	                          A/chicken/Jiangxi/10784/2014(H7N7) segment 1
+  0.00	1	1	5	5	S3	3898608	                          A/chicken/Jiangxi/12/2011(H9N2) segment 1
+  0.00	1	1	1	1	S3	3782064	                          A/chicken/Zhejiang/3C37/2014(H9N2) segment 1
+  0.00	1	1	7	7	S3	3365720	                          A/swine/Thailand/CU-RA29/2009(H1N1) segment 1
+  0.00	1	1	1	1	S3	3281784	                          A/swine/England/WVL16/1998(H1N1) segment 1
+  0.00	1	1	7	7	S3	3168064	                          A/New York/673/1995(H3N2) segment 1
+  0.00	1	1	1	1	S3	3365976	                          A/Yaroslavl/IIV-196/2009(H1N1) segment 1
+  0.00	1	1	3	3	S3	3925792	                          A/swine/Guangxi/DX24/2013(H1N1) segment 1
+  0.00	1	1	1	1	S3	3721128	                          A/equine/Guangxi/1/2008(H3N8) segment 1
+  0.00	1	1	1	1	S3	3257840	                          A/emu/NY/12716/1994(H5N9) segment 1
+  0.00	1	1	3	3	S3	3797824	                          A/Massachusetts/28/2015(H3N2) segment 1
+  0.00	1	1	1	1	S3	3196944	                          A/garganey/SanJiang/160/2006(H5N2) segment 1
+  0.00	1	1	1	1	S3	3696032	                          A/swine/Kansas/10-83533/2010(H3N2) segment 1
+  0.00	1	1	1	1	S3	3746648	                          A/Eurasian wigeon/Netherlands/1/2010(H5N2) segment 1
+  0.00	1	1	6	6	S3	3176944	                          A/South Australia/59/2000(H3N2) segment 1
+  0.00	1	1	2	2	S3	3847320	                          A/Virginia/58/2016(H1N1) segment 1
+  0.00	1	1	1	1	S3	3227400	                          A/swine/Jiangxi/1/2004(H9N2) segment 1
+  0.00	1	1	1	1	S3	3258360	                          A/unknown/NY/85161/2000(H7N2) segment 1
+  0.00	1	1	8	8	S3	3310008	                          A/Muscovy duck/France/070090b/2007(H5N3) segment 1
+  0.00	1	1	1	1	S3	3212528	                          A/equine/Alaska/29759/1991(H3N8) segment 1
+  0.00	1	1	1	1	S3	3814560	                          A/duck/Hunan/161/2015(H3N6) segment 1
+  0.00	1	1	1	1	S3	3377696	                          A/Athens/INS358/2009(H1N1) segment 1
+  0.00	1	1	1	1	S3	3833776	                          A/chicken/Guangdong/SIC41/2015(H9N2) segment 1
+  0.00	1	1	1	1	S3	3901712	                          A/mallard duck/Netherlands/38/2008(H5N3) segment 1
+  0.00	1	1	1	1	S3	3641744	                          A/duck/Hunan/S4386/2009(H6N2) segment 1
+  0.00	1	1	1	1	S3	3830176	                          A/Pennsylvania/20/2016(H3N2) segment 1
+  0.00	1	1	2	2	S3	3188608	                          A/Albany/1/1976(H3N2) segment 1
+  0.00	1	1	1	1	S3	3149320	                          A/New York/123/2004(H3N2) segment 1
+  0.00	1	1	6	6	S3	3611776	                          A/Helsinki/604/2013(H1N1) segment 1
+  0.00	1	1	7	7	S3	3157248	                          A/Canterbury/109/2004(H3N2) segment 1
+  0.00	1	1	3	3	S3	3576392	                          A/chicken/Jiangsu/TS/2010(H9N2) segment 1
+  0.00	1	1	5	5	S3	3534032	                          A/wild bird/Korea/GD42/2005(H4N6) segment 1
+  0.00	1	1	4	4	S3	3869528	                          A/Baltimore/0092/2016(H1N1) segment 1
+  0.00	1	1	2	2	S3	3575872	                          A/swine/Iowa/321160/2012(H3N2) segment 1
+  0.00	1	1	1	1	S3	3336704	                          A/Australia/13/2009(H1N1) segment 1
+  0.00	1	1	3	3	S3	3729768	                          A/Duck/Fujian/1753/2009(H9N2) segment 1
+  0.00	1	1	1	1	S3	3207088	                          A/chicken/Jiangxi/25/2004(H5N1) segment 1
+  0.00	1	1	2	2	S3	3819904	                          A/environment/Korea/W178/2007(H7N7) segment 1
+  0.00	1	1	2	2	S3	3285752	                          A/chicken/Israel/182/2008(H9N2) segment 1
+  0.00	1	1	2	2	S3	3891272	                          A/Rosario do Sul/LACENRS-383/2012(H1N1) segment 1
+  0.00	1	1	1	1	S3	3901904	                          A/yellow-legged gull/Georgia/1/2011(H13N8) segment 1
+  0.00	1	1	2	2	S3	3813744	                          A/duck/Zhejiang/S4235/2011(H7N7) segment 1
+  0.00	1	1	1	1	S3	3534904	                          A/swine/Hubei/10/2008(H10N5) segment 1
+  0.00	1	1	2	2	S3	3794432	                          A/California/90/2015(H1N1) segment 1
+  0.00	1	1	1	1	S3	3745632	                          A/swine/Oklahoma/A01202414/2011(H1N2) segment 1
+  0.00	1	1	2	2	S3	3677976	                          A/duck/Hubei/C1146/2011(H9N2) segment 1
+  0.00	1	1	1	1	S3	3321336	                          A/swine/Shandong/275/2009(H1N1) segment 1
+  0.00	1	1	5	5	S3	3842504	                          A/greater white-fronted goose/Netherlands/3/2006(H6N8) segment 1
+  0.00	1	1	4	4	S3	3827216	                          A/Arizona/32/2016(H3N2) segment 1
+  0.00	1	1	4	4	S3	3602872	                          A/chicken/Hong Kong/JV75/2011(H9N2) segment 1
+  0.00	1	1	3	3	S3	3733064	                          A/chicken/Shandong/196/2011(H9N2) segment 1
+  0.00	1	1	1	1	S3	3827336	                          A/Arkansas/02/2016(H3N2) segment 1
+  0.00	1	1	4	4	S3	3824408	                          A/New Jersey/03/2016(H1N1) segment 1
+  0.00	1	1	1	1	S3	3814592	                          A/water/Hunan/140/2014(H3N2) segment 1
+  0.00	1	1	1	1	S3	3602608	                          A/chicken/Egypt/D7100/2013(H9N2) segment 1
+  0.00	1	1	1	1	S3	3364512	                          A/duck/Shantou/1252/2000(H6N2) segment 1
+  0.82	802	344	3676	943	S2	3121628	                        Influenza A segment 2
+  0.07	70	70	399	10	S3	3185065	                          A/duck/Yangzhou/02/2005(H8N4) segment 2
+  0.05	51	51	221	5	S3	3597049	                          A/Shanghai/02/2013(H7N9) segment 2
+  0.04	39	39	176	4	S3	3368881	                          A/bar-headed goose/Qinghai/3/2005(H5N1) segment 2
+  0.04	35	35	42	1	S3	3814681	                          A/pika/QH-Maduo/01/2006(H7N2) segment 2
+  0.03	34	34	269	12	S3	3149249	                          A/New York/392/2004(H3N2) segment 2
+  0.03	31	31	33	1	S3	3673473	                          A/swine/Guangxi/2920/2011(H1N2) segment 2
+  0.03	30	30	33	1	S3	3599825	                          A/chicken/Hong Kong/G9/1997(H9N2) segment 2
+  0.00	2	2	11	8	S3	3433065	                          A/chicken/Zhejiang/Q1D4/2010(H9N2) segment 2
+  0.00	2	2	2	2	S3	3885465	                          A/ostrich/South Africa/325863/2015(H5N2) segment 2
+  0.00	2	2	8	4	S3	3599169	                          A/chicken/Jiangsu/1001/2013(H5N2) segment 2
+  0.00	2	2	12	8	S3	3782121	                          A/chicken/Zhejiang/727063/2014(H9N2) segment 2
+  0.00	2	2	2	2	S3	3551889	                          A/goose/Eastern China/223/2008(H5N1) segment 2
+  0.00	2	2	4	2	S3	3677817	                          A/chicken/Hubei/C4196/2009(H9N2) segment 2
+  0.00	2	2	2	1	S3	3192313	                          A/chicken/Victoria/224/1992(H7N3) segment 2
+  0.00	2	2	7	4	S3	3276097	                          A/Hong Kong/HKU20/2004(H3N2) segment 2
+  0.00	2	2	3	2	S3	3192553	                          A/duck/Italy/775/2004(H5N3) segment 2
+  0.00	2	2	6	6	S3	3791017	                          A/chicken/TayNinh/0200/2014(H9N2) segment 2
+  0.00	1	1	4	4	S3	3898089	                          A/swine/Chile/33/2014(H3N2) segment 2
+  0.00	1	1	1	1	S3	3518961	                          A/swine/Illinois/A00857318a/2012(H3N2) segment 2
+  0.00	1	1	2	2	S3	3744209	                          A/swine/Italy/7821/2011(H1N1) segment 2
+  0.00	1	1	4	4	S3	3773089	                          A/Massachusetts/17/2014(H3N2) segment 2
+  0.00	1	1	1	1	S3	3826353	                          A/Washington/11/2016(H1N1) segment 2
+  0.00	1	1	2	2	S3	3269529	                          A/swine/Shanghai/1/2007(H1N2) segment 2
+  0.00	1	1	1	1	S3	3812985	                          A/Washington/09/2016(H1N1) segment 2
+  0.00	1	1	2	2	S3	3551737	                          A/swine/Minnesota/A01271731/2012(H3N2) segment 2
+  0.00	1	1	1	1	S3	3179241	                          A/mallard duck/Alberta/331/1985(H3N6) segment 2
+  0.00	1	1	1	1	S3	3195977	                          A/Korea/KBNP-0028/2000(H9N2) segment 2
+  0.00	1	1	1	1	S3	3365425	                          A/duck/Hunan/3748/2004(H6N8) segment 2
+  0.00	1	1	2	2	S3	3821081	                          A/swine/Missouri/A01775853/2016(H3N2) segment 2
+  0.00	1	1	1	1	S3	3942785	                          A/scoter/Maryland/16OS2525/2016(H10N7) segment 2
+  0.00	1	1	1	1	S3	3743881	                          A/swine/Germany/Bakum-IDT12292/2010(H1N2) segment 2
+  0.00	1	1	7	7	S3	3613473	                          A/Santa Cruz/005/2010(H1N1) segment 2
+  0.00	1	1	5	5	S3	3663425	                          A/ferret/Taiwan/E01/2013(H1N1) segment 2
+  0.00	1	1	1	1	S3	3943857	                          A/chicken/Zhejiang/102615/2016(H10N8) segment 2
+  0.00	1	1	8	8	S3	3898057	                          A/swine/Chile/2-7/2014(H1N1) segment 2
+  0.00	1	1	1	1	S3	3196505	                          A/Auckland/613/2002(H3N2) segment 2
+  0.00	1	1	1	1	S3	3487809	                          A/chicken/Zhejiang/329/2011(H9N2) segment 2
+  0.00	1	1	8	8	S3	3411057	                          A/Jiangsu/S62/2009(H1N1) segment 2
+  0.00	1	1	2	2	S3	3411049	                          A/Jiangsu/S61/2009(H1N1) segment 2
+  0.00	1	1	3	3	S3	3841305	                          A/swine/Indiana/15TOSU0844/2015(H3N2) segment 2
+  0.00	1	1	2	2	S3	3171409	                          A/tern/South Africa/1961(H5N3) segment 2
+  0.00	1	1	2	2	S3	3903929	                          A/chicken/Guangdong/30/2017(H7N9) segment 2
+  0.00	1	1	2	2	S3	3578081	                          A/swine/Thailand/CB001/2009(H1N1) segment 2
+  0.00	1	1	2	2	S3	3686209	                          A/swine/Shanghai/3/2014(H1N1) segment 2
+  0.00	1	1	1	1	S3	3255089	                          A/blue-winged teal/Texas/Sg-00086/2007(H10N7) segment 2
+  0.00	1	1	1	1	S3	3718993	                          A/Vietnam/UT36250-1/2010(H5N1) segment 2
+  0.00	1	1	8	8	S3	3938745	                          A/chicken/Fujian/SD070/2017(H9N2) segment 2
+  0.00	1	1	3	2	S3	3647281	                          A/chicken/Shandong/03/2008(H9N2) segment 2
+  0.00	1	1	1	1	S3	3700353	                          A/chicken/Shanghai/015/2014(H9N2) segment 2
+  0.00	1	1	1	1	S3	3266441	                          A/Pennsylvania/PIT34/2008(H3N2) segment 2
+  0.00	1	1	5	5	S3	3894705	                          A/duck/Zhejiang/727D30/2013(H1N3) segment 2
+  0.00	1	1	3	3	S3	3952657	                          A/South Dakota/33/2017(H3N2) segment 2
+  0.00	1	1	2	2	S3	3144625	                          A/New York/121/2002(H3N2) segment 2
+  0.00	1	1	1	1	S3	3148977	                          A/New York/358/2004(H3N2) segment 2
+  0.00	1	1	1	1	S3	3743625	                          A/swine/France/56-110525/2010(H1N1) segment 2
+  0.00	1	1	3	3	S3	3338961	                          A/District of Columbia/INS20/2009(H1N1) segment 2
+  0.00	1	1	1	1	S3	3217609	                          A/Johannesburg/617/1967(H2N2) segment 2
+  0.00	1	1	1	1	S3	3678425	                          A/pigeon/Guangxi/020P/2009(H3N6) segment 2
+  0.00	1	1	3	3	S3	3271681	                          A/black-headed gull/Netherlands/1/2006(H4N5) segment 2
+  0.00	1	1	1	1	S3	3376473	                          A/greater white-fronted goose/California/44358-077/2007(H6N1) segment 2
+  0.00	1	1	1	1	S3	3281705	                          A/swine/Spain/WVL6/1991(H1N1) segment 2
+  0.00	1	1	1	1	S3	3925841	                          A/swine/Guangxi/NNLX/2014(H1N1) segment 2
+  0.00	1	1	3	3	S3	3192457	                          A/muscovy duck/New York/21211-5/2005(H1N1) segment 2
+  0.00	1	1	9	9	S3	3702425	                          A/chicken/Jiangxi/13518/2014(H7N9) segment 2
+  0.00	1	1	3	3	S3	3605089	                          A/India/Nag132467/2013(H1N1) segment 2
+  0.00	1	1	3	3	S3	3387889	                          A/chicken/Guangxi/KMIII/1999(H9N2) segment 2
+  0.00	1	1	2	2	S3	3368937	                          A/chicken/Henan/A-7/2006(H5N1) segment 2
+  0.00	1	1	2	2	S3	3791865	                          A/Parma/7/2011(H1N1) segment 2
+  0.00	1	1	1	1	S3	3180865	                          A/chicken/Jilin/hf/2002(H5N1) segment 2
+  0.00	1	1	1	1	S3	3918577	                          A/cackling goose/Aichi/2312T020/2016(H5N6) segment 2
+  0.00	1	1	1	1	S3	3654321	                          A/swine/Kansas/11-104259/2011(H1N2) segment 2
+  0.00	1	1	1	1	S3	3232089	                          A/duck/Hokkaido/W132/2004(H12N5) segment 2
+  0.00	1	1	1	1	S3	3181009	                          A/duck/Hubei/wq/2003(H5N1) segment 2
+  0.00	1	1	2	2	S3	3928057	                          A/chicken/Xuzhou/XZ6/2016(H5N6) segment 2
+  0.00	1	1	2	2	S3	3369025	                          A/chicken/Shanxi/10/2006(H5N1) segment 2
+  0.00	1	1	7	7	S3	3908649	                          A/swine/Iowa/MT_12_07_2227/2012(H3N2) segment 2
+  0.00	1	1	2	2	S3	3219697	                          A/duck/Hunan/533/2004(H5N1) segment 2
+  0.00	1	1	2	2	S3	3838153	                          A/environment/Zhongshan/ZS201504/2015(H9N2) segment 2
+  0.00	1	1	4	4	S3	3719961	                          A/Thailand/SR08103/2010(H1N1) segment 2
+  0.00	1	1	1	1	S3	3782369	                          A/chicken/Zhejiang/C50/2013(H9N2) segment 2
+  0.00	1	1	2	2	S3	3918377	                          A/Mexico/15017/2017(H1N1) segment 2
+  0.00	1	1	6	6	S3	3374777	                          A/Netherlands/1324/2009(H1N1) segment 2
+  0.00	1	1	3	3	S3	3154905	                          A/black duck/AUS/4045/1980(H6N5) segment 2
+  0.00	1	1	1	1	S3	3756449	                          A/Yunnan/0127/2015(H5N6) segment 2
+  0.00	1	1	2	2	S3	3223809	                          A/Illinois/UR06-0600/2007(H3N2) segment 2
+  0.00	1	1	3	3	S3	3792089	                          A/swine/Italy/269814/2013(H1N1) segment 2
+  0.00	1	1	1	1	S3	3179713	                          A/chicken/New York/14677-13/1998(H6N2) segment 2
+  0.00	1	1	2	2	S3	3647313	                          A/chicken/Shandong/WF0513/2012(H9N2) segment 2
+  0.00	1	1	1	1	S3	3880161	                          A/duck/Bangladesh/22991/2014(H5N1) segment 2
+  0.00	1	1	1	1	S3	3326905	                          A/duck/LA/B174/1986(H8N4) segment 2
+  0.00	1	1	5	5	S3	3219969	                          A/partridge/Shantou/478/2002(H5N1) segment 2
+  0.00	1	1	8	8	S3	3367617	                          A/Taipei/WR1472T/2009(H1N1) segment 2
+  0.00	1	1	9	9	S3	3367657	                          A/Mexico City/WR1683T/2009(H1N1) segment 2
+  0.00	1	1	1	1	S3	3613657	                          A/Santa Cruz/995/2010(H1N1) segment 2
+  0.00	1	1	2	2	S3	3848401	                          A/mallard/Pennsylvania/UGAI15-2877/2015(H7N3) segment 2
+  0.00	1	1	1	1	S3	3384161	                          A/mallard/PT/27972-B139/2007(H9N2) segment 2
+  0.00	1	1	1	1	S3	3570569	                          A/canine/Korea/CY009/2010(H3N2) segment 2
+  0.00	1	1	7	7	S3	3281809	                          A/swine/Guangdong/01/1998(H3N2) segment 2
+  0.00	1	1	3	3	S3	3946081	                          A/chicken/Anhui/WB/2014(H9N2) segment 2
+  0.00	1	1	4	3	S3	3919081	                          A/chicken/Guangdong/S1200/2015(H7N9) segment 2
+  0.00	1	1	1	1	S3	3919073	                          A/chicken/Fujian/SD005/2015(H7N9) segment 2
+  0.00	1	1	7	7	S3	3843633	                          A/Arizona/03/2016(H1N1) segment 2
+  0.00	1	1	1	1	S3	3681761	                          A/chicken/India/03CA03/2012(H5N1) segment 2
+  0.00	1	1	4	4	S3	3840097	                          A/wild bird/Jiangxi/P419/2016(H6N8) segment 2
+  0.00	1	1	1	1	S3	3898505	                          A/swine/Rancagua/VN1401-1459/2015(H1N1) segment 2
+  0.00	1	1	3	3	S3	3746769	                          A/bewicks swan/Netherlands/4/2006(H9N2) segment 2
+  0.00	1	1	1	1	S3	3641641	                          A/duck/Guangdong/S3225/2010(H6N6) segment 2
+  0.00	1	1	3	3	S3	3260633	                          A/mallard/Yan chen/2005(H4N6) segment 2
+  0.00	1	1	6	6	S3	3704281	                          A/chicken/Yantai/2484/2013(H9N2) segment 2
+  0.00	1	1	11	11	S3	3599833	                          A/chicken/Hong Kong/NT10/2011(H9N2) segment 2
+  0.00	1	1	2	2	S3	3362769	                          A/swine/MN/23506/2009(H1N1) segment 2
+  0.00	1	1	1	1	S3	3922225	                          A/swine/Saskatchewan/SD0069/2015(H3N2) segment 2
+  0.00	1	1	2	2	S3	3677921	                          A/chicken/Yunnan/C4090/2011(H9N2) segment 2
+  0.00	1	1	1	1	S3	3939809	                          A/swine/Colorado/A01785307/2017(H1N2) segment 2
+  0.00	1	1	3	3	S3	3833697	                          A/chicken/Guangdong/SIC17/2014(H9N2) segment 2
+  0.00	1	1	2	2	S3	3298425	                          A/mallard/Minnesota/Sg-00628/2008(H1N1) segment 2
+  0.00	1	1	2	2	S3	3364409	                          A/duck/Guangxi/1598/2005(H6N2) segment 2
+  0.00	1	1	3	3	S3	3671505	                          A/swine/Guangdong/2732/2011(H1N1) segment 2
+  0.00	1	1	1	1	S3	3901905	                          A/yellow-legged gull/Georgia/1/2011(H13N8) segment 2
+  0.00	1	1	1	1	S3	3532265	                          A/duck/Cao Bang/43/2007(H5N1) segment 2
+  0.00	1	1	1	1	S3	3954521	                          A/swine/Iowa/A02137183/2017(H1N2) segment 2
+  0.00	1	1	1	1	S3	3662985	                          A/chicken/Bhutan/352/2012(H5N1) segment 2
+  0.00	1	1	3	3	S3	3436841	                          A/chicken/Shandong/02/2010(H9N2) segment 2
+  0.00	1	1	3	3	S3	3939705	                          A/canine/Guangxi/LZ36/2015(H1N1) segment 2
+  0.00	1	1	3	3	S3	3920969	                          A/domestic duck/Georgia/2/2016(H4N6) segment 2
+  0.00	1	1	8	8	S3	3332929	                          A/Argentina/HNRG15/2009(H1N1) segment 2
+  0.00	1	1	3	3	S3	3890233	                          A/Alegrete/LACENRS-1453/2009(H1N1) segment 2
+  0.00	1	1	2	2	S3	3890609	                          A/Frederico Westphalen/LACENRS-204/2012(H3N2) segment 2
+  0.00	1	1	1	1	S3	3845057	                          A/Louisiana/20/2016(H1N1) segment 2
+  0.00	1	1	2	2	S3	3197041	                          A/duck/Victoria/D23/1994(H4N2) segment 2
+  0.00	1	1	1	1	S3	3575681	                          A/duck/BC/8038/2006(H5N2) segment 2
+  0.00	1	1	4	4	S3	3378185	                          A/Fukui/20/2004(H3N2) segment 2
+  0.00	1	1	1	1	S3	3162777	                          A/mallard/Ohio/664/2002(H6N6) segment 2
+  0.00	1	1	1	1	S3	3575721	                          A/swan/BC/2045/2008(H5N2) segment 2
+  0.00	1	1	1	1	S3	3677777	                          A/chicken/Guangxi/C2163/2012(H9N2) segment 2
+  0.00	1	1	6	6	S3	3416721	                          A/swine/Missouri/00564/2005(H1N1) segment 2
+  0.00	1	1	1	1	S3	3733065	                          A/chicken/Shandong/196/2011(H9N2) segment 2
+  0.00	1	1	1	1	S3	3285761	                          A/chicken/Israel/184/2009(H9N2) segment 2
+  0.00	1	1	5	5	S3	3703593	                          A/chicken/Dongguan/2900/2013(H9N2) segment 2
+  0.00	1	1	4	4	S3	3704137	                          A/chicken/Shenzhen/3745/2013(H9N2) segment 2
+  0.00	1	1	1	1	S3	3863633	                          A/chicken/Yuhuan/YH15/2016(H9N2) segment 2
+  0.00	1	1	3	3	S3	3785585	                          A/swine/Zhejiang/SW64/2014(H1N2) segment 2
+  0.00	1	1	1	1	S3	3364345	                          A/duck/Fujian/420/2005(H6N2) segment 2
+  0.00	1	1	2	2	S3	3422545	                          A/swine/Minnesota/A01047613/2010(H1N1) segment 2
+  0.00	1	1	2	2	S3	3704185	                          A/chicken/Suzhou/4822/2013(H9N2) segment 2
+  0.00	1	1	2	2	S3	3901633	                          A/mallard duck/Netherlands/23/2013(H7N3) segment 2
+  0.00	1	1	1	1	S3	3901641	                          A/mallard duck/Netherlands/24/2005(H11N3) segment 2
+  0.00	1	1	3	3	S3	3143777	                          A/New York/9/2003(H3N2) segment 2
+  0.00	1	1	1	1	S3	3336297	                          A/canine/Guangdong/2/2006(H3N2) segment 2
+  0.00	1	1	1	1	S3	3801689	                          A/goose/Taiwan/01022/2015(H5N2) segment 2
+  0.00	1	1	2	2	S3	3631921	                          A/swine/Oklahoma/A01290693/2013(H1N1) segment 2
+  0.00	1	1	1	1	S3	3321329	                          A/swine/Shandong/101/2008(H1N1) segment 2
+  0.00	1	1	2	2	S3	3321337	                          A/swine/Shandong/275/2009(H1N1) segment 2
+  0.00	1	1	9	9	S3	3177673	                          A/Indonesia/CDC644T/2006(H5N1) segment 2
+  0.00	1	1	1	1	S3	3257841	                          A/emu/NY/12716/1994(H5N9) segment 2
+  0.00	1	1	6	6	S3	3338049	                          A/environment/Hunan/1-70/2007(H9N2) segment 2
+  0.00	1	1	2	2	S3	3784825	                          A/duck/Hebei/B1645-2/2011(H3N2) segment 2
+  0.00	1	1	1	1	S3	3813537	                          A/duck/France/150233/2015(H5N2) segment 2
+  0.00	1	1	1	1	S3	3673737	                          A/swine/Hong Kong/4083/2011(H1N2) segment 2
+  0.00	1	1	3	3	S3	3274345	                          A/swine/Minnesota/65767/2006(H3N2) segment 2
+  0.00	1	1	8	8	S3	3486809	                          A/equine/Guangxi/3/2011(H9N2) segment 2
+  0.00	1	1	3	3	S3	3701441	                          A/chicken/Dongguan/449/2014(H7N9) segment 2
+  0.00	1	1	2	2	S3	3214585	                          A/duck/Victoria/512/2007(H7N6) segment 2
+  0.00	1	1	1	1	S3	3700825	                          A/chicken/Dongguan/1096/2014(H7N9) segment 2
+  0.00	1	1	3	3	S3	3890225	                          A/Yunnan/0129/2017(H7N9) segment 2
+  0.68	664	279	2322	851	S2	3121629	                        Influenza A segment 3
+  0.09	88	88	250	7	S3	3149250	                          A/New York/392/2004(H3N2) segment 3
+  0.08	74	74	151	3	S3	3368874	                          A/bar-headed goose/Qinghai/1-HVRI/2006(H5N1) segment 3
+  0.03	32	32	55	1	S3	3576370	                          A/chicken/Hebei/ZR/2010(H9N2) segment 3
+  0.02	17	17	19	1	S3	3733170	                          A/goose/Inner Mongolia/IM-192/2014(H5N1) segment 3
+  0.00	3	3	7	5	S3	3686538	                          A/chicken/Shandong/yt0106/2012(H9N2) segment 3
+  0.00	3	3	10	10	S3	3838170	                          A/environment/Zhongshan/ZS201506/2015(H9N2) segment 3
+  0.00	2	2	4	4	S3	3599170	                          A/chicken/Jiangsu/1001/2013(H5N2) segment 3
+  0.00	2	2	5	5	S3	3663386	                          A/duck/China/J1/2012(H4N6) segment 3
+  0.00	2	2	4	3	S3	3531370	                          A/Singapore/TT454/2010(H1N1) segment 3
+  0.00	2	2	3	3	S3	3179890	                          A/chicken/Scotland/1959(H5N1) segment 3
+  0.00	2	2	2	1	S3	3678258	                          A/swine/Indiana/13TOSU5730/2013(H3N2) segment 3
+  0.00	2	2	6	5	S3	3909282	                          A/swine/South Dakota/MT_12_07_2075/2012(H1N2) segment 3
+  0.00	2	2	5	5	S3	3774978	                          A/New York/63/2015(H3N2) segment 3
+  0.00	2	2	2	2	S3	3422554	                          A/swine/Pennsylvania/057108-1/2010(H3N2) segment 3
+  0.00	2	2	2	2	S3	3197050	                          A/duck/Victoria/5384/2002(H4N8) segment 3
+  0.00	1	1	6	6	S3	3221186	                          A/chicken/Malaysia/5223/2007(H5N1) segment 3
+  0.00	1	1	1	1	S3	3773138	                          A/Massachusetts/22/2014(H3N2) segment 3
+  0.00	1	1	2	2	S3	3909738	                          A/peregrine falcon/Nagasaki/4212A005/2016(H5N6) segment 3
+  0.00	1	1	5	5	S3	3880754	                          A/mallard/South Dakota/AH0014958/2015(H3N8) segment 3
+  0.00	1	1	7	7	S3	3573866	                          A/North Carolina/44/2009(H1N1) segment 3
+  0.00	1	1	2	2	S3	3756450	                          A/Yunnan/0127/2015(H5N6) segment 3
+  0.00	1	1	2	2	S3	3854258	                          A/chicken/Vietnam/NCVD14-A380/2014(H5N1) segment 3
+  0.00	1	1	1	1	S3	3681226	                          A/duck/Shanghai/SH3/2013(H3N2) segment 3
+  0.00	1	1	1	1	S3	3853802	                          A/northern pintail/Alaska/372/2013(H4N6) segment 3
+  0.00	1	1	3	3	S3	3880834	                          A/mallard/Utah/AH0066981/2016(H7N3) segment 3
+  0.00	1	1	4	4	S3	3794458	                          A/Colorado/22/2015(H1N1) segment 3
+  0.00	1	1	4	4	S3	3826754	                          A/Wyoming/03/2016(H1N1) segment 3
+  0.00	1	1	5	5	S3	3486810	                          A/equine/Guangxi/3/2011(H9N2) segment 3
+  0.00	1	1	2	2	S3	3833882	                          A/chicken/Shandong/SIC24/2014(H9N2) segment 3
+  0.00	1	1	3	3	S3	3677970	                          A/duck/Guangdong/C3204/2010(H9N2) segment 3
+  0.00	1	1	2	2	S3	3910442	                          A/greater scaup/Aichi/2301H050/2017(H5N6) segment 3
+  0.00	1	1	2	2	S3	3677930	                          A/chicken/Zhejiang/C1083/2011(H9N2) segment 3
+  0.00	1	1	7	7	S3	3794266	                          A/swine/Missouri/A01796703/2015(H1N1) segment 3
+  0.00	1	1	4	4	S3	3677858	                          A/chicken/Jiangsu/C3089/2011(H9N2) segment 3
+  0.00	1	1	3	3	S3	3677762	                          A/chicken/Guangdong/C1122/2011(H9N2) segment 3
+  0.00	1	1	5	5	S3	3736114	                          A/India/Pun151214/2015(H1N1) segment 3
+  0.00	1	1	4	4	S3	3151690	                          A/New York/412/2002(H3N2) segment 3
+  0.00	1	1	1	1	S3	3793026	                          A/swine/Italy/60011-3/2014(H1N2) segment 3
+  0.00	1	1	1	1	S3	3326394	                          A/environment/Hunan/6-69/2008(H5N1) segment 3
+  0.00	1	1	4	4	S3	3290802	                          A/duck/Primorie/2633/2001(H5N3) segment 3
+  0.00	1	1	9	9	S3	3620242	                          A/swine/Illinois/02907/2009(H3N2) segment 3
+  0.00	1	1	1	1	S3	3516218	                          A/ostrich/South Africa/AI2887/2011(H1N2) segment 3
+  0.00	1	1	1	1	S3	3280106	                          A/chicken/Pakistan/c1998/1998(H7N3) segment 3
+  0.00	1	1	2	2	S3	3743298	                          A/swine/England/058879/2011(H1N2) segment 3
+  0.00	1	1	1	1	S3	3326306	                          A/chicken/Hunan/8/2008(H5N1) segment 3
+  0.00	1	1	1	1	S3	3281738	                          A/swine/England/WVL10/1993(H1N1) segment 3
+  0.00	1	1	1	1	S3	3326386	                          A/environment/Hunan/6-45/2008(H5N1) segment 3
+  0.00	1	1	7	7	S3	3145898	                          A/New York/257/1999(H3N2) segment 3
+  0.00	1	1	1	1	S3	3743386	                          A/swine/England/1251/2011(H1N1) segment 3
+  0.00	1	1	2	2	S3	3145250	                          A/New York/201/2003(H3N2) segment 3
+  0.00	1	1	1	1	S3	3653458	                          A/breeder duck/Korea/H249/2014(H5N8) segment 3
+  0.00	1	1	1	1	S3	3282042	                          A/Taiwan/1452/2007(H3N2) segment 3
+  0.00	1	1	1	1	S3	3870586	                          A/swine/Oklahoma/A01671948/2016(H1N1) segment 3
+  0.00	1	1	4	4	S3	3808034	                          A/Anseriformes/Anhui/L167/2014(H1N1) segment 3
+  0.00	1	1	1	1	S3	3904154	                          A/chicken/Nigeria/16VIR5840-34/2015(H5N1) segment 3
+  0.00	1	1	2	2	S3	3125410	                          A/Teal/Hong Kong/W312/97(H6N1) segment 3
+  0.00	1	1	1	1	S3	3877338	                          A/Bethesda/P0040/2015(H3N2) segment 3
+  0.00	1	1	2	2	S3	3826226	                          A/Virginia/12/2016(H1N1) segment 3
+  0.00	1	1	1	1	S3	3685786	                          A/muscovy duck/Vietnam/LBM694/2014(H9N2) segment 3
+  0.00	1	1	1	1	S3	3175458	                          A/New York/C4/2002(H3N2) segment 3
+  0.00	1	1	1	1	S3	3880226	                          A/duck/Bangladesh/24044/2014(H5N1) segment 3
+  0.00	1	1	3	3	S3	3945450	                          A/aquatic bird/South Korea/sw006/2016(H3N3) segment 3
+  0.00	1	1	1	1	S3	3387890	                          A/chicken/Guangxi/KMIII/1999(H9N2) segment 3
+  0.00	1	1	4	3	S3	3740514	                          A/swine/Missouri/A01554378/2015(H3N2) segment 3
+  0.00	1	1	1	1	S3	3836978	                          A/waterfowl/Korea/S245/2016(H6N2) segment 3
+  0.00	1	1	9	7	S3	3909106	                          A/swine/Minnesota/MT_12_07_2130/2012(H1N2) segment 3
+  0.00	1	1	1	1	S3	3682074	                          A/swine/France/50-120350/2012(H1N1) segment 3
+  0.00	1	1	7	7	S3	3568402	                          A/swine/Indiana/A01260185/2013(H3N2) segment 3
+  0.00	1	1	3	3	S3	3505178	                          A/swine/Minnesota/A01240127/2011(H3N2) segment 3
+  0.00	1	1	3	3	S3	3324714	                          A/swine/Iowa/H03US3/2003(H1N1) segment 3
+  0.00	1	1	3	3	S3	3174066	                          A/Western Australia/54/2004(H3N2) segment 3
+  0.00	1	1	1	1	S3	3809658	                          A/swine/Mexico/AVX47/2013(H1N1) segment 3
+  0.00	1	1	7	7	S3	3947330	                          A/Changsha/34/2017(H7N9) segment 3
+  0.00	1	1	2	2	S3	3702842	                          A/chicken/Shantou/4824/2014(H7N9) segment 3
+  0.00	1	1	1	1	S3	3266714	                          A/equine/Richmond/1/2007(H3N8) segment 3
+  0.00	1	1	1	1	S3	3359898	                          A/mallard/Sweden/58/2003(H11N1) segment 3
+  0.00	1	1	1	1	S3	3919578	                          A/duck/Jiangsu/S1700/2016(H7N9) segment 3
+  0.00	1	1	1	1	S3	3365234	                          A/wild duck/Shantou/261/2001(H6N2) segment 3
+  0.00	1	1	5	5	S3	3667786	                          A/duck/Guangxi/125D17/2012(H4N2) segment 3
+  0.00	1	1	2	2	S3	3767922	                          A/ostrich/South Africa/OUD/2012(H7N1) segment 3
+  0.00	1	1	1	1	S3	3886690	                          A/duck/Mongolia/62/2013(H3N1) segment 3
+  0.00	1	1	1	1	S3	3348722	                          A/California/VRDL5/2010(H1N1) segment 3
+  0.00	1	1	1	1	S3	3789730	                          A/mallard/Delaware/A00456271/2009(H7N3) segment 3
+  0.00	1	1	1	1	S3	3365426	                          A/duck/Hunan/3748/2004(H6N8) segment 3
+  0.00	1	1	11	11	S3	3348666	                          A/California/VRDL131/2009(H1N1) segment 3
+  0.00	1	1	2	2	S3	3604394	                          A/duck/Yunnan/1282/2007(H11N9) segment 3
+  0.00	1	1	2	2	S3	3667138	                          A/Sri Lanka/19838/2010(H1N1) segment 3
+  0.00	1	1	7	7	S3	3348602	                          A/California/VRDL123/2009(H1N1) segment 3
+  0.00	1	1	10	5	S3	3919282	                          A/chicken/Henan/S1425/2014(H7N9) segment 3
+  0.00	1	1	9	9	S3	3770938	                          A/Florida/35/2014(H3N2) segment 3
+  0.00	1	1	1	1	S3	3367418	                          A/Taipei/WR1485T/2009(H1N1) segment 3
+  0.00	1	1	2	2	S3	3784690	                          A/turtledove/Wuhan/WHBJ26/2014(H5N6) segment 3
+  0.00	1	1	2	2	S3	3891250	                          A/Rosario do Sul/LACENRS-1230/2016(H1N1) segment 3
+  0.00	1	1	1	1	S3	3312378	                          A/waterfowl/Colorado/476466-2/2007(H5N2) segment 3
+  0.00	1	1	1	1	S3	3598738	                          A/swine/Pennsylvania/A01380412/2013(H3N2) segment 3
+  0.00	1	1	3	3	S3	3704450	                          A/duck/Jiangxi/26175/2013(H7N3) segment 3
+  0.00	1	1	2	2	S3	3704442	                          A/duck/Jiangxi/23510/2013(H7N3) segment 3
+  0.00	1	1	8	8	S3	3770146	                          A/California/16/2015(H3N2) segment 3
+  0.00	1	1	2	2	S3	3157434	                          A/Canterbury/04/2002(H3N2) segment 3
+  0.00	1	1	1	1	S3	3362754	                          A/Orenburg/IIV-13/2010(H1N1) segment 3
+  0.00	1	1	1	1	S3	3787346	                          A/mallard/Washington/196262/2015(H5N2) segment 3
+  0.00	1	1	1	1	S3	3670522	                          A/Santiago/p9d1/2012(H3N2) segment 3
+  0.00	1	1	2	2	S3	3921642	                          A/swine/Nebraska/A02218434/2017(H1N2) segment 3
+  0.00	1	1	2	2	S3	3847210	                          A/Virginia/18/2016(H1N1) segment 3
+  0.00	1	1	1	1	S3	3188370	                          A/Albany/1618/1951(H1N1) segment 3
+  0.00	1	1	3	3	S3	3311018	                          A/Thailand/CU-B42/2009(H1N1) segment 3
+  0.00	1	1	4	4	S3	3894946	                          A/northern shoveler/California/HS249/2015(H10N3) segment 3
+  0.00	1	1	3	3	S3	3154866	                          A/duck/Potsdam/1402-6/1986(H5N2) segment 3
+  0.00	1	1	2	2	S3	3195490	                          A/swine/Guangxi/58/2005(H9N2) segment 3
+  0.00	1	1	1	1	S3	3406362	                          A/swine/Guangxi/8/2007(H9N2) segment 3
+  0.00	1	1	2	2	S3	3347482	                          A/New York/1796/2010(H1N1) segment 3
+  0.00	1	1	1	1	S3	3464314	                          A/swine/Iowa/A01049739/2011(H1N1) segment 3
+  0.00	1	1	1	1	S3	3274298	                          A/mallard/MN/327/1999(H4N8) segment 3
+  0.00	1	1	3	3	S3	3939298	                          A/WuXi/0402/2013(H7N9) segment 3
+  0.00	1	1	1	1	S3	3673642	                          A/swine/Hong Kong/263/2012(H1N2) segment 3
+  0.00	1	1	2	1	S3	3179666	                          A/guinea fowl/New York/20221-11/1995(H2N2) segment 3
+  0.00	1	1	2	2	S3	3819050	                          A/swine/Illinois/A01774071/2016(H1N1) segment 3
+  0.00	1	1	1	1	S3	3729770	                          A/Duck/Fujian/1753/2009(H9N2) segment 3
+  0.00	1	1	1	1	S3	3275146	                          A/duck/Mongolia/867/2002(H7N1) segment 3
+  0.00	1	1	1	1	S3	3151890	                          A/New York/437/2000(H3N2) segment 3
+  0.00	1	1	2	2	S3	3730042	                          A/chicken/Shanghai/4/2006(H9N2) segment 3
+  0.00	1	1	1	1	S3	3228994	                          A/Muscovy duck/New York/62095-1/2006(H5N2) segment 3
+  0.00	1	1	1	1	S3	3793018	                          A/swine/Italy/36818-4/2015(H1N2) segment 3
+  0.00	1	1	3	3	S3	3833626	                          A/chicken/Fujian/SIC13/2013(H9N2) segment 3
+  0.00	1	1	1	1	S3	3230850	                          A/chicken/Vietnam/NCVD-20/2007(H5N1) segment 3
+  0.00	1	1	3	3	S3	3792098	                          A/swine/Italy/280201/2013(H1N1) segment 3
+  0.00	1	1	3	3	S3	3155090	                          A/duck/Hong Kong/d73/1976(H6N1) segment 3
+  0.00	1	1	4	4	S3	3792010	                          A/swine/Italy/179057/2015(H1N1) segment 3
+  0.00	1	1	1	1	S3	3369162	                          A/duck/Hunan/29/2006(H5N1) segment 3
+  0.00	1	1	5	5	S3	3369114	                          A/chicken/Xinjiang/78/2005(H5N1) segment 3
+  0.00	1	1	1	1	S3	3181010	                          A/duck/Hubei/wq/2003(H5N1) segment 3
+  0.00	1	1	2	2	S3	3791866	                          A/Parma/7/2011(H1N1) segment 3
+  0.00	1	1	1	1	S3	3369002	                          A/chicken/Shandong/A-1/2009(H5N1) segment 3
+  0.00	1	1	1	1	S3	3664802	                          A/duck/Korea/372/2009(H1N1) segment 3
+  0.00	1	1	1	1	S3	3782506	                          A/duck/Zhejiang/925019/2014(H5N8) segment 3
+  0.00	1	1	5	5	S3	3452738	                          A/Zhejiang/89w/2009(H1N1) segment 3
+  0.00	1	1	3	3	S3	3925810	                          A/swine/Guangxi/JG1/2014(H3N2) segment 3
+  0.00	1	1	1	1	S3	3367722	                          A/Mexico City/WR1708T/2009(H1N1) segment 3
+  0.00	1	1	1	1	S3	3886482	                          A/duck/Mongolia/248/2010(H3N8) segment 3
+  0.00	1	1	2	2	S3	3842674	                          A/mallard duck/Netherlands/1/2013(H7N7) segment 3
+  0.00	1	1	1	1	S3	3335554	                          A/California/VRDL65/2009(H1N1) segment 3
+  0.00	1	1	1	1	S3	3692098	                          A/England/12/1962(H2N2) segment 3
+  0.00	1	1	1	1	S3	3285314	                          A/environment/New York/484678/2007(H5N2) segment 3
+  0.00	1	1	4	4	S3	3776034	                          A/South Dakota/16/2015(H1N1) segment 3
+  0.00	1	1	1	1	S3	3169226	                          A/Wellington/9/2002(H3N2) segment 3
+  0.00	1	1	2	2	S3	3747018	                          A/lesser black-backed gull/Netherlands/1/2007(H11N1) segment 3
+  0.00	1	1	2	2	S3	3169242	                          A/Dunedin/1/2002(H3N2) segment 3
+  0.00	1	1	2	2	S3	3143954	                          A/New York/31/2004(H3N2) segment 3
+  0.00	1	1	1	1	S3	3170474	                          A/snow goose/Maryland/410/2005(H6N1) segment 3
+  0.00	1	1	2	2	S3	3803914	                          A/chicken/Shanghai/15/2015(H9N2) segment 3
+  0.00	1	1	1	1	S3	3696402	                          A/chicken/Jiangxi/17403/2013(H9N2) segment 3
+  0.00	1	1	1	1	S3	3744490	                          A/swine/Poland/006801/2013(H1N1) segment 3
+  0.00	1	1	6	6	S3	3143370	                          A/duck/Shandong/093/2004(H5N1) segment 3
+  0.00	1	1	3	3	S3	3901698	                          A/mallard duck/Netherlands/33/2011(H2N2) segment 3
+  0.00	1	1	2	1	S3	3775210	                          A/North Dakota/01/2015(H1N1) segment 3
+  0.00	1	1	2	2	S3	3202338	                          A/California/UR06-0565/2007(H3N2) segment 3
+  0.00	1	1	2	2	S3	3647170	                          A/chicken/Jiangsu/03/2007(H9N2) segment 3
+  0.00	1	1	1	1	S3	3775034	                          A/North Carolina/11/2015(H3N2) segment 3
+  0.00	1	1	1	1	S3	3901786	                          A/mallard duck/Netherlands/6/2012(H1N1) segment 3
+  0.00	1	1	8	7	S3	3807602	                          A/environment/Guangdong/GZ670/2015(H5N6) segment 3
+  0.00	1	1	1	1	S3	3127210	                          A/pintail duck/Alberta/114/1979(H8N4) segment 3
+  0.00	1	1	1	1	S3	3338082	                          A/feces/Hunan/2-28/2007(H9N2) segment 3
+  0.00	1	1	2	2	S3	3641658	                          A/duck/Guangdong/S4018/2010(H6N6) segment 3
+  0.00	1	1	1	1	S3	3336282	                          A/canine/Guangdong/1/2006(H3N2) segment 3
+  0.00	1	1	5	5	S3	3171410	                          A/tern/South Africa/1961(H5N3) segment 3
+  0.63	617	0	2952	595	S2	3121630	                        Influenza A segment 4
+  0.21	210	115	1470	144	S3	3121637	                          Influenza A H3 segment 4
+  0.08	76	76	85	2	S4	3149251	                            A/New York/392/2004(H3N2) segment 4
+  0.00	1	1	1	1	S4	3212307	                            A/equine/Kentucky/2/1980(H3N8) segment 4
+  0.00	1	1	6	6	S4	3776395	                            A/Texas/23/2015(H3N2) segment 4
+  0.00	1	1	2	2	S4	3760371	                            A/swine/Korea/S2001/2015(H3N2) segment 4
+  0.00	1	1	1	1	S4	3254323	                            A/Siena/3/1988(H3N2) segment 4
+  0.00	1	1	11	11	S4	3149099	                            A/New York/373/2005(H3N2) segment 4
+  0.00	1	1	1	1	S4	3772835	                            A/Maine/09/2015(H3N2) segment 4
+  0.00	1	1	3	3	S4	3666931	                            A/Mexico/DIF2112/2005(H3N2) segment 4
+  0.00	1	1	1	1	S4	3828819	                            A/Illinois/11/2016(H3N2) segment 4
+  0.00	1	1	1	1	S4	3168275	                            A/New York/699/1995(H3N2) segment 4
+  0.00	1	1	1	1	S4	3158723	                            A/New York/525/1998(H3N2) segment 4
+  0.00	1	1	4	4	S4	3145251	                            A/New York/201/2003(H3N2) segment 4
+  0.00	1	1	1	1	S4	3777419	                            A/Washington/36/2015(H3N2) segment 4
+  0.00	1	1	2	2	S4	3173779	                            A/Western Australia/12/2000(H3N2) segment 4
+  0.00	1	1	1	1	S4	3740891	                            A/equine/Tennessee/28A/2014(H3N8) segment 4
+  0.00	1	1	6	6	S4	3170363	                            A/Waikato/15/2005(H3N2) segment 4
+  0.00	1	1	1	1	S4	3174155	                            A/Western Australia/65/2005(H3N2) segment 4
+  0.00	1	1	5	5	S4	3145987	                            A/New York/269/2003(H3N2) segment 4
+  0.00	1	1	1	1	S4	3229731	                            A/Philippines/2-MA/1982(H3N2) segment 4
+  0.00	1	1	7	7	S4	3149123	                            A/New York/376/2005(H3N2) segment 4
+  0.18	178	63	556	129	S3	3121639	                          Influenza A H5 segment 4
+  0.04	37	37	39	2	S4	3290795	                            A/duck/Altai/1285/1991(H5N3) segment 4
+  0.03	28	28	39	1	S4	3369043	                            A/chicken/Tibet/6/2008(H5N1) segment 4
+  0.03	25	25	28	2	S4	3309979	                            A/duck/France/080032/2008(H5N2) segment 4
+  0.01	10	10	21	1	S4	3180763	                            A/chicken/Hubei/wj/1997(H5N1) segment 4
+  0.00	2	2	2	2	S4	3269851	                            A/falcon/Saudi Arabia/D1936/2007(H5N1) segment 4
+  0.00	1	1	1	1	S4	3272515	                            A/long-tailed shrike/Hong Kong/2762/2007(H5N1) segment 4
+  0.00	1	1	3	3	S4	3181027	                            A/duck/Shanghai/xj/2002(H5N1) segment 4
+  0.00	1	1	3	3	S4	3180963	                            A/chicken/Jilin/xw/2003(H5N1) segment 4
+  0.00	1	1	4	4	S4	3360683	                            A/chicken/West Bengal/239020/2010(H5N1) segment 4
+  0.00	1	1	2	2	S4	3843003	                            A/mallard duck/Netherlands/28/2010(H5N2) segment 4
+  0.00	1	1	1	1	S4	3699859	                            A/duck/Bhutan/01TR03/2013(H5N1) segment 4
+  0.00	1	1	1	1	S4	3215347	                            A/chicken/Vietnam/24/2004(H5N1) segment 4
+  0.00	1	1	1	1	S4	3746643	                            A/Eurasian wigeon/Netherlands/1/2009(H5N2) segment 4
+  0.00	1	1	2	2	S4	3407331	                            A/duck/Vietnam/G12/2008(H5N1) segment 4
+  0.00	1	1	2	2	S4	3691875	                            A/chicken/Vietnam/NCVD-KA432/2013(H5N1) segment 4
+  0.00	1	1	4	4	S4	3759627	                            A/environment/Guangdong/QY025/2013(H5N6) segment 4
+  0.00	1	1	1	1	S4	3854475	                            A/duck/Vietnam/NCVD-2153/2012(H5N1) segment 4
+  0.00	1	1	1	1	S4	3310011	                            A/Muscovy duck/France/070090b/2007(H5N3) segment 4
+  0.16	156	37	680	77	S3	3121643	                          Influenza A H9 segment 4
+  0.06	59	59	61	1	S4	3285787	                            A/chicken/Israel/375/2007(H9N2) segment 4
+  0.05	49	49	217	5	S4	3599835	                            A/chicken/Hong Kong/NT10/2011(H9N2) segment 4
+  0.00	1	1	1	1	S4	3758123	                            A/chicken/India/01CL1619/2012(H9N2) segment 4
+  0.00	1	1	6	6	S4	3283099	                            A/chicken/Pakistan/UDL-01/2005(H9N2) segment 4
+  0.00	1	1	7	7	S4	3621507	                            A/duck/Guangxi/LAD9/2009(H9N8) segment 4
+  0.00	1	1	1	1	S4	3627499	                            A/chicken/Egypt/S7404/2013(H9N2) segment 4
+  0.00	1	1	9	9	S4	3920763	                            A/chicken/Jordan/14/2003(H9N2) segment 4
+  0.00	1	1	1	1	S4	3173651	                            A/duck/Hokkaido/9/99(H9N2) segment 4
+  0.00	1	1	1	1	S4	3285827	                            A/chicken/Israel/883/2008(H9N2) segment 4
+  0.00	1	1	1	1	S4	3285835	                            A/chicken/Israel/951/2007(H9N2) segment 4
+  0.00	1	1	1	1	S4	3663747	                            A/turtledove/Guangxi/49B6/2013(H9N2) segment 4
+  0.00	1	1	3	3	S4	3486971	                            A/chicken/Israel/32/2009(H9N2) segment 4
+  0.00	1	1	1	1	S4	3839939	                            A/ferret/Maryland/P10-UMD/2012(H9N2) segment 4
+  0.04	42	16	148	147	S3	3121635	                          Influenza A H1 segment 4
+  0.00	2	2	2	1	S4	3824723	                            A/New York/42/2016(H1N1) segment 4
+  0.00	1	1	6	6	S4	3809523	                            A/swine/Mexico/AVX31/2012(H1N1) segment 4
+  0.00	1	1	3	3	S4	3663347	                            A/Uganda/MUWRP-224/2010(H1N1) segment 4
+  0.00	1	1	5	5	S4	3314635	                            A/Wisconsin/629-D01619/2009(H1N1) segment 4
+  0.00	1	1	1	1	S4	3384627	                            A/Athens/INS389/2010(H1N1) segment 4
+  0.00	1	1	6	6	S4	3822987	                            A/Iowa/08/2016(H1N1) segment 4
+  0.00	1	1	3	3	S4	3378123	                            A/New York/INS432/2010(H1N1) segment 4
+  0.00	1	1	1	1	S4	3348091	                            A/Berlin/INS170/2009(H1N1) segment 4
+  0.00	1	1	2	2	S4	3414659	                            A/India/GWL_DSC/2010(H1N1) segment 4
+  0.00	1	1	7	7	S4	3332651	                            A/Tomsk/07/2009(H1N1) segment 4
+  0.00	1	1	4	4	S4	3685747	                            A/swine/Ontario/46/2012(H1N1) segment 4
+  0.00	1	1	2	2	S4	3376739	                            A/District of Columbia/INS227/2009(H1N1) segment 4
+  0.00	1	1	2	2	S4	3898363	                            A/swine/El Monte/VN1401-1537/2015(H1N2) segment 4
+  0.00	1	1	1	1	S4	3848467	                            A/swine/Minnesota/A01781754/2016(H1N1) segment 4
+  0.00	1	1	1	1	S4	3376947	                            A/Aarhus/INS253/2009(H1N1) segment 4
+  0.00	1	1	3	3	S4	3409803	                            A/swine/Hebei/10/2006(H1N2) segment 4
+  0.00	1	1	2	2	S4	3852579	                            A/Alaska/16/2016(H1N1) segment 4
+  0.00	1	1	1	1	S4	3411619	                            A/swine/Jangsu/434/2010(H1N1) segment 4
+  0.00	1	1	8	8	S4	3411611	                            A/swine/Jangsu/38/2010(H1N1) segment 4
+  0.00	1	1	3	3	S4	3898507	                            A/swine/Rancagua/VN1401-1459/2015(H1N1) segment 4
+  0.00	1	1	1	1	S4	3667099	                            A/Sri Lanka/11/2012(H1N1) segment 4
+  0.00	1	1	2	2	S4	3647627	                            A/swine/Hiroshima/8/2011(H1N1) segment 4
+  0.00	1	1	5	5	S4	3823059	                            A/Kansas/09/2016(H1N1) segment 4
+  0.00	1	1	8	8	S4	3411195	                            A/Taiwan/14/2009(H1N1) segment 4
+  0.00	1	1	6	6	S4	3611643	                            A/Helsinki/493/2013(H1N1) segment 4
+  0.03	30	12	95	95	S3	3121641	                          Influenza A H7 segment 4
+  0.00	1	1	1	1	S4	3701739	                            A/chicken/Jiangxi/10784/2014(H7N7) segment 4
+  0.00	1	1	1	1	S4	3919019	                            A/chicken/Fujian/S1085/2014(H7N9) segment 4
+  0.00	1	1	1	1	S4	3192307	                            A/chicken/Victoria/1976(H7N7) segment 4
+  0.00	1	1	1	1	S4	3701387	                            A/chicken/Dongguan/4064/2013(H7N9) segment 4
+  0.00	1	1	1	1	S4	3919083	                            A/chicken/Guangdong/S1200/2015(H7N9) segment 4
+  0.00	1	1	1	1	S4	3915147	                            A/Guangdong/GZ8H001/2017(H7N9) segment 4
+  0.00	1	1	1	1	S4	3919643	                            A/environment/Hunan/S40858/2015(H7N9) segment 4
+  0.00	1	1	1	1	S4	3212675	                            A/duck/Italy/4609/2003(H7N2) segment 4
+  0.00	1	1	1	1	S4	3596667	                            A/Suzhou/3/2013(H7N9) segment 4
+  0.00	1	1	1	1	S4	3909835	                            A/chicken/Guangdong/Q39/2017(H7N9) segment 4
+  0.00	1	1	1	1	S4	3174275	                            A/duck/Hokkaido/Vac-2/04(H7N7) segment 4
+  0.00	1	1	7	7	S4	3919459	                            A/chicken/Zhejiang/S4008/2013(H7N9) segment 4
+  0.00	1	1	7	7	S4	3919339	                            A/chicken/Jiangsu/S1441/2016(H7N9) segment 4
+  0.00	1	1	4	4	S4	3919411	                            A/chicken/Ningxia/S1152/2014(H7N9) segment 4
+  0.00	1	1	4	4	S4	3919403	                            A/chicken/Jilin/SD009/2016(H7N9) segment 4
+  0.00	1	1	6	6	S4	3701011	                            A/chicken/Dongguan/1494/2014(H7N9) segment 4
+  0.00	1	1	4	4	S4	3919331	                            A/chicken/Jiangsu/S1361/2015(H7N9) segment 4
+  0.00	1	1	1	1	S4	3641475	                            A/Shanghai/PD-01/2014(H7N9) segment 4
+  0.00	1	1	1	1	S3	3121649	                          Influenza A H15 segment 4
+  0.44	430	200	1328	553	S2	3121631	                        Influenza A segment 5
+  0.06	58	58	214	9	S3	3219756	                          A/duck/Shantou/195/2001(H5N1) segment 5
+  0.04	37	37	39	2	S3	3463932	                          A/chicken/Iran/EBGV-88/2010(H9N2) segment 5
+  0.03	31	31	168	7	S3	3284012	                          A/California/07/2009(H1N1) segment 5
+  0.01	6	6	9	1	S3	3215364	                          A/chicken/Vietnam/890/2004(H5N1) segment 5
+  0.00	2	2	13	7	S3	3306300	                          A/New York/3654/2009(H1N1) segment 5
+  0.00	2	2	12	6	S3	3663700	                          A/chicken/Shanghai/1107/2013(H9N2) segment 5
+  0.00	1	1	3	3	S3	3151820	                          A/New York/428/1999(H3N2) segment 5
+  0.00	1	1	2	2	S3	3604572	                          A/pigeon/Hong Kong/WF255/2007(H9N2) segment 5
+  0.00	1	1	2	2	S3	3460252	                          A/swine/Kansas/11-104467/2011(H3N2) segment 5
+  0.00	1	1	4	4	S3	3410924	                          A/grebe/Tyva/2/2010(H5N1) segment 5
+  0.00	1	1	2	2	S3	3172228	                          A/New York/768/1993(H3N2) segment 5
+  0.00	1	1	3	3	S3	3720108	                          A/duck/Zhejiang/LS02/2014(H7N9) segment 5
+  0.00	1	1	1	1	S3	3823260	                          A/Louisiana/05/2016(H1N1) segment 5
+  0.00	1	1	1	1	S3	3829268	                          A/Massachusetts/28/2016(H3N2) segment 5
+  0.00	1	1	1	1	S3	3876932	                          A/swine/Michigan/A01672424/2017(H3N2) segment 5
+  0.00	1	1	8	8	S3	3169956	                          A/Waikato/31/2004(H3N2) segment 5
+  0.00	1	1	1	1	S3	3231668	                          A/duck/Yunnan/5310/2006(H5N1) segment 5
+  0.00	1	1	6	6	S3	3634068	                          A/chicken/Shandong/07/2009(H9N2) segment 5
+  0.00	1	1	2	2	S3	3744612	                          A/swine/Spain/23998/2011(H1N1) segment 5
+  0.00	1	1	5	5	S3	3528372	                          A/teal/Djankoy/4-17-11/2010(H5N2) segment 5
+  0.00	1	1	1	1	S3	3191540	                          A/black duck/Ohio/161/1999(H11N9) segment 5
+  0.00	1	1	1	1	S3	3532180	                          A/Muscovy duck/Ca Mau/1181/2006(H5N1) segment 5
+  0.00	1	1	2	2	S3	3553604	                          A/swine/Illinois/A01271599/2012(H1N2) segment 5
+  0.00	1	1	1	1	S3	3782476	                          A/duck/Zhejiang/727036/2014(H9N2) segment 5
+  0.00	1	1	1	1	S3	3762332	                          A/chicken/Qingdao/005/2014(H9N2) segment 5
+  0.00	1	1	3	3	S3	3411620	                          A/swine/Jangsu/434/2010(H1N1) segment 5
+  0.00	1	1	3	3	S3	3833916	                          A/chicken/Shandong/SIC35/2014(H9N2) segment 5
+  0.00	1	1	1	1	S3	3833908	                          A/chicken/Shandong/SIC34/2014(H9N2) segment 5
+  0.00	1	1	5	5	S3	3673220	                          A/swine/Guangdong/3196/2011(H1N2) segment 5
+  0.00	1	1	6	6	S3	3668244	                          A/eurasian curlew/Zhuanghe/ZH-64/2013(H3N6) segment 5
+  0.00	1	1	2	2	S3	3933852	                          A/chicken/Suqian/SQ1602/2016(H9N2) segment 5
+  0.00	1	1	3	3	S3	3667220	                          A/Sri Lanka/21386/2010(H1N1) segment 5
+  0.00	1	1	3	3	S3	3545356	                          A/chicken/Egypt/D4905B/2012(H9N2) segment 5
+  0.00	1	1	3	3	S3	3739012	                          A/chicken/YL/A3190/2014(H5N2) segment 5
+  0.00	1	1	5	5	S3	3438684	                          A/chicken/China/AH-10-01/2010(H9N2) segment 5
+  0.00	1	1	6	6	S3	3859276	                          A/Pennsylvania/92/2016(H3N2) segment 5
+  0.00	1	1	8	8	S3	3631316	                          A/environment/Shanghai/TY01/2013(H7N9) segment 5
+  0.00	1	1	2	2	S3	3797220	                          A/Colorado/19/2015(H3N2) segment 5
+  0.00	1	1	1	1	S3	3173956	                          A/Western Australia/40/2003(H3N2) segment 5
+  0.00	1	1	1	1	S3	3909820	                          A/chicken/Guangdong/Q1/2016(H7N9) segment 5
+  0.00	1	1	1	1	S3	3667148	                          A/Sri Lanka/2008/2009(H1N1) segment 5
+  0.00	1	1	2	2	S3	3281740	                          A/swine/England/WVL10/1993(H1N1) segment 5
+  0.00	1	1	1	1	S3	3943908	                          A/chicken/Zhejiang/8615/2016(H10N3) segment 5
+  0.00	1	1	1	1	S3	3578020	                          A/duck/Vietnam/LBM235/2012(H3N6) segment 5
+  0.00	1	1	10	10	S3	3517852	                          A/swine/Iowa/A01202576/2011(H1N2) segment 5
+  0.00	1	1	1	1	S3	3704508	                          A/duck/Jiangxi/34884/2013(H7N3) segment 5
+  0.00	1	1	1	1	S3	3364436	                          A/duck/Hunan/573/2002(H6N2) segment 5
+  0.00	1	1	3	3	S3	3368916	                          A/chicken/Gansu/44/2004(H5N1) segment 5
+  0.00	1	1	2	2	S3	3898364	                          A/swine/El Monte/VN1401-1537/2015(H1N2) segment 5
+  0.00	1	1	1	1	S3	3604556	                          A/pheasant/Hong Kong/WF288W/2007(H9N2) segment 5
+  0.00	1	1	1	1	S3	3794572	                          A/Maryland/16/2015(H1N1) segment 5
+  0.00	1	1	3	3	S3	3641788	                          A/goose/Guangdong/S4362/2009(H6N6) segment 5
+  0.00	1	1	3	3	S3	3368900	                          A/chicken/Anhui/39/2004(H5N1) segment 5
+  0.00	1	1	5	5	S3	3372484	                          A/New York/6530/2010(H1N1) segment 5
+  0.00	1	1	2	2	S3	3174012	                          A/Western Australia/47/2003(H3N2) segment 5
+  0.00	1	1	1	1	S3	3482444	                          A/duck/Mongolia/194/2011(H5N3) segment 5
+  0.00	1	1	1	1	S3	3809436	                          A/swine/Mexico/AVX18/2012(H1N2) segment 5
+  0.00	1	1	1	1	S3	3789740	                          A/mallard/Illinois/A00325439/2009(H7N3) segment 5
+  0.00	1	1	3	3	S3	3338092	                          A/feces/Hunan/3-91/2007(H9N2) segment 5
+  0.00	1	1	2	2	S3	3920748	                          A/chicken/Jordan/12/2003(H9N2) segment 5
+  0.00	1	1	1	1	S3	3668036	                          A/swine/Kazakhstan/106/1985(H3N6) segment 5
+  0.00	1	1	1	1	S3	3599844	                          A/chicken/Hong Kong/NT155/2008(H9N2) segment 5
+  0.00	1	1	4	4	S3	3852204	                          A/swine/Iowa/A01782235/2016(H1N1) segment 5
+  0.00	1	1	1	1	S3	3730044	                          A/chicken/Shanghai/4/2006(H9N2) segment 5
+  0.00	1	1	1	1	S3	3660788	                          A/chicken/India/01CA06/2012(H5N1) segment 5
+  0.00	1	1	2	2	S3	3197044	                          A/duck/Victoria/D23/1994(H4N2) segment 5
+  0.00	1	1	1	1	S3	3600220	                          A/chicken/Taiwan/A1997/2012(H5N2) segment 5
+  0.00	1	1	1	1	S3	3310012	                          A/Muscovy duck/France/070090b/2007(H5N3) segment 5
+  0.00	1	1	1	1	S3	3514508	                          A/mallard/Norway/10_779/2009(H3N8) segment 5
+  0.00	1	1	1	1	S3	3275148	                          A/duck/Mongolia/867/2002(H7N1) segment 5
+  0.00	1	1	1	1	S3	3145652	                          A/New York/217/2002(H1N2) segment 5
+  0.00	1	1	2	2	S3	3693948	                          A/ostrich/Beijing/712/2013(H9N2) segment 5
+  0.00	1	1	1	1	S3	3677844	                          A/chicken/Hunan/C3247/2009(H9N2) segment 5
+  0.00	1	1	2	2	S3	3808076	                          A/Anseriformes/Anhui/S3/2014(H1N1) segment 5
+  0.00	1	1	1	1	S3	3616836	                          A/Huizhou/01/2013(H7N9) segment 5
+  0.00	1	1	4	4	S3	3774412	                          A/New Jersey/02/2015(H3N2) segment 5
+  0.00	1	1	2	2	S3	3738460	                          A/swine/Illinois/A01462582/2015(H3N2) segment 5
+  0.00	1	1	1	1	S3	3880932	                          A/northern shoveler/California/AH0076719/2016(H7N3) segment 5
+  0.00	1	1	1	1	S3	3321332	                          A/swine/Shandong/101/2008(H1N1) segment 5
+  0.00	1	1	1	1	S3	3947596	                          A/chicken/Anhui/AH388/2017(H7N9) segment 5
+  0.00	1	1	5	5	S3	3672740	                          A/swine/Guangxi/NS2394/2012(H3N2) segment 5
+  0.00	1	1	6	6	S3	3663708	                          A/chicken/Shanghai/A/2010(H9N2) segment 5
+  0.00	1	1	2	2	S3	3641748	                          A/duck/Hunan/S4386/2009(H6N2) segment 5
+  0.00	1	1	2	2	S3	3257684	                          A/chicken/CT/260413-2/2003(H7N2) segment 5
+  0.00	1	1	2	2	S3	3343236	                          A/American coot/Mississippi/09OS615/2009(H10N3) segment 5
+  0.00	1	1	5	5	S3	3809708	                          A/swine/Mexico/AVX53/2013(H3N2) segment 5
+  0.00	1	1	1	1	S3	3442428	                          A/swan/Shanghai/10/2009(H5N1) segment 5
+  0.00	1	1	1	1	S3	3641708	                          A/duck/Hubei/S4135/2010(H6N2) segment 5
+  0.00	1	1	5	5	S3	3647332	                          A/chicken/Zhejiang/JX42/2012(H9N2) segment 5
+  0.00	1	1	1	1	S3	3365700	                          A/swine/Thailand/CU-RA75/2010(H1N1) segment 5
+  0.00	1	1	2	2	S3	3578084	                          A/swine/Thailand/CB001/2009(H1N1) segment 5
+  0.00	1	1	3	3	S3	3901380	                          A/common teal/Netherlands/07/2000(H3N8) segment 5
+  0.00	1	1	3	3	S3	3733068	                          A/chicken/Shandong/196/2011(H9N2) segment 5
+  0.00	1	1	1	1	S3	3758940	                          A/swine/Pennsylvania/A02035484/2015(H1N2) segment 5
+  0.00	1	1	1	1	S3	3575620	                          A/swine/Henan/Y1/2009(H9N2) segment 5
+  0.00	1	1	1	1	S3	3225060	                          A/domestic green-winged teal/Hunan/67/2005(H5N1) segment 5
+  0.00	1	1	2	2	S3	3460684	                          A/chicken/Attock/NARC-14994/2009(H9N2) segment 5
+  0.00	1	1	4	4	S3	3790940	                          A/pheasant/TienGiang/0021/2013(H5N1) segment 5
+  0.00	1	1	1	1	S3	3901444	                          A/mallard duck/Netherlands/10/2013(H4N6) segment 5
+  0.00	1	1	2	2	S3	3758124	                          A/chicken/India/01CL1619/2012(H9N2) segment 5
+  0.40	390	0	1239	636	S2	3121632	                        Influenza A segment 6
+  0.18	180	124	448	194	S3	3121654	                          Influenza A N2 segment 6
+  0.01	12	12	25	1	S4	3149253	                            A/New York/392/2004(H3N2) segment 6
+  0.00	2	2	5	4	S4	3946301	                            A/chicken/Shandong/C9YT/2011(H9N2) segment 6
+  0.00	2	2	2	1	S4	3276301	                            A/Hong Kong/HKU45/2005(H3N2) segment 6
+  0.00	2	2	2	2	S4	3486933	                            A/chicken/Israel/1067/2010(H9N2) segment 6
+  0.00	1	1	2	2	S4	3173885	                            A/Western Australia/30/2002(H3N2) segment 6
+  0.00	1	1	2	2	S4	3169253	                            A/Dunedin/3/2002(H3N2) segment 6
+  0.00	1	1	5	5	S4	3363021	                            A/swine/Hong Kong/2314/2009(H1N2) segment 6
+  0.00	1	1	1	1	S4	3547589	                            A/swine/Iowa/A01203942/2012(H3N2) segment 6
+  0.00	1	1	1	1	S4	3692117	                            A/Shanghai/202/1957(H2N2) segment 6
+  0.00	1	1	3	3	S4	3759205	                            A/environment/Bangladesh/23571/2014(H9N2) segment 6
+  0.00	1	1	1	1	S4	3758965	                            A/environment/Hunan/18489/2014(H9N2) segment 6
+  0.00	1	1	2	2	S4	3212229	                            A/chicken/CA/S0403106/2004(H6N2) segment 6
+  0.00	1	1	3	3	S4	3152117	                            A/New York/466/2004(H3N2) segment 6
+  0.00	1	1	2	2	S4	3853901	                            A/northern pintail/Alaska/622/2012(H5N2) segment 6
+  0.00	1	1	1	1	S4	3316765	                            A/yellow-headed Amazon/California/500658/2007(H5N2) segment 6
+  0.00	1	1	2	2	S4	3312437	                            A/wild bird/Minnesota/460613-12/2006(H5N2) segment 6
+  0.00	1	1	2	2	S4	3677749	                            A/chicken/Fujian/C1239/2009(H9N2) segment 6
+  0.00	1	1	3	3	S4	3312317	                            A/northern pintail/Utah/469648/2006(H5N2) segment 6
+  0.00	1	1	1	1	S4	3157189	                            A/Canterbury/101/2004(H3N2) segment 6
+  0.00	1	1	1	1	S4	3285845	                            A/chicken/Israel/953/2007(H9N2) segment 6
+  0.00	1	1	1	1	S4	3516221	                            A/ostrich/South Africa/AI2887/2011(H1N2) segment 6
+  0.00	1	1	1	1	S4	3576389	                            A/chicken/Henan/DY/2009(H9N2) segment 6
+  0.00	1	1	1	1	S4	3266421	                            A/duck/Victoria/26/1981(H5N2) segment 6
+  0.00	1	1	1	1	S4	3920805	                            A/chicken/Jordan/70/2004(H9N2) segment 6
+  0.00	1	1	1	1	S4	3920909	                            A/black-headed gull/Netherlands/8/2016(H13N2) segment 6
+  0.00	1	1	2	2	S4	3670357	                            A/Santiago/p1d2/2012(H3N2) segment 6
+  0.00	1	1	1	1	S4	3869933	                            A/Columbia/P0064/2014(H3N2) segment 6
+  0.00	1	1	7	7	S4	3408877	                            A/swine/Argentina/CIP051-StaFeN2/2010(H1N2) segment 6
+  0.00	1	1	4	4	S4	3149285	                            A/New York/396/2005(H3N2) segment 6
+  0.00	1	1	7	7	S4	3916285	                            A/dove/Guangxi/96B8/2014(H9N2) segment 6
+  0.00	1	1	1	1	S4	3576485	                            A/chicken/Shandong/11/2010(H9N2) segment 6
+  0.00	1	1	1	1	S4	3364677	                            A/duck/Shantou/1840/2000(H6N2) segment 6
+  0.00	1	1	2	2	S4	3666997	                            A/Mexico/DIF940/2003(H3N2) segment 6
+  0.00	1	1	1	1	S4	3782701	                            A/pigeon/Zhejiang/P3/2013(H9N2) segment 6
+  0.00	1	1	1	1	S4	3257877	                            A/environmental/NY/268925-10/2003(H7N2) segment 6
+  0.00	1	1	1	1	S4	3663733	                            A/chicken/Shanghai/D/2011(H9N2) segment 6
+  0.00	1	1	2	2	S4	3276133	                            A/Hong Kong/HKU24/2004(H3N2) segment 6
+  0.00	1	1	2	2	S4	3276341	                            A/Hong Kong/HKU50/2005(H3N2) segment 6
+  0.00	1	1	2	2	S4	3785589	                            A/swine/Zhejiang/SW64/2014(H1N2) segment 6
+  0.00	1	1	1	1	S4	3682413	                            A/swine/Thailand/CU-S14129N/2013(H3N2) segment 6
+  0.00	1	1	1	1	S4	3777373	                            A/Washington/33/2014(H3N2) segment 6
+  0.00	1	1	1	1	S4	3225021	                            A/swine/Iowa/H02AS8/2002(H3N2) segment 6
+  0.17	164	53	598	336	S3	3121653	                          Influenza A N1 segment 6
+  0.03	27	27	30	1	S4	3514037	                            A/turkey/France/10-040/2010(H6N1) segment 6
+  0.01	14	14	24	2	S4	3368933	                            A/chicken/Hebei/A-8/2009(H5N1) segment 6
+  0.01	9	9	10	1	S4	3365365	                            A/duck/Shantou/1275/2004(H6N1) segment 6
+  0.00	2	2	6	3	S4	3611613	                            A/Helsinki/480/2013(H1N1) segment 6
+  0.00	2	2	2	1	S4	3289493	                            A/chicken/Egypt/08124S-NLQP/2008(H5N1) segment 6
+  0.00	2	2	7	7	S4	3345933	                            A/Boston/124/2009(H1N1) segment 6
+  0.00	2	2	16	8	S4	3404813	                            A/Boston/591/2009(H1N1) segment 6
+  0.00	2	2	10	6	S4	3825925	                            A/Texas/68/2016(H1N1) segment 6
+  0.00	2	2	2	1	S4	3341109	                            A/duck/Eastern China/909/2009(H5N1) segment 6
+  0.00	1	1	1	1	S4	3743293	                            A/swine/England/045033/2013(H1N1) segment 6
+  0.00	1	1	4	4	S4	3315053	                            A/Wisconsin/629-S0186/2009(H1N1) segment 6
+  0.00	1	1	2	2	S4	3845373	                            A/Michigan/56/2016(H1N1) segment 6
+  0.00	1	1	3	3	S4	3369157	                            A/duck/Hunan/11/2007(H5N1) segment 6
+  0.00	1	1	4	4	S4	3845389	                            A/Michigan/58/2016(H1N1) segment 6
+  0.00	1	1	3	3	S4	3811749	                            A/Illinois/24/2015(H1N1) segment 6
+  0.00	1	1	1	1	S4	3259845	                            A/duck/Hubei/Hangmei01/2006(H5N1) segment 6
+  0.00	1	1	1	1	S4	3176637	                            A/chicken/Viet Nam/17/2005(H5N1) segment 6
+  0.00	1	1	2	2	S4	3219221	                            A/duck/Vietnam/52/2007(H5N1) segment 6
+  0.00	1	1	2	2	S4	3667109	                            A/Sri Lanka/1735/2011(H1N1) segment 6
+  0.00	1	1	1	1	S4	3272285	                            A/swan/Mangystau/3/2006(H5N1) segment 6
+  0.00	1	1	1	1	S4	3553957	                            A/swine/France/18-120158/2012(H1N1) segment 6
+  0.00	1	1	2	2	S4	3322117	                            A/Singapore/GP2715/2009(H1N1) segment 6
+  0.00	1	1	1	1	S4	3272573	                            A/scaly-breasted munia/Hong Kong/45/2007(H5N1) segment 6
+  0.00	1	1	11	11	S4	3431997	                            A/swine/MB/46/2009(H1N1) segment 6
+  0.00	1	1	4	4	S4	3310389	                            A/chicken/India/WB-NIV529/2008(H5N1) segment 6
+  0.00	1	1	5	5	S4	3154941	                            A/pigeon/MN/1407/1981(H1N1) segment 6
+  0.00	1	1	1	1	S4	3849541	                            A/turkey/Missouri/16-014037-7/2016(H5N1) segment 6
+  0.00	1	1	2	2	S4	3362733	                            A/Vietnam/UT31412II/2008(H5N1) segment 6
+  0.00	1	1	4	4	S4	3822949	                            A/Indiana/42/2016(H1N1) segment 6
+  0.00	1	1	1	1	S4	3551877	                            A/chicken/North China/k0604/2010(H5N1) segment 6
+  0.00	1	1	1	1	S4	3650773	                            A/swine/Chiba/30/2012(H1N1) segment 6
+  0.00	1	1	1	1	S4	3740805	                            A/Mexico/200130/2014(H1N1) segment 6
+  0.00	1	1	8	8	S4	3311965	                            A/New York/3345/2009(H1N1) segment 6
+  0.00	1	1	1	1	S4	3809661	                            A/swine/Mexico/AVX47/2013(H1N1) segment 6
+  0.00	1	1	5	5	S4	3219661	                            A/chukar/Shantou/4690/2003(H5N1) segment 6
+  0.00	1	1	4	4	S4	3925021	                            A/mallard duck/Netherlands/32/2008(H6N1) segment 6
+  0.00	1	1	7	7	S4	3341805	                            A/Wisconsin/629-D00936/2009(H1N1) segment 6
+  0.00	1	1	5	5	S4	3272373	                            A/mute swan/Hungary/3472/2006(H5N1) segment 6
+  0.00	1	1	2	2	S4	3846557	                            A/Tennessee/18/2016(H1N1) segment 6
+  0.00	1	1	5	5	S4	3143501	                            A/chicken/Guangdong/191/04(H5N1) segment 6
+  0.00	1	1	4	4	S4	3369013	                            A/chicken/Shandong/A-10/2006(H5N1) segment 6
+  0.00	1	1	5	5	S4	3411061	                            A/Jiangsu/S62/2009(H1N1) segment 6
+  0.00	1	1	1	1	S4	3762645	                            A/pigeon/Hubei/RP25/2012(H5N1) segment 6
+  0.00	1	1	3	3	S4	3332653	                            A/Tomsk/07/2009(H1N1) segment 6
+  0.00	1	1	5	5	S4	3191669	                            A/chicken/Tula/4/05(H5N1) segment 6
+  0.00	1	1	1	1	S4	3862285	                            A/swine/France/01-160099/2016(H1N1) segment 6
+  0.00	1	1	1	1	S4	3595501	                            A/Cambodia/X0207301/2013(H5N1) segment 6
+  0.00	1	1	3	3	S4	3681101	                            A/Helsinki/303M/2014(H1N1) segment 6
+  0.00	1	1	4	4	S4	3791725	                            A/Milano/230/2015(H1N1) segment 6
+  0.00	1	1	9	9	S4	3277917	                            A/chicken/Domodedovo/MK/2007(H5N1) segment 6
+  0.00	1	1	2	2	S4	3329757	                            A/chicken/West Bengal/193936/2009(H5N1) segment 6
+  0.00	1	1	2	2	S4	3789557	                            A/American green winged teal/Utah/A00461135/2009(H7N1) segment 6
+  0.00	1	1	1	1	S4	3368925	                            A/chicken/Guizhou/7/2008(H5N1) segment 6
+  0.00	1	1	8	8	S4	3611765	                            A/Helsinki/595/2013(H1N1) segment 6
+  0.00	1	1	1	1	S4	3664805	                            A/duck/Korea/372/2009(H1N1) segment 6
+  0.00	1	1	1	1	S4	3728117	                            A/swine/France/22-120340/2012(H1N1) segment 6
+  0.00	1	1	1	1	S4	3719933	                            A/Thailand/SP11686/2012(H1N1) segment 6
+  0.00	1	1	2	2	S4	3605117	                            A/India/P1114854/2011(H1N1) segment 6
+  0.05	45	35	192	105	S3	3121661	                          Influenza A N9 segment 6
+  0.00	1	1	9	9	S4	3909821	                            A/chicken/Guangdong/Q1/2016(H7N9) segment 6
+  0.00	1	1	1	1	S4	3596661	                            A/Nanjing/7/2013(H7N9) segment 6
+  0.00	1	1	2	2	S4	3919445	                            A/chicken/Zhejiang/S1074/2016(H7N9) segment 6
+  0.00	1	1	2	2	S4	3919277	                            A/chicken/Hebei/S1257/2016(H7N9) segment 6
+  0.00	1	1	2	2	S4	3703165	                            A/silkie chicken/Dongguan/1519/2014(H7N9) segment 6
+  0.00	1	1	2	2	S4	3700909	                            A/chicken/Dongguan/1307/2014(H7N9) segment 6
+  0.00	1	1	3	3	S4	3909829	                            A/chicken/Guangdong/Q26/2017(H7N9) segment 6
+  0.00	1	1	1	1	S4	3919069	                            A/chicken/Fujian/S4518/2015(H7N9) segment 6
+  0.00	1	1	2	2	S4	3604397	                            A/duck/Yunnan/1282/2007(H11N9) segment 6
+  0.00	1	1	1	1	S4	3919109	                            A/chicken/Guangdong/SD002/2014(H7N9) segment 6
+  0.00	1	1	1	1	S3	3121660	                          Influenza A N8 segment 6
+  0.28	278	123	987	339	S2	3121634	                        Influenza A segment 8
+  0.04	44	44	155	4	S3	3219759	                          A/duck/Shantou/195/2001(H5N1) segment 8
+  0.04	42	42	82	2	S3	3758399	                          A/chicken/India/100074/2008(H5N1) segment 8
+  0.00	2	2	2	1	S3	3686287	                          A/chicken/Beijing/1115/2013(H9N2) segment 8
+  0.00	2	2	2	1	S3	3326391	                          A/environment/Hunan/6-45/2008(H5N1) segment 8
+  0.00	1	1	2	2	S3	3886759	                          A/duck/Mongolia/68/2010(H4N6) segment 8
+  0.00	1	1	2	2	S3	3667271	                          A/Sri Lanka/2290/2011(H1N1) segment 8
+  0.00	1	1	1	1	S3	3442055	                          A/duck/Eastern China/13/2010(H6N6) segment 8
+  0.00	1	1	7	7	S3	3758975	                          A/environment/Hunan/18498/2014(H9N2) segment 8
+  0.00	1	1	3	3	S3	3782455	                          A/chicken/Zhejiang/C7199/2013(H9N2) segment 8
+  0.00	1	1	3	3	S3	3286135	                          A/Canada-NS/RV1538/2009(H1N1) segment 8
+  0.00	1	1	1	1	S3	3885199	                          A/chicken/Jiangsu/JT119/2015(H7N9) segment 8
+  0.00	1	1	1	1	S3	3532271	                          A/duck/Cao Bang/43/2007(H5N1) segment 8
+  0.00	1	1	6	6	S3	3847927	                          A/Texas/184/2016(H3N2) segment 8
+  0.00	1	1	4	4	S3	3898423	                          A/swine/Melipilla/VN1401-1587/2015(H1N2) segment 8
+  0.00	1	1	3	3	S3	3603103	                          A/chicken/Hong Kong/TSTB25W/2010(H9N2) segment 8
+  0.00	1	1	6	6	S3	3919423	                          A/chicken/Shanghai/S4100/2015(H7N9) segment 8
+  0.00	1	1	2	2	S3	3275895	                          A/chicken/Zhejiang/HJ/2007(H9N2) segment 8
+  0.00	1	1	2	2	S3	3397031	                          A/Ankara/WRAIR1428T/2009(H1N1) segment 8
+  0.00	1	1	2	2	S3	3346103	                          A/Boston/146/2009(H1N1) segment 8
+  0.00	1	1	1	1	S3	3338055	                          A/environment/Hunan/1-70/2007(H9N2) segment 8
+  0.00	1	1	1	1	S3	3340519	                          A/IIV-Anadyr/177/2009(H1N1) segment 8
+  0.00	1	1	1	1	S3	3324231	                          A/Texas/45023717/2009(H1N1) segment 8
+  0.00	1	1	1	1	S3	3667167	                          A/Sri Lanka/20502/2010(H1N1) segment 8
+  0.00	1	1	5	5	S3	3842799	                          A/mallard duck/Netherlands/16/2009(H1N1) segment 8
+  0.00	1	1	2	1	S3	3917063	                          A/black-headed gull/Netherlands/21/2014(H11N1) segment 8
+  0.00	1	1	5	5	S3	3704063	                          A/chicken/Shenzhen/2066/2013(H9N2) segment 8
+  0.00	1	1	1	1	S3	3254351	                          A/Siena/10/1990(H3N2) segment 8
+  0.00	1	1	3	3	S3	3919551	                          A/duck/Hunan/S40506/2015(H7N9) segment 8
+  0.00	1	1	9	9	S3	3254383	                          A/Siena/5/1991(H3N2) segment 8
+  0.00	1	1	1	1	S3	3885247	                          A/chicken/Jiangsu/LY79/2015(H7N9) segment 8
+  0.00	1	1	1	1	S3	3787535	                          A/swine/Illinois/A01944946/2015(H3N2) segment 8
+  0.00	1	1	4	4	S3	3369159	                          A/duck/Hunan/11/2007(H5N1) segment 8
+  0.00	1	1	1	1	S3	3843247	                          A/mallard duck/Netherlands/53/2010(H1N1) segment 8
+  0.00	1	1	3	2	S3	3262567	                          A/chicken/Guangdong/1/2005(H5N1) segment 8
+  0.00	1	1	1	1	S3	3411615	                          A/swine/Jangsu/38/2010(H1N1) segment 8
+  0.00	1	1	3	3	S3	3263711	                          A/Boston/9/2008(H3N2) segment 8
+  0.00	1	1	2	2	S3	3272743	                          A/chicken/Sukhothai/NIAH114843/2008(H5N1) segment 8
+  0.00	1	1	1	1	S3	3671647	                          A/swine/Guangdong/NS3243/2011(H1N1) segment 8
+  0.00	1	1	1	1	S3	3740631	                          A/chicken/WestJava/SMI-PAT/2006(H5N1) segment 8
+  0.00	1	1	1	1	S3	3542799	                          A/green-winged teal/Xianghai/430/2011(H5N2) segment 8
+  0.00	1	1	1	1	S3	3169471	                          A/Waikato/1/2003(H3N2) segment 8
+  0.00	1	1	2	2	S3	3809399	                          A/swine/Mexico/AVX13/2012(H3N2) segment 8
+  0.00	1	1	1	1	S3	3919335	                          A/chicken/Jiangsu/S1361/2015(H7N9) segment 8
+  0.00	1	1	3	3	S3	3202447	                          A/Oregon/UR06-0221/2007(H3N2) segment 8
+  0.00	1	1	1	1	S3	3143511	                          A/chicken/Guangdong/178/04(H5N1) segment 8
+  0.00	1	1	1	1	S3	3719479	                          A/Thailand/MR08303/2009(H1N1) segment 8
+  0.00	1	1	1	1	S3	3886303	                          A/duck/Hokkaido/W165/2015(H11N6) segment 8
+  0.00	1	1	1	1	S3	3898255	                          A/swine/Chile/VN1401-339/2014(H1N2) segment 8
+  0.00	1	1	1	1	S3	3604015	                          A/duck/Guangdong/4323/2007(H11N9) segment 8
+  0.00	1	1	1	1	S3	3194895	                          A/swine/Minnesota/5892-7/1979(H1N1) segment 8
+  0.00	1	1	1	1	S3	3414791	                          A/swine/Nanchang/F9/2010(H1N1) segment 8
+  0.00	1	1	2	2	S3	3347751	                          A/Athens/INS122/2009(H1N1) segment 8
+  0.00	1	1	7	7	S3	3568231	                          A/swine/Warendorf/IDT15018/2012(H1N2) segment 8
+  0.00	1	1	1	1	S3	3152031	                          A/New York/455/1999(H3N2) segment 8
+  0.00	1	1	2	2	S3	3782263	                          A/chicken/Zhejiang/C2/2013(H9N2) segment 8
+  0.00	1	1	7	7	S3	3901647	                          A/mallard duck/Netherlands/24/2005(H11N3) segment 8
+  0.00	1	1	1	1	S3	3833639	                          A/chicken/Fujian/SIC16/2014(H9N2) segment 8
+  0.00	1	1	4	4	S3	3374839	                          A/Netherlands/2822/2009(H1N1) segment 8
+  0.00	1	1	1	1	S3	3558199	                          A/brambling/Beijing/16/2012(H9N2) segment 8
+  0.00	1	1	2	2	S3	3822343	                          A/Georgia/15/2016(H1N1) segment 8
+  0.00	1	1	5	5	S3	3273927	                          A/chicken/Hebei/4/2008(H9N2) segment 8
+  0.00	1	1	2	2	S3	3279711	                          A/duck/Hunan/3340/2006(H5N1) segment 8
+  0.00	1	1	1	1	S3	3514039	                          A/turkey/France/10-040/2010(H6N1) segment 8
+  0.00	1	1	1	1	S3	3546631	                          A/swine/Nanjing/50/2011(H1N1) segment 8
+  0.00	1	1	5	5	S3	3700655	                          A/Shenzhen/SP116/2014(H7N9) segment 8
+  0.00	1	1	1	1	S3	3744783	                          A/swine/Ohio/A01847657/2015(H1N1) segment 8
+  0.00	1	1	1	1	S3	3730063	                          A/chicken/Shanghai/5/2003(H9N2) segment 8
+  0.00	1	1	6	6	S3	3698783	                          A/Thailand/CU-A305/2013(H3N2) segment 8
+  0.00	1	1	1	1	S3	3939319	                          A/WuXi/0410/2014(H7N9) segment 8
+  0.26	251	166	655	277	S2	3121633	                        Influenza A segment 7
+  0.03	34	34	43	9	S3	3847902	                          A/Rhode Island/29/2016(H3N2) segment 7
+  0.00	2	2	3	3	S3	3364718	                          A/duck/Shantou/22596/2005(H6N2) segment 7
+  0.00	2	2	4	4	S3	3321334	                          A/swine/Shandong/101/2008(H1N1) segment 7
+  0.00	2	2	3	2	S3	3348246	                          A/Tessenderlo/INS191/2009(H1N1) segment 7
+  0.00	1	1	4	4	S3	3685550	                          A/Quebec/26-281106/2006(H3N2) segment 7
+  0.00	1	1	2	2	S3	3782206	                          A/chicken/Zhejiang/925122/2014(H9N2) segment 7
+  0.00	1	1	1	1	S3	3583262	                          A/Michigan/03/2011(H1N1) segment 7
+  0.00	1	1	1	1	S3	3828214	                          A/Florida/104/2015(H3N2) segment 7
+  0.00	1	1	4	4	S3	3932286	                          A/duck/Moscow/4182-C/2010(H5N3) segment 7
+  0.00	1	1	3	3	S3	3919414	                          A/chicken/Ningxia/S1152/2014(H7N9) segment 7
+  0.00	1	1	3	3	S3	3180870	                          A/chicken/Jilin/hf/2002(H5N1) segment 7
+  0.00	1	1	1	1	S3	3171414	                          A/tern/South Africa/1961(H5N3) segment 7
+  0.00	1	1	2	2	S3	3776670	                          A/Texas/61/2015(H3N2) segment 7
+  0.00	1	1	1	1	S3	3263974	                          A/Boston/64/2008(H3N2) segment 7
+  0.00	1	1	1	1	S3	3840062	                          A/chicken/Anhui/AH120/2015(H9N2) segment 7
+  0.00	1	1	1	1	S3	3808038	                          A/Anseriformes/Anhui/L167/2014(H1N1) segment 7
+  0.00	1	1	1	1	S3	3594310	                          A/chicken/Guangdong/LG1/2013(H9N2) segment 7
+  0.00	1	1	7	7	S3	3925446	                          A/swine/Minnesota/MT_13_01_S42/2013(H1N1) segment 7
+  0.00	1	1	2	2	S3	3703982	                          A/chicken/Shenzhen/1591/2013(H9N2) segment 7
+  0.00	1	1	5	5	S3	3411222	                          A/Nanjing/1663/2010(H3N2) segment 7
+  0.00	1	1	3	3	S3	3842638	                          A/mallard duck/Netherlands/1/2007(H10N7) segment 7
+  0.00	1	1	2	2	S3	3312222	                          A/mallard/Michigan/466547-5/2006(H5N2) segment 7
+  0.00	1	1	2	2	S3	3603214	                          A/chicken/Hong Kong/YO6/2012(H9N2) segment 7
+  0.00	1	1	2	2	S3	3736126	                          A/India/Pun151245/2015(H1N1) segment 7
+  0.00	1	1	2	2	S3	3611566	                          A/Helsinki/434/2013(H1N1) segment 7
+  0.00	1	1	1	1	S3	3881286	                          A/chicken/Bangladesh/28182/2016(H9N2) segment 7
+  0.00	1	1	1	1	S3	3162174	                          A/mallard/Ohio/30/1986(H2N1) segment 7
+  0.00	1	1	2	2	S3	3219958	                          A/partridge/Shantou/1075/2002(H5N1) segment 7
+  0.00	1	1	1	1	S3	3730046	                          A/chicken/Shanghai/4/2006(H9N2) segment 7
+  0.00	1	1	6	6	S3	3196486	                          A/Auckland/610/2002(H3N2) segment 7
+  0.00	1	1	4	4	S3	3730134	                          A/duck/Anhui/C652/2012(H9N2) segment 7
+  0.00	1	1	1	1	S3	3723382	                          A/duck/Eastern China/L0321/2010(H5N2) segment 7
+  0.00	1	1	1	1	S3	3321342	                          A/swine/Shandong/275/2009(H1N1) segment 7
+  0.00	1	1	2	2	S3	3571374	                          A/Arizona/20/2009(H1N1) segment 7
+  0.00	1	1	1	1	S3	3169246	                          A/Dunedin/1/2002(H3N2) segment 7
+  0.00	1	1	4	4	S3	3736150	                          A/India/Pun151368/2015(H1N1) segment 7
+  0.00	1	1	9	9	S3	3610950	                          A/chicken/Shanghai/017/2013(H7N9) segment 7
+  0.00	1	1	8	8	S3	3174030	                          A/Western Australia/49/2003(H3N2) segment 7
+  0.00	1	1	2	2	S3	3895262	                          A/swine/Pennsylvania/A01933903/2017(H1N2) segment 7
+  0.00	1	1	1	1	S3	3271950	                          A/mallard/Netherlands/42/2006(H11N9) segment 7
+  0.00	1	1	1	1	S3	3663390	                          A/duck/China/J1/2012(H4N6) segment 7
+  0.00	1	1	2	2	S3	3152102	                          A/New York/464/2005(H3N2) segment 7
+  0.00	1	1	1	1	S3	3367718	                          A/Mexico City/WR1706T/2009(H1N1) segment 7
+  0.00	1	1	2	2	S3	3782182	                          A/chicken/Zhejiang/925018/2014(H9N2) segment 7
+  0.00	1	1	1	1	S3	3534902	                          A/chicken/Nanjing/908/2009(H11N2) segment 7
+  0.00	1	1	1	1	S3	3535654	                          A/wild duck/Jilin/ZF/2011(H5N1) segment 7
+  0.00	1	1	1	1	S3	3671342	                          A/Bangkok/SIMI508/2010(H1N1) segment 7
+  0.00	1	1	2	2	S3	3143782	                          A/New York/9/2003(H3N2) segment 7
+  0.00	1	1	9	9	S3	3413374	                          A/Thailand/H1255/2010(H1N1) segment 7
+  0.12	117	105	427	48	S2	102793	                        H5N1 subtype
+  0.00	3	3	4	2	S3	407205	                          Influenza A virus (A/teal/Germany/WV632/2005(H5N1))
+  0.00	2	2	2	2	S3	762421	                          Influenza A virus (A/pied magpie/Liaoning/7/2006(H5N1))
+  0.00	2	2	14	7	S3	680801	                          Influenza A virus (A/goose/Hong Kong/485.3/2000(H5N1))
+  0.00	1	1	5	5	S3	186168	                          Influenza A virus (A/Duck/Hong Kong/380.5/2001(H5N1))
+  0.00	1	1	2	2	S3	691466	                          Influenza A virus (A/chicken/Hong Kong/409.1/2002(H5N1))
+  0.00	1	1	9	9	S3	287864	                          Influenza A virus (A/swine/Shandong/2/03(H5N1))
+  0.00	1	1	6	6	S3	691494	                          Influenza A virus (A/waterfowl/Hong Kong/378.5/2001(H5N1))
+  0.00	1	1	6	6	S3	680802	                          Influenza A virus (A/goose/Hong Kong/668.1/2001(H5N1))
+  0.07	65	37	137	20	S2	102797	                        Influenza A virus with incomplete names
+  0.02	21	21	25	3	S3	680786	                          Influenza A virus (A/environment/Hong Kong/258/1997(H5))
+  0.00	1	1	1	1	S3	1575212	                          Influenza A virus (A/chicken/Guizhou/G154/2012(H9))
+  0.00	1	1	3	3	S3	1612894	                          Influenza A virus (A/chicken/Anhui/A3089/2014(H9))
+  0.00	1	1	3	3	S3	461892	                          Influenza A virus (A/Arizona/24/2003(N2))
+  0.00	1	1	3	3	S3	1575137	                          Influenza A virus (A/chicken/Guangdong/Y297/2012(H9))
+  0.00	1	1	2	2	S3	1470606	                          Influenza A virus (A/duck/Thailand/CU-13011C/2013(N1))
+  0.00	1	1	1	1	S3	2009218	                          Influenza A virus (A/chicken/Mexico/P-14/2016(H5))
+  0.00	1	1	1	1	S3	646571	                          Influenza A virus (A/swine/North Carolina/41621/2003(H1))
+  0.04	42	2	93	44	S2	384619	                        mixed subtypes
+  0.02	22	22	45	1	S3	1587804	                          Influenza A virus (A/duck/Jiangxi/32180/2013(mixed))
+  0.00	2	2	2	1	S3	370204	                          Influenza A virus (A/mallard/Ohio/656/2002(mixed))
+  0.00	2	2	10	6	S3	1594053	                          Influenza A virus (A/chicken/Shenzhen/2122/2013(mixed))
+  0.00	1	1	3	3	S3	1593914	                          Influenza A virus (A/chicken/Dongguan/1424/2014(mixed))
+  0.00	1	1	1	1	S3	1594147	                          Influenza A virus (A/silkie chicken/Dongguan/3529/2013(mixed))
+  0.00	1	1	7	7	S3	1611867	                          Influenza A virus (A/chicken/Jiangsu/2540/2014(mixed))
+  0.00	1	1	1	1	S3	1594151	                          Influenza A virus (A/silkie chicken/Dongguan/634/2014(mixed))
+  0.00	1	1	2	2	S3	1911775	                          Influenza A virus (A/mallard/Minnesota/UGAI14-2257/2014(mixed))
+  0.00	1	1	1	1	S3	2008248	                          Influenza A virus (A/swine/Minnesota/MT_12_07_4003/2012(mixed))
+  0.00	1	1	1	1	S3	1587849	                          Influenza A virus (A/duck/Jiangxi/5581/2013(mixed))
+  0.00	1	1	2	2	S3	1719191	                          Influenza A virus (A/chicken/Suzhou/04020705/2013(mixed))
+  0.00	1	1	2	2	S3	1587752	                          Influenza A virus (A/chicken/Jiangxi/6717/2013(mixed))
+  0.00	1	1	1	1	S3	1759510	                          Influenza A virus (A/swine/Iowa/A01795441/2015(mixed))
+  0.00	1	1	1	1	S3	1587749	                          Influenza A virus (A/chicken/Jiangxi/36293/2013(mixed))
+  0.00	1	1	1	1	S3	1386843	                          Influenza A virus (A/swine/Iowa/A01432902/2013(mixed))
+  0.00	1	1	1	1	S3	1587713	                          Influenza A virus (A/chicken/Jiangxi/25941/2013(mixed))
+  0.00	1	1	4	4	S3	1587670	                          Influenza A virus (A/chicken/Jiangxi/18926/2013(mixed))
+  0.02	15	11	25	17	S2	114727	                        H1N1 subtype
+  0.00	2	2	2	2	S3	374441	                          Influenza A virus (A/swine/Spain/50047/2003(H1N1))
+  0.00	1	1	2	2	S3	1735035	                          Influenza A virus (A/swine/Argentina/CIP112-C40.P6/2014(H1N1))
+  0.00	1	1	4	4	S3	1735032	                          Influenza A virus (A/swine/Argentina/CIP051-C14.A1/2013(H1N1))
+  0.01	8	0	37	37	S2	119210	                        H3N2 subtype
+  0.00	2	2	8	8	S3	1507957	                          Influenza A virus (A/Ho Chi Minh/722.8/2010(H3N2))
+  0.00	1	1	1	1	S3	1507955	                          Influenza A virus (A/Ho Chi Minh/718.8/2010(H3N2))
+  0.00	1	1	3	3	S3	370126	                          Influenza A virus (A/England/1972(H3N2))
+  0.00	1	1	6	6	S3	1517375	                          Influenza A virus (A/Singapore/S2010.304b/2010(H3N2))
+  0.00	1	1	1	1	S3	1056543	                          Influenza A virus (A/Hong Kong/H090-727-V1(0)/2009(H3N2))
+  0.00	1	1	1	1	S3	1517344	                          Influenza A virus (A/Singapore/H2013.430b/2013(H3N2))
+  0.00	1	1	3	3	S3	1517275	                          Influenza A virus (A/Singapore/C2010.721/2010(H3N2))
+  0.00	1	0	3	3	S2	215855	                        H3N6 subtype
+  0.00	1	1	3	3	S3	542911	                          Influenza A virus (A/pintail/Minnesota/479/1999(H3N6))
+  0.00	1	0	1	1	S2	129772	                        H11N9 subtype
+  0.00	1	1	1	1	S3	542904	                          Influenza A virus (A/mallard/Minnesota/42/2000(H11N9))
+  0.00	1	0	2	2	S2	299327	                        H4N2 subtype
+  0.00	1	1	2	2	S3	352641	                          Influenza A virus (A/mallard duck/Alberta/630/1984(H4N2))
+  0.00	1	0	4	2	S2	114733	                        H2N9 subtype
+  0.00	1	1	4	2	S3	99352	                          Influenza A virus (A/laughing gull/New Jersey/75/1985(H2N9))
+  0.00	1	0	2	2	S2	119216	                        H7N1 subtype
+  0.00	1	1	2	2	S3	1177617	                          Influenza A virus (A/Baer's pochard/HuNan/414/2010(H7N1))
+  9.40	9200	0	664585	16262	G	197912	                  Betainfluenzavirus
+  9.40	9200	0	664585	16262	S	2955465	                    Betainfluenzavirus influenzae
+  9.40	9200	7210	664585	16262	S1	11520	                      Influenza B virus
+  0.83	815	815	3381	56	S2	416674	                        Influenza B virus (B/Yamagata/16/1988)
+  0.65	641	641	2694	65	S2	416672	                        Influenza B virus (B/Victoria/02/1987)
+  0.07	68	68	319	8	S2	416685	                        Influenza B virus (B/Oita/15/1992)
+  0.06	56	56	108	25	S2	444325	                        Influenza B virus (B/Russia/69)
+  0.05	51	51	263	6	S2	1733677	                        Influenza B virus (B/Iowa/01/2015)
+  0.03	28	28	86	4	S2	1733830	                        Influenza B virus (B/Washington/11/2015)
+  0.01	8	8	30	27	S2	416687	                        Influenza B virus (B/Hong Kong/02/1993)
+  0.01	7	7	26	25	S2	416673	                        Influenza B virus (B/Texas/37/1988)
+  0.01	6	6	13	4	S2	408929	                        Influenza B virus (B/Panama/45/1990)
+  0.01	5	5	5	4	S2	1206184	                        Influenza B virus (B/Taiwan/94543/2011)
+  0.00	4	4	25	17	S2	416648	                        Influenza B virus (B/Ann Arbor/1994)
+  0.00	4	4	10	9	S2	416699	                        Influenza B virus (B/California/02/1995)
+  0.00	4	4	5	4	S2	416693	                        Influenza B virus (B/Johannesburg/06/1994)
+  0.00	4	4	8	6	S2	416688	                        Influenza B virus (B/Mie/01/1993)
+  0.00	4	4	13	13	S2	416681	                        Influenza B virus (B/Singapore/04/1991)
+  0.00	4	4	11	11	S2	1206179	                        Influenza B virus (B/Taiwan/101/2010)
+  0.00	3	3	13	12	S2	416679	                        Influenza B virus (B/Cordoba/2979/1991)
+  0.00	3	3	14	12	S2	1917631	                        Influenza B virus (B/Florida/61/2016)
+  0.00	3	3	10	10	S2	416684	                        Influenza B virus (B/Hong Kong/03/1992)
+  0.00	3	3	7	7	S2	518987	                        Influenza B virus (B/Lee/1940)
+  0.00	3	3	11	11	S2	416686	                        Influenza B virus (B/Connecticut/07/1993)
+  0.00	3	3	8	8	S2	408950	                        Influenza B virus (B/Temple/B9/1999)
+  0.00	3	3	15	7	S2	1824138	                        Influenza B virus (B/California/117/2015)
+  0.00	3	3	17	14	S2	408913	                        Influenza B virus (B/Houston/B75/2002)
+  0.00	2	2	6	6	S2	1884080	                        Influenza B virus (B/Vermont/02/2016)
+  0.00	2	2	10	10	S2	416701	                        Influenza B virus (B/Indiana/01/1995)
+  0.00	2	2	2	1	S2	416702	                        Influenza B virus (B/Romania/318/1998)
+  0.00	2	2	2	1	S2	1910343	                        Influenza B virus (B/Colorado/28/2016)
+  0.00	2	2	8	6	S2	1734290	                        Influenza B virus (B/Maine/17/2015)
+  0.00	2	2	8	8	S2	408930	                        Influenza B virus (B/Romania/217/1999)
+  0.00	2	2	9	6	S2	1734257	                        Influenza B virus (B/Florida/32/2015)
+  0.00	2	2	3	2	S2	1910349	                        Influenza B virus (B/Colorado/34/2016)
+  0.00	2	2	7	7	S2	408937	                        Influenza B virus (B/Temple/B1188/2001)
+  0.00	2	2	2	2	S2	1734318	                        Influenza B virus (B/New Jersey/12/2015)
+  0.00	2	2	9	9	S2	416696	                        Influenza B virus (B/Taiwan/1197/1994)
+  0.00	2	2	5	3	S2	416694	                        Influenza B virus (B/Lisbon/02/1994)
+  0.00	2	2	3	3	S2	416689	                        Influenza B virus (B/New York/24/1993)
+  0.00	2	2	13	13	S2	416643	                        Influenza B virus (B/Russia/22/1995)
+  0.00	2	2	4	4	S2	416645	                        Influenza B virus (B/Hong Kong/70/1996)
+  0.00	2	2	2	2	S2	416683	                        Influenza B virus (B/Alaska/03/1992)
+  0.00	2	2	2	1	S2	416682	                        Influenza B virus (B/Texas/14/1991)
+  0.00	2	2	3	3	S2	416660	                        Influenza B virus (B/Johannesburg/69/2001)
+  0.00	2	2	4	4	S2	416661	                        Influenza B virus (B/Argentina/132/2001)
+  0.00	2	2	10	10	S2	416664	                        Influenza B virus (B/Chile/3162/2002)
+  0.00	2	2	2	2	S2	1824199	                        Influenza B virus (B/Idaho/02/2016)
+  0.00	2	2	14	14	S2	1824196	                        Influenza B virus (B/Hawaii/37/2015)
+  0.00	2	2	12	6	S2	1733594	                        Influenza B virus (B/Alaska/04/2015)
+  0.00	2	2	5	2	S2	1225746	                        Influenza B virus (B/Thailand/CU-B2432/2010)
+  0.00	2	2	2	1	S2	1733649	                        Influenza B virus (B/Hawaii/11/2015)
+  0.00	2	2	5	5	S2	486176	                        Influenza B virus (B/Guangzhou/01/2007)
+  0.00	2	2	5	5	S2	408883	                        Influenza B virus (B/Auckland/01/2000)
+  0.00	2	2	10	10	S2	408884	                        Influenza B virus (B/Brazil/975/2000)
+  0.00	2	2	4	4	S2	1910573	                        Influenza B virus (B/Rhode Island/06/2016)
+  0.00	2	2	4	4	S2	521445	                        Influenza B virus (B/Taiwan/2643/2002)
+  0.00	2	2	2	2	S2	1733796	                        Influenza B virus (B/Texas/21/2015)
+  0.00	2	2	2	2	S2	98832	                        Influenza B virus (B/Memphis/12/97)
+  0.00	1	1	3	3	S2	1225766	                        Influenza B virus (B/Thailand/CU-H2933/2011)
+  0.00	1	1	2	2	S2	1225757	                        Influenza B virus (B/Thailand/CU-B6096/2012)
+  0.00	1	1	3	3	S2	1788857	                        Influenza B virus (B/Idaho/26/2015)
+  0.00	1	1	2	2	S2	1225767	                        Influenza B virus (B/Thailand/CU-H3002/2011)
+  0.00	1	1	1	1	S2	1519538	                        Influenza B virus (B/Thailand/CU-A645/2014)
+  0.00	1	1	8	8	S2	1788874	                        Influenza B virus (B/Montana/17/2015)
+  0.00	1	1	2	2	S2	1225755	                        Influenza B virus (B/Thailand/CU-B5910/2011)
+  0.00	1	1	3	3	S2	1225753	                        Influenza B virus (B/Thailand/CU-B5671/2011)
+  0.00	1	1	6	6	S2	1225751	                        Influenza B virus (B/Thailand/CU-B4585/2011)
+  0.00	1	1	2	2	S2	1519548	                        Influenza B virus (B/Thailand/CU-B8999/2014)
+  0.00	1	1	1	1	S2	1225745	                        Influenza B virus (B/Thailand/CU-B2390/2010)
+  0.00	1	1	2	2	S2	1206211	                        Influenza B virus (B/Taiwan/94786/2012)
+  0.00	1	1	3	3	S2	1788876	                        Influenza B virus (B/Montana/19/2015)
+  0.00	1	1	1	1	S2	1788880	                        Influenza B virus (B/Texas/95/2015)
+  0.00	1	1	1	1	S2	1788884	                        Influenza B virus (B/Wisconsin/84/2015)
+  0.00	1	1	1	1	S2	1824098	                        Influenza B virus (B/Alaska/49/2015)
+  0.00	1	1	1	1	S2	1824109	                        Influenza B virus (B/Arizona/18/2015)
+  0.00	1	1	3	3	S2	529648	                        Influenza B virus (B/Taiwan/71523/2007)
+  0.00	1	1	3	3	S2	529647	                        Influenza B virus (B/Taiwan/70690/2006)
+  0.00	1	1	1	1	S2	529641	                        Influenza B virus (B/Taiwan/45/2007)
+  0.00	1	1	1	1	S2	518989	                        Influenza B virus (B/NYMC BX-15(Lee/1940-Hawaii/33/2004))
+  0.00	1	1	3	3	S2	518985	                        Influenza B virus (B/Florida/7/2004)
+  0.00	1	1	1	1	S2	510627	                        Influenza B virus (B/Taiwan/202/2005)
+  0.00	1	1	7	7	S2	1824161	                        Influenza B virus (B/Florida/05/2016)
+  0.00	1	1	4	4	S2	164518	                        Influenza B virus (B/Vienna/1/99)
+  0.00	1	1	9	9	S2	1734266	                        Influenza B virus (B/Florida/46/2015)
+  0.00	1	1	1	1	S2	1733797	                        Influenza B virus (B/Texas/23/2015)
+  0.00	1	1	2	2	S2	1733787	                        Influenza B virus (B/Texas/01/2015)
+  0.00	1	1	1	1	S2	1733820	                        Influenza B virus (B/Vermont/16/2015)
+  0.00	1	1	1	1	S2	1733821	                        Influenza B virus (B/Virginia/01/2015)
+  0.00	1	1	1	1	S2	1733767	                        Influenza B virus (B/Ohio/06/2015)
+  0.00	1	1	1	1	S2	1733822	                        Influenza B virus (B/Virginia/03/2015)
+  0.00	1	1	7	7	S2	1733702	                        Influenza B virus (B/Maryland/17/2015)
+  0.00	1	1	2	2	S2	1733839	                        Influenza B virus (B/Wisconsin/03/2015)
+  0.00	1	1	7	7	S2	1733843	                        Influenza B virus (B/Wisconsin/07/2015)
+  0.00	1	1	1	1	S2	500701	                        Influenza B virus (B/Taiwan/539/2005)
+  0.00	1	1	6	6	S2	1733856	                        Influenza B virus (B/Wisconsin/18/2015)
+  0.00	1	1	1	1	S2	1733861	                        Influenza B virus (B/Wisconsin/45/2015)
+  0.00	1	1	3	3	S2	1734243	                        Influenza B virus (B/Arizona/08/2015)
+  0.00	1	1	2	2	S2	1733680	                        Influenza B virus (B/Iowa/06/2015)
+  0.00	1	1	1	1	S2	1734263	                        Influenza B virus (B/Florida/43/2015)
+  0.00	1	1	1	1	S2	1788855	                        Influenza B virus (B/Hawaii/32/2015)
+  0.00	1	1	1	1	S2	1733667	                        Influenza B virus (B/Illinois/04/2015)
+  0.00	1	1	1	1	S2	1734267	                        Influenza B virus (B/Florida/49/2015)
+  0.00	1	1	1	1	S2	1734268	                        Influenza B virus (B/Florida/53/2015)
+  0.00	1	1	1	1	S2	1733641	                        Influenza B virus (B/Georgia/01/2015)
+  0.00	1	1	2	2	S2	1733619	                        Influenza B virus (B/Colorado/02/2014)
+  0.00	1	1	1	1	S2	1734315	                        Influenza B virus (B/New Hampshire/13/2015)
+  0.00	1	1	4	4	S2	1733611	                        Influenza B virus (B/California/10/2015)
+  0.00	1	1	1	1	S2	1733610	                        Influenza B virus (B/California/09/2015)
+  0.00	1	1	8	8	S2	1734317	                        Influenza B virus (B/New Jersey/11/2015)
+  0.00	1	1	6	6	S2	1640792	                        Influenza B virus (B/Malaysia/U3224/2013)
+  0.00	1	1	3	3	S2	1519554	                        Influenza B virus (B/Thailand/CU-H3456/2012)
+  0.00	1	1	7	7	S2	1734332	                        Influenza B virus (B/Utah/39/2015)
+  0.00	1	1	4	4	S2	1519553	                        Influenza B virus (B/Thailand/CU-H3349/2012)
+  0.00	1	1	1	1	S2	1788852	                        Influenza B virus (B/Hawaii/29/2015)
+  0.00	1	1	3	3	S2	1519539	                        Influenza B virus (B/Thailand/CU-B6148/2012)
+  0.00	1	1	1	1	S2	1910395	                        Influenza B virus (B/Florida/58/2016)
+  0.00	1	1	1	1	S2	1910484	                        Influenza B virus (B/Michigan/24/2016)
+  0.00	1	1	1	1	S2	1910476	                        Influenza B virus (B/Maryland/10/2016)
+  0.00	1	1	8	8	S2	1910475	                        Influenza B virus (B/Maryland/09/2016)
+  0.00	1	1	1	1	S2	1910470	                        Influenza B virus (B/Maine/19/2016)
+  0.00	1	1	4	4	S2	1910456	                        Influenza B virus (B/Kansas/09/2016)
+  0.00	1	1	1	1	S2	1910455	                        Influenza B virus (B/Kansas/07/2016)
+  0.00	1	1	6	6	S2	1910446	                        Influenza B virus (B/Idaho/39/2016)
+  0.00	1	1	2	2	S2	1910429	                        Influenza B virus (B/Hawaii/16/2016)
+  0.00	1	1	1	1	S2	1910418	                        Influenza B virus (B/Georgia/10/2016)
+  0.00	1	1	2	2	S2	1910408	                        Influenza B virus (B/Florida/73/2016)
+  0.00	1	1	2	2	S2	1910398	                        Influenza B virus (B/Florida/63/2016)
+  0.00	1	1	3	3	S2	1910498	                        Influenza B virus (B/New Hampshire/15/2016)
+  0.00	1	1	1	1	S2	1910387	                        Influenza B virus (B/Florida/27/2016)
+  0.00	1	1	1	1	S2	1910381	                        Influenza B virus (B/Delaware/35/2016)
+  0.00	1	1	6	6	S2	1910374	                        Influenza B virus (B/Delaware/28/2016)
+  0.00	1	1	1	1	S2	1910372	                        Influenza B virus (B/Delaware/26/2016)
+  0.00	1	1	1	1	S2	1910351	                        Influenza B virus (B/Connecticut/08/2016)
+  0.00	1	1	3	3	S2	1910347	                        Influenza B virus (B/Colorado/32/2016)
+  0.00	1	1	2	2	S2	1910331	                        Influenza B virus (B/California/70/2016)
+  0.00	1	1	1	1	S2	1884183	                        Influenza B virus (B/Wyoming/08/2016)
+  0.00	1	1	3	3	S2	1884176	                        Influenza B virus (B/Wisconsin/32/2016)
+  0.00	1	1	2	2	S2	1884175	                        Influenza B virus (B/Wisconsin/29/2016)
+  0.00	1	1	2	2	S2	1910654	                        Influenza B virus (B/Washington/67/2016)
+  0.00	1	1	8	8	S2	2050419	                        Influenza B virus (B/South Carolina/NHRC_75651/2017)
+  0.00	1	1	2	2	S2	1925225	                        Influenza B virus (B/Florida/88/2016)
+  0.00	1	1	1	1	S2	1917649	                        Influenza B virus (B/Washington/66/2015)
+  0.00	1	1	9	9	S2	1917639	                        Influenza B virus (B/Hawaii/41/2016)
+  0.00	1	1	1	1	S2	1917629	                        Influenza B virus (B/California/79/2016)
+  0.00	1	1	3	3	S2	1913294	                        Influenza B virus (B/Hawaii/13/2016)
+  0.00	1	1	1	1	S2	1910760	                        Influenza B virus (B/Wisconsin/40/2016)
+  0.00	1	1	9	9	S2	1910745	                        Influenza B virus (B/North Carolina/26/2016)
+  0.00	1	1	2	2	S2	1910729	                        Influenza B virus (B/Florida/80/2016)
+  0.00	1	1	10	10	S2	1910682	                        Influenza B virus (B/Wyoming/19/2016)
+  0.00	1	1	1	1	S2	1910680	                        Influenza B virus (B/Wyoming/14/2016)
+  0.00	1	1	7	7	S2	1884167	                        Influenza B virus (B/Wisconsin/13/2016)
+  0.00	1	1	7	7	S2	1910630	                        Influenza B virus (B/Virginia/31/2016)
+  0.00	1	1	2	2	S2	1910628	                        Influenza B virus (B/Virginia/23/2016)
+  0.00	1	1	1	1	S2	1910618	                        Influenza B virus (B/Utah/56/2016)
+  0.00	1	1	1	1	S2	1910601	                        Influenza B virus (B/Texas/154/2016)
+  0.00	1	1	8	8	S2	1910597	                        Influenza B virus (B/Texas/148/2016)
+  0.00	1	1	1	1	S2	1910579	                        Influenza B virus (B/South Carolina/09/2016)
+  0.00	1	1	2	2	S2	1910567	                        Influenza B virus (B/Pennsylvania/48/2016)
+  0.00	1	1	1	1	S2	1910535	                        Influenza B virus (B/New York/46/2016)
+  0.00	1	1	3	3	S2	1910533	                        Influenza B virus (B/New York/43/2016)
+  0.00	1	1	1	1	S2	1910524	                        Influenza B virus (B/New York/33/2016)
+  0.00	1	1	3	3	S2	1883468	                        Influenza B virus (B/Arizona/06/2016)
+  0.00	1	1	9	9	S2	1883733	                        Influenza B virus (B/Maine/13/2016)
+  0.00	1	1	1	1	S2	1883679	                        Influenza B virus (B/Indiana/22/2016)
+  0.00	1	1	1	1	S2	1883669	                        Influenza B virus (B/Indiana/07/2016)
+  0.00	1	1	2	2	S2	1883657	                        Influenza B virus (B/Idaho/36/2016)
+  0.00	1	1	1	1	S2	1883649	                        Influenza B virus (B/Idaho/20/2016)
+  0.00	1	1	8	8	S2	1883625	                        Influenza B virus (B/Hawaii/07/2016)
+  0.00	1	1	5	5	S2	1883613	                        Influenza B virus (B/Florida/51/2016)
+  0.00	1	1	1	1	S2	1883584	                        Influenza B virus (B/Florida/11/2016)
+  0.00	1	1	3	3	S2	1883575	                        Influenza B virus (B/Delaware/21/2016)
+  0.00	1	1	1	1	S2	1883544	                        Influenza B virus (B/Colorado/17/2016)
+  0.00	1	1	1	1	S2	1883491	                        Influenza B virus (B/California/118/2015)
+  0.00	1	1	5	5	S2	1883776	                        Influenza B virus (B/Mississippi/07/2016)
+  0.00	1	1	5	5	S2	1824404	                        Influenza B virus (B/Washington/08/2016)
+  0.00	1	1	3	3	S2	1824399	                        Influenza B virus (B/Washington/02/2016)
+  0.00	1	1	6	6	S2	1824393	                        Influenza B virus (B/Virginia/01/2016)
+  0.00	1	1	2	2	S2	1824389	                        Influenza B virus (B/Vermont/01/2016)
+  0.00	1	1	1	1	S2	1824375	                        Influenza B virus (B/Utah/13/2016)
+  0.00	1	1	9	9	S2	1824353	                        Influenza B virus (B/Texas/11/2016)
+  0.00	1	1	1	1	S2	1824334	                        Influenza B virus (B/Oregon/05/2015)
+  0.00	1	1	1	1	S2	1824308	                        Influenza B virus (B/New York/25/2015)
+  0.00	1	1	2	2	S2	1824270	                        Influenza B virus (B/Minnesota/25/2015)
+  0.00	1	1	2	2	S2	1824208	                        Influenza B virus (B/Idaho/21/2015)
+  0.00	1	1	2	2	S2	1883940	                        Influenza B virus (B/Oregon/25/2016)
+  0.00	1	1	1	1	S2	1884115	                        Influenza B virus (B/Washington/19/2016)
+  0.00	1	1	1	1	S2	1884073	                        Influenza B virus (B/Utah/51/2015)
+  0.00	1	1	1	1	S2	1884063	                        Influenza B virus (B/Utah/39/2016)
+  0.00	1	1	1	1	S2	1884061	                        Influenza B virus (B/Utah/37/2016)
+  0.00	1	1	10	10	S2	1884054	                        Influenza B virus (B/Utah/30/2016)
+  0.00	1	1	10	10	S2	1884041	                        Influenza B virus (B/Utah/16/2016)
+  0.00	1	1	9	9	S2	1884038	                        Influenza B virus (B/Texas/85/2016)
+  0.00	1	1	2	2	S2	1884002	                        Influenza B virus (B/Texas/21/2016)
+  0.00	1	1	2	2	S2	1883994	                        Influenza B virus (B/Texas/12/2016)
+  0.00	1	1	1	1	S2	1883974	                        Influenza B virus (B/South Carolina/07/2016)
+  0.00	1	1	2	2	S2	1883970	                        Influenza B virus (B/South Carolina/03/2016)
+  0.00	1	1	7	7	S2	1824194	                        Influenza B virus (B/Hawaii/35/2015)
+  0.00	1	1	2	2	S2	1883909	                        Influenza B virus (B/North Dakota/06/2016)
+  0.00	1	1	8	8	S2	1883899	                        Influenza B virus (B/North Carolina/07/2016)
+  0.00	1	1	2	2	S2	1883897	                        Influenza B virus (B/North Carolina/04/2016)
+  0.00	1	1	2	2	S2	1883882	                        Influenza B virus (B/New York/12/2016)
+  0.00	1	1	1	1	S2	1883881	                        Influenza B virus (B/New York/11/2016)
+  0.00	1	1	1	1	S2	1883861	                        Influenza B virus (B/New Mexico/13/2016)
+  0.00	1	1	3	2	S2	1883858	                        Influenza B virus (B/New Mexico/08/2016)
+  0.00	1	1	1	1	S2	1883846	                        Influenza B virus (B/New Jersey/07/2016)
+  0.00	1	1	1	1	S2	1883834	                        Influenza B virus (B/New Hampshire/13/2016)
+  0.00	1	1	1	1	S2	1883780	                        Influenza B virus (B/Missouri/02/2016)
+  0.00	1	1	12	12	S2	408891	                        Influenza B virus (B/Georgia/09/2005)
+  0.00	1	1	1	1	S2	408910	                        Influenza B virus (B/Houston/B720/2004)
+  0.00	1	1	1	1	S2	416698	                        Influenza B virus (B/California/01/1995)
+  0.00	1	1	2	2	S2	416651	                        Influenza B virus (B/Paris/549/1999)
+  0.00	1	1	6	6	S2	476598	                        Influenza B virus (B/Mississippi/UR06-0345/2007)
+  0.00	1	1	1	1	S2	408947	                        Influenza B virus (B/Temple/B30/2003)
+  0.00	1	1	8	8	S2	408926	                        Influenza B virus (B/Mexico/84/2000)
+  0.00	1	1	1	1	S2	476630	                        Influenza B virus (B/Texas/UR06-0541/2007)
+  0.00	1	1	7	7	S2	476631	                        Influenza B virus (B/Texas/UR06-0590/2007)
+  0.00	1	1	3	3	S2	476624	                        Influenza B virus (B/Tennessee/UR06-0451/2007)
+  0.00	1	1	1	1	S2	416667	                        Influenza B virus (B/South Carolina/04/2003)
+  0.00	1	1	2	1	S2	482017	                        Influenza B virus (B/Taiwan/3001/2006)
+  0.00	1	1	6	6	S2	416666	                        Influenza B virus (B/Brisbane/32/2002)
+  0.00	1	1	2	2	S2	416665	                        Influenza B virus (B/Moscow/16/2002)
+  0.00	1	1	1	1	S2	416678	                        Influenza B virus (B/Czechoslovakia/69/1990)
+  0.00	1	1	1	1	S2	430428	                        Influenza B virus (B/Jilin/20/2003)
+  0.00	1	1	1	1	S2	445929	                        Influenza B virus (B/Florida/UR06-0006/2006)
+  0.00	1	1	1	1	S2	206181	                        Influenza B virus (B/Alaska/16/2000)
+  0.00	1	1	2	2	S2	408951	                        Influenza B virus (B/Texas/06/2000)
+  0.00	1	1	4	4	S2	408893	                        Influenza B virus (B/Hong Kong/542/2000)
+  0.00	1	1	2	2	S2	228675	                        Influenza B virus (B/Memphis/12/97-MA)
+  0.00	1	1	7	7	S2	408885	                        Influenza B virus (B/Canada/16188/2000)
+  0.00	1	1	2	2	S2	416652	                        Influenza B virus (B/Argentina/3640/1999)
+  0.00	1	1	5	5	S2	416653	                        Influenza B virus (B/Johannesburg/05/1999)
+  0.00	1	1	4	4	S2	408907	                        Influenza B virus (B/Houston/B69/2002)
+  0.00	1	1	7	7	S2	476622	                        Influenza B virus (B/Tennessee/UR06-0431/2007)
+  0.00	1	1	4	3	S2	408882	                        Influenza B virus (B/Alaska/12/1996)
+  0.00	1	1	1	1	S2	408934	                        Influenza B virus (B/Temple/B1166/2001)
+  0.00	1	1	1	1	S2	416670	                        Influenza B virus (B/Paraguay/636/2003)
+  0.00	1	1	1	1	S2	209844	                        Influenza B virus (B/Taiwan/1484/2001)
+  0.00	1	1	1	1	S2	408938	                        Influenza B virus (B/Temple/B1190/2001)
+  0.00	1	1	3	3	S2	476591	                        Influenza B virus (B/Illinois/UR06-0516/2007)
+  0.00	1	1	1	1	S2	476606	                        Influenza B virus (B/Mississippi/UR06-0551/2007)
+  0.00	1	1	2	2	S2	408912	                        Influenza B virus (B/Houston/B745/2005)
+  0.00	1	1	5	5	S2	260904	                        Influenza B virus (B/Akita/27/2001)
+  0.00	1	1	6	6	S2	500693	                        Influenza B virus (B/Taiwan/1838/2006)
+  0.00	1	1	1	1	S2	408919	                        Influenza B virus (B/Houston/B84/2003)
+  0.00	1	1	1	1	S2	408941	                        Influenza B virus (B/Temple/B18/2003)
+  0.00	1	1	4	4	S2	408931	                        Influenza B virus (B/Singapore/35/1998)
+  0.00	1	1	9	9	S2	408939	                        Influenza B virus (B/Temple/B1193/2001)
+  0.00	1	1	2	1	S2	500698	                        Influenza B virus (B/Taiwan/37/2007)
+  0.00	1	1	1	1	S2	270687	                        Influenza B virus (B/Victoria/504/2000)
+  0.00	1	1	3	3	S2	408920	                        Influenza B virus (B/Houston/B846/2005)
+  0.00	1	1	9	9	S2	416680	                        Influenza B virus (B/New York/39/1991)
+ 12.29	12025	0	711206	14895	P1	2497570	          Haploviricotina
+ 12.29	12025	0	711206	14895	C	2497574	            Monjiviricetes
+ 12.29	12025	0	711206	14895	O	11157	              Mononegavirales
+  9.63	9425	0	531684	10021	F	11244	                Pneumoviridae
+  9.63	9425	22	531279	10014	G	1868215	                  Orthopneumovirus
+  7.06	6914	0	241769	5249	S	3049954	                    Orthopneumovirus hominis
+  7.06	6914	6914	241769	5249	S1	11250	                      Human orthopneumovirus
+  2.54	2489	0	86801	2303	S	3050248	                    Orthopneumovirus bovis
+  2.54	2489	3	86801	2303	S1	11246	                      Bovine orthopneumovirus
+  2.54	2486	2486	86661	2292	S2	12814	                        Respiratory syncytial virus
+  2.66	2600	0	179519	4955	F	11158	                Paramyxoviridae
+  2.66	2600	0	179478	4952	F1	2560076	                  Orthoparamyxovirinae
+  2.66	2600	0	179478	4952	G	186938	                    Respirovirus
+  2.66	2600	0	179231	4936	S	3049952	                      Respirovirus laryngotracheitidis
+  2.66	2600	2600	179231	4936	S1	12730	                        Human respirovirus 1
+ 24.38	23857	0	1675190	31787	D1	2732004	    Varidnaviria
+ 24.38	23857	0	1675190	31787	K	2732005	      Bamfordvirae
+ 24.37	23850	0	1675126	31769	P	2732008	        Preplasmiviricota
+ 24.37	23850	0	1675126	31769	C	2732529	          Tectiliviricetes
+ 24.37	23850	0	1675126	31769	O	2732559	            Rowavirales
+ 24.37	23850	0	1675126	31769	F	10508	              Adenoviridae
+ 24.37	23850	0	1674347	31745	G	10509	                Mastadenovirus
+ 18.34	17950	7454	1226272	19827	S	129951	                  Human mastadenovirus C
+  5.50	5386	5386	148345	4105	S1	28285	                    Human adenovirus 5
+  5.22	5110	5110	143385	3882	S1	10533	                    Human adenovirus 1
+  6.03	5900	244	399892	11065	S	108098	                  Human mastadenovirus B
+  5.78	5656	5656	134161	3705	S1	10519	                    Human adenovirus 7
+  0.01	7	0	64	22	P	2732007	        Nucleocytoviricota
+  0.01	7	0	45	4	C	2732525	          Pokkesviricetes
+  0.01	7	0	44	3	O	2732527	            Chitovirales
+  0.01	7	0	44	3	F	10240	              Poxviridae
+  0.01	7	0	43	2	F1	10241	                Chordopoxvirinae
+  0.01	7	0	42	1	G	10275	                  Suipoxvirus
+  0.01	7	7	42	1	S	10276	                    Swinepox virus

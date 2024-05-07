@@ -17,7 +17,7 @@ default:
       - pip install virtualenv
       - virtualenv venv
       - source venv/bin/activate
-      - pip install -r requirements.txt
+      - pip install .
 
 lint_code:
   stage: build
@@ -36,5 +36,3 @@ run_tests:
     - pytest
   artifacts:
     expire_in: "5 mins"
-
-

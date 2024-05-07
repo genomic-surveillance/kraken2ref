@@ -5,7 +5,6 @@ ADD kraken2ref/ /home/kraken2ref/kraken2ref
 ADD .git /home/kraken2ref/.git
 COPY pyproject.toml /home/kraken2ref/
 COPY setup.cfg  /home/kraken2ref/
-COPY requirements.txt  /home/kraken2ref/
 
 RUN cd  /home/kraken2ref/ && pip install .
 WORKDIR /home

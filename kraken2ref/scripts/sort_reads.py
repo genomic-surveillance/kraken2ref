@@ -1,16 +1,3 @@
-###
-"""
-This script splits a pair of fastq files based on the kraken2 output, and creates a set of <sample_id>_<taxon_id_R{1,2}.fq
-Usage:
-        sort_reads [-h] -s SAMPLE_ID [-t TAXON_LIST] -k KRAKEN_OUT -fq1 FASTQ1 -fq2 FASTQ2 [-r REF_JSON] [-m MODE] [-c] [-u] [-o OUTDIR]
-
-Supports three modes: unique, tree, and condensed
-Unique mode: Extract ONLY reads that are uniquely assigned to the specified taxon ID(s). Specify taxon IDs as follows: `-m unique -t taxon1[,taxon2,taxon3...]`. 
-                NB: `-r path/to/kraken2ref.json` can be used with unique mode but is not required.
-Tree mode: Extract ALL reads in the taxonomy tree of the specified taxon ID(s). Usage: `-m tree -r path/to/kraken2ref.json`
-Condensed mode: Builds on tree mode; produce one set of fastq files per species, RATHER THAN per refernce. Usage: `-m tree -r path/to/kraken2ref.json -c`
-"""
-###
 import os, sys
 import json
 import pandas as pd
@@ -26,8 +13,17 @@ def collect_args():
     Returns:
         args (Namespace): Argparse namespace
     """
+    msg = f"""
+        Extract reads to reference sequences from kraken2 outputs.
+        This script splits a pair of fastq files based on the kraken2 output, and creates a set of <sample_id>_<taxon_id_R{1,2}.fq.
+        Supports three modes: unique, tree, and condensed.
+        Unique mode: Extract ONLY reads that are uniquely assigned to the specified taxon ID(s). Specify taxon IDs as follows: `-m unique -t taxon1[,taxon2,taxon3...]`.
+                        NB: `-r path/to/kraken2ref.json` can be used with unique mode but is not required.
+        Tree mode: Extract ALL reads in the taxonomy tree of the specified taxon ID(s). Usage: `-m tree -r path/to/kraken2ref.json`
+        Condensed mode: Builds on tree mode; produce one set of fastq files per species, RATHER THAN per refernce. Usage: `-m tree -r path/to/kraken2ref.json -c`
+        """
     parser = argparse.ArgumentParser(
-            description = "kraken2ref: extract reads to reference sequences from kraken2 outputs")
+            description = msg)
 
     parser.add_argument(
             '-s', '--sample_id',

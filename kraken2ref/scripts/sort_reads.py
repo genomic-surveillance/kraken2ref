@@ -1,3 +1,15 @@
+###
+"""
+This script splits a pair of fastq files based on the kraken2 output, and creates a set of <sample_id>_<taxon_id_R{1,2}.fq
+Usage:
+        sort_reads [-h] -s SAMPLE_ID [-t TAXON_LIST] -k KRAKEN_OUT -fq1 FASTQ1 -fq2 FASTQ2 [-r REF_JSON] [-m MODE] [-c] [-u] [-o OUTDIR]
+
+Supports three modes: unique, tree, and condensed
+Unique mode: Extract ONLY reads that are uniquely assigned to the specified taxon ID(s). Specify taxon IDs as follows: `-m unique -t taxon1[,taxon2,taxon3...]`
+Tree mode: Extract ALL reads in the taxonomy tree of the specified taxon ID(s). Usage: `-m tree -r path/to/kraken2ref.json`
+Condensed mode: Builds on tree mode; produce one set of fastq files per species, RATHER THAN per refernce. Usage: `-m tree -r path/to/kraken2ref.json -c`
+"""
+###
 import os, sys
 import json
 import pandas as pd
@@ -82,7 +94,7 @@ def collect_args():
 
     return args
 
-def dump_to_file(tax_to_readids_dict, fq1, fq2, outdir):
+def dump_to_file(sample_id, tax_to_readids_dict, fq1, fq2, outdir):
     """Function that dumps reads to file.
 
     Args:
@@ -102,7 +114,7 @@ def dump_to_file(tax_to_readids_dict, fq1, fq2, outdir):
     else:
         slashes = False
 
-    def wrapper(output_taxid, tax_to_readids_dict, fq1_dict, fq2_dict, outdir):
+    def fq_write_wrapper(output_taxid, sample_id, tax_to_readids_dict, fq1_dict, fq2_dict, outdir):
         """Function that wraps around actual file I/O, run in parallel
 
         Args:
@@ -116,8 +128,8 @@ def dump_to_file(tax_to_readids_dict, fq1, fq2, outdir):
         written = 0
 
         ## initialise files to write to
-        R1_file = open(os.path.join(outdir, f"{output_taxid}_R1.fq"), "w")
-        R2_file = open(os.path.join(outdir, f"{output_taxid}_R2.fq"), "w")
+        R1_file = open(os.path.join(outdir, f"{sample_id}_{output_taxid}_R1.fq"), "w")
+        R2_file = open(os.path.join(outdir, f"{sample_id}_{output_taxid}_R2.fq"), "w")
 
         ## iterate over read ids in list and dump to files
         for read_id in tax_to_readids_dict[output_taxid]:
@@ -133,7 +145,7 @@ def dump_to_file(tax_to_readids_dict, fq1, fq2, outdir):
     ## initialise parallel function calls
     with futures.ThreadPoolExecutor(max_workers=4) as executor:
         ## get list of functions for execution
-        functions = [executor.submit(wrapper(taxid, tax_to_readids_dict, fq1_dict, fq2_dict, outdir)) for taxid in list(tax_to_readids_dict.keys())]
+        functions = [executor.submit(fq_write_wrapper(taxid, sample_id, tax_to_readids_dict, fq1_dict, fq2_dict, outdir)) for taxid in list(tax_to_readids_dict.keys())]
         ## make main wait until functions conclude
         futures.wait(functions)
 
@@ -194,7 +206,7 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq
         umode_numreads_per_taxon = {k: len(v) for k, v in umode_tax_to_reads.items()}
 
         ## dump to file
-        dump_to_file(umode_tax_to_reads, fastq1, fastq2, outdir)
+        dump_to_file(sample_id, umode_tax_to_reads, fastq1, fastq2, outdir)
         file_read_counts = umode_numreads_per_taxon
         reads_written = []
         ## collect reads that were written for summary logging
@@ -248,7 +260,7 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq
             ## collect reads that were written for summary logging
             for k, v in tmode_tax_to_reads.items():
                 reads_written.extend(v)
-            dump_to_file(tmode_tax_to_reads, fastq1, fastq2, outdir)
+            dump_to_file(sample_id, tmode_tax_to_reads, fastq1, fastq2, outdir)
 
         #############################
         #                           #
@@ -273,7 +285,7 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq
             ## collect reads that were written for summary logging
             for k, v in cmode_tax_to_reads.items():
                 reads_written.extend(v)
-            dump_to_file(cmode_tax_to_reads, fastq1, fastq2, outdir)
+            dump_to_file(sample_id, cmode_tax_to_reads, fastq1, fastq2, outdir)
 
     ## populate summary dict
     summary = {

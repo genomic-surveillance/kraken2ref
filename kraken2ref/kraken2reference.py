@@ -64,14 +64,16 @@ class KrakenProcessor:
         return kraken_report, has_minimizer_info
 
     def find_node_lists(self, kraken_report: pd.DataFrame, has_minimizer_info: bool):
-        """Collect node-lists from kraken report and populate data dictionary
+        """Collect node-lists from kraken report and populate data dictionary. 
+            Node-lists look like: [[(10, "S"), (11, "S1"), (12, "S2")...], [(167, "S"), (168, "S1")...]]. 
+            For more, see description of `all_nodes_list` below
 
         Args:
             kraken_report (pd.DataFrame): Dataframe of kraken2 taxonomic report
             has_minimizer_info (bool): Whether the input report contains minimizer data
 
         Returns:
-            all_nodes_list (list(list)): List of nodes (from species level - "S" - onward only)
+            all_nodes_list (list(list(tuple))): List of nodes (from species level - "S" - onward only)
                 Each node is represented as a tuple, where:
                     node[0] = index of that node in the kraken report
                     node[1] = taxon level of that node ("S"/"S1"/etc)

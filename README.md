@@ -50,6 +50,7 @@ sort_reads -s sample_id -fq1 path/to/fq1.fq -fq2 path/to/fq2.fq -k path/to/outpu
 - `-fq1` [path]: Path to R1 fastq file [REQUIRED]  
 - `-fq2` [path]: Path to R2 fastq file [REQUIRED]  
 - `-k` [path]: Path to kraken2 output.kraken file [REQUIRED]  
+- `-t` [str]: List of taxon IDs to extract [REQUIRED ONLY IF USING `-m unique`]  
 - `-r` [path]: Path to JSON file produced by `kraken2r parse_report` [OPTIONAL ONLY IF USING `-m unique`]  
 - `-o` [path]: Path to output directory [OPTIONAL ONLY IF NOT USING `-r`][Default = "path/to/ref_json"]  
 - `-m` [str]: Specify sorting mode [OPTIONAL][DEFAULT = "unique"]  

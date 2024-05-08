@@ -21,7 +21,7 @@ pip install .
 Once installed, run as follows:  
 ```shell
 ## parse kraken2 report
-kraken2ref -s sample_id parse_report -i path/to/kraken2/report.txt -o ./ -t min_read_threshold -m kmeans -s decomposed -q
+kraken2ref -s sample_id parse_report -i path/to/kraken2/report.txt -o ./ -t min_read_threshold -m kmeans -x decomposed -q
 
 ## sort reads by reference (requires parse_report to have been run before if using tree mode)
 kraken2ref -s sample_id sort_reads -fq1 path/to/fq1.fq -fq2 path/to/fq2.fq -k path/to/output.kraken -r path/to/kraken2ref.json -m tree

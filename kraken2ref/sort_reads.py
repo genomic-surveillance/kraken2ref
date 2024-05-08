@@ -328,12 +328,9 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq
     unwritten = full_kraken_out[~full_kraken_out[1].isin(reads_written)]
     unwritten.to_csv(os.path.join(outdir, f"{sample_id}_unwritten_reads.txt"), sep = "\t", header = False, index = False)
 
-def main():
+def sort_reads_by_tax(args):
     """Driver function.
     """
-
-    ## collect args
-    args = collect_args()
 
     args.mode = args.mode.lower()
 
@@ -382,4 +379,4 @@ def main():
     sort_reads(sample_id=sample_id, kraken_output=kraken_output, mode=mode, fastq1=fastq1, fastq2=fastq2, condense=condense, update_output=update_output, taxon_list=taxon_list, ref_json_file=full_path_to_ref_json, outdir=fixed_outdir)
 
 if __name__ == "__main__":
-    main()
+    sort_reads_by_tax(args = collect_args())

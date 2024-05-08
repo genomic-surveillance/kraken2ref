@@ -52,4 +52,3 @@ dynamic = ["version"]
 
 [project.scripts]
 kraken2ref = "kraken2ref.main:main"
-sort_reads = "kraken2ref.scripts.sort_reads:main"

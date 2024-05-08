@@ -7,90 +7,6 @@ from concurrent import futures
 import datetime
 import logging
 
-def collect_args():
-    """Function to collect command-lne arguments.
-
-    Returns:
-        args (Namespace): Argparse namespace
-    """
-    msg = f"""
-        Extract reads to reference sequences from kraken2 outputs.
-        This script splits a pair of fastq files based on the kraken2 output, and creates a set of <sample_id>_<taxon_id_R{1,2}.fq.
-        Supports three modes: unique, tree, and condensed.
-        Unique mode: Extract ONLY reads that are uniquely assigned to the specified taxon ID(s). Specify taxon IDs as follows: `-m unique -t taxon1[,taxon2,taxon3...]`.
-                        NB: `-r path/to/kraken2ref.json` can be used with unique mode but is not required.
-        Tree mode: Extract ALL reads in the taxonomy tree of the specified taxon ID(s). Usage: `-m tree -r path/to/kraken2ref.json`
-        Condensed mode: Builds on tree mode; produce one set of fastq files per species, RATHER THAN per refernce. Usage: `-m tree -r path/to/kraken2ref.json -c`
-        """
-    parser = argparse.ArgumentParser(
-            description = msg)
-
-    parser.add_argument(
-            '-s', '--sample_id',
-            required = True,
-            type = str,
-            help = "Sample ID [str]")
-
-    parser.add_argument(
-            '-t', '--taxon_list',
-            required = False,
-            type = str,
-            help = "Comma-separated list of taxa to extract reads for. Eg: taxID_1,taxID_2... [str/pathlike]")
-
-    parser.add_argument(
-            "-k", "--kraken_out",
-            type = str,
-            required = True,
-            help = "Path to kraken2 output file. [str/pathlike]")
-
-    parser.add_argument(
-            "-fq1", "--fastq1",
-            type = str,
-            required = True,
-            help = "First FASTQ file of paired end reads. [str/pathlike]")
-
-    parser.add_argument(
-            "-fq2", "--fastq2",
-            type = str,
-            required = True,
-            help = "Second FASTQ file of paired end reads. [str/pathlike]")
-
-    parser.add_argument(
-            "-r", "--ref_json",
-            type = str,
-            required = False,
-            help = "Output JSON created by `kraken2ref parse_report`. [str/pathlike]")
-
-    parser.add_argument(
-            "-m", "--mode",
-            type = str,
-            required = False,
-            default="unique",
-            help = "Which mode to use while sorting reads ['unique', 'tree']")
-
-    parser.add_argument(
-            "-c", "--condense",
-            action = "store_true",
-            required = False,
-            help = "Whether to condense the outputs by root taxid. [switch]")
-
-    parser.add_argument(
-        "-u", "--update",
-        action = "store_true",
-        required = False,
-        help = "Whether to update the kraken2ref JSON inplace or create a new updated copy. [switch]")
-
-    parser.add_argument(
-        '-o', '--outdir',
-        type = str,
-        required = False,
-        help = "Full path to output directory. [str/pathlike]")
-
-
-    args = parser.parse_args()
-
-    return args
-
 def dump_to_file(sample_id, tax_to_readids_dict, fq1, fq2, outdir):
     """Function that dumps reads to file.
 
@@ -378,5 +294,3 @@ def sort_reads_by_tax(args):
     ## run sort_reads
     sort_reads(sample_id=sample_id, kraken_output=kraken_output, mode=mode, fastq1=fastq1, fastq2=fastq2, condense=condense, update_output=update_output, taxon_list=taxon_list, ref_json_file=full_path_to_ref_json, outdir=fixed_outdir)
 
-if __name__ == "__main__":
-    sort_reads_by_tax(args = collect_args())

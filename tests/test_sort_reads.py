@@ -1,4 +1,4 @@
-from kraken2ref.scripts import sort_reads
+from kraken2ref import sort_reads
 import os, json
 import pandas as pd
 

@@ -1,5 +1,5 @@
 ## python imports
-import os
+import os, sys
 import logging
 import argparse
 
@@ -143,7 +143,12 @@ def main():
     args = collect_args()
 
     ## explicitly set up outdir
-    fixed_outdir = os.path.abspath(args.outdir)
+    if args.run_mode == "parse_report":
+        fixed_outdir = os.path.abspath(args.outdir)
+        if not os.path.exists(fixed_outdir):
+            os.mkdir(fixed_outdir)
+    if args.run_mode == "sort_reads":
+        fixed_outdir = os.path.dirname(os.path.abspath(args.ref_json))
 
     ## set up logging to file
     logfile = os.path.join(fixed_outdir, f"{args.sample_id}_kraken2ref.log")

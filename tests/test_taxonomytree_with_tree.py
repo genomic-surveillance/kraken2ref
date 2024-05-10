@@ -46,7 +46,7 @@ def __init__():
     return test_input, test_output, test_split_output, test_decomposed_output
 
 
-def test_taxonomy_tree_with_nodes():
+def test_taxonomy_tree_with_tree():
     test_input, test_output, test_split_output, test_decomposed_output  = __init__()
 
     test_tree_from_tree = TaxonomyTree(tree = test_output)

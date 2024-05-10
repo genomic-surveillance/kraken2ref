@@ -12,7 +12,8 @@ def __init__():
 
 def test_tree():
     __init__()
-    sort_reads.sort_reads(sample_id="test_sort",
+    sort_reads.sort_reads(
+            sample_id="test_sort",
             kraken_output="tests/test_set/with_fluseg_db/testset_50x.kraken.output",
             mode="tree",
             fastq1="tests/test_set/with_fluseg_db/testset_50x.class_seqs_1.fq",
@@ -43,7 +44,7 @@ def test_tree():
             assert v == r1_dict[k]
             assert v == r2_dict[k]
 
-    os.system("rm ./*.fq")
+    # os.system("rm ./*.fq")
     os.system("rm ./test_sort_*")
 
 

@@ -19,56 +19,36 @@ pip install .
 ```  
 
 Once installed, run as follows:  
-
 ```shell
 ## parse kraken2 report
-kraken2r -s sample_id parse_report -i path/to/kraken2/report.txt -o ./ -t min_read_threshold
+kraken2ref -s sample_id parse_report -i path/to/kraken2/report.txt -o ./ -t min_read_threshold -m kmeans -x decomposed -q
 
-## sort reads by reference (requires parse_report to have been run before)
-kraken2r -s sample_id sort_reads -fq1 path/to/fq1.fq -fq2 path/to/fq2.fq -k path/to/output.kraken -r path/to/kraken2ref.json -u
+## sort reads by reference (requires parse_report to have been run before if using tree mode)
+kraken2ref -s sample_id sort_reads -fq1 path/to/fq1.fq -fq2 path/to/fq2.fq -k path/to/output.kraken -r path/to/kraken2ref.json -m tree
 ```  
 
-#### From Singularity  
-```shell
-git clone https://gitlab.internal.sanger.ac.uk/malariagen1/misc_utils/kraken2ref.git
-cd kraken2ref
-sudo singularity build kraken2ref.sif Singularity
-singularity exec --bind `pwd` kraken2ref.sif kraken2r -s dump_test ref_sort_reads
-```
-
-#### From Docker  
-```shell
-git clone https://gitlab.internal.sanger.ac.uk/malariagen1/misc_utils/kraken2ref.git
-cd kraken2ref
-docker build -t name:tag .
-docker run -v `pwd`:/home name:tag kraken2r -s sample_id <mode> <OPTIONS>
-```
-
 # List of Arguments  
-
+- `-v` [switch]: Print version  
 - `-s` [str]: Sample ID [REQUIRED FOR BOTH MODES]  
 
-## Mode: "parse_report"  
-
+## `parse_report` Mode  
 - `-i` [path]: (Ideally the absolute) path to kraken2 taxonomy report file [REQUIRED]  
-- `-t` [int]: Minimum number of reads assigned to a leaf node for it to be considered [OPTIONAL][Default = 5]  
-- `-o` [path]: Path to output directory [Default = "./"]  
+- `-t` [int]: Minimum number of reads assigned to a leaf node for it to be considered [OPTIONAL][Default = 100]  
+- `-o` [path]: Path to output directory [OPTIONAL][Default = "./"]  
+- `-m` [str]: Polling method to use [OPTIONAL][DEFAULT = "kmeans"]["kmeans", "tiles"]  
+- `-x` [str]: Suffix to apply to `sample_id` when creating output JSON file [OPTIONAL][Default = "decomposed"]  
+- `-q` [switch]: Whether to log to stderr or not [OPTIONAL][Default = True]  
 
-## Mode: "sort_reads"  
-
+## `sort_reads` Mode  
 - `-fq1` [path]: Path to R1 fastq file [REQUIRED]  
 - `-fq2` [path]: Path to R2 fastq file [REQUIRED]  
 - `-k` [path]: Path to kraken2 output.kraken file [REQUIRED]  
-- `-r` [path]: Path to JSON file produced by `kraken2r parse_report` [REQUIRED]  
-- `-u` [switch]: Whether to update the JSON file produced by `kraken2r parse_report` inplace or produce a new, updated copy [OPTIONAL][Default: produce new]  
-- `-c` [switch]: Whether to dump all reads for a species into one file-pair (as opposed to producing a file-pair _per reference_)
-
-## General Args
-
-- `-h`: print help and exit  
-- `-v`: print version and exit  
-
-# Algorithm  
+- `-t` [str]: List of taxon IDs to extract [REQUIRED ONLY IF USING `-m unique`]  
+- `-r` [path]: Path to JSON file produced by `kraken2r parse_report` [OPTIONAL ONLY IF USING `-m unique`]  
+- `-o` [path]: Path to output directory [OPTIONAL ONLY IF NOT USING `-r`][Default = "path/to/ref_json"]  
+- `-m` [str]: Specify sorting mode [OPTIONAL][DEFAULT = "unique"]  
+- `-u` [switch]: Whether to update the JSON file produced by `kraken2r parse_report` inplace or produce a new, updated copy [OPTIONAL][Default: produce new][ONLY USED IF `-r` SPECIFIED]  
+- `-c` [switch]: Whether to dump all reads for a species into one file-pair (as opposed to producing a file-pair _per reference_)[ONLY USED IF USING `-m tree`]  
 
 ### Kraken2 Taxonomy Report  
 
@@ -79,6 +59,8 @@ Each line in the taxonomy report contains kraken2 output information for a singl
 4. **Taxon Level**: The short descriptor of taxonomic level (eg. "G" for Genus, "S" for Species, "S1" for sub-species or equivalent, etc)  
 5. **Taxon ID**: The unique ID for that taxon  
 6. **Descriptive Name**: The descriptive name of that taxon (eg. "Orthomyxoviridae", "Severe acute respiratory syndrome coronavirus 2")  
+
+> If running kraken2 with `--report-minimizer-info`, two columns are added to between "#Reads Assigned" and "Taxon Level". There are: "Total #Minimizers Assigned to Taxon" and "#Unique Minimizers Assigned to Taxon".  
 
 ### Summary of the Kraken2 Read Assignment Algorithm  
 
@@ -92,7 +74,7 @@ For quick access to the contents of the kraken2 taxonomy report, we store salien
 
 In the context of viral data analysis pipelines, the root of the taxonomy tree/graph described in the kraken report will, of course, be the Domain "Viruses", with subtaxa following below. Since we expect kraken2 to virtually never encounter reads that can **only** be confidently assigned at very high taxonomic levels (any level higher than "Species", for example; see [here](#summary-of-the-kraken2-read-assignment-algorithm) and [here](https://github.com/DerrickWood/kraken2) for more), we start by "trimming" the taxonomy tree/graph to create one or more subtrees/subgraphs (in green, Fig. 1), each rooted at "Species" level and each extending to the leaf nodes in that branch of the graph.  
 
-| ![Fig.1](kraken2ref/assets/kraken_tax_example.png) |
+| ![Fig.1](assets/kraken_tax_example.png) |
 |:--:|
 | *Figure 1: Example kraken2 Taxonomy* |  
 
@@ -131,38 +113,28 @@ paths2 = [[(0,"S"), (1,"S1"), (5,"S2"), (6,"S3")],
 
 Now, we can evaluate the leaf nodes of each subgraph separately by checking the number of reads assigned to each of these leaf nodes by kraken2, using the data dictionary. Not all leaf nodes will pass the threshold number set by the user, and those paths through the graph will be discarded. If the entire graph contains insufficient reads, it is disregarged. However, we focus on checking firs the leaf nodes, and then their parent nodes. Any higher, and you usually risk evaluating at the species level or similar -- this is not bad, _per se_, but does mean that we then expect lots of data duplication when it is time to sort reads by the chosen reference.   
 
-So, in case no leaf nodes in a subgraph pass the threshold, the algorithm jumps up one taxonomic level; for example, in the graph `[(0,"S"), (1,"S1"), (5,"S2"), (6,"S3"), (7,"S3")]`, if neither `(6,"S3")` nor `(7,"S3")` have more than the threshold number of reads directly assigned, the output will identify this and note the parent, in this case `(5,"S2")`, as the stopping point. But it will only include `(5,"S2")` in the output if the cumulative number of reads assigned at `(5,"S2")`, (i.e. all reads at `(5,"S2")` and below) passes the threshold.  
-
-##
-> This error is flagged on stderr and is searchable in case stderr is written to file: simply search for `NoSuitableTargetError` to find instances of this exception.  
-##
+So, in case no leaf nodes in a subgraph pass the threshold, the algorithm jumps up one taxonomic level; for example, in the graph `[(0,"S"), (1,"S1"), (5,"S2"), (6,"S3"), (7,"S3")]`, if neither `(6,"S3")` nor `(7,"S3")` have more than the threshold number of reads directly assigned, the output will identify this and note the parent, in this case `(5,"S2")`, as the stopping point. But it will only include `(5,"S2")` in the output if the **cumulative** number of reads assigned at `(5,"S2")`, (i.e. all reads at `(5,"S2")` and below) passes the threshold.  
 
 In most cases, there is expected to be at least one leaf node which passes the threshold; for example, in the subgraph `[(0,"S"), (1,"S1"), (2,"S2"), (3,"S3"), (4,"S3")]`, let us say leaf `(4,"S3")` passes, giving us a valid path `[(0,"S"), (1,"S1"), (2,"S2"), (4,"S3")]` through this subgraph. At this point, the output notes `(4,"S3")` as the chosen reference, records the path to that node, and also records the taxonomic IDs of **ALL** nodes in the entire parent graph `[(0,"S"), (1,"S1"), (2,"S2"), (3,"S3"), (4,"S3")]` -- this allows us to retain all read information associated with this parent graph, and potentially use all those reads to align to/call consensus on/analyse with the chose reference.  
 
 ## Polling  
 
-If multiple leaf nodes pass the threshold, then polling is triggered. The polling function first retrieves the number of reads uniquely assigned to each passing node. Then, this distribution is sorted, and then we apply a (very experimental) heuristic approach to decide on an approach to use. There are three approaches available:
- - MAX: Just pick the node with the maximum number of reads assigned.  
- - STEP: Step from RIGHT TO LEFT in the sorted distribution, and find the first "inflection point", i.e. the first instance where the step-size is larger than the latest one.  
- - CONSERVATIVE: Step from LEFT TO RIGHT in the sorted distribution, and find the first "inflection point".
+### KMeans-Based Outlier Detection  
 
-To select an approach, we use `scipy.stats.skewtest()` to essentially compare our distribution against a normal distribution. From observations, we establish that an extremely skewed distribution occurs when there is one node with the overwhelmingly majority of reads; if there is more than one node that has a high "frequency", the distribution is still very skewed, but a bit flatter at the top; if there are multiple well-represented nodes such that the distribution is quite flat, such a distribution has the smallest skew. `scipy.stats.skewtest()` gives us a p-value that we then use to apply our observations as follows:  
+In this approach to outlier analysis, we use `sklearn.cluster`, specifically the `KMeans` module. Briefly, we conceptualise the list of references and their correspoding number of assigned reads as a frequency distribution. This frequency distribution is reshaped to a 2D `numpy` array so that `KMeans` can use it. Then, we "cluster" this distribution using `KMeans`, sort the frequenccies by their distance from the cluster centroid, and retain those outlier frequencies that are to the right of the median (i.e. those that are big numbers, rather than those that are outliers because they are small).  
 
-```python
-if skew_test.pvalue < 0.005:
-        logging.info("Mode = MAX")
-if 0.005 < skew_test.pvalue < 0.05:
-    logging.info("Mode = STEP")
-if 0.05 < skew_test.pvalue:
-    logging.info("Mode = CONSERVATIVE")
-```
+| ![Fig.2](assets/polling_kmeans.png) |
+|:--:|
+| *Figure 2: KMeans-Based Outlier Analysis* |  
 
-##
-> CAVEAT: `scipy.stats.skewtest()` does not accept distributions smaller than n=8, so smaller distribution are padded with zeroes. This feels, generally speaking, a bit wrong, but it does not affect the shape of the distribution, and as such, is a sufficient workaround for this approximate approach.  
-##
+### Quantile-Based Outlier Detection  
 
-## Outputs  
+In this approach, we use quartiles 1 and 3 (Q1 and Q3 respectively) to calculate the interquartile range (IQR) of the distribution, then we use these values to set up quantile "fences"; a "left fence": `Q1 - (1.5 x IQR)` and a "right fence": `Q3 + (1.5 x IQR)`. Finally, we retain frequences that lie beyond the "right fence".  
 
-Provisionally the outputs are summarised in a JSON file written by the program, which can be used by downstream processes. Potentially, main outputs could also be per-taxon FASTQ filepairs that can directly be fed to downstream applications.  
+| ![Fig.3](assets/polling_tiles.png) |
+|:--:|
+| *Figure 3: Quantile-Based Outlier Analysis* |  
+
+
 
 

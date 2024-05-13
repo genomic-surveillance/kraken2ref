@@ -21,23 +21,28 @@ pip install .
 Once installed, run as follows:  
 ```shell
 ## parse kraken2 report
-kraken2ref -s sample_id -i path/to/kraken2/report.txt -o ./ -t min_read_threshold -m kmeans -s decomposed -q
+kraken2ref -s sample_id parse_report \
+            -i path/to/kraken2/report.txt \
+            -o ./ \
+            -t min_read_threshold \
+            -m kmeans \
+            -x decomposed \
+            -q
 
-## sort reads by reference (requires parse_report to have been run before)
-sort_reads -s sample_id -fq1 path/to/fq1.fq -fq2 path/to/fq2.fq -k path/to/output.kraken -r path/to/kraken2ref.json -m tree
+## sort reads by reference (requires parse_report to have been run before if using tree mode)
+kraken2ref -s sample_id sort_reads \
+            -fq1 path/to/fq1.fq \
+            -fq2 path/to/fq2.fq \
+            -k path/to/output.kraken \
+            -r path/to/kraken2ref.json \
+            -m tree
 ```  
 
-#### From Singularity  
-##TODO
-
-#### From Docker  
-##TODO
-
 # List of Arguments  
-## `kraken2ref`  
 - `-v` [switch]: Print version  
+- `-s` [str]: Sample ID [REQUIRED FOR BOTH MODES]  
 
-- `-s` [str]: Sample ID [REQUIRED]  
+## `parse_report` Mode  
 - `-i` [path]: (Ideally the absolute) path to kraken2 taxonomy report file [REQUIRED]  
 - `-t` [int]: Minimum number of reads assigned to a leaf node for it to be considered [OPTIONAL][Default = 100]  
 - `-o` [path]: Path to output directory [OPTIONAL][Default = "./"]  
@@ -45,11 +50,11 @@ sort_reads -s sample_id -fq1 path/to/fq1.fq -fq2 path/to/fq2.fq -k path/to/outpu
 - `-x` [str]: Suffix to apply to `sample_id` when creating output JSON file [OPTIONAL][Default = "decomposed"]  
 - `-q` [switch]: Whether to log to stderr or not [OPTIONAL][Default = True]  
 
-## `sort_reads`  
-- `-s` [str]: Sample ID [REQUIRED]  
+## `sort_reads` Mode  
 - `-fq1` [path]: Path to R1 fastq file [REQUIRED]  
 - `-fq2` [path]: Path to R2 fastq file [REQUIRED]  
 - `-k` [path]: Path to kraken2 output.kraken file [REQUIRED]  
+- `-t` [str]: List of taxon IDs to extract [REQUIRED ONLY IF USING `-m unique`]  
 - `-r` [path]: Path to JSON file produced by `kraken2r parse_report` [OPTIONAL ONLY IF USING `-m unique`]  
 - `-o` [path]: Path to output directory [OPTIONAL ONLY IF NOT USING `-r`][Default = "path/to/ref_json"]  
 - `-m` [str]: Specify sorting mode [OPTIONAL][DEFAULT = "unique"]  

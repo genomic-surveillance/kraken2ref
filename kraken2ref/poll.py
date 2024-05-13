@@ -37,6 +37,9 @@ class Poll:
             ## if subterminal node is valid, return this info
             if len(self.valid_subterminals) > 0 and len(self.leaves) > 1:
                 self.valid_parent = True
+                valid_leaves_dict = {i: data_dict[i] for i in self.leaves}
+                max_freq = max(list(valid_leaves_dict.values()))
+                self.max_leaves = [k for k, v in valid_leaves_dict.items() if v == max_freq]
 
         ## if only one valid leaf node, mark singleton attribute as true: no polling needed
         if len(self.valid_leaves) == 1:

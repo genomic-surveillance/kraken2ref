@@ -212,7 +212,12 @@ class KrakenProcessor:
 
                 ## if parent is valid, add info to output dict
                 if poll.valid_parent:
-                    self.tree_meta_out.update(self._update_tree_meta(filt_leaves = poll.valid_subterminals, simple_source_tree = simple_tree, data_dict = data_dict, parent_selected = poll.parent_selected))
+                    selected_nodes = poll.max_leaves
+                    if len(selected_nodes) == 1:
+                        self.tree_meta_out.update(self._update_tree_meta(filt_leaves = selected_nodes, simple_source_tree = simple_tree, data_dict = data_dict, parent_selected = poll.parent_selected))
+                    else:
+                        self.tree_meta_out.update(self._update_tree_meta(filt_leaves = [selected_nodes[0]], simple_source_tree = simple_tree, data_dict = data_dict, parent_selected = poll.parent_selected))
+
 
                     ## logging
                     logging.debug(f"Jumped up 1 level, selected parent node: {poll.valid_subterminals}.\n")

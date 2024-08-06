@@ -16,16 +16,6 @@ def dump_to_file(sample_id, tax_to_readids_dict, fq1, fq2, outdir):
         fq2 (str/path): Path to reverse fastq file
         outdir (str/path): Path to output directory
     """
-    ## load in fastq files as dictionaries for constant-time lookup
-    fq1_dict = SeqIO.index(fq1, "fastq")
-    fq2_dict = SeqIO.index(fq2, "fastq")
-
-    ## check if read IDs have slash notations
-    chosen_ref = list(fq1_dict.keys())[0]
-    if chosen_ref[-2:] == "/1":
-        slashes = True
-    else:
-        slashes = False
 
     def fq_write_wrapper(output_taxid, sample_id, tax_to_readids_dict, fq1_dict, fq2_dict, outdir):
         """Function that wraps around actual file I/O, run in parallel
@@ -54,6 +44,18 @@ def dump_to_file(sample_id, tax_to_readids_dict, fq1, fq2, outdir):
                 R1_file.write(fq1_dict[read_id].format("fastq"))
                 R2_file.write(fq2_dict[read_id].format("fastq"))
                 written += 1
+
+    # -------------------------------------------------------------#
+    ## load in fastq files as dictionaries for constant-time lookup
+    fq1_dict = SeqIO.index(fq1, "fastq")
+    fq2_dict = SeqIO.index(fq2, "fastq")
+
+    ## check if read IDs have slash notations
+    chosen_ref = list(fq1_dict.keys())[0]
+    if chosen_ref[-2:] == "/1":
+        slashes = True
+    else:
+        slashes = False
 
     ## initialise parallel function calls
     with futures.ThreadPoolExecutor(max_workers=4) as executor:

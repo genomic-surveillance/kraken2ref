@@ -7,7 +7,7 @@ from concurrent import futures
 import datetime
 import logging
 
-def dump_to_file(sample_id, tax_to_readids_dict, fq1, fq2, outdir):
+def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir, max_threads=1):
     """Function that dumps reads to file.
 
     Args:
@@ -17,7 +17,7 @@ def dump_to_file(sample_id, tax_to_readids_dict, fq1, fq2, outdir):
         outdir (str/path): Path to output directory
     """
 
-    def fq_write_wrapper(output_taxid, sample_id, tax_to_readids_dict, fq1_dict, fq2_dict, outdir):
+    def fq_write_wrapper(output_taxid, sample_id, tax_to_readids_dict, fq1_dict, fq2_dict, outdir, slashes):
         """Function that wraps around actual file I/O, run in parallel
 
         Args:
@@ -58,14 +58,91 @@ def dump_to_file(sample_id, tax_to_readids_dict, fq1, fq2, outdir):
         slashes = False
 
     ## initialise parallel function calls
-    with futures.ThreadPoolExecutor(max_workers=4) as executor:
+    with futures.ThreadPoolExecutor(max_workers=max_threads) as executor:
         ## get list of functions for execution
-        functions = [executor.submit(fq_write_wrapper(taxid, sample_id, tax_to_readids_dict, fq1_dict, fq2_dict, outdir)) for taxid in list(tax_to_readids_dict.keys())]
+        functions = [executor.submit(fq_write_wrapper(taxid, sample_id, tax_to_readids_dict, fq1_dict, fq2_dict, outdir, slashes)) for taxid in list(tax_to_readids_dict.keys())]
         ## make main wait until functions conclude
         futures.wait(functions)
 
 
-def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq2: str, ref_json_file: str, outdir: str, update_output: bool, condense: bool = False, taxon_list: list = None):
+#@profile
+def dump_to_file_chunks(sample_id, tax_to_readids_dict, fq1, fq2, outdir, chunk_size=10_000):
+    """Function that dumps reads to file in chunks.
+
+    Args:
+        tax_to_readids_dict (dict): Dictionary mapping of taxon IDs to their corresponding lists of read IDs
+        fq1 (str/path): Path to forward fastq file
+        fq2 (str/path): Path to reverse fastq file
+        outdir (str/path): Path to output directory
+        chunk_size (int): Number of records to process in each batch (default is 1000)
+    """
+    print(chunk_size)
+    ## Check if output directory exists and create if not
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
+
+    ## Create output files for each taxid
+    output_files = {}
+    for taxid in tax_to_readids_dict.keys():
+        R1_file = open(os.path.join(outdir, f"{sample_id}_{taxid}_R1.fq"), "w")
+        R2_file = open(os.path.join(outdir, f"{sample_id}_{taxid}_R2.fq"), "w")
+        output_files[taxid] = (R1_file, R2_file)
+
+    ## Use iterators to process the fastq files
+    fq1_iter = SeqIO.parse(fq1, "fastq")
+    fq2_iter = SeqIO.parse(fq2, "fastq")
+
+    ## Check if read IDs have slash notations
+    first_record = next(fq1_iter)
+    slashes = first_record.id.endswith("/1")
+
+    ## Reinitialize iterators after peeking
+    fq1_iter = SeqIO.parse(fq1, "fastq")
+    fq2_iter = SeqIO.parse(fq2, "fastq")
+
+    ## Process files in chunks
+    c = 1
+    while True:
+        chunk1 = list(next(fq1_iter, None) for _ in range(chunk_size))
+        chunk2 = list(next(fq2_iter, None) for _ in range(chunk_size))
+        ## Break the loop if no more records to process
+        if not chunk1 or not chunk2:
+            break
+
+        ## Filter out None values in case the iterators run out at different times
+        chunk1 = [record for record in chunk1 if record is not None]
+        chunk2 = [record for record in chunk2 if record is not None]
+        if len(chunk1) == 0:
+            break
+        ## Iterate over both chunks simultaneously
+        for record1, record2 in zip(chunk1, chunk2):
+            read_id = record1.id.rstrip("/1") if slashes else record1.id
+            ## Check which taxid (if any) the read belongs to and write to corresponding file
+            for taxid, read_ids in tax_to_readids_dict.items():
+                if read_id in read_ids:
+                    R1_file, R2_file = output_files[taxid]
+                    R1_file.write(record1.format("fastq"))
+                    R2_file.write(record2.format("fastq"))
+                    break  # No need to check further once found
+        
+        ## Explicitly clear the chunk variables and run garbage collection
+        del chunk1, chunk2
+        gc.collect()
+        c +=1
+
+    ## Close all output files
+    for R1_file, R2_file in output_files.values():
+        R1_file.close()
+        R2_file.close()
+
+    gc.collect()  # Final garbage collection
+
+#@profile
+def sort_reads(sample_id: str, kraken_output: str, mode: str, 
+            fastq1: str, fastq2: str, ref_json_file: str,
+            outdir: str, update_output: bool, 
+            condense: bool = False, taxon_list: list = None,
+            max_threads: int = 1, chunk_size: int = 10_000):
     """Control flow of taking args and producing output fastq files
 
     Args:
@@ -121,7 +198,9 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq
         umode_numreads_per_taxon = {k: len(v) for k, v in umode_tax_to_reads.items()}
 
         ## dump to file
-        dump_to_file(sample_id, umode_tax_to_reads, fastq1, fastq2, outdir)
+        #dump_to_file(sample_id, umode_tax_to_reads, fastq1, fastq2, outdir, max_threads=max_threads)
+        dump_to_file_chunks(sample_id, umode_tax_to_reads, fastq1, fastq2, outdir, chunk_size=chunk_size)
+
         file_read_counts = umode_numreads_per_taxon
         reads_written = []
         ## collect reads that were written for summary logging
@@ -175,7 +254,8 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq
             ## collect reads that were written for summary logging
             for k, v in tmode_tax_to_reads.items():
                 reads_written.extend(v)
-            dump_to_file(sample_id, tmode_tax_to_reads, fastq1, fastq2, outdir)
+            #dump_to_file(sample_id, tmode_tax_to_reads, fastq1, fastq2, outdir, max_threads=max_threads)
+            dump_to_file_chunks(sample_id, tmode_tax_to_reads, fastq1, fastq2, outdir, chunk_size=chunk_size)
 
         #############################
         #                           #
@@ -200,7 +280,8 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq
             ## collect reads that were written for summary logging
             for k, v in cmode_tax_to_reads.items():
                 reads_written.extend(v)
-            dump_to_file(sample_id, cmode_tax_to_reads, fastq1, fastq2, outdir)
+            #dump_to_file(sample_id, cmode_tax_to_reads, fastq1, fastq2, outdir, max_threads=max_threads)
+            dump_to_file_chunks(sample_id, cmode_tax_to_reads, fastq1, fastq2, outdir,chunk_size=chunk_size)
 
     ## populate summary dict
     summary = {
@@ -270,6 +351,8 @@ def sort_reads_by_tax(args):
     sample_id = args.sample_id
     kraken_output = args.kraken_out
     mode = args.mode
+    chunk_size = args.chunk_size
+
     if not args.mode:
         logging.debug("No sorting mode provided, defaulting to mode: tree.")
         mode = "tree"
@@ -294,5 +377,16 @@ def sort_reads_by_tax(args):
 
 
     ## run sort_reads
-    sort_reads(sample_id=sample_id, kraken_output=kraken_output, mode=mode, fastq1=fastq1, fastq2=fastq2, condense=condense, update_output=update_output, taxon_list=taxon_list, ref_json_file=full_path_to_ref_json, outdir=fixed_outdir)
+    sort_reads(
+        sample_id=sample_id,
+        kraken_output=kraken_output,
+        mode=mode,
+        fastq1=fastq1,
+        fastq2=fastq2,
+        condense=condense,
+        update_output=update_output,
+        taxon_list=taxon_list,
+        ref_json_file=full_path_to_ref_json,
+        outdir=fixed_outdir,
+        chunk_size=chunk_size)
 

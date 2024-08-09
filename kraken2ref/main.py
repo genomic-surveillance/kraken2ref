@@ -133,6 +133,13 @@ def collect_args():
         required = False,
         help = "Full path to output directory. [str/pathlike]")
 
+    sort_reads_parser.add_argument(
+        '--chunk_size',
+        type = int,
+        required = False,
+        default=10_000,
+        help = "number of reads loaded into memory to process per batch")
+    
     args = parser.parse_args()
     return args
 

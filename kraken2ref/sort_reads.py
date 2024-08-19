@@ -6,8 +6,16 @@ from Bio import SeqIO
 from concurrent import futures
 import datetime
 import logging
+import gc
+import io
+# importing the library
+# from memory_profiler import profile
+import time
+import resource
 
-def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir, max_threads=1):
+# instantiating the decorator
+#@profile
+def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir, max_threads=1, buffer_size=io.DEFAULT_BUFFER_SIZE):
     """Function that dumps reads to file.
 
     Args:
@@ -31,8 +39,8 @@ def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir, max_thr
         written = 0
 
         ## initialise files to write to
-        R1_file = open(os.path.join(outdir, f"{sample_id}_{output_taxid}_R1.fq"), "w")
-        R2_file = open(os.path.join(outdir, f"{sample_id}_{output_taxid}_R2.fq"), "w")
+        R1_file = open(os.path.join(outdir, f"{sample_id}_{output_taxid}_R1.fq"), "w", buffering=buffer_size)
+        R2_file = open(os.path.join(outdir, f"{sample_id}_{output_taxid}_R2.fq"), "w", buffering=buffer_size)
 
         ## iterate over read ids in list and dump to files
         for read_id in tax_to_readids_dict[output_taxid]:
@@ -52,6 +60,7 @@ def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir, max_thr
 
     ## check if read IDs have slash notations
     chosen_ref = list(fq1_dict.keys())[0]
+
     if chosen_ref[-2:] == "/1":
         slashes = True
     else:

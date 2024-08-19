@@ -6,6 +6,7 @@ import argparse
 ## import driver module
 from kraken2ref.kraken2reference import KrakenProcessor
 from kraken2ref.sort_reads import sort_reads_by_tax
+import io
 
 ## collect version
 try:
@@ -139,10 +140,34 @@ def collect_args():
         required = False,
         default=10_000,
         help = "number of reads loaded into memory to process per batch")
+
+    sort_reads_parser.add_argument(
+        '--buffer_size',
+        type = int,
+        required = False,
+        default=io.DEFAULT_BUFFER_SIZE,
+        help = "buffer for writing output fq files size in bytes")
     
+    sort_reads_parser.add_argument(
+        '--DEBUG_dump_file_mode',
+        type = str,
+        required = False,
+        default="chunk_1",
+        help = "DEBUG dump file, this should be removed")
+
+    sort_reads_parser.add_argument(
+        '--DEBUG_max_threads_index',
+        type = int,
+        required = False,
+        default=1,
+        help = "number of threads to provide to index")
+
+
     args = parser.parse_args()
     return args
 
+# instantiating the decorator
+#@profile
 def main():
     """User-facing driver function
     """
@@ -174,4 +199,3 @@ def main():
 
 if __name__ == "main":
     main()
-

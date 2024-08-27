@@ -3,250 +3,12 @@ import json
 import pandas as pd
 import argparse
 from Bio import SeqIO
-from concurrent import futures
 import datetime
 import logging
-import gc
-import io
-# importing the library
-# from memory_profiler import profile
-import time
-import resource
 
-# instantiating the decorator
-#@profile
-def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir, max_threads=1, buffer_size=io.DEFAULT_BUFFER_SIZE):
-    """Function that dumps reads to file.
-
-    Args:
-        tax_to_readids_dict (dict): Dictionary mapping of taxon IDs to their corresponding lists of read IDs
-        fq1 (str/path): Path to forward fastq file
-        fq2 (str/path): Path to reverse fastq file
-        outdir (str/path): Path to output directory
-    """
-
-    def fq_write_wrapper(output_taxid, sample_id, tax_to_readids_dict, fq1_dict, fq2_dict, outdir, slashes):
-        """Function that wraps around actual file I/O, run in parallel
-
-        Args:
-            output_taxid (str): Taxonomic ID to write
-            tax_to_readids_dict (dict): Dictionary mapping of taxon IDs to their corresponding lists of read IDs
-            fq1_dict (_IndexedSeqFileDict): Dictionary of forward fastq records
-            fq2_dict (_IndexedSeqFileDict): Dictionary of reverse fastq records
-            outdir (str/path): Path to output directory
-        """
-        ## initiate counter
-        written = 0
-
-        ## initialise files to write to
-        R1_file = open(os.path.join(outdir, f"{sample_id}_{output_taxid}_R1.fq"), "w", buffering=buffer_size)
-        R2_file = open(os.path.join(outdir, f"{sample_id}_{output_taxid}_R2.fq"), "w", buffering=buffer_size)
-
-        ## iterate over read ids in list and dump to files
-        for read_id in tax_to_readids_dict[output_taxid]:
-            if slashes:
-                R1_file.write(fq1_dict[read_id+"/1"].format("fastq"))
-                R2_file.write(fq2_dict[read_id+"/2"].format("fastq"))
-                written += 1
-            else:
-                R1_file.write(fq1_dict[read_id].format("fastq"))
-                R2_file.write(fq2_dict[read_id].format("fastq"))
-                written += 1
-
-    # -------------------------------------------------------------#
-    ## load in fastq files as dictionaries for constant-time lookup
-    fq1_dict = SeqIO.index(fq1, "fastq")
-    fq2_dict = SeqIO.index(fq2, "fastq")
-
-    ## check if read IDs have slash notations
-    chosen_ref = list(fq1_dict.keys())[0]
-
-    if chosen_ref[-2:] == "/1":
-        slashes = True
-    else:
-        slashes = False
-
-    ## initialise parallel function calls
-    with futures.ThreadPoolExecutor(max_workers=max_threads) as executor:
-        ## get list of functions for execution
-        functions = [executor.submit(fq_write_wrapper(taxid, sample_id, tax_to_readids_dict, fq1_dict, fq2_dict, outdir, slashes)) for taxid in list(tax_to_readids_dict.keys())]
-        ## make main wait until functions conclude
-        futures.wait(functions)
-
-
-#@profile
-def dump_to_file_chunks(sample_id, tax_to_readids_dict, fq1, fq2, outdir, chunk_size=10_000, buffer_size=io.DEFAULT_BUFFER_SIZE):
-    """Function that dumps reads to file in chunks.
-
-    Args:
-        tax_to_readids_dict (dict): Dictionary mapping of taxon IDs to their corresponding lists of read IDs
-        fq1 (str/path): Path to forward fastq file
-        fq2 (str/path): Path to reverse fastq file
-        outdir (str/path): Path to output directory
-        chunk_size (int): Number of records to process in each batch (default is 1000)
-    """
-
-    ## Check if output directory exists and create if not
-    if not os.path.exists(outdir):
-        os.makedirs(outdir)
-
-    ## Create output files for each taxid
-    output_files = {}
-    for taxid in tax_to_readids_dict.keys():
-        R1_file = open(os.path.join(outdir, f"{sample_id}_{taxid}_R1.fq.b"), "w", buffering=buffer_size)
-        R2_file = open(os.path.join(outdir, f"{sample_id}_{taxid}_R2.fq.b"), "w", buffering=buffer_size)
-        output_files[taxid] = (R1_file, R2_file)
-
-    ## Use iterators to process the fastq files
-    fq1_iter = SeqIO.parse(fq1, "fastq")
-
-    ## Check if read IDs have slash notations
-    first_record = next(fq1_iter)
-    slashes = first_record.id.endswith("/1")
-
-    ## Reinitialize iterators after peeking
-    fq1_iter = SeqIO.parse(fq1, "fastq")
-    fq2_iter = SeqIO.parse(fq2, "fastq")
-
-    ## Process files in chunks
-    c = 1
-    while True:
-        chunk1 = list(next(fq1_iter, None) for _ in range(chunk_size))
-        chunk2 = list(next(fq2_iter, None) for _ in range(chunk_size))
-        ## Break the loop if no more records to process
-        if not chunk1 or not chunk2:
-            break
-
-        ## Filter out None values in case the iterators run out at different times
-        chunk1 = [record for record in chunk1 if record is not None]
-        chunk2 = [record for record in chunk2 if record is not None]
-
-        # break loop if only none values are present on chunk1
-        if len(chunk1) == 0:
-            break
-
-        ## Iterate over both chunks simultaneously
-        for record1, record2 in zip(chunk1, chunk2):
-            read_id = record1.id.rstrip("/1") if slashes else record1.id
-
-            ## Check which taxid (if any) the read belongs to and write to corresponding file
-            for taxid, read_ids in tax_to_readids_dict.items():
-                R1_file, R2_file = output_files[taxid]
-
-                ## DEBUG ##
-                # uncomment the line below to print buffer moving checks
-                #print(R1_file.buffer.tell(), "buffer,", R1_file.buffer.raw.tell(), "raw")
-                ###########
-
-                if read_id in read_ids:
-                    R1_file.write(record1.format("fastq"))
-                    R2_file.write(record2.format("fastq"))
-                    break  # No need to check further once found
-
-
-        ## Explicitly clear the chunk variables and run garbage collection
-        del chunk1, chunk2
-        gc.collect()
-        c +=1
-
-    ## Close all output files
-    for R1_file, R2_file in output_files.values():
-        R1_file.close()
-        R2_file.close()
-
-    gc.collect()  # Final garbage collection
-
-
-#@profile
-def dump_to_file_chunks_exp(sample_id, tax_to_readids_dict, fq1, fq2, outdir, chunk_size=10_000, buffer_size=io.DEFAULT_BUFFER_SIZE):
-    """Function that dumps reads to file in chunks.
-
-    Args:
-        tax_to_readids_dict (dict): Dictionary mapping of taxon IDs to their corresponding lists of read IDs
-        fq1 (str/path): Path to forward fastq file
-        fq2 (str/path): Path to reverse fastq file
-        outdir (str/path): Path to output directory
-        chunk_size (int): Number of records to process in each batch (default is 1000)
-    """
-
-    ## Check if output directory exists and create if not
-    if not os.path.exists(outdir):
-        os.makedirs(outdir)
-
-    ## Create output files for each taxid
-    output_files = {}
-    for taxid in tax_to_readids_dict.keys():
-        R1_file = open(os.path.join(outdir, f"{sample_id}_{taxid}_R1.fq.b"), "w", buffering=buffer_size)
-        R2_file = open(os.path.join(outdir, f"{sample_id}_{taxid}_R2.fq.b"), "w", buffering=buffer_size)
-        output_files[taxid] = (R1_file, R2_file)
-
-    ## Use iterators to process the fastq files
-    fq1_iter = SeqIO.parse(fq1, "fastq")
-
-    ## Check if read IDs have slash notations
-    first_record = next(fq1_iter)
-    slashes = first_record.id.endswith("/1")
-
-    ## Reinitialize iterators after peeking
-    fq1_iter = SeqIO.parse(fq1, "fastq")
-    fq2_iter = SeqIO.parse(fq2, "fastq")
-
-    ## Process files in chunks
-    c = 1
-
-    while True:
-        chunk1 = list(next(fq1_iter, None) for _ in range(chunk_size))
-        chunk2 = list(next(fq2_iter, None) for _ in range(chunk_size))
-    
-        if not chunk1 or not chunk2:
-            break
-
-        chunk1 = [record for record in chunk1 if record is not None]
-        chunk2 = [record for record in chunk2 if record is not None]
-
-        if len(chunk1) == 0:
-            break
-
-        # Dictionary to store lists of records for each taxid
-        taxid_to_records = {taxid: ([], []) for taxid in tax_to_readids_dict}
-
-        # Collect records for each taxid
-        for record1, record2 in zip(chunk1, chunk2):
-            read_id = record1.id.rstrip("/1") if slashes else record1.id
-        
-            for taxid, read_ids in tax_to_readids_dict.items():
-                if read_id in read_ids:
-                    taxid_to_records[taxid][0].append(record1)
-                    taxid_to_records[taxid][1].append(record2)
-                    break  # No need to check further once found
-
-        # Write out records for each taxid
-        for taxid, (records1, records2) in taxid_to_records.items():
-            R1_file, R2_file = output_files[taxid]
-            for record1, record2 in zip(records1, records2):
-                R1_file.write(record1.format("fastq"))
-                R2_file.write(record2.format("fastq"))
-
-        ## Explicitly clear the chunk variables and run garbage collection
-        del chunk1, chunk2
-        gc.collect()
-        c +=1
-
-    ## Close all output files
-    for R1_file, R2_file in output_files.values():
-        R1_file.close()
-        R2_file.close()
-
-    gc.collect()  # Final garbage collection
-
-
-#@profile
 def sort_reads(sample_id: str, kraken_output: str, mode: str, 
-            fastq1: str, fastq2: str, ref_json_file: str,
-            outdir: str, update_output: bool, 
-            condense: bool = False, taxon_list: list = None,
-            max_threads: int = 1, chunk_size: int = 10_000,
-            buffer_size: int = io.DEFAULT_BUFFER_SIZE, debug_mode: str = "chunk_1"):
+        ref_json_file: str, outdir: str, update_output: bool, 
+        condense: bool = False, taxon_list: list = None,):
     """
     Control flow of taking args and producing output fastq files
 
@@ -262,6 +24,21 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str,
         ref_json_file (str/path, optional): Path to ref_json file produced by kraken2ref. Defaults to None.
     """
 
+    def load_reads_written(tax_to_reads):
+        reads_written = []
+        ## collect reads that were written for summary logging
+        for k, v in tax_to_reads.items():
+            reads_written.extend(v)
+        return reads_written
+
+    def write_out_json(sample_id: str, outdir: str,tax_to_reads: dict):
+        # write tax_to_reads json file
+        tax_json_out = open(f"{outdir}/{sample_id}_tax_to_reads.json", "w")
+        json.dump(tax_to_reads, tax_json_out, indent=4)
+
+    def compute_numreads_per_taxon(tax_to_reads):
+        return {k: len(v) for k, v in tax_to_reads.items()}
+    
     ## time for logging
     NOW = f"{datetime.datetime.now():%Y-%m-%d %H:%M:%S}"
 
@@ -300,34 +77,11 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str,
         taxids_to_extract = [str(i) for i in taxon_list.split(",")]
 
         ## generate dict {taxid1: [readid1, readid2...], taxid2: [readid11, readid12...]}
-        umode_tax_to_reads = {k: v for k, v in tax_to_read_ids.items() for k in taxids_to_extract}
+        tax_to_reads = {k: v for k, v in tax_to_read_ids.items() for k in taxids_to_extract}
         ## generate dict {{taxid1: num_reads1, taxid2: num_reads2}}
-        umode_numreads_per_taxon = {k: len(v) for k, v in umode_tax_to_reads.items()}
+        numreads_per_taxon = compute_numreads_per_taxon(tax_to_reads)
 
-        # ------------------------------------- #
-        ### DEBUG time and memory
-        time_start = time.perf_counter()
         
-        # run dump files -- //
-        if debug_mode == "index":
-            dump_to_file_index(sample_id, umode_tax_to_reads, fastq1, fastq2, outdir, max_threads=max_threads, buffer_size=buffer_size)
-        if debug_mode == "chunk_1":
-            dump_to_file_chunks(sample_id, umode_tax_to_reads, fastq1, fastq2, outdir, chunk_size=chunk_size, buffer_size=buffer_size)
-        if debug_mode == "chunk_2":
-            dump_to_file_chunks_exp(sample_id, umode_tax_to_reads, fastq1, fastq2, outdir, chunk_size=chunk_size, buffer_size=buffer_size)
-        # ---------------- //
-        time_elapsed = (time.perf_counter() - time_start)
-        ## ru_maxrss is provided in kbytes
-        memMb=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024.0#/1024.0 
-        print ("dump_file: %5.1f secs %5.1f MByte" % (time_elapsed,memMb))
-        print(resource.getrusage(resource.RUSAGE_SELF))
-
-        file_read_counts = umode_numreads_per_taxon
-        reads_written = []
-        ## collect reads that were written for summary logging
-        for k, v in umode_tax_to_reads.items():
-            reads_written.extend(v)
-
     ############################
     #                          #
     ####     TREE MODE     #####
@@ -366,32 +120,14 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str,
                     pass
 
         ## generate dict {{taxid1: num_reads1, taxid2: num_reads2}}
-        tmode_numreads_per_taxon = {k: len(v) for k, v in tmode_tax_to_reads.items()}
+        numreads_per_taxon = compute_numreads_per_taxon(tmode_tax_to_reads)
 
         ## if not condense, dump to file now
         if not condense:
-            file_read_counts = tmode_numreads_per_taxon
-            reads_written = []
+            #file_read_counts = tmode_numreads_per_taxon
             ## collect reads that were written for summary logging
-            for k, v in tmode_tax_to_reads.items():
-                reads_written.extend(v)
-            # ------------------------------------- #
-            ### DEBUG time and memory
-            time_start = time.perf_counter()
-            
-            # run dump files -- //
-            if debug_mode == "index":
-                dump_to_file_index(sample_id, tmode_tax_to_reads, fastq1, fastq2, outdir, max_threads=max_threads, buffer_size=buffer_size)
-            if debug_mode == "chunk_1":
-                dump_to_file_chunks(sample_id, tmode_tax_to_reads, fastq1, fastq2, outdir, chunk_size=chunk_size, buffer_size=buffer_size)
-            if debug_mode == "chunk_2":
-                dump_to_file_chunks_exp(sample_id, tmode_tax_to_reads, fastq1, fastq2, outdir, chunk_size=chunk_size, buffer_size=buffer_size)
-            # ---------------- //
-            time_elapsed = (time.perf_counter() - time_start)
-            ## ru_maxrss is provided in kbytes
-            memMb=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024.0#/1024.0 
-            print ("dump_file: %5.1f secs %5.1f MByte" % (time_elapsed,memMb))
-            print(resource.getrusage(resource.RUSAGE_SELF))
+            reads_written = load_reads_written(tmode_tax_to_reads)
+            write_out_json(sample_id, outdir,tmode_tax_to_reads)
 
         #############################
         #                           #
@@ -409,30 +145,10 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str,
                     cmode_tax_to_reads[k].update(tmode_tax_to_reads[leaf_tax])
 
             ## generate dict {{taxid1: num_reads1, taxid2: num_reads2}}
-            cmode_numreads_per_taxon = {k: len(v) for k, v in cmode_tax_to_reads.items()}
+            numreads_per_taxon = compute_numreads_per_taxon(cmode_tax_to_reads)
 
-            file_read_counts = cmode_numreads_per_taxon
-            reads_written = []
-            ## collect reads that were written for summary logging
-            for k, v in cmode_tax_to_reads.items():
-                reads_written.extend(v)
-
-            ### DEBUG time and memory
-            time_start = time.perf_counter()
-        
-            # run dump files -- //
-            if debug_mode == "index":
-                dump_to_file_index(sample_id, cmode_tax_to_reads, fastq1, fastq2, outdir, max_threads=max_threads, buffer_size=buffer_size)
-            if debug_mode == "chunk_1":
-                dump_to_file_chunks(sample_id, cmode_tax_to_reads, fastq1, fastq2, outdir, chunk_size=chunk_size, buffer_size=buffer_size)
-            if debug_mode == "chunk_2":
-                dump_to_file_chunks_exp(sample_id, cmode_tax_to_reads, fastq1, fastq2, outdir, chunk_size=chunk_size, buffer_size=buffer_size)
-            # ---------------- //
-            time_elapsed = (time.perf_counter() - time_start)
-            ## ru_maxrss is provided in kbytes
-            memMb=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024.0#/1024.0 
-            print ("dump_file: %5.1f secs %5.1f MByte" % (time_elapsed,memMb))
-            print(resource.getrusage(resource.RUSAGE_SELF))
+            reads_written = load_reads_written(cmode_tax_to_reads)
+            write_out_json(sample_id, outdir, cmode_tax_to_reads)
 
     ## populate summary dict
     summary = {
@@ -443,7 +159,7 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str,
                 "total_classified_reads": classified_reads_count,
                 "unclasified_reads": read_count - classified_reads_count,
                 },
-        "per_taxon": file_read_counts
+        "per_taxon": numreads_per_taxon
     }
 
     ## log info related to condense
@@ -471,12 +187,14 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str,
                 new_json_path = ref_json_file.replace("_decomposed.json", "_updated_decomposed.json")
                 with open(new_json_path, "w") as new_json:
                     json.dump(data, new_json, indent=4)
-    logging.info(f"Wrote {len(file_read_counts.keys())} file-pairs at path {outdir}.\n\n")
+
+    logging.info(f"Wrote {len(numreads_per_taxon.keys())} file-pairs at path {outdir}.\n\n")
 
     ## get a list of unwritten reads and dump to file as tsv
     full_kraken_out = pd.read_csv(kraken_output, sep = "\t", header = None)
     unwritten = full_kraken_out[~full_kraken_out[1].isin(reads_written)]
     unwritten.to_csv(os.path.join(outdir, f"{sample_id}_unwritten_reads.txt"), sep = "\t", header = False, index = False)
+
 
 # instantiating the decorator
 #@profile
@@ -504,15 +222,10 @@ def sort_reads_by_tax(args):
     sample_id = args.sample_id
     kraken_output = args.kraken_out
     mode = args.mode
-    chunk_size = args.chunk_size
-    buffer_size = args.buffer_size
-    debug_mode = args.DEBUG_dump_file_mode
-    max_threads = args.DEBUG_max_threads_index
+
     if not args.mode:
         logging.debug("No sorting mode provided, defaulting to mode: tree.")
         mode = "tree"
-    fastq1 = args.fastq1
-    fastq2 = args.fastq2
 
     condense = args.condense
     update_output = args.update
@@ -536,12 +249,9 @@ def sort_reads_by_tax(args):
         sample_id=sample_id,
         kraken_output=kraken_output,
         mode=mode,
-        fastq1=fastq1,
-        fastq2=fastq2,
         condense=condense,
         update_output=update_output,
         taxon_list=taxon_list,
         ref_json_file=full_path_to_ref_json,
-        outdir=fixed_outdir,
-        chunk_size=chunk_size, buffer_size=buffer_size, debug_mode=debug_mode, max_threads=max_threads)
+        outdir=fixed_outdir)
 

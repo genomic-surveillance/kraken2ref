@@ -33,8 +33,10 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str,
 
     def write_out_json(sample_id: str, outdir: str,tax_to_reads: dict):
         # write tax_to_reads json file
-        tax_json_out = open(f"{outdir}/{sample_id}_tax_to_reads.json", "w")
+        json_out_path = f"{outdir}/{sample_id}_tax_to_reads.json"
+        tax_json_out = open(json_out_path, "w")
         json.dump(tax_to_reads, tax_json_out, indent=4)
+        print(f"> output file written to {json_out_path}")
 
     def compute_numreads_per_taxon(tax_to_reads):
         return {k: len(v) for k, v in tax_to_reads.items()}
@@ -232,14 +234,15 @@ def sort_reads_by_tax(args):
     taxon_list = args.taxon_list
     ref_json_file = args.ref_json
 
+    absolute_outdir = os.path.abspath(args.outdir)
+
     ## set up logfile
     if ref_json_file:
         full_path_to_ref_json = os.path.abspath(ref_json_file)
-        fixed_outdir = os.path.dirname(full_path_to_ref_json)
-        logfile = os.path.join(fixed_outdir, f"{sample_id}_kraken2ref.log")
+        log_outdir = os.path.dirname(full_path_to_ref_json)
+        logfile = os.path.join(log_outdir, f"{sample_id}_kraken2ref.log")
     else:
-        fixed_outdir = os.path.abspath(args.outdir)
-        logfile = os.path.join(fixed_outdir, f"{sample_id}_sort_reads.log")
+        logfile = os.path.join(absolute_outdir, f"{sample_id}_sort_reads.log")
         full_path_to_ref_json = None
     logging.basicConfig(format='%(asctime)s | %(levelname)s | %(module)s - %(funcName)s | %(message)s', level=logging.NOTSET, datefmt="%Y-%m-%d %H:%M:%S", filename = logfile)
 
@@ -253,5 +256,5 @@ def sort_reads_by_tax(args):
         update_output=update_output,
         taxon_list=taxon_list,
         ref_json_file=full_path_to_ref_json,
-        outdir=fixed_outdir)
+        outdir=absolute_outdir)
 

@@ -6,6 +6,7 @@ import argparse
 ## import driver module
 from kraken2ref.kraken2reference import KrakenProcessor
 from kraken2ref.sort_reads import sort_reads_by_tax
+from kraken2ref.dump_fastqs import dump_fastqs
 import io
 
 ## collect version
@@ -92,18 +93,6 @@ def collect_args():
             help = "Path to kraken2 output file. [str/pathlike]")
 
     sort_reads_parser.add_argument(
-            "-fq1", "--fastq1",
-            type = str,
-            required = True,
-            help = "First FASTQ file of paired end reads. [str/pathlike]")
-
-    sort_reads_parser.add_argument(
-            "-fq2", "--fastq2",
-            type = str,
-            required = True,
-            help = "Second FASTQ file of paired end reads. [str/pathlike]")
-
-    sort_reads_parser.add_argument(
             "-r", "--ref_json",
             type = str,
             required = False,
@@ -134,29 +123,67 @@ def collect_args():
         required = False,
         help = "Full path to output directory. [str/pathlike]")
 
-    sort_reads_parser.add_argument(
+
+    dump_fqs_parser = subparsers.add_parser("dump_fastqs")
+
+    dump_fqs_parser.add_argument(
+        "--tax_to_readsid_path",
+        type = str,
+        required = True,
+        help="json file containing tax to reads id (output by 'sort_to_reads' mode)"
+    )
+
+    dump_fqs_parser.add_argument(
+        "-fq1", "--fastq1",
+        type = str,
+        required = True,
+        help = "First FASTQ file of paired end reads. [str/pathlike]")
+
+    dump_fqs_parser.add_argument(
+        "-fq2", "--fastq2",
+        type = str,
+        required = True,
+        help = "Second FASTQ file of paired end reads. [str/pathlike]")
+
+    dump_fqs_parser.add_argument(
+        '-o', '--outdir',
+        type = str,
+        required = False,
+        help = "Full path to output directory. [str/pathlike]")
+
+    dump_fqs_parser.add_argument(
         '--chunk_size',
         type = int,
         required = False,
         default=10_000,
         help = "number of reads loaded into memory to process per batch")
 
-    sort_reads_parser.add_argument(
+    dump_fqs_parser.add_argument(
         '--buffer_size',
         type = int,
         required = False,
         default=io.DEFAULT_BUFFER_SIZE,
         help = "buffer for writing output fq files size in bytes")
     
-    sort_reads_parser.add_argument(
-        '--DEBUG_dump_file_mode',
+    dump_fqs_parser.add_argument(
+        '--fq_load_mode',
         type = str,
         required = False,
-        default="chunk_1",
-        help = "DEBUG dump file, this should be removed")
+        default="full",
+        help = """
+load fqs file on memory mode. (default = "full")
+[full: (faster, but higher memory foorprint), chunks: (slower, lower memory footprint)]
+""")
 
-    sort_reads_parser.add_argument(
-        '--DEBUG_max_threads_index',
+    dump_fqs_parser.add_argument(
+        "-r", "--ref_json",
+        type = str,
+        required = False,
+        help = "Output JSON created by `kraken2ref parse_report`. [str/pathlike]")
+
+
+    dump_fqs_parser.add_argument(
+        '--max_threads',
         type = int,
         required = False,
         default=1,
@@ -179,7 +206,7 @@ def main():
         fixed_outdir = os.path.abspath(args.outdir)
         if not os.path.exists(fixed_outdir):
             os.mkdir(fixed_outdir)
-    if args.run_mode == "sort_reads":
+    if (args.run_mode == "sort_reads") or (args.run_mode == "dump_fastqs"):
         fixed_outdir = os.path.dirname(os.path.abspath(args.ref_json))
 
     ## set up logging to file
@@ -196,6 +223,8 @@ def main():
     if args.run_mode == "sort_reads":
         sort_reads_by_tax(args)
 
+    if args.run_mode == "dump_fastqs":
+        dump_fastqs(args)
 
 if __name__ == "main":
     main()

@@ -202,12 +202,9 @@ def main():
     args = collect_args()
 
     ## explicitly set up outdir
-    if args.run_mode == "parse_report":
-        fixed_outdir = os.path.abspath(args.outdir)
-        if not os.path.exists(fixed_outdir):
-            os.mkdir(fixed_outdir)
-    if (args.run_mode == "sort_reads") or (args.run_mode == "dump_fastqs"):
-        fixed_outdir = os.path.dirname(os.path.abspath(args.ref_json))
+    fixed_outdir = os.path.abspath(args.outdir)
+    if not os.path.exists(fixed_outdir):
+        os.mkdir(fixed_outdir)
 
     ## set up logging to file
     logfile = os.path.join(fixed_outdir, f"{args.sample_id}_kraken2ref.log")

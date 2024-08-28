@@ -175,7 +175,7 @@ def dump_fastqs(args):
     # --------------------------- #
 
     ## Check if output directory exists and create if not
-    absolute_outdir = os.path.abspath(args.outdir)
+    absolute_outdir = os.path.abspath(outdir)
 
     if not os.path.exists(absolute_outdir):
         os.makedirs(absolute_outdir)

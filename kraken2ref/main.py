@@ -46,8 +46,9 @@ def collect_args():
     report_parser.add_argument(
         '-o', '--outdir',
         type = str,
+        default=os.getcwd(),
         required = True,
-        help = "Full path to output directory. [str/pathlike]")
+        help = "Full path to output directory. [str/pathlike] (default = current working dir)")
 
     report_parser.add_argument(
         '-x', '--suffix',
@@ -120,8 +121,9 @@ def collect_args():
     sort_reads_parser.add_argument(
         '-o', '--outdir',
         type = str,
+        default=os.getcwd(),
         required = False,
-        help = "Full path to output directory. [str/pathlike]")
+        help = "Full path to output directory. [str/pathlike] (default = current working dir)")
 
 
     dump_fqs_parser = subparsers.add_parser("dump_fastqs")
@@ -148,8 +150,9 @@ def collect_args():
     dump_fqs_parser.add_argument(
         '-o', '--outdir',
         type = str,
+        default=os.getcwd(),
         required = False,
-        help = "Full path to output directory. [str/pathlike]")
+        help = "Full path to output directory. [str/pathlike] (default = current working dir)")
 
     dump_fqs_parser.add_argument(
         '--chunk_size',

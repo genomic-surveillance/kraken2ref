@@ -36,13 +36,23 @@ def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir,
         ## iterate over read ids in list and dump to files
         for read_id in tax_to_readids_dict[output_taxid]:
             if slashes:
-                R1_file.write(fq1_dict[read_id+"/1"].format("fastq"))
-                R2_file.write(fq2_dict[read_id+"/2"].format("fastq"))
-                written += 1
+                try:
+                    R1_file.write(fq1_dict[read_id+"/1"].format("fastq"))
+                    R2_file.write(fq2_dict[read_id+"/2"].format("fastq"))
+                    written += 1
+                except(KeyError): 
+                    # if read_id not present, skip it (necessary if splitted fq are processed ) 
+                    continue
+
             else:
-                R1_file.write(fq1_dict[read_id].format("fastq"))
-                R2_file.write(fq2_dict[read_id].format("fastq"))
-                written += 1
+                try:
+                    R1_file.write(fq1_dict[read_id].format("fastq"))
+                    R2_file.write(fq2_dict[read_id].format("fastq"))
+                    written += 1
+
+                except(KeyError): 
+                    # if read_id not present, skip it (necessary if fq is splitted) 
+                    continue
 
     # -------------------------------------------------------------#
     ## load in fastq files as dictionaries for constant-time lookup

@@ -1,13 +1,12 @@
 import os, sys
 import json
 import pandas as pd
-import argparse
 from Bio import SeqIO
 import datetime
 import logging
 
-def sort_reads(sample_id: str, kraken_output: str, mode: str, 
-        ref_json_file: str, outdir: str, update_output: bool, 
+def sort_reads(sample_id: str, kraken_output: str, mode: str,
+        ref_json_file: str, outdir: str, update_output: bool,
         condense: bool = False, taxon_list: list = None,):
     """
     Control flow of taking args and producing output fastq files
@@ -35,7 +34,8 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str,
         # write tax_to_reads json file
         json_out_path = f"{outdir}/{sample_id}_tax_to_reads.json"
         tax_json_out = open(json_out_path, "w")
-        json.dump(tax_to_reads, tax_json_out, indent=4)
+        json_content_str = json.dumps(tax_to_reads, indent=4)
+        tax_json_out.write(json_content_str)
         print(f"> output file written to {json_out_path}")
 
     def compute_numreads_per_taxon(tax_to_reads):
@@ -54,10 +54,8 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str,
         if decomp[0] == "C":
             if decomp[2] in tax_to_read_ids.keys():
                 tax_to_read_ids[decomp[2]].append(decomp[1])
-                #tax_to_read_ids[decomp[2]].add(decomp[1])
             else:
                 tax_to_read_ids[decomp[2]] = [decomp[1]]
-                #tax_to_read_ids[decomp[2]] = set(decomp[1])
             classified_reads_count += 1
         read_count += 1
 
@@ -145,6 +143,10 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str,
             for k, v in cmode_parent_to_refs.items():
                 for leaf_tax in v:
                     cmode_tax_to_reads[k].update(tmode_tax_to_reads[leaf_tax])
+                
+            # convert set to list, json is not happy to dump files containing sets
+            for k, v in cmode_tax_to_reads.items():
+                cmode_tax_to_reads[k] = list(v)
 
             ## generate dict {{taxid1: num_reads1, taxid2: num_reads2}}
             numreads_per_taxon = compute_numreads_per_taxon(cmode_tax_to_reads)

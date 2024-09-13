@@ -68,6 +68,19 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str,
         print(f"> output file written to {json_out_path}")
 
     def compute_numreads_per_taxon(tax_to_reads):
+        """
+        Computes and returns a dictionary where keys are taxonomy IDs and values are the number of reads associated with each ID.
+
+        Parameters:
+            tax_to_reads (dict): A dictionary where keys are taxonomy IDs and values are lists of reads that were written at those levels.
+
+        Returns:
+            dict: A dictionary where keys are taxonomy IDs and values are the number of reads associated with each ID.
+
+        Examples:
+            >>> compute_numreads_per_taxon({'tax1': ['read1', 'read2'], 'tax2': ['read3']})
+            {'tax1': 2, 'tax2': 1}
+        """
         return {k: len(v) for k, v in tax_to_reads.items()}
     
     ## time for logging

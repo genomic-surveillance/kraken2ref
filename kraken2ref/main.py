@@ -132,7 +132,7 @@ def collect_args():
         "--tax_to_readsid_path",
         type = str,
         required = True,
-        help="json file containing tax to reads id (output by 'sort_to_reads' mode)"
+        help="json file containing tax to reads id (output by 'sort_to_reads' mode) [str/pathlike]"
     )
 
     dump_fqs_parser.add_argument(
@@ -158,15 +158,15 @@ def collect_args():
         '--chunk_size',
         type = int,
         required = False,
-        default=10_000,
-        help = "number of reads loaded into memory to process per batch")
+        default=100_000,
+        help = "Number of reads loaded into memory to process per batch [int] (default = 100_000)")
 
     dump_fqs_parser.add_argument(
         '--buffer_size',
         type = int,
         required = False,
         default=io.DEFAULT_BUFFER_SIZE,
-        help = "buffer for writing output fq files size in bytes")
+        help = "buffer for writing output fq files size in bytes [int] (default=IO default buffer size)")
     
     dump_fqs_parser.add_argument(
         '--fq_load_mode',
@@ -174,7 +174,7 @@ def collect_args():
         required = False,
         default="full",
         help = """
-load fqs file on memory mode. (default = "full")
+load fqs file on memory mode. [bool] (default = "full")
 [full: (faster, but higher memory foorprint), chunks: (slower, lower memory footprint)]
 """)
 
@@ -190,7 +190,7 @@ load fqs file on memory mode. (default = "full")
         type = int,
         required = False,
         default=1,
-        help = "number of threads to provide to index")
+        help = "number of threads to provide to index [int] (default=1)")
 
 
     args = parser.parse_args()

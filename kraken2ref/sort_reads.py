@@ -65,7 +65,7 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str,
         tax_json_out = open(json_out_path, "w")
         json_content_str = json.dumps(tax_to_reads, indent=4)
         tax_json_out.write(json_content_str)
-        print(f"> output file written to {json_out_path}")
+        sys.stdout.write(f"> output file written to {json_out_path}")
 
     def compute_numreads_per_taxon(tax_to_reads):
         """

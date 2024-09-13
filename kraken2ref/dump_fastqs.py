@@ -39,8 +39,7 @@ def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir,
                 try:
                     R1_file.write(fq1_dict[read_id+"/1"].format("fastq"))
                     R2_file.write(fq2_dict[read_id+"/2"].format("fastq"))
-                    written += 1
-                except(KeyError): 
+                except KeyError as ke: 
                     # if read_id not present, skip it (necessary if splitted fq are processed ) 
                     continue
 
@@ -50,7 +49,7 @@ def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir,
                     R2_file.write(fq2_dict[read_id].format("fastq"))
                     written += 1
 
-                except(KeyError): 
+                except KeyError as ke: 
                     # if read_id not present, skip it (necessary if fq is splitted) 
                     continue
 

@@ -4,6 +4,7 @@ import os
 from Bio import SeqIO
 from concurrent import futures
 import gc
+import sys
 
 def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir, 
                         max_threads=1, buffer_size=io.DEFAULT_BUFFER_SIZE):
@@ -102,7 +103,7 @@ def dump_to_file_chunks(sample_id, tax_to_readids_dict, fq1, fq2,
     fq2_iter = SeqIO.parse(fq2, "fastq")
 
     ## Process files in chunks
-    print(f"@ processing chunks (chunk_size = {chunk_size})")
+    sys.stdout.write(f"@ processing chunks (chunk_size = {chunk_size})")
     c = 1
     while True:
 
@@ -145,10 +146,10 @@ def dump_to_file_chunks(sample_id, tax_to_readids_dict, fq1, fq2,
         gc.collect()
         c +=1
     # print output files generated
-    print(":> Output files:")
+    sys.stdout.write(":> Output files:")
     for taxid in output_files.keys():
         out_file = os.path.join(outdir, f"{sample_id}_{taxid}_R*.fq")
-        print(f"  -> {out_file}")
+        sys.stdout.write(f"  -> {out_file}")
 
 
     ## Close all output files
@@ -187,7 +188,7 @@ def dump_fastqs(args):
     if not os.path.exists(absolute_outdir):
         os.makedirs(absolute_outdir)
 
-    print(f"> {fq_load_mode} mode selected ")
+    sys.stdout.write(f"> {fq_load_mode} mode selected ")
     # dump files according to mode
     if fq_load_mode == "full":
         dump_to_file_index(

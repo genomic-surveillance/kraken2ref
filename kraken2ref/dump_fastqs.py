@@ -26,8 +26,6 @@ def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir,
             fq2_dict (_IndexedSeqFileDict): Dictionary of reverse fastq records
             outdir (str/path): Path to output directory
         """
-        ## initiate counter
-        written = 0
 
         ## initialise files to write to
         R1_file = open(os.path.join(outdir, f"{sample_id}_{output_taxid}_R1.fq"), "w", buffering=buffer_size)
@@ -39,6 +37,7 @@ def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir,
                 try:
                     R1_file.write(fq1_dict[read_id+"/1"].format("fastq"))
                     R2_file.write(fq2_dict[read_id+"/2"].format("fastq"))
+
                 except KeyError as ke: 
                     # if read_id not present, skip it (necessary if splitted fq are processed ) 
                     continue
@@ -47,7 +46,6 @@ def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir,
                 try:
                     R1_file.write(fq1_dict[read_id].format("fastq"))
                     R2_file.write(fq2_dict[read_id].format("fastq"))
-                    written += 1
 
                 except KeyError as ke: 
                     # if read_id not present, skip it (necessary if fq is splitted) 

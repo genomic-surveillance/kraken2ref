@@ -178,8 +178,12 @@ def dump_fastqs(args):
 
     # check if modes are valid -- /
     ACCEPTED_MODES = ["full", "chunks"]
-    err_msg = f"'{fq_load_mode}' is an invalid mode (valid ones: {ACCEPTED_MODES}"
-    assert(fq_load_mode in ACCEPTED_MODES), err_msg
+
+    try:
+        assert(fq_load_mode in ACCEPTED_MODES)
+    except(AssertionError):
+        err_msg = f"'{fq_load_mode}' is an invalid mode (valid ones: {ACCEPTED_MODES}"
+        sys.stdout.write(err_msg)
     # --------------------------- #
 
     ## Check if output directory exists and create if not

@@ -24,6 +24,20 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str,
     """
 
     def load_reads_written(tax_to_reads):
+        """
+        Collects and returns a list of reads written for summary logging.
+
+        Parameters:
+            tax_to_reads (dict): A dictionary where keys are taxonomy IDs
+                         and values are lists of reads that were written at those levels
+
+        Returns:
+            reads_written (list): A list of all reads that were written, regardless of taxonomy level
+
+        Examples:
+            >>> load_reads_written({'tax1': ['read1', 'read2'], 'tax2': ['read3']})
+            ['read1', 'read2', 'read3']
+        """
         reads_written = []
         ## collect reads that were written for summary logging
         for k, v in tax_to_reads.items():
@@ -31,6 +45,21 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str,
         return reads_written
 
     def write_out_json(sample_id: str, outdir: str,tax_to_reads: dict):
+        """
+        Writes the taxonomy-to-reads dictionary to a JSON file.
+
+        Parameters:
+            sample_id (str): The ID of the sample being written.
+            outdir (str): The directory where the output files should be written.
+            tax_to_reads (dict): A dictionary where keys are taxonomy IDs and values are lists of reads that were written at those levels.
+
+        Returns:
+            None
+
+        Examples:
+            >>> write_out_json('sample1', '/path/to/output/directory', {'tax1': ['read1', 'read2'], 'tax2': ['read3']})
+            > output file written to /path/to/output/directory/sample1_tax_to_reads.json
+        """
         # write tax_to_reads json file
         json_out_path = f"{outdir}/{sample_id}_tax_to_reads.json"
         tax_json_out = open(json_out_path, "w")

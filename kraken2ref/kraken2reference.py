@@ -251,7 +251,7 @@ class KrakenProcessor:
                 self.tree_meta_out.update(self._update_tree_meta(filt_leaves = poll.filt_leaves, simple_source_tree = simple_tree, data_dict = data_dict, parent_selected = poll.parent_selected))
 
                 ## logging
-                logging.debug(f"Valid leaves = {poll.valid_leaves}\n")
+                logging.debug(f"Filtered leaves = {poll.filt_leaves}\n")
                 self._log_to_stderr(f"{poll.filt_leaves = }\n\n", quiet)
 
         return self.tree_meta_out

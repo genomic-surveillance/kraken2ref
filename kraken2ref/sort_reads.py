@@ -1,70 +1,15 @@
 import os, sys
 import json
 import pandas as pd
-import argparse
 from Bio import SeqIO
-from concurrent import futures
 import datetime
 import logging
 
-def dump_to_file(sample_id, tax_to_readids_dict, fq1, fq2, outdir):
-    """Function that dumps reads to file.
-
-    Args:
-        tax_to_readids_dict (dict): Dictionary mapping of taxon IDs to their corresponding lists of read IDs
-        fq1 (str/path): Path to forward fastq file
-        fq2 (str/path): Path to reverse fastq file
-        outdir (str/path): Path to output directory
+def sort_reads(sample_id: str, kraken_output: str, mode: str,
+        ref_json_file: str, outdir: str, update_output: bool,
+        condense: bool = False, taxon_list: list = None,):
     """
-    ## load in fastq files as dictionaries for constant-time lookup
-    fq1_dict = SeqIO.index(fq1, "fastq")
-    fq2_dict = SeqIO.index(fq2, "fastq")
-
-    ## check if read IDs have slash notations
-    chosen_ref = list(fq1_dict.keys())[0]
-    if chosen_ref[-2:] == "/1":
-        slashes = True
-    else:
-        slashes = False
-
-    def fq_write_wrapper(output_taxid, sample_id, tax_to_readids_dict, fq1_dict, fq2_dict, outdir):
-        """Function that wraps around actual file I/O, run in parallel
-
-        Args:
-            output_taxid (str): Taxonomic ID to write
-            tax_to_readids_dict (dict): Dictionary mapping of taxon IDs to their corresponding lists of read IDs
-            fq1_dict (_IndexedSeqFileDict): Dictionary of forward fastq records
-            fq2_dict (_IndexedSeqFileDict): Dictionary of reverse fastq records
-            outdir (str/path): Path to output directory
-        """
-        ## initiate counter
-        written = 0
-
-        ## initialise files to write to
-        R1_file = open(os.path.join(outdir, f"{sample_id}_{output_taxid}_R1.fq"), "w")
-        R2_file = open(os.path.join(outdir, f"{sample_id}_{output_taxid}_R2.fq"), "w")
-
-        ## iterate over read ids in list and dump to files
-        for read_id in tax_to_readids_dict[output_taxid]:
-            if slashes:
-                R1_file.write(fq1_dict[read_id+"/1"].format("fastq"))
-                R2_file.write(fq2_dict[read_id+"/2"].format("fastq"))
-                written += 1
-            else:
-                R1_file.write(fq1_dict[read_id].format("fastq"))
-                R2_file.write(fq2_dict[read_id].format("fastq"))
-                written += 1
-
-    ## initialise parallel function calls
-    with futures.ThreadPoolExecutor(max_workers=4) as executor:
-        ## get list of functions for execution
-        functions = [executor.submit(fq_write_wrapper(taxid, sample_id, tax_to_readids_dict, fq1_dict, fq2_dict, outdir)) for taxid in list(tax_to_readids_dict.keys())]
-        ## make main wait until functions conclude
-        futures.wait(functions)
-
-
-def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq2: str, ref_json_file: str, outdir: str, update_output: bool, condense: bool = False, taxon_list: list = None):
-    """Control flow of taking args and producing output fastq files
+    Control flow of taking args and producing output fastq files
 
     Args:
         sample_id (str): Sample ID
@@ -78,6 +23,66 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq
         ref_json_file (str/path, optional): Path to ref_json file produced by kraken2ref. Defaults to None.
     """
 
+    def load_reads_written(tax_to_reads):
+        """
+        Collects and returns a list of reads written for summary logging.
+
+        Parameters:
+            tax_to_reads (dict): A dictionary where keys are taxonomy IDs
+                         and values are lists of reads that were written at those levels
+
+        Returns:
+            reads_written (list): A list of all reads that were written, regardless of taxonomy level
+
+        Examples:
+            >>> load_reads_written({'tax1': ['read1', 'read2'], 'tax2': ['read3']})
+            ['read1', 'read2', 'read3']
+        """
+        reads_written = []
+        ## collect reads that were written for summary logging
+        for k, v in tax_to_reads.items():
+            reads_written.extend(v)
+        return reads_written
+
+    def write_out_json(sample_id: str, outdir: str,tax_to_reads: dict):
+        """
+        Writes the taxonomy-to-reads dictionary to a JSON file.
+
+        Parameters:
+            sample_id (str): The ID of the sample being written.
+            outdir (str): The directory where the output files should be written.
+            tax_to_reads (dict): A dictionary where keys are taxonomy IDs and values are lists of reads that were written at those levels.
+
+        Returns:
+            None
+
+        Examples:
+            >>> write_out_json('sample1', '/path/to/output/directory', {'tax1': ['read1', 'read2'], 'tax2': ['read3']})
+            > output file written to /path/to/output/directory/sample1_tax_to_reads.json
+        """
+        # write tax_to_reads json file
+        json_out_path = f"{outdir}/{sample_id}_tax_to_reads.json"
+        tax_json_out = open(json_out_path, "w")
+        json_content_str = json.dumps(tax_to_reads, indent=4)
+        tax_json_out.write(json_content_str)
+        sys.stdout.write(f"> output file written to {json_out_path}")
+
+    def compute_numreads_per_taxon(tax_to_reads):
+        """
+        Computes and returns a dictionary where keys are taxonomy IDs and values are the number of reads associated with each ID.
+
+        Parameters:
+            tax_to_reads (dict): A dictionary where keys are taxonomy IDs and values are lists of reads that were written at those levels.
+
+        Returns:
+            dict: A dictionary where keys are taxonomy IDs and values are the number of reads associated with each ID.
+
+        Examples:
+            >>> compute_numreads_per_taxon({'tax1': ['read1', 'read2'], 'tax2': ['read3']})
+            {'tax1': 2, 'tax2': 1}
+        """
+        return {k: len(v) for k, v in tax_to_reads.items()}
+    
     ## time for logging
     NOW = f"{datetime.datetime.now():%Y-%m-%d %H:%M:%S}"
 
@@ -114,18 +119,11 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq
         taxids_to_extract = [str(i) for i in taxon_list.split(",")]
 
         ## generate dict {taxid1: [readid1, readid2...], taxid2: [readid11, readid12...]}
-        umode_tax_to_reads = {k: v for k, v in tax_to_read_ids.items() for k in taxids_to_extract}
+        tax_to_reads = {k: v for k, v in tax_to_read_ids.items() for k in taxids_to_extract}
         ## generate dict {{taxid1: num_reads1, taxid2: num_reads2}}
-        umode_numreads_per_taxon = {k: len(v) for k, v in umode_tax_to_reads.items()}
+        numreads_per_taxon = compute_numreads_per_taxon(tax_to_reads)
 
-        ## dump to file
-        dump_to_file(sample_id, umode_tax_to_reads, fastq1, fastq2, outdir)
-        file_read_counts = umode_numreads_per_taxon
-        reads_written = []
-        ## collect reads that were written for summary logging
-        for k, v in umode_tax_to_reads.items():
-            reads_written.extend(v)
-
+        
     ############################
     #                          #
     ####     TREE MODE     #####
@@ -164,16 +162,14 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq
                     pass
 
         ## generate dict {{taxid1: num_reads1, taxid2: num_reads2}}
-        tmode_numreads_per_taxon = {k: len(v) for k, v in tmode_tax_to_reads.items()}
+        numreads_per_taxon = compute_numreads_per_taxon(tmode_tax_to_reads)
 
         ## if not condense, dump to file now
         if not condense:
-            file_read_counts = tmode_numreads_per_taxon
-            reads_written = []
+            #file_read_counts = tmode_numreads_per_taxon
             ## collect reads that were written for summary logging
-            for k, v in tmode_tax_to_reads.items():
-                reads_written.extend(v)
-            dump_to_file(sample_id, tmode_tax_to_reads, fastq1, fastq2, outdir)
+            reads_written = load_reads_written(tmode_tax_to_reads)
+            write_out_json(sample_id, outdir,tmode_tax_to_reads)
 
         #############################
         #                           #
@@ -189,16 +185,16 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq
             for k, v in cmode_parent_to_refs.items():
                 for leaf_tax in v:
                     cmode_tax_to_reads[k].update(tmode_tax_to_reads[leaf_tax])
+                
+            # convert set to list, json is not happy to dump files containing sets
+            for k, v in cmode_tax_to_reads.items():
+                cmode_tax_to_reads[k] = list(v)
 
             ## generate dict {{taxid1: num_reads1, taxid2: num_reads2}}
-            cmode_numreads_per_taxon = {k: len(v) for k, v in cmode_tax_to_reads.items()}
+            numreads_per_taxon = compute_numreads_per_taxon(cmode_tax_to_reads)
 
-            file_read_counts = cmode_numreads_per_taxon
-            reads_written = []
-            ## collect reads that were written for summary logging
-            for k, v in cmode_tax_to_reads.items():
-                reads_written.extend(v)
-            dump_to_file(sample_id, cmode_tax_to_reads, fastq1, fastq2, outdir)
+            reads_written = load_reads_written(cmode_tax_to_reads)
+            write_out_json(sample_id, outdir, cmode_tax_to_reads)
 
     ## populate summary dict
     summary = {
@@ -209,7 +205,7 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq
                 "total_classified_reads": classified_reads_count,
                 "unclasified_reads": read_count - classified_reads_count,
                 },
-        "per_taxon": file_read_counts
+        "per_taxon": numreads_per_taxon
     }
 
     ## log info related to condense
@@ -237,13 +233,17 @@ def sort_reads(sample_id: str, kraken_output: str, mode: str, fastq1: str, fastq
                 new_json_path = ref_json_file.replace("_decomposed.json", "_updated_decomposed.json")
                 with open(new_json_path, "w") as new_json:
                     json.dump(data, new_json, indent=4)
-    logging.info(f"Wrote {len(file_read_counts.keys())} file-pairs at path {outdir}.\n\n")
+
+    logging.info(f"Wrote {len(numreads_per_taxon.keys())} file-pairs at path {outdir}.\n\n")
 
     ## get a list of unwritten reads and dump to file as tsv
     full_kraken_out = pd.read_csv(kraken_output, sep = "\t", header = None)
     unwritten = full_kraken_out[~full_kraken_out[1].isin(reads_written)]
     unwritten.to_csv(os.path.join(outdir, f"{sample_id}_unwritten_reads.txt"), sep = "\t", header = False, index = False)
 
+
+# instantiating the decorator
+#@profile
 def sort_reads_by_tax(args):
     """Driver function.
     """
@@ -268,29 +268,37 @@ def sort_reads_by_tax(args):
     sample_id = args.sample_id
     kraken_output = args.kraken_out
     mode = args.mode
+
     if not args.mode:
         logging.debug("No sorting mode provided, defaulting to mode: tree.")
         mode = "tree"
-    fastq1 = args.fastq1
-    fastq2 = args.fastq2
 
     condense = args.condense
     update_output = args.update
     taxon_list = args.taxon_list
     ref_json_file = args.ref_json
 
+    absolute_outdir = os.path.abspath(args.outdir)
+
     ## set up logfile
     if ref_json_file:
         full_path_to_ref_json = os.path.abspath(ref_json_file)
-        fixed_outdir = os.path.dirname(full_path_to_ref_json)
-        logfile = os.path.join(fixed_outdir, f"{sample_id}_kraken2ref.log")
+        log_outdir = os.path.dirname(full_path_to_ref_json)
+        logfile = os.path.join(log_outdir, f"{sample_id}_kraken2ref.log")
     else:
-        fixed_outdir = os.path.abspath(args.outdir)
-        logfile = os.path.join(fixed_outdir, f"{sample_id}_sort_reads.log")
+        logfile = os.path.join(absolute_outdir, f"{sample_id}_sort_reads.log")
         full_path_to_ref_json = None
     logging.basicConfig(format='%(asctime)s | %(levelname)s | %(module)s - %(funcName)s | %(message)s', level=logging.NOTSET, datefmt="%Y-%m-%d %H:%M:%S", filename = logfile)
 
 
     ## run sort_reads
-    sort_reads(sample_id=sample_id, kraken_output=kraken_output, mode=mode, fastq1=fastq1, fastq2=fastq2, condense=condense, update_output=update_output, taxon_list=taxon_list, ref_json_file=full_path_to_ref_json, outdir=fixed_outdir)
+    sort_reads(
+        sample_id=sample_id,
+        kraken_output=kraken_output,
+        mode=mode,
+        condense=condense,
+        update_output=update_output,
+        taxon_list=taxon_list,
+        ref_json_file=full_path_to_ref_json,
+        outdir=absolute_outdir)
 

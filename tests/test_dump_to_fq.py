@@ -1,0 +1,55 @@
+import json
+from Bio import SeqIO
+from kraken2ref import sort_reads, dump_fastqs
+from kraken2ref.kraken2reference import KrakenProcessor
+
+def test_dump_basic():
+    dump_basic_proc = KrakenProcessor("test_dump_basic")
+    dump_basic_proc.analyse_report(input_kraken_report_file="tests/artificial_reports/adenovirus_clean.report.txt", input_threshold=100, input_method="max", quiet=True)
+    dump_basic_proc.write_output(prefix = ".", suffix="decomposed")
+
+    sort_reads.sort_reads(sample_id="test_dump_basic",
+                          kraken_output="tests/test_set/with_fluseg_db/testset_50x.kraken.output",
+                          mode="tree",
+                          ref_json_file="test_dump_basic_decomposed.json",
+                          outdir=".",
+                          update_output=False,
+                          condense=False)
+
+    tax_to_read_ids_here = json.load(open("test_dump_basic_tax_to_reads.json", "r"))
+    dump_fastqs.dump_to_file_index(sample_id="test_dump_basic",
+                                   tax_to_readids_dict=tax_to_read_ids_here,
+                                   fq1="tests/test_set/with_fluseg_db/testset_50x_1.fq",
+                                   fq2="tests/test_set/with_fluseg_db/testset_50x_2.fq",
+                                   outdir=".")
+
+    files_expected = {"test_dump_basic_10519_R1.fq": 5900, "test_dump_basic_10519_R2.fq": 5900, "test_dump_basic_28285_R1.fq": 17950, "test_dump_basic_28285_R2.fq": 17950}
+    for filepath, num_reads_expected in files_expected.items():
+        recs = list(SeqIO.parse(filepath, "fastq"))
+        assert len(recs) == num_reads_expected, f"File {filepath} does not contain the expected number of reads {num_reads_expected}"
+
+def test_dump_chunks():
+    dump_chunks_proc = KrakenProcessor("test_dump_chunks")
+    dump_chunks_proc.analyse_report(input_kraken_report_file="tests/artificial_reports/adenovirus_clean.report.txt", input_threshold=100, input_method="max", quiet=True)
+    dump_chunks_proc.write_output(prefix = ".", suffix="decomposed")
+
+    sort_reads.sort_reads(sample_id="test_dump_chunks",
+                          kraken_output="tests/test_set/with_fluseg_db/testset_50x.kraken.output",
+                          mode="tree",
+                          ref_json_file="test_dump_chunks_decomposed.json",
+                          outdir=".",
+                          update_output=False,
+                          condense=False)
+
+    tax_to_read_ids_here = json.load(open("test_dump_chunks_tax_to_reads.json", "r"))
+    dump_fastqs.dump_to_file_chunks(sample_id="test_dump_chunks",
+                                   tax_to_readids_dict=tax_to_read_ids_here,
+                                   fq1="tests/test_set/with_fluseg_db/testset_50x_1.fq",
+                                   fq2="tests/test_set/with_fluseg_db/testset_50x_2.fq",
+                                   outdir=".")
+
+    files_expected = {"test_dump_chunks_10519_R1.fq": 5900, "test_dump_chunks_10519_R2.fq": 5900, "test_dump_chunks_28285_R1.fq": 17950, "test_dump_chunks_28285_R2.fq": 17950}
+    for filepath, num_reads_expected in files_expected.items():
+        recs = list(SeqIO.parse(filepath, "fastq"))
+        assert len(recs) == num_reads_expected, f"File {filepath} does not contain the expected number of reads {num_reads_expected}"
+

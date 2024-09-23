@@ -54,6 +54,18 @@ class Poll:
             self.dist = freq_dist
             self.prob_dist = [i/sum(self.dist) for i in self.dist]
 
+    def get_max(self):
+        """Function that selects the node with the maximum frequency, forcing the selection of exactly one references
+           from valid trees
+
+           Returns:
+            max_node (tuple): Node with maximum frequency
+        """
+        max_freq = max(self.dist)
+        max_node = self.nodes_to_poll[self.dist.index(max_freq)]
+
+        return [max_node]
+
     def step_thru(self):
         """Function that steps forward through a frequency distribution and finds the first inflection
 
@@ -264,7 +276,7 @@ class Poll:
         method = method.lower()
         self.class_method.append(method)
         try:
-            assert method in ["skew", "tiles", "kmeans"]
+            assert method in ["max", "skew", "tiles", "kmeans"]
         except AssertionError as ae:
             logging.warning(f"Invalid polling method specified. Defaulting to 'kmeans'")
             method = "kmeans"
@@ -273,6 +285,10 @@ class Poll:
         logging.debug(f"Probability Distribution: {self.prob_dist}")
         self.surprise_prefilter = sts.entropy(self.prob_dist)
         logging.debug(f"Pre-filter Entropy: {self.surprise_prefilter}")
+
+        if method == "max":
+            self.postfilter_surprise = 0
+            self.filt_leaves = self.get_max()
 
         if method == "skew":
             self.filt_leaves, self.postfilter_surprise = self.poll_with_skew()

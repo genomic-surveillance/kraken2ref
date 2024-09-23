@@ -1,0 +1,15 @@
+  0.63	618	618	0	0	U	0	unclassified
+ 99.37	97251	0	6733234	107793	R	1	root
+ 99.37	97251	0	6733234	107793	D	10239	  Viruses
+ 24.38	23857	0	1675190	31787	D1	2732004	    Varidnaviria
+ 24.38	23857	0	1675190	31787	K	2732005	      Bamfordvirae
+ 24.37	23850	0	1675126	31769	P	2732008	        Preplasmiviricota
+ 24.37	23850	0	1675126	31769	C	2732529	          Tectiliviricetes
+ 24.37	23850	0	1675126	31769	O	2732559	            Rowavirales
+ 24.37	23850	0	1675126	31769	F	10508	              Adenoviridae
+ 24.37	23850	0	1674347	31745	G	10509	                Mastadenovirus
+ 18.34	17950	7454	1226272	19827	S	129951	                  Human mastadenovirus C
+  5.50	5386	5386	148345	4105	S1	28285	                    Human adenovirus 5
+  5.22	5110	5110	143385	3882	S1	10533	                    Human adenovirus 1
+  6.03	5900	244	399892	11065	S	108098	                  Human mastadenovirus B
+  5.78	5656	5656	134161	3705	S1	10519	                    Human adenovirus 7

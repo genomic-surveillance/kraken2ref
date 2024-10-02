@@ -25,7 +25,7 @@ kraken2ref -s <sample_id> parse_report \
             -i path/to/kraken2/report.txt \
             -o ./ \
             -t <min_read_threshold> \
-            -m kmeans \
+            -m max \
             -x decomposed \
             -q
 
@@ -63,7 +63,7 @@ kraken2ref -s <sample_id> dump_fastqs
 - `-i` [path]: (Ideally the absolute) path to kraken2 taxonomy report file [REQUIRED]  
 - `-t` [int]: Minimum number of reads assigned to a leaf node for it to be considered [OPTIONAL][Default = 100]  
 - `-o` [path]: Path to output directory [OPTIONAL][Default = "./"]  
-- `-m` [str]: Polling method to use [OPTIONAL][DEFAULT = "kmeans"]["kmeans", "tiles"]  
+- `-m` [str]: Polling method to use [OPTIONAL][DEFAULT = "max"]["max", "kmeans", "tiles"]  
 - `-x` [str]: Suffix to apply to `sample_id` when creating output JSON file [OPTIONAL][Default = "decomposed"]  
 - `-q` [switch]: Whether to log to stderr or not [OPTIONAL][Default = True]  
 
@@ -153,6 +153,10 @@ So, in case no leaf nodes in a subgraph pass the threshold, the algorithm jumps 
 In most cases, there is expected to be at least one leaf node which passes the threshold; for example, in the subgraph `[(0,"S"), (1,"S1"), (2,"S2"), (3,"S3"), (4,"S3")]`, let us say leaf `(4,"S3")` passes, giving us a valid path `[(0,"S"), (1,"S1"), (2,"S2"), (4,"S3")]` through this subgraph. At this point, the output notes `(4,"S3")` as the chosen reference, records the path to that node, and also records the taxonomic IDs of **ALL** nodes in the entire parent graph `[(0,"S"), (1,"S1"), (2,"S2"), (3,"S3"), (4,"S3")]` -- this allows us to retain all read information associated with this parent graph, and potentially use all those reads to align to/call consensus on/analyse with the chose reference.  
 
 ## Polling  
+
+### Maximum-Based Reference Selection  
+
+As the name suggests, this method simply selects the leaf node with the maximum number of reads assigned to it. This is the default method that kraken2ref uses.  
 
 ### KMeans-Based Outlier Detection  
 

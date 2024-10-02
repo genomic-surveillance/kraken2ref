@@ -69,9 +69,9 @@ def collect_args():
         '-m', '--poll_method',
         type = str,
         required = False,
-        default = "kmeans",
-        help = """Which polling method to use. [str] [Default = 'kmeans']
-                    Valid choices: ['skew', 'kmeans', 'tiles']""")
+        default = "max",
+        help = """Which polling method to use. [str] [Default = 'max']
+                    Valid choices: ['max', 'skew', 'kmeans', 'tiles']""")
 
     report_parser.add_argument(
         "-q", "--quiet",
@@ -167,7 +167,7 @@ def collect_args():
         required = False,
         default=io.DEFAULT_BUFFER_SIZE,
         help = "buffer for writing output fq files size in bytes [int] (default=IO default buffer size)")
-    
+
     dump_fqs_parser.add_argument(
         '--fq_load_mode',
         type = str,

@@ -1,0 +1,15 @@
+  0.63	618	618	0	0	U	0	unclassified
+ 99.37	97251	0	6733234	107793	R	1	root
+ 99.37	97251	0	6733234	107793	D	10239	  Viruses
+ 74.99	73394	0	5057023	77071	D1	2559587	    Riboviria
+ 74.99	73394	0	5056989	77071	K	2732396	      Orthornavirae
+ 42.47	41569	0	2922002	12499	P	2732408	        Pisuviricota
+ 42.47	41569	0	2922002	12499	C	2732506	          Pisoniviricetes
+ 41.27	40394	0	2840393	10280	O	76804	            Nidovirales
+ 41.27	40394	0	2840391	10280	O1	2499399	              Cornidovirineae
+ 41.27	40394	0	2840391	10280	F	11118	                Coronaviridae
+ 41.27	40394	0	2840045	10277	F1	2501931	                  Orthocoronavirinae
+ 41.27	40394	0	2835837	10244	G	694002	                    Betacoronavirus
+ 41.27	40394	0	2834890	10228	G1	2509511	                      Sarbecovirus
+ 41.27	40394	0	2798630	9947	S	694009	                        Severe acute respiratory syndrome-related coronavirus
+ 41.27	40394	40394	2727544	9480	S1	2697049	                          Severe acute respiratory syndrome coronavirus 2

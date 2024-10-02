@@ -1,13 +1,12 @@
-import io
+import io, os, sys
 import json
-import os
+import logging
 from Bio import SeqIO
 from concurrent import futures
 import gc
-import sys
 
-def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir, 
-                        max_threads=1, buffer_size=io.DEFAULT_BUFFER_SIZE):
+def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir,
+                       max_threads=1, buffer_size=io.DEFAULT_BUFFER_SIZE):
     """Function that dumps reads to file.
 
     Args:
@@ -17,7 +16,8 @@ def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir,
         outdir (str/path): Path to output directory
     """
 
-    def fq_write_wrapper(output_taxid, sample_id, tax_to_readids_dict, fq1_dict, fq2_dict, outdir, slashes):
+    def fq_write_wrapper(output_taxid, sample_id, tax_to_readids_dict,
+                         fq1_dict, fq2_dict, outdir, slashes):
         """Function that wraps around actual file I/O, run in parallel
 
         Args:
@@ -39,8 +39,8 @@ def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir,
                     R1_file.write(fq1_dict[read_id+"/1"].format("fastq"))
                     R2_file.write(fq2_dict[read_id+"/2"].format("fastq"))
 
-                except KeyError as ke: 
-                    # if read_id not present, skip it (necessary if splitted fq are processed ) 
+                except KeyError as ke:
+                    # if read_id not present, skip it (necessary if splitted fq are processed )
                     continue
 
             else:
@@ -49,7 +49,7 @@ def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir,
                     R2_file.write(fq2_dict[read_id].format("fastq"))
 
                 except KeyError as ke: 
-                    # if read_id not present, skip it (necessary if fq is splitted) 
+                    # if read_id not present, skip it (necessary if fq is split)
                     continue
 
     # -------------------------------------------------------------#
@@ -72,8 +72,8 @@ def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir,
         ## make main wait until functions conclude
         futures.wait(functions)
 
-def dump_to_file_chunks(sample_id, tax_to_readids_dict, fq1, fq2,
-    outdir, chunk_size=10_000, buffer_size=io.DEFAULT_BUFFER_SIZE):
+def dump_to_file_chunks(sample_id, tax_to_readids_dict, fq1, fq2, outdir,
+                        chunk_size=10_000, buffer_size=io.DEFAULT_BUFFER_SIZE):
     """Function that dumps reads to file in chunks.
 
     Args:
@@ -103,13 +103,14 @@ def dump_to_file_chunks(sample_id, tax_to_readids_dict, fq1, fq2,
     fq2_iter = SeqIO.parse(fq2, "fastq")
 
     ## Process files in chunks
-    sys.stdout.write(f"@ processing chunks (chunk_size = {chunk_size})")
+    sys.stdout.write(f"@ processing chunks (chunk_size = {chunk_size})\n")
     c = 1
     while True:
 
         chunk1 = list(next(fq1_iter, None) for _ in range(chunk_size))
         chunk2 = list(next(fq2_iter, None) for _ in range(chunk_size))
         print(f"  > {c}", end="\r")
+
         ## Break the loop if no more records to process
         if not chunk1 or not chunk2:
             break
@@ -146,10 +147,12 @@ def dump_to_file_chunks(sample_id, tax_to_readids_dict, fq1, fq2,
         gc.collect()
         c +=1
     # print output files generated
-    sys.stdout.write(":> Output files:")
+    sys.stdout.write(":> Output files:\n")
+    logging.info(":> Output files:\n")
     for taxid in output_files.keys():
         out_file = os.path.join(outdir, f"{sample_id}_{taxid}_R*.fq")
-        sys.stdout.write(f"  -> {out_file}")
+        sys.stdout.write(f"  -> {out_file}\n")
+        logging.info(f"  -> {out_file}\n")
 
 
     ## Close all output files
@@ -161,7 +164,7 @@ def dump_to_file_chunks(sample_id, tax_to_readids_dict, fq1, fq2,
 
 
 def dump_fastqs(args):
-    
+
     # inputs
     sample_id = args.sample_id
     json_tax_to_readsid_path = args.tax_to_readsid_path
@@ -184,6 +187,7 @@ def dump_fastqs(args):
     except(AssertionError):
         err_msg = f"'{fq_load_mode}' is an invalid mode (valid ones: {ACCEPTED_MODES}"
         sys.stdout.write(err_msg)
+        logging.info(err_msg)
     # --------------------------- #
 
     ## Check if output directory exists and create if not
@@ -193,6 +197,7 @@ def dump_fastqs(args):
         os.makedirs(absolute_outdir)
 
     sys.stdout.write(f"> {fq_load_mode} mode selected ")
+    logging.info(f"> {fq_load_mode} mode selected ")
     # dump files according to mode
     if fq_load_mode == "full":
         dump_to_file_index(

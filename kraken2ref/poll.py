@@ -6,7 +6,8 @@ from sklearn.cluster import KMeans
 from kraken2ref.taxonomytree import TaxonomyTree
 
 class Poll:
-    """Class to encapsulate polling functions and handle related exceptions/standard behaviours
+    """Class to encapsulate polling functions
+    and handle related exceptions/standard behaviours
     """
     def __init__(self, taxonomy_tree: TaxonomyTree, data_dict:dict, threshold: int):
         """Initialiser
@@ -54,11 +55,24 @@ class Poll:
             self.dist = freq_dist
             self.prob_dist = [i/sum(self.dist) for i in self.dist]
 
+    def get_max(self):
+        """Function that selects the node with the maximum frequency,
+            forcing the selection of exactly one references from valid trees
+
+           Returns:
+            max_node (tuple): Node with maximum frequency
+        """
+        max_freq = max(self.dist)
+        max_node = self.nodes_to_poll[self.dist.index(max_freq)]
+
+        return [max_node]
+
     def step_thru(self):
         """Function that steps forward through a frequency distribution and finds the first inflection
 
         Returns:
-            idxs_to_return: Index locations of retained frequencies to map back to X-axis values and retrieve them
+            idxs_to_return: Index locations of retained frequencies
+                            to map back to X-axis values and retrieve them
         """
         steps = sorted(self.dist)
         max_step = 0
@@ -85,10 +99,12 @@ class Poll:
         return idxs_to_return
 
     def step_thru_back(self):
-        """Function that steps backward through reverse-sorted list of frequencies and finds the last inflection point.
+        """Function that steps backward through reverse-sorted
+        list of frequencies and finds the last inflection point.
 
         Returns:
-            idxs_to_return: Index locations of retained frequencies to map back to X-axis values and retrieve them
+            idxs_to_return: Index locations of retained frequencies
+                            to map back to X-axis values and retrieve them
         """
         steps = sorted(self.dist, reverse=True)
         # max_step = 100000000000000000
@@ -115,7 +131,8 @@ class Poll:
         return idxs_to_return
 
     def poll_with_skew(self):
-        """Apply polling functions to end nodes, treating data as a frequency distribution of hits v/s end nodes
+        """Apply polling functions to end nodes, treating data as a
+        frequency distribution of hits v/s end nodes
 
         Returns:
             filt_leaves (list): List of indexed end nodes retained after filtration
@@ -264,7 +281,7 @@ class Poll:
         method = method.lower()
         self.class_method.append(method)
         try:
-            assert method in ["skew", "tiles", "kmeans"]
+            assert method in ["max", "skew", "tiles", "kmeans"]
         except AssertionError as ae:
             logging.warning(f"Invalid polling method specified. Defaulting to 'kmeans'")
             method = "kmeans"
@@ -273,6 +290,10 @@ class Poll:
         logging.debug(f"Probability Distribution: {self.prob_dist}")
         self.surprise_prefilter = sts.entropy(self.prob_dist)
         logging.debug(f"Pre-filter Entropy: {self.surprise_prefilter}")
+
+        if method == "max":
+            self.postfilter_surprise = 0
+            self.filt_leaves = self.get_max()
 
         if method == "skew":
             self.filt_leaves, self.postfilter_surprise = self.poll_with_skew()

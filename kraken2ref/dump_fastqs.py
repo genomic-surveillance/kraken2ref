@@ -5,7 +5,8 @@ from Bio import SeqIO
 from concurrent import futures
 import gc
 
-def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir, max_threads=1, buffer_size=io.DEFAULT_BUFFER_SIZE):
+def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir,
+                       max_threads=1, buffer_size=io.DEFAULT_BUFFER_SIZE):
     """Function that dumps reads to file.
 
     Args:
@@ -15,7 +16,8 @@ def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir, max_thr
         outdir (str/path): Path to output directory
     """
 
-    def fq_write_wrapper(output_taxid, sample_id, tax_to_readids_dict, fq1_dict, fq2_dict, outdir, slashes):
+    def fq_write_wrapper(output_taxid, sample_id, tax_to_readids_dict,
+                         fq1_dict, fq2_dict, outdir, slashes):
         """Function that wraps around actual file I/O, run in parallel
 
         Args:
@@ -70,7 +72,8 @@ def dump_to_file_index(sample_id, tax_to_readids_dict, fq1, fq2, outdir, max_thr
         ## make main wait until functions conclude
         futures.wait(functions)
 
-def dump_to_file_chunks(sample_id, tax_to_readids_dict, fq1, fq2, outdir, chunk_size=10_000, buffer_size=io.DEFAULT_BUFFER_SIZE):
+def dump_to_file_chunks(sample_id, tax_to_readids_dict, fq1, fq2, outdir,
+                        chunk_size=10_000, buffer_size=io.DEFAULT_BUFFER_SIZE):
     """Function that dumps reads to file in chunks.
 
     Args:

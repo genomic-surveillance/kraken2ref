@@ -6,7 +6,8 @@ from sklearn.cluster import KMeans
 from kraken2ref.taxonomytree import TaxonomyTree
 
 class Poll:
-    """Class to encapsulate polling functions and handle related exceptions/standard behaviours
+    """Class to encapsulate polling functions
+    and handle related exceptions/standard behaviours
     """
     def __init__(self, taxonomy_tree: TaxonomyTree, data_dict:dict, threshold: int):
         """Initialiser
@@ -55,8 +56,8 @@ class Poll:
             self.prob_dist = [i/sum(self.dist) for i in self.dist]
 
     def get_max(self):
-        """Function that selects the node with the maximum frequency, forcing the selection of exactly one references
-           from valid trees
+        """Function that selects the node with the maximum frequency,
+            forcing the selection of exactly one references from valid trees
 
            Returns:
             max_node (tuple): Node with maximum frequency
@@ -70,7 +71,8 @@ class Poll:
         """Function that steps forward through a frequency distribution and finds the first inflection
 
         Returns:
-            idxs_to_return: Index locations of retained frequencies to map back to X-axis values and retrieve them
+            idxs_to_return: Index locations of retained frequencies
+                            to map back to X-axis values and retrieve them
         """
         steps = sorted(self.dist)
         max_step = 0
@@ -97,10 +99,12 @@ class Poll:
         return idxs_to_return
 
     def step_thru_back(self):
-        """Function that steps backward through reverse-sorted list of frequencies and finds the last inflection point.
+        """Function that steps backward through reverse-sorted
+        list of frequencies and finds the last inflection point.
 
         Returns:
-            idxs_to_return: Index locations of retained frequencies to map back to X-axis values and retrieve them
+            idxs_to_return: Index locations of retained frequencies
+                            to map back to X-axis values and retrieve them
         """
         steps = sorted(self.dist, reverse=True)
         # max_step = 100000000000000000
@@ -127,7 +131,8 @@ class Poll:
         return idxs_to_return
 
     def poll_with_skew(self):
-        """Apply polling functions to end nodes, treating data as a frequency distribution of hits v/s end nodes
+        """Apply polling functions to end nodes, treating data as a
+        frequency distribution of hits v/s end nodes
 
         Returns:
             filt_leaves (list): List of indexed end nodes retained after filtration

@@ -17,13 +17,13 @@ def test_sort_basic():
                           condense=False)
 
     outdata = json.load(open("test_sort_basic_tax_to_reads.json", "r"))
-    assert sorted(outdata.keys()) == ["10519", "28285"], "Wrong taxIDs appear to be in output"
-    assert len(outdata["10519"]) == 5900, "Wrong number of reads found"
-    assert len(outdata["28285"]) == 17950, "Wrong number of reads found"
+    assert sorted(outdata.keys()) == ["10519", "28285"], "Wrong taxIDs appear to be in output, should be ['10519, '28285']"
+    assert len(outdata["10519"]) == 5900, "Wrong number of reads foun, should be 5900"
+    assert len(outdata["28285"]) == 17950, "Wrong number of reads found, should be 17950"
 
     with open("test_sort_basic_unwritten_reads.txt", "r") as unwritten:
         num_lines = len(unwritten.readlines())
-    assert num_lines == 74019
+    assert num_lines == 74019, "Wrong number of unwritten reads, should be 74019"
 
 
 

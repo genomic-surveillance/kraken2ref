@@ -21,45 +21,72 @@ pip install .
 Once installed, run as follows:  
 ```shell
 ## parse kraken2 report
-kraken2ref -s sample_id parse_report \
+kraken2ref -s <sample_id> parse_report \
             -i path/to/kraken2/report.txt \
             -o ./ \
-            -t min_read_threshold \
-            -m kmeans \
+            -t <min_read_threshold> \
+            -m max \
             -x decomposed \
             -q
 
 ## sort reads by reference (requires parse_report to have been run before if using tree mode)
-kraken2ref -s sample_id sort_reads \
-            -fq1 path/to/fq1.fq \
-            -fq2 path/to/fq2.fq \
+kraken2ref -s <sample_id> sort_reads \
             -k path/to/output.kraken \
             -r path/to/kraken2ref.json \
             -m tree
+
+## write per taxon fastq files loading the fastqs into memory
+kraken2ref -s <sample_id> dump_fastqs
+            -fq1 path/to/fq1.fq \
+            -fq2 path/to/fq2.fq \
+            --tax_to_readsid_path path/<sample_id>_tax_to_reads.json \
+            --fq_load_mode "full" --max_threads <max_number_threads>
+
+# or
+
+## write per taxon fastq files loading the fastqs by chunks into memory
+kraken2ref -s <sample_id> dump_fastqs
+            -fq1 path/to/fq1.fq \
+            -fq2 path/to/fq2.fq \
+            --tax_to_readsid_path path/<sample_id>_tax_to_reads.json \
+            --fq_load_mode "chunks" --chunk_size <number_of_reads> \
+
 ```  
 
-# List of Arguments  
-- `-v` [switch]: Print version  
+## List of Arguments
+
+- `-v` [switch]: Print version
 - `-s` [str]: Sample ID [REQUIRED FOR BOTH MODES]  
 
-## `parse_report` Mode  
+### `parse_report` Mode
+
 - `-i` [path]: (Ideally the absolute) path to kraken2 taxonomy report file [REQUIRED]  
 - `-t` [int]: Minimum number of reads assigned to a leaf node for it to be considered [OPTIONAL][Default = 100]  
 - `-o` [path]: Path to output directory [OPTIONAL][Default = "./"]  
-- `-m` [str]: Polling method to use [OPTIONAL][DEFAULT = "kmeans"]["kmeans", "tiles"]  
+- `-m` [str]: Polling method to use [OPTIONAL][DEFAULT = "max"]["max", "kmeans", "tiles"]  
 - `-x` [str]: Suffix to apply to `sample_id` when creating output JSON file [OPTIONAL][Default = "decomposed"]  
 - `-q` [switch]: Whether to log to stderr or not [OPTIONAL][Default = True]  
 
-## `sort_reads` Mode  
-- `-fq1` [path]: Path to R1 fastq file [REQUIRED]  
-- `-fq2` [path]: Path to R2 fastq file [REQUIRED]  
+### `sort_reads` Mode
+
 - `-k` [path]: Path to kraken2 output.kraken file [REQUIRED]  
 - `-t` [str]: List of taxon IDs to extract [REQUIRED ONLY IF USING `-m unique`]  
-- `-r` [path]: Path to JSON file produced by `kraken2r parse_report` [OPTIONAL ONLY IF USING `-m unique`]  
-- `-o` [path]: Path to output directory [OPTIONAL ONLY IF NOT USING `-r`][Default = "path/to/ref_json"]  
+- `-r` [path]: Path to JSON file produced by `kraken2r parse_report` [OPTIONAL ONLY IF USING `-m unique`]
+- `-o` [path]: Path to output directory [Default = "path/to/ref_json"]  
 - `-m` [str]: Specify sorting mode [OPTIONAL][DEFAULT = "unique"]  
 - `-u` [switch]: Whether to update the JSON file produced by `kraken2r parse_report` inplace or produce a new, updated copy [OPTIONAL][Default: produce new][ONLY USED IF `-r` SPECIFIED]  
 - `-c` [switch]: Whether to dump all reads for a species into one file-pair (as opposed to producing a file-pair _per reference_)[ONLY USED IF USING `-m tree`]  
+
+### `dump_fastqs` Mode
+
+- `-fq1` [path]: Path to R1 fastq file [REQUIRED]
+- `-fq2` [path]: Path to R2 fastq file [REQUIRED]
+- `-o` [path]: Path to output directory [Default = working dir]
+- `-r` [path]: Path to JSON file produced by `kraken2r parse_report`
+- `--max_threads` [int]: number of threads (default = 1, only used for `full` mode)
+- `--fq_load_mode` [str]: load fqs file on memory mode. (default = "full") [full: (faster, but higher memory foorprint), chunks: (slower, lower memory footprint)]
+- `--chunk_size` [int]: number of reads loaded into memory to process per batch (default = 10000)
+- `--buffer_size` [int]: buffer for writing output fq files size in bytes (default = OS default buffer size)
 
 ### Kraken2 Taxonomy Report  
 
@@ -81,8 +108,6 @@ Briefly, once Kraken2 has a database set up, it attempts to assign each read in 
 
 For quick access to the contents of the kraken2 taxonomy report, we store salient information from it in a dictionary right at the start, where the keys are indexed nodes, and the value is a tuple containing that node's #Reads Directly Assigned and Taxonomic ID, before proceeding with the remainder of the process.  
 
-##
-
 In the context of viral data analysis pipelines, the root of the taxonomy tree/graph described in the kraken report will, of course, be the Domain "Viruses", with subtaxa following below. Since we expect kraken2 to virtually never encounter reads that can **only** be confidently assigned at very high taxonomic levels (any level higher than "Species", for example; see [here](#summary-of-the-kraken2-read-assignment-algorithm) and [here](https://github.com/DerrickWood/kraken2) for more), we start by "trimming" the taxonomy tree/graph to create one or more subtrees/subgraphs (in green, Fig. 1), each rooted at "Species" level and each extending to the leaf nodes in that branch of the graph.  
 
 | ![Fig.1](assets/kraken_tax_example.png) |
@@ -96,6 +121,7 @@ nodes = ["S", "S1", "S2", "S3", "S3", "S2", "S3", "S3"]
 ```
 
 Next, we parse this list of nodes to obtain the two subtrees/subgraphs in this one:  
+
 ```python
 subgraph1 = ["S", "S1", "S2", "S3", "S3"]
 subgraph2 = ["S", "S1", "S2", "S3", "S3"]
@@ -118,17 +144,19 @@ paths2 = [[(0,"S"), (1,"S1"), (5,"S2"), (6,"S3")],
             [(0,"S"), (1,"S1"), (5,"S2"), (7,"S3")]]
 ```
 
-##
 > Note that the indices used to construct the data dictionary and by extension the nodes/graphs, correspond to the line indices in the kraken2 report -- this lets us use the outputs of this package to query the kraken2 report directly if ever we need to
-##
 
-Now, we can evaluate the leaf nodes of each subgraph separately by checking the number of reads assigned to each of these leaf nodes by kraken2, using the data dictionary. Not all leaf nodes will pass the threshold number set by the user, and those paths through the graph will be discarded. If the entire graph contains insufficient reads, it is disregarged. However, we focus on checking firs the leaf nodes, and then their parent nodes. Any higher, and you usually risk evaluating at the species level or similar -- this is not bad, _per se_, but does mean that we then expect lots of data duplication when it is time to sort reads by the chosen reference.   
+Now, we can evaluate the leaf nodes of each subgraph separately by checking the number of reads assigned to each of these leaf nodes by kraken2, using the data dictionary. Not all leaf nodes will pass the threshold number set by the user, and those paths through the graph will be discarded. If the entire graph contains insufficient reads, it is disregarged. However, we focus on checking firs the leaf nodes, and then their parent nodes. Any higher, and you usually risk evaluating at the species level or similar -- this is not bad, _per se_, but does mean that we then expect lots of data duplication when it is time to sort reads by the chosen reference.
 
 So, in case no leaf nodes in a subgraph pass the threshold, the algorithm jumps up one taxonomic level; for example, in the graph `[(0,"S"), (1,"S1"), (5,"S2"), (6,"S3"), (7,"S3")]`, if neither `(6,"S3")` nor `(7,"S3")` have more than the threshold number of reads directly assigned, the output will identify this and note the parent, in this case `(5,"S2")`, as the stopping point. But it will only include `(5,"S2")` in the output if the **cumulative** number of reads assigned at `(5,"S2")`, (i.e. all reads at `(5,"S2")` and below) passes the threshold.  
 
 In most cases, there is expected to be at least one leaf node which passes the threshold; for example, in the subgraph `[(0,"S"), (1,"S1"), (2,"S2"), (3,"S3"), (4,"S3")]`, let us say leaf `(4,"S3")` passes, giving us a valid path `[(0,"S"), (1,"S1"), (2,"S2"), (4,"S3")]` through this subgraph. At this point, the output notes `(4,"S3")` as the chosen reference, records the path to that node, and also records the taxonomic IDs of **ALL** nodes in the entire parent graph `[(0,"S"), (1,"S1"), (2,"S2"), (3,"S3"), (4,"S3")]` -- this allows us to retain all read information associated with this parent graph, and potentially use all those reads to align to/call consensus on/analyse with the chose reference.  
 
 ## Polling  
+
+### Maximum-Based Reference Selection  
+
+As the name suggests, this method simply selects the leaf node with the maximum number of reads assigned to it. This is the default method that kraken2ref uses.  
 
 ### KMeans-Based Outlier Detection  
 
@@ -145,7 +173,3 @@ In this approach, we use quartiles 1 and 3 (Q1 and Q3 respectively) to calculate
 | ![Fig.3](assets/polling_tiles.png) |
 |:--:|
 | *Figure 3: Quantile-Based Outlier Analysis* |  
-
-
-
-

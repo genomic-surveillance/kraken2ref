@@ -1,5 +1,23 @@
 # Changelog
 
+[2.1.0] 2024-10-03
+---
+### Changed
+
+- [refactor] sort_reads now split into two separate processes
+- [improvement] Unit tests updated and improved
+- [improvement] Explicit handling of kraken report being an empty file
+- [improvement] Updated README
+
+### Added
+
+- [feature] Default reference-selection method now "max"
+- [feature] Default behaviour to select only a single reference from a given valid taxonomy tree
+- [feature] `sort_reads` now produces a taxid-to-read_id mapping as a JSON file
+- [feature] `dump_fastq` now a separate script, reads in `sort_reads` output JSON to produce per-taxon fastqs
+- [feature] Unit test for `dump_fastq`
+
+---
 [2.0.0] 2024-05-17
 ---
 ### Changed

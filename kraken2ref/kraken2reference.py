@@ -53,7 +53,13 @@ class KrakenProcessor:
 
         ## read in kraken report and collect lists of data needed
         self.report_file = kraken_report_file
-        kraken_report = pd.read_csv(kraken_report_file, sep = "\t", header = None)
+        try:
+            kraken_report = pd.read_csv(kraken_report_file, sep = "\t", header = None)
+        except pd.errors.EmptyDataError as empty_file_err:
+            logging.critical(f"Provided kraken report at {kraken_report_file} appears to be empty. Quitting...\n")
+            sys.stderr.write(f"Provided kraken report at {kraken_report_file} appears to be empty. Quitting...\n")
+            sys.exit(0)
+
         try:
             kraken_report.columns = ["pct_comp", "cumulative_num_reads", "unique_num_reads", "cumulative_minimizers", "unique_minimizers", "taxon_level", "taxon_id", "desc_name"]
             has_minimizer_info = True
@@ -235,6 +241,7 @@ class KrakenProcessor:
 
             ## if >1 valid leaf nodes found, run polling
             else:
+                logging.debug(f"Now selecting reference(s) using method = {input_method}\n")
                 poll.poll_leaves(method = input_method)
 
                 ## logging
@@ -244,14 +251,14 @@ class KrakenProcessor:
                 ## if polling returned no leaf nodes, handle and skip
                 if len(poll.filt_leaves) == 0:
                     logging.debug(f"No leaf nodes passed polling")
-                    self._log_to_stderr(f"No leaf nodes passed polling.\n\n")
+                    self._log_to_stderr(f"No leaf nodes passed polling.\n\n", quiet)
                     continue
 
                 ## update output dict sith polling results
                 self.tree_meta_out.update(self._update_tree_meta(filt_leaves = poll.filt_leaves, simple_source_tree = simple_tree, data_dict = data_dict, parent_selected = poll.parent_selected))
 
                 ## logging
-                logging.debug(f"Valid leaves = {poll.valid_leaves}\n")
+                logging.debug(f"Filtered leaves = {poll.filt_leaves}\n")
                 self._log_to_stderr(f"{poll.filt_leaves = }\n\n", quiet)
 
         return self.tree_meta_out
@@ -269,6 +276,7 @@ class KrakenProcessor:
         Returns:
             tree_meta_chunk: The chunk of the output dict generated for the input leaf nodes
         """
+        tree_meta_chunk = {}
         for filt_leaf in filt_leaves:
             simple_tree_root = simple_source_tree.root ## root node
             simple_tree_root_taxid = data_dict[simple_tree_root][2] ## root taxID
@@ -277,9 +285,7 @@ class KrakenProcessor:
             all_taxa_in_simple_tree = [data_dict[node][2] for node in simple_source_tree.nodes] ## all taxIDs in this simple (sub)tree
             path_to_filt_leaf = simple_source_tree.find_all_paths(graph = simple_source_tree.graph, source = simple_tree_root, target = filt_leaf)[0] ## path as nodes
             path_as_taxids = [data_dict[i][2] for i in path_to_filt_leaf] ## path as taxIDs
-            tree_meta_chunk =  {
-                                meta_key :
-                                            {
+            tree_meta_chunk[meta_key] = {
                                                 "graph_idx": simple_tree_idx,
                                                 "source": simple_tree_root,
                                                 "source_taxid": simple_tree_root_taxid,
@@ -289,7 +295,6 @@ class KrakenProcessor:
                                                 "path": path_to_filt_leaf,
                                                 "path_as_taxids": path_as_taxids,
                                             }
-                            }
 
         return tree_meta_chunk
 

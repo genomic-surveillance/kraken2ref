@@ -6,6 +6,8 @@ import argparse
 ## import driver module
 from kraken2ref.kraken2reference import KrakenProcessor
 from kraken2ref.sort_reads import sort_reads_by_tax
+from kraken2ref.dump_fastqs import dump_fastqs
+import io
 
 ## collect version
 try:
@@ -44,8 +46,9 @@ def collect_args():
     report_parser.add_argument(
         '-o', '--outdir',
         type = str,
+        default=os.getcwd(),
         required = True,
-        help = "Full path to output directory. [str/pathlike]")
+        help = "Full path to output directory. [str/pathlike] (default = current working dir)")
 
     report_parser.add_argument(
         '-x', '--suffix',
@@ -66,9 +69,9 @@ def collect_args():
         '-m', '--poll_method',
         type = str,
         required = False,
-        default = "kmeans",
-        help = """Which polling method to use. [str] [Default = 'kmeans']
-                    Valid choices: ['skew', 'kmeans', 'tiles']""")
+        default = "max",
+        help = """Which polling method to use. [str] [Default = 'max']
+                    Valid choices: ['max', 'skew', 'kmeans', 'tiles']""")
 
     report_parser.add_argument(
         "-q", "--quiet",
@@ -89,18 +92,6 @@ def collect_args():
             type = str,
             required = True,
             help = "Path to kraken2 output file. [str/pathlike]")
-
-    sort_reads_parser.add_argument(
-            "-fq1", "--fastq1",
-            type = str,
-            required = True,
-            help = "First FASTQ file of paired end reads. [str/pathlike]")
-
-    sort_reads_parser.add_argument(
-            "-fq2", "--fastq2",
-            type = str,
-            required = True,
-            help = "Second FASTQ file of paired end reads. [str/pathlike]")
 
     sort_reads_parser.add_argument(
             "-r", "--ref_json",
@@ -130,12 +121,83 @@ def collect_args():
     sort_reads_parser.add_argument(
         '-o', '--outdir',
         type = str,
+        default=os.getcwd(),
         required = False,
-        help = "Full path to output directory. [str/pathlike]")
+        help = "Full path to output directory. [str/pathlike] (default = current working dir)")
+
+
+    dump_fqs_parser = subparsers.add_parser("dump_fastqs")
+
+    dump_fqs_parser.add_argument(
+        "--tax_to_readsid_path",
+        type = str,
+        required = True,
+        help="json file containing tax to reads id (output by 'sort_to_reads' mode) [str/pathlike]"
+    )
+
+    dump_fqs_parser.add_argument(
+        "-fq1", "--fastq1",
+        type = str,
+        required = True,
+        help = "First FASTQ file of paired end reads. [str/pathlike]")
+
+    dump_fqs_parser.add_argument(
+        "-fq2", "--fastq2",
+        type = str,
+        required = True,
+        help = "Second FASTQ file of paired end reads. [str/pathlike]")
+
+    dump_fqs_parser.add_argument(
+        '-o', '--outdir',
+        type = str,
+        default=os.getcwd(),
+        required = False,
+        help = "Full path to output directory. [str/pathlike] (default = current working dir)")
+
+    dump_fqs_parser.add_argument(
+        '--chunk_size',
+        type = int,
+        required = False,
+        default=100_000,
+        help = "Number of reads loaded into memory to process per batch [int] (default = 100_000)")
+
+    dump_fqs_parser.add_argument(
+        '--buffer_size',
+        type = int,
+        required = False,
+        default=io.DEFAULT_BUFFER_SIZE,
+        help = "buffer for writing output fq files size in bytes [int] (default=IO default buffer size)")
+
+    dump_fqs_parser.add_argument(
+        '--fq_load_mode',
+        type = str,
+        required = False,
+        default="full",
+        help = """
+load fqs file on memory mode. [bool] (default = "full")
+[full: (faster, but higher memory foorprint), chunks: (slower, lower memory footprint)]
+""")
+
+    dump_fqs_parser.add_argument(
+        "-r", "--ref_json",
+        type = str,
+        required = False,
+        help = "Output JSON created by `kraken2ref parse_report`. [str/pathlike]")
+
+
+    dump_fqs_parser.add_argument(
+        '--max_threads',
+        type = int,
+        required = False,
+        default=1,
+        help = "number of threads to provide to index [int] (default=1)")
+
 
     args = parser.parse_args()
     return args
 
+# instantiating the decorator
+#@profile
 def main():
     """User-facing driver function
     """
@@ -143,12 +205,9 @@ def main():
     args = collect_args()
 
     ## explicitly set up outdir
-    if args.run_mode == "parse_report":
-        fixed_outdir = os.path.abspath(args.outdir)
-        if not os.path.exists(fixed_outdir):
-            os.mkdir(fixed_outdir)
-    if args.run_mode == "sort_reads":
-        fixed_outdir = os.path.dirname(os.path.abspath(args.ref_json))
+    fixed_outdir = os.path.abspath(args.outdir)
+    if not os.path.exists(fixed_outdir):
+        os.mkdir(fixed_outdir)
 
     ## set up logging to file
     logfile = os.path.join(fixed_outdir, f"{args.sample_id}_kraken2ref.log")
@@ -164,7 +223,8 @@ def main():
     if args.run_mode == "sort_reads":
         sort_reads_by_tax(args)
 
+    if args.run_mode == "dump_fastqs":
+        dump_fastqs(args)
 
 if __name__ == "main":
     main()
-

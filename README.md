@@ -63,7 +63,7 @@ kraken2ref -s <sample_id> dump_fastqs
 - `-i` [path]: (Ideally the absolute) path to kraken2 taxonomy report file [REQUIRED]  
 - `-t` [int]: Minimum number of reads assigned to a leaf node for it to be considered [OPTIONAL][Default = 100]  
 - `-o` [path]: Path to output directory [OPTIONAL][Default = "./"]  
-- `-m` [str]: Polling method to use [OPTIONAL][DEFAULT = "max"]["max", "kmeans", "tiles"]  
+- `-m` [str]: Polling method to use [OPTIONAL][DEFAULT = "max"]["max", "kmeans", "tiles", "skew"]  
 - `-x` [str]: Suffix to apply to `sample_id` when creating output JSON file [OPTIONAL][Default = "decomposed"]  
 - `-q` [switch]: Whether to log to stderr or not [OPTIONAL][Default = True]  
 
@@ -108,6 +108,10 @@ Briefly, once Kraken2 has a database set up, it attempts to assign each read in 
 
 For quick access to the contents of the kraken2 taxonomy report, we store salient information from it in a dictionary right at the start, where the keys are indexed nodes, and the value is a tuple containing that node's #Reads Directly Assigned and Taxonomic ID, before proceeding with the remainder of the process.  
 
+## Algorithm  
+
+### `parse_report`  
+
 In the context of viral data analysis pipelines, the root of the taxonomy tree/graph described in the kraken report will, of course, be the Domain "Viruses", with subtaxa following below. Since we expect kraken2 to virtually never encounter reads that can **only** be confidently assigned at very high taxonomic levels (any level higher than "Species", for example; see [here](#summary-of-the-kraken2-read-assignment-algorithm) and [here](https://github.com/DerrickWood/kraken2) for more), we start by "trimming" the taxonomy tree/graph to create one or more subtrees/subgraphs (in green, Fig. 1), each rooted at "Species" level and each extending to the leaf nodes in that branch of the graph.  
 
 | ![Fig.1](assets/kraken_tax_example.png) |
@@ -146,11 +150,78 @@ paths2 = [[(0,"S"), (1,"S1"), (5,"S2"), (6,"S3")],
 
 > Note that the indices used to construct the data dictionary and by extension the nodes/graphs, correspond to the line indices in the kraken2 report -- this lets us use the outputs of this package to query the kraken2 report directly if ever we need to
 
-Now, we can evaluate the leaf nodes of each subgraph separately by checking the number of reads assigned to each of these leaf nodes by kraken2, using the data dictionary. Not all leaf nodes will pass the threshold number set by the user, and those paths through the graph will be discarded. If the entire graph contains insufficient reads, it is disregarged. However, we focus on checking firs the leaf nodes, and then their parent nodes. Any higher, and you usually risk evaluating at the species level or similar -- this is not bad, _per se_, but does mean that we then expect lots of data duplication when it is time to sort reads by the chosen reference.
+Next, kraken2ref assesses the "complexity" of each Species-rooted tree in the kraken report. A simple tree is one which contains exactly one subterminal node -- as shown in the figure below, trees in the ARD viral_pipeline kraken DB may be "simple", "wide" (meaning more than one subterminal node, but all paths from root to leaf are the same length), and "complex" (meaning more than one subterminal node, but the various subterminals are at different depths in the tree). All trees are decomposed to their simple subtrees before being evaluated further.  
 
-So, in case no leaf nodes in a subgraph pass the threshold, the algorithm jumps up one taxonomic level; for example, in the graph `[(0,"S"), (1,"S1"), (5,"S2"), (6,"S3"), (7,"S3")]`, if neither `(6,"S3")` nor `(7,"S3")` have more than the threshold number of reads directly assigned, the output will identify this and note the parent, in this case `(5,"S2")`, as the stopping point. But it will only include `(5,"S2")` in the output if the **cumulative** number of reads assigned at `(5,"S2")`, (i.e. all reads at `(5,"S2")` and below) passes the threshold.  
+| ![Fig.2](assets/graph_types.png) |
+|:--:|
+| *Figure 3: Possible Tree Structures* |  
 
-In most cases, there is expected to be at least one leaf node which passes the threshold; for example, in the subgraph `[(0,"S"), (1,"S1"), (2,"S2"), (3,"S3"), (4,"S3")]`, let us say leaf `(4,"S3")` passes, giving us a valid path `[(0,"S"), (1,"S1"), (2,"S2"), (4,"S3")]` through this subgraph. At this point, the output notes `(4,"S3")` as the chosen reference, records the path to that node, and also records the taxonomic IDs of **ALL** nodes in the entire parent graph `[(0,"S"), (1,"S1"), (2,"S2"), (3,"S3"), (4,"S3")]` -- this allows us to retain all read information associated with this parent graph, and potentially use all those reads to align to/call consensus on/analyse with the chose reference.  
+Now, each simple sub-tree is passed into the driver workflow of kraken2ref. Briefly:  
+- The leaf nodes are checked for the number of reads assigned to each one using the data dictionary  
+- If no leaf nodes pass the threshold:  
+    - kraken2ref checks the **cumulative** number of reads assigned to the subterminal
+    - If this number passes the threshold:  
+        - The leaf node with the maximum number of reads is passed on to the output
+    - If this number does not pass the threshold:  
+        - This subtree is discarded  
+- If only one leaf node passes the threshold:  
+    - That leaf node is passed to the output and no further processing is required for this subtree  
+- If more than one leaf node passes the threshold:  
+    - This set of leaf nodes is passed on to the polling function, and based on the selected polling method, one or more leaves are selected and promoted to output  
+    > Note that by default, polling is simply the selection of the leaf node with the maximum number of reads assigned to it  
+
+The output is summarised in a JSON file that has the following schema:  
+```json
+{
+    "metadata": {
+        //version string
+        "k2r_version": string,
+        //sample_id
+        "sample": string,
+        //timestamp format: yyyy-mm-dd hh:mm:ss
+        "timestamp": string,
+        //user-defined min read threshold
+        "threshold": int,
+        //list of selected taxids
+        "selected": list(int)
+    },
+    "outputs": dict {
+        //tax_id being summarised
+        tax_id (string): {
+            //index of "Species" line for this tree
+            //corresponds to 0-indexed line0-number in kraken report
+            "graph_idx": int,
+            //Source node (idx, taxon-level)
+            "source": list(int, string),
+            //tax_id of source node
+            "source_taxid": int,
+            //Target node (idx, taxon-level)
+            //corresponds to tax_id being summarised
+            "target": list(int, string),
+            //Whether tax_id being summarised is a subterminal
+            "parent_selected": bool,
+            //All tax_ids in this sub tree
+            "all_taxa": list(int),
+            //Path from root to leaf represented as a list of nodes
+            "path": list(list(int, string)),
+            //Path from root to leaf represented as list of tax_ids
+            "path_as_taxids": list(int)
+        }
+    }
+```
+
+### `sort_reads` & `dump_fastqs`  
+
+The `sort_reads` function takes as input the JSON file output by `parse_report` and summarises it in another JSON output. This JSON is formatted as follows:  
+```json
+{
+    tax_id (string): list(string) //Read IDs associated with the key tax_id
+}
+```
+
+This JSON is then taken as input for the `dump_fastqs` function, which writes:  
+- One fastq filepair for each key tax_id in the `sort_reads` JSON
+- A text file listing the read IDs that were not written to any fastq files  
 
 ## Polling  
 
@@ -162,7 +233,7 @@ As the name suggests, this method simply selects the leaf node with the maximum 
 
 In this approach to outlier analysis, we use `sklearn.cluster`, specifically the `KMeans` module. Briefly, we conceptualise the list of references and their correspoding number of assigned reads as a frequency distribution. This frequency distribution is reshaped to a 2D `numpy` array so that `KMeans` can use it. Then, we "cluster" this distribution using `KMeans`, sort the frequenccies by their distance from the cluster centroid, and retain those outlier frequencies that are to the right of the median (i.e. those that are big numbers, rather than those that are outliers because they are small).  
 
-| ![Fig.2](assets/polling_kmeans.png) |
+| ![Fig.3](assets/polling_kmeans.png) |
 |:--:|
 | *Figure 2: KMeans-Based Outlier Analysis* |  
 

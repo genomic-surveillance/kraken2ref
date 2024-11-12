@@ -7,7 +7,11 @@ This python package identifies suitable reference genomes as well as reads that 
 #### With pip  
 
 ```shell
+## ssh
 pip install kraken2ref@git+ssh://git@gitlab.internal.sanger.ac.uk/malariagen1/misc_utils/kraken2ref.git
+
+## https
+pip install kraken2ref@git+https://gitlab.internal.sanger.ac.uk/malariagen1/misc_utils/kraken2ref.git
 ```  
 
 #### From Source  
@@ -36,27 +40,29 @@ kraken2ref -s <sample_id> sort_reads \
             -m tree
 
 ## write per taxon fastq files loading the fastqs into memory
-kraken2ref -s <sample_id> dump_fastqs
+kraken2ref -s <sample_id> dump_fastqs \
             -fq1 path/to/fq1.fq \
             -fq2 path/to/fq2.fq \
             --tax_to_readsid_path path/<sample_id>_tax_to_reads.json \
-            --fq_load_mode "full" --max_threads <max_number_threads>
+            --fq_load_mode "full" \
+            --max_threads <max_number_threads>
 
 # or
 
 ## write per taxon fastq files loading the fastqs by chunks into memory
-kraken2ref -s <sample_id> dump_fastqs
+kraken2ref -s <sample_id> dump_fastqs \
             -fq1 path/to/fq1.fq \
             -fq2 path/to/fq2.fq \
             --tax_to_readsid_path path/<sample_id>_tax_to_reads.json \
-            --fq_load_mode "chunks" --chunk_size <number_of_reads> \
+            --fq_load_mode "chunks" \
+            --chunk_size <number_of_reads>
 
 ```  
 
 ## List of Arguments
 
 - `-v` [switch]: Print version
-- `-s` [str]: Sample ID [REQUIRED FOR BOTH MODES]  
+- `-s` [str]: Sample ID [REQUIRED FOR ALL MODES]  
 
 ### `parse_report` Mode
 

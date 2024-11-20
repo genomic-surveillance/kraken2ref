@@ -1,28 +1,27 @@
 import json
 from kraken2ref.kraken2reference import KrakenProcessor
 
-def test_singleton_output():
+def test_singleton_output(tmp_path):
+    print(tmp_path)
     singleton_proc = KrakenProcessor("singleton_report")
     singleton_proc.analyse_report(input_kraken_report_file="tests/artificial_reports/scov2_clean.report.txt", input_threshold=100, input_method="max", quiet=True)
-    singleton_proc.write_output(prefix=".")
+    singleton_proc.write_output(prefix=tmp_path)
 
-    outdata = json.load(open("singleton_report_decomposed.json", "r"))
+    outdata = json.load(open(f"{tmp_path}/singleton_report_decomposed.json", "r"))
     assert len(outdata["metadata"]["selected"]) == 1, "Wrong number of refs selected, should be 1"
     assert outdata["metadata"]["selected"] == [2697049], "wrong ref selected, should be 2697049"
 
-def test_complex_tree_output():
+def test_complex_tree_output(tmp_path):
     complex_tree_report_proc = KrakenProcessor("complex_tree")
     complex_tree_report_proc.analyse_report(input_kraken_report_file="tests/artificial_reports/fluA_clean.report.txt", input_threshold=100, input_method="max", quiet=True)
-    complex_tree_report_proc.write_output(prefix=".")
+    complex_tree_report_proc.write_output(prefix=tmp_path)
 
-    outdata = json.load(open("complex_tree_decomposed.json", "r"))
+    outdata = json.load(open(f"{tmp_path}/complex_tree_decomposed.json", "r"))
     assert len(outdata["metadata"]["selected"]) == 11, "Wrong number of refs selected, should be 11"
 
     complex_tree_report_proc = KrakenProcessor("complex_tree_kmeans")
     complex_tree_report_proc.analyse_report(input_kraken_report_file="tests/artificial_reports/fluA_clean.report.txt", input_threshold=100, input_method="kmeans", quiet=True)
-    complex_tree_report_proc.write_output(prefix=".")
+    complex_tree_report_proc.write_output(prefix=tmp_path)
 
-    outdata_kmeans = json.load(open("complex_tree_kmeans_decomposed.json", "r"))
+    outdata_kmeans = json.load(open(f"{tmp_path}/complex_tree_kmeans_decomposed.json", "r"))
     assert len(outdata_kmeans["metadata"]["selected"]) == 12, "Wrong number of refs selected, should be 12" ## one extra segment 1 ref should be selected AND written with kmeans method
-
-test_complex_tree_output()

@@ -1,7 +1,6 @@
 import io, os, sys
 import json
 import logging
-from collections import defaultdict
 from Bio import SeqIO
 
 def dump_to_files(sample_id, tax_to_readids_dict, fq1, fq2, outdir,

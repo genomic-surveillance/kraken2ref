@@ -1,5 +1,11 @@
 # Changelog
 
+[2.2.0] 2025-11-10
+---
+### Changed
+ - [refactor] Reworked dump_fastqs to be faster and more memory efficient
+ - [removed] removed --fq_load_mode option, and "chunks" functionality
+
 [2.1.0] 2024-10-03
 ---
 ### Changed

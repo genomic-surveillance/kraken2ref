@@ -169,21 +169,10 @@ def collect_args():
         help = "buffer for writing output fq files size in bytes [int] (default=IO default buffer size)")
 
     dump_fqs_parser.add_argument(
-        '--fq_load_mode',
-        type = str,
-        required = False,
-        default="full",
-        help = """
-load fqs file on memory mode. [bool] (default = "full")
-[full: (faster, but higher memory foorprint), chunks: (slower, lower memory footprint)]
-""")
-
-    dump_fqs_parser.add_argument(
         "-r", "--ref_json",
         type = str,
         required = False,
         help = "Output JSON created by `kraken2ref parse_report`. [str/pathlike]")
-
 
     dump_fqs_parser.add_argument(
         '--max_threads',
@@ -191,7 +180,6 @@ load fqs file on memory mode. [bool] (default = "full")
         required = False,
         default=1,
         help = "number of threads to provide to index [int] (default=1)")
-
 
     args = parser.parse_args()
     return args
